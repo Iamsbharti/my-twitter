@@ -18,7 +18,8 @@
   top: 0;
   background-color: white;
   z-index: 100;
-  border: 1px solid var(--twitter-bg);
+  border-bottom: 1px solid var(--twitter-bg);
+  /**border: 1px solid var(--twitter-bg);*/
   padding: 15px 20px;
 }
 .feedHeader > h2 {
