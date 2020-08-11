@@ -13,7 +13,11 @@ import "../css/SideBar.css";
 function SideBar() {
   return (
     <div className="sidebar">
-      <img src={process.env.PUBLIC_URL + "/android-icon-96x96.png"} alt="" />
+      <img
+        className="icon--img"
+        src={process.env.PUBLIC_URL + "/android-icon-96x96.png"}
+        alt=""
+      />
       <SideBarOptions text="Home" Icon={Homeicon} active />
       <SideBarOptions text="Explore" Icon={Searchicon} />
       <SideBarOptions text="Notifications" Icon={NotificationsNoneicon} />

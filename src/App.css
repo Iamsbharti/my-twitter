@@ -3,11 +3,7 @@ body {
   --twitter-bg: #cad4dd;
   font-family: "Montserrat", sans-serif;
 }
-img {
-  height: 45px;
-  width: 45px;
-  margin-left: 15px;
-}
+
 .app {
   display: flex;
   height: 100vh;
