@@ -4,7 +4,7 @@ import SideBar from "./components/SideBar";
 function App() {
   return (
     <div>
-      Twitter App
+      <img src={process.env.PUBLIC_URL + "/android-icon-96x96.png"} alt="" />
       {/**Side bar */}
       <SideBar />
       {/**Feeds */}
