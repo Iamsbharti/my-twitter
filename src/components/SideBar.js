@@ -9,10 +9,11 @@ import PermIdentityicon from "@material-ui/icons/PermIdentity";
 import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
 import { Button } from "@material-ui/core";
-import "../App.css";
+import "../css/SideBar.css";
 function SideBar() {
   return (
-    <div>
+    <div className="sidebar">
+      <img src={process.env.PUBLIC_URL + "/android-icon-96x96.png"} alt="" />
       <SideBarOptions text="Home" Icon={Homeicon} active />
       <SideBarOptions text="Explore" Icon={Searchicon} />
       <SideBarOptions text="Notifications" Icon={NotificationsNoneicon} />
