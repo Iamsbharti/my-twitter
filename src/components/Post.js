@@ -26,7 +26,11 @@ function Post({
             <h3>
               UserName{" "}
               <span className="post__verified">
-                <VerifiedUserIcon className="post__badge" />
+                <img
+                  src={process.env.PUBLIC_URL + "/verified.png"}
+                  alt=""
+                  className="post__badge"
+                />
                 @username
               </span>
             </h3>

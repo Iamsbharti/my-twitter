@@ -24,6 +24,9 @@
 .post__badge {
   font-size: 14px !important;
   color: var(--twitter-color);
+  width: 15px;
+  height: 15px;
+  margin-top: 0px;
 }
 .post_headerDescription {
   margin-top: 10px;
