@@ -1,0 +1,41 @@
+.home {
+  display: block;
+  width: 550px;
+  margin: 80px;
+  padding: 20px;
+}
+.home > h2 {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-weight: 900;
+  font-size: 40px;
+}
+.home__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.button__signup {
+  background-color: var(--twitter-color) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 900 !important;
+  font-size: 19px !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+}
+.button__login {
+  background-color: rgb(250, 250, 250) !important;
+  color: var(--twitter-color) !important;
+  border: 1px solid var(--twitter-color) !important;
+  font-weight: 900 !important;
+  font-size: 19px !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+}
+.home__buttons > button:hover {
+  background-color: rgb(192, 233, 247) !important;
+}
