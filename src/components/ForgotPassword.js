@@ -9,8 +9,8 @@ function ForgotPassword() {
         <p>Password Reset</p>
       </div>
       <div className="forgot__password">
-        <h2>Find your Twitter account</h2>
-        <code>Enter your email, phone number, or username.</code>
+        <h2>Find your my-twitter account</h2>
+        <code>Enter your email or username.</code>
         <input type="text" />
         <Button>Search</Button>
       </div>
