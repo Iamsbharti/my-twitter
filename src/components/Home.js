@@ -19,7 +19,12 @@ function Home() {
         >
           Sign up
         </Button>
-        <Button className="button__login">Log in</Button>
+        <Button
+          className="button__login"
+          onClick={(e) => history.push("/login")}
+        >
+          Log in
+        </Button>
       </div>
     </div>
   );
