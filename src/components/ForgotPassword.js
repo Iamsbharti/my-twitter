@@ -23,8 +23,18 @@ function ForgotPassword() {
           <Button onClick={findUser}>Search</Button>
         </div>
       </div>
-      <div className="recovery__code" hidden={toggleRecoveryDiv}>
-        <h2>Your Email is </h2>
+      <div hidden={toggleRecoveryDiv}>
+        <div className="recovery__code">
+          <h2>Your Email is </h2>
+          <h2>Your Recovery has been sent to you email</h2>
+          <code>Enter Your Recovery Code</code>
+          <input type="text" />
+          <code>Enter New Password</code>
+          <input type="password" />
+          <code>Type Again</code>
+          <input type="password" />
+          <Button>Reset Password</Button>
+        </div>
       </div>
     </div>
   );
