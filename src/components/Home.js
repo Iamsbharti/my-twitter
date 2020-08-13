@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import "../css/Post.css";
 function Home() {
   return (
     <div className="home">
@@ -8,8 +10,12 @@ function Home() {
 
       <div className="home__options">
         <h3>Join Twitter today.</h3>
-        <Button className="button__signup">Sign up</Button>
-        <Button className="button_login">Login</Button>
+        <Link to="/signup">
+          <Button className="button__signup">Sign up</Button>
+        </Link>
+        <Link to="/login">
+          <Button className="button_login">Login</Button>
+        </Link>
       </div>
     </div>
   );

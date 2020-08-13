@@ -4,6 +4,10 @@ import { Button } from "@material-ui/core";
 function ForgotPassword() {
   return (
     <div className="forgot__password">
+      <div className="forgot__nav">
+        <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
+        Password Reset
+      </div>
       <h2>Find your Twitter account</h2>
       <code>Enter your email, phone number, or username.</code>
       <input type="text" />
