@@ -12,7 +12,7 @@ function ForgotPassword() {
         <h2>Find your my-twitter account</h2>
         <code>Enter your email or username.</code>
         <input type="text" />
-        <Button>Send Recovery Code</Button>
+        <Button>Search</Button>
       </div>
     </div>
   );
