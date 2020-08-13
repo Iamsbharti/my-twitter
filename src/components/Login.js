@@ -1,19 +1,26 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import "../css/Home.css";
 function Login() {
+  let history = useHistory();
   return (
     <div className="login">
-      <img src="" alt="" />
-      <h2>Log in to Twitter</h2>
+      <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
+      <h2>Log in to my-twitter</h2>
       <div className="login__inputs">
         <input type="text" placeholder="email or username" />
         <input type="password" placeholder="Password" />
-        <Button className="login__button">Log in</Button>
+        <Button
+          className="login__button"
+          onClick={() => history.push("/login")}
+        >
+          Log in
+        </Button>
       </div>
       <div className="login__footer">
-        <Link to="/forgotPassword">Forgot password?</Link>
-        <Link to="/signup">Sign up for Twitter</Link>
+        <p onClick={() => history.push("/forgotPwd")}>Forgot password?</p>.
+        <p onClick={() => history.push("/signup")}>Sign up for my-twitter</p>
       </div>
     </div>
   );
