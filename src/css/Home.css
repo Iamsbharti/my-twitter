@@ -37,5 +37,6 @@
   margin-top: 20px !important;
 }
 .home__buttons > button:hover {
-  background-color: rgb(192, 233, 247) !important;
+  background-color: rgb(64, 148, 175) !important;
+  color: aliceblue !important;
 }
