@@ -91,3 +91,58 @@
 .login__footer > p:hover {
   border-bottom: 1px solid var(--twitter-color);
 }
+.login__inputs > input:focus {
+  outline: none;
+}
+/*Forgot password styles*/
+
+.forgot__nav {
+  display: flex;
+  border-bottom: 1px solid var(--twitter-color);
+  justify-content: center;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+.forgot__nav > img {
+  width: 45px;
+  height: 45px;
+}
+.forgot__nav > p {
+  margin-top: 10px;
+  margin-left: 2px;
+}
+.forgot__password {
+  display: grid;
+  justify-content: center;
+  margin-top: 40px;
+}
+.forgot__password > h2 {
+  font-weight: bolder;
+  font-size: 35px;
+  margin-bottom: 50px;
+}
+.forgot__password > code {
+  margin-bottom: 50px;
+  font-size: 30px;
+}
+.forgot__password > input {
+  border-radius: 20px;
+  width: 350px;
+  height: 34px;
+  font-size: 20px;
+  border-color: var(--twitter-color);
+}
+.forgot__password > button {
+  background-color: var(--twitter-color) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 900 !important;
+  font-size: 19px !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+  width: 120px;
+}
+.forgot__password > input:focus {
+  outline: none;
+}
