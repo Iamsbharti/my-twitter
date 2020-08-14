@@ -808,3 +808,14 @@
 2020-08-14 12:32:28 info: Login validation
 2020-08-14 12:32:28 info: Login Control
 2020-08-14 12:32:28 info: POST /api/v1/user/login 200 236.182 ms - 611
+2020-08-14 12:33:58 info: API Server Running at:3001
+2020-08-14 12:33:58 info: DB Connection Success
+2020-08-14 12:34:14 info: API Server Running at:3001
+2020-08-14 12:34:14 info: DB Connection Success
+2020-08-14 12:35:11 info: API Server Running at:3001
+2020-08-14 12:35:12 info: DB Connection Success
+2020-08-14 12:35:22 info: API Server Running at:3001
+2020-08-14 12:35:22 info: DB Connection Success
+2020-08-14 12:35:31 info: Login validation
+2020-08-14 12:35:31 info: Login Control
+2020-08-14 12:35:31 info: POST /api/v1/user/login 200 246.720 ms - 611

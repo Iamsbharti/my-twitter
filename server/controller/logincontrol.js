@@ -18,7 +18,7 @@ exports.logincontrol = async (req, res) => {
       username: loginId,
     };
   }
-  console.log("query:", query);
+
   /**user existence */
   let userExists = await User.findOne(query);
   let credMatch;
