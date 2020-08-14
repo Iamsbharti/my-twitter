@@ -15,6 +15,7 @@ function Signup() {
         <p>Create your account</p>
         <input type="text" placeholder="name" />
         <input type="text" placeholder="Phone or Email" />
+        <input type="text" placeholder="create a username" />
         <Button>Sign up</Button>
         <br />
         <h4 onClick={() => history.push("/")}>Cancel?</h4>
