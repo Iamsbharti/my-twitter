@@ -819,3 +819,104 @@
 2020-08-14 12:35:31 info: Login validation
 2020-08-14 12:35:31 info: Login Control
 2020-08-14 12:35:31 info: POST /api/v1/user/login 200 246.720 ms - 611
+2020-08-14 12:36:47 info: API Server Running at:3001
+2020-08-14 12:36:47 info: DB Connection Success
+2020-08-14 12:37:06 info: API Server Running at:3001
+2020-08-14 12:37:07 info: DB Connection Success
+2020-08-14 12:37:57 info: API Server Running at:3001
+2020-08-14 12:37:58 info: DB Connection Success
+2020-08-14 12:38:11 info: API Server Running at:3001
+2020-08-14 12:38:12 info: DB Connection Success
+2020-08-14 12:39:16 info: API Server Running at:3001
+2020-08-14 12:39:16 info: DB Connection Success
+2020-08-14 12:40:02 info: API Server Running at:3001
+2020-08-14 12:40:02 info: DB Connection Success
+2020-08-14 12:40:06 info: API Server Running at:3001
+2020-08-14 12:40:06 info: DB Connection Success
+2020-08-14 12:40:39 info: API Server Running at:3001
+2020-08-14 12:40:39 info: DB Connection Success
+2020-08-14 12:41:20 info: API Server Running at:3001
+2020-08-14 12:41:20 info: DB Connection Success
+2020-08-14 12:41:29 info: API Server Running at:3001
+2020-08-14 12:41:29 info: DB Connection Success
+2020-08-14 12:43:18 info: API Server Running at:3001
+2020-08-14 12:43:18 info: DB Connection Success
+2020-08-14 12:43:32 info: API Server Running at:3001
+2020-08-14 12:43:33 info: DB Connection Success
+2020-08-14 12:43:34 info: API Server Running at:3001
+2020-08-14 12:43:34 info: DB Connection Success
+2020-08-14 12:43:36 info: API Server Running at:3001
+2020-08-14 12:43:36 info: DB Connection Success
+2020-08-14 12:43:44 info: API Server Running at:3001
+2020-08-14 12:43:44 info: DB Connection Success
+2020-08-14 12:44:10 info: API Server Running at:3001
+2020-08-14 12:44:10 info: DB Connection Success
+2020-08-14 12:44:25 info: API Server Running at:3001
+2020-08-14 12:44:25 info: DB Connection Success
+2020-08-14 12:44:31 info: API Server Running at:3001
+2020-08-14 12:44:32 info: DB Connection Success
+2020-08-14 12:44:41 info: API Server Running at:3001
+2020-08-14 12:44:41 info: DB Connection Success
+2020-08-14 12:44:54 info: API Server Running at:3001
+2020-08-14 12:44:54 info: DB Connection Success
+2020-08-14 12:45:14 info: API Server Running at:3001
+2020-08-14 12:45:15 info: DB Connection Success
+2020-08-14 12:45:21 info: API Server Running at:3001
+2020-08-14 12:45:21 info: DB Connection Success
+2020-08-14 12:45:51 info: API Server Running at:3001
+2020-08-14 12:45:51 info: DB Connection Success
+2020-08-14 12:46:14 info: API Server Running at:3001
+2020-08-14 12:46:14 info: DB Connection Success
+2020-08-14 12:46:19 info: API Server Running at:3001
+2020-08-14 12:46:19 info: DB Connection Success
+2020-08-14 12:46:41 info: API Server Running at:3001
+2020-08-14 12:46:41 info: DB Connection Success
+2020-08-14 12:46:53 info: API Server Running at:3001
+2020-08-14 12:46:54 info: DB Connection Success
+2020-08-14 12:47:08 info: API Server Running at:3001
+2020-08-14 12:47:08 info: DB Connection Success
+2020-08-14 12:48:05 info: API Server Running at:3001
+2020-08-14 12:48:06 info: DB Connection Success
+2020-08-14 12:48:10 info: API Server Running at:3001
+2020-08-14 12:48:11 info: DB Connection Success
+2020-08-14 12:48:34 info: API Server Running at:3001
+2020-08-14 12:48:35 info: DB Connection Success
+2020-08-14 12:49:06 info: API Server Running at:3001
+2020-08-14 12:49:06 info: DB Connection Success
+2020-08-14 12:49:35 info: API Server Running at:3001
+2020-08-14 12:49:36 info: DB Connection Success
+2020-08-14 12:50:18 info: API Server Running at:3001
+2020-08-14 12:50:18 info: DB Connection Success
+2020-08-14 12:50:33 info: API Server Running at:3001
+2020-08-14 12:50:33 info: DB Connection Success
+2020-08-14 12:50:46 info: API Server Running at:3001
+2020-08-14 12:50:47 info: DB Connection Success
+2020-08-14 12:50:54 info: API Server Running at:3001
+2020-08-14 12:50:54 info: DB Connection Success
+2020-08-14 12:50:57 info: API Server Running at:3001
+2020-08-14 12:50:57 info: DB Connection Success
+2020-08-14 12:51:34 info: API Server Running at:3001
+2020-08-14 12:51:34 info: DB Connection Success
+2020-08-14 12:52:39 info: Password Recovery validation
+2020-08-14 12:52:39 info: POST /api/v1/user/recoveryPassword 400 36.021 ms - 113
+2020-08-14 12:52:44 info: Password Recovery validation
+2020-08-14 12:52:44 info: Get RecoveryCode Control
+2020-08-14 12:52:44 info: 1 doc updated
+2020-08-14 12:52:47 info: RecoveryEmail result::
+2020-08-14 12:52:47 info: POST /api/v1/user/recoveryPassword 200 3189.660 ms - 72
+2020-08-14 12:53:39 info: API Server Running at:3001
+2020-08-14 12:53:39 info: DB Connection Success
+2020-08-14 12:53:42 info: Password Recovery validation
+2020-08-14 12:53:42 info: Get RecoveryCode Control
+2020-08-14 12:53:42 info: 1 doc updated
+2020-08-14 12:53:44 info: RecoveryEmail result::
+2020-08-14 12:53:44 info: POST /api/v1/user/recoveryPassword 200 2702.809 ms - 72
+2020-08-14 12:54:30 info: Password Recovery validation
+2020-08-14 12:54:30 info: Get RecoveryCode Control
+2020-08-14 12:54:30 info: 1 doc updated
+2020-08-14 12:54:33 info: RecoveryEmail result::
+2020-08-14 12:54:33 info: POST /api/v1/user/recoveryPassword 200 2685.619 ms - 72
+2020-08-14 12:55:09 info: API Server Running at:3001
+2020-08-14 12:55:10 info: DB Connection Success
+2020-08-14 12:55:14 info: API Server Running at:3001
+2020-08-14 12:55:14 info: DB Connection Success
