@@ -1,9 +1,9 @@
 const joi = require("@hapi/joi");
 const { formatResponse } = require("../library/formatResponse");
 const options = { abortEarly: false };
-
+const logger = require("../library/logger");
 exports.signUpParam = (req, res, next) => {
-  console.log("Sign up validation");
+  logger.info("Sign up validation");
   let signupSchema = joi.object({
     name: joi.string().min(3).required(),
     email: joi.string().min(4).email(),

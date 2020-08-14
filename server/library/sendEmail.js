@@ -14,8 +14,6 @@ exports.sendEmail = async (mailOptions) => {
     },
     tls: { rejectUnauthorized: false },
   });
-  /**config mail options */
-  //console.log("EmailText::", mailOptions);
 
   /**send email */
   let sentInfo = await transporter.sendMail(mailOptions);
@@ -25,6 +23,6 @@ exports.sendEmail = async (mailOptions) => {
   } else {
     sendEmailResult = "Error Sending Email";
   }
-  console.log("Email Sent?", sendEmailResult);
+
   return sendEmailResult;
 };

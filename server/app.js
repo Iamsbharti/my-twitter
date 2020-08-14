@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 initdb();
 
 /**add router */
-console.log("route::", process.env.API_VERSION);
 app.use(process.env.API_VERSION, router);
+
 /**listen to server */
 let port = process.env.PORT;
 
