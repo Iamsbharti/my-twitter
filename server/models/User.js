@@ -22,7 +22,10 @@ let userSchema = mongoose.Schema({
     type: Array,
   },
   profile: {
-    type: Blob,
+    type: String,
+  },
+  password: {
+    type: String,
   },
   createdOn: {
     type: Date,
