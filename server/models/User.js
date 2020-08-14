@@ -15,5 +15,18 @@ let userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  recoveryCode: {
+    type: String,
+  },
+  followers: {
+    type: Array,
+  },
+  profile: {
+    type: Blob,
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 module.exports = mongoose.model("User", userSchema);
