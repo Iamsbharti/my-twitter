@@ -36,8 +36,7 @@ initdb();
 
 /**add router */
 app.use(process.env.API_VERSION, router);
-app.use(notfound);
-app.use(handleError);
+
 /**listen to server */
 let port = process.env.PORT || process.env.API_PORT;
 
@@ -51,3 +50,5 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve("index.html"));
   });
 }
+app.use(notfound);
+app.use(handleError);
