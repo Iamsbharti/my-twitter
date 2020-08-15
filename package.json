@@ -36,7 +36,7 @@
     "winston": "^3.3.3"
   },
   "scripts": {
-    "start-api": "nodemon src/server/app.js",
+    "start-api": "nodemon server/app.js",
     "dev": "react-scripts start",
     "start": "npm run start-api",
     "build": "react-scripts build",
