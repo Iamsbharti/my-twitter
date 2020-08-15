@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import TweetsPage from "./components/TweetsPage";
 import ForgotPassword from "./components/ForgotPassword";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+
 function App() {
   return (
     <div>
