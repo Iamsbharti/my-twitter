@@ -243,3 +243,51 @@
 .signup__content > h4:hover {
   color: blue;
 }
+/*reset password*/
+
+.reset__password > img {
+  width: 45px;
+  height: 45px;
+}
+.reset__password {
+  display: grid;
+  justify-content: center;
+  margin-top: 40px;
+}
+.reset__password > h2 {
+  font-weight: bolder;
+  font-size: 35px;
+  margin-bottom: 50px;
+}
+.reset__password > code {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+.reset__password > input {
+  border-radius: 20px;
+  width: 350px;
+  height: 34px;
+  font-size: 20px;
+  border-color: var(--twitter-color);
+}
+.reset__password > p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bolder;
+  font-size: 20px;
+}
+.reset__password > button {
+  background-color: var(--twitter-color) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 900 !important;
+  font-size: 19px !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+  width: 220px;
+}
+.reset__password > input:focus {
+  outline: none;
+}
