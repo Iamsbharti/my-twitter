@@ -6,6 +6,7 @@ const httpLogger = require("./middlewares/httpLogger");
 const logger = require("./library/logger");
 const { initdb } = require("./initdb");
 const router = require("./router/router");
+const { notfound, handleError } = require("./middlewares/errorHandlers");
 
 /**configure envoirnment variables */
 dotenv.config();
@@ -15,9 +16,15 @@ const app = express();
 
 /**add middlewares */
 app.use(httpLogger);
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(notfound);
+app.use(handleError);
 
 /**init db */
 initdb();
