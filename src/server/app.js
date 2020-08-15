@@ -46,7 +46,7 @@ app.listen(port, () => logger.info(`API Server Running at:${port}`));
 //production config
 if (process.env.NODE_ENV === "production") {
   console.log("prod-env");
-  app.use(express.static(path.resolve(__dirname, "../build")));
+  app.use(express.static(path.resolve(__dirname, "../../build")));
   app.get("/*", (req, res) => {
     res.sendFile(path.resolve("index.html"));
   });
