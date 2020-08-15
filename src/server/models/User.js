@@ -14,7 +14,6 @@ let userSchema = mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     recoveryCode: {
       type: String,

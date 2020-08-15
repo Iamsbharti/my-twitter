@@ -1,0 +1,3 @@
+export const LOGIN = "LOGIN";
+export const RESET_PASSWORD = "RESET_PASSWORD";
+export const RECOVER_PASSWORD = "RECOVER_PASSWORD";

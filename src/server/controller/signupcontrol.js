@@ -9,8 +9,8 @@ exports.signUpControl = async (req, res) => {
   logger.info(`SignUp Control`);
   const { name, email, username } = req.body;
   /**check for existing email and username */
-  let userexists = await User.findOne({ email: email, username: username });
-  if (userexists) {
+  let userEmailexists = await User.findOne({ email: email });
+  if (userEmailexists) {
     return res
       .status(400)
       .json(formatResponse(true, 400, "User Already Exists", email));
@@ -26,6 +26,7 @@ exports.signUpControl = async (req, res) => {
 
     let usercreated = await User.create(newuser);
     let result;
+    console.log("usercreated::", usercreated);
     if (usercreated) {
       let _user = usercreated.toObject();
       delete _user.__v;
