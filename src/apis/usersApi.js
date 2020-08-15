@@ -84,10 +84,26 @@ export const resetPassword = async (resetInfo) => {
         ...requestBody,
       }
     );
-    console.log("resetresponse::", resetResponse);
+    console.log("resetresponse::", resetResponse.data);
     return resetResponse.data;
   } catch (error) {
     console.warn(error.response.data);
+    return error.response.data;
+  }
+};
+export const recoverPassword = async (loginId) => {
+  console.log("recover pwd:API:", loginId);
+  try {
+    let recoverResponse = await axios.post(
+      `${baseUrl}/api/v1/user/recoveryPassword`,
+      {
+        loginId: loginId,
+      }
+    );
+    console.log("recover res::", recoverResponse.data);
+    return recoverResponse.data;
+  } catch (error) {
+    console.log("Error::", error.response.data);
     return error.response.data;
   }
 };
