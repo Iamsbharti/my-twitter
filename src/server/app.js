@@ -38,6 +38,6 @@ app.use(process.env.API_VERSION, router);
 app.use(notfound);
 app.use(handleError);
 /**listen to server */
-let port = process.env.PORT;
+let port = process.env.NODE_ENV === "production" ? "" : process.env.PORT;
 
 app.listen(port, () => logger.info(`API Server Running at:${port}`));
