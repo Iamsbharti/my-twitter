@@ -34,6 +34,8 @@ export const loginApi = async ({ loginId, password }) => {
     let returnRes = {
       ..._response,
       isAuthenticated: true,
+      error: response.data.error,
+      message: response.data.message,
     };
     return returnRes;
   } catch (error) {

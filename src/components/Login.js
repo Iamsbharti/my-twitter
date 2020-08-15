@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import "../css/Home.css";
 import { loginAction } from "../redux/actions/userActions";
 import { connect } from "react-redux";
 
-function Login({ loginAction }) {
+function Login({ loginAction, message, error, isAuthenticated }) {
   let history = useHistory();
   /**define state */
   let [loginId, setLoginId] = useState("");
   let [password, setPwd] = useState("");
+  let [authenticating, setAuth] = useState(false);
+  let [status, setStatus] = useState("");
+  let [errorClassName, setClassName] = useState("");
   /**manipulate local state */
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,9 +33,21 @@ function Login({ loginAction }) {
       loginId: loginId,
       password: password,
     };
-
-    loginAction(userInfo);
+    /**set loading to true */
+    setAuth(true);
+    setStatus("Processing...");
+    setClassName("");
+    setTimeout(() => loginAction(userInfo), 1200);
   };
+  /**change state post login response */
+  useEffect(() => {
+    setAuth(true);
+    setStatus(
+      isAuthenticated ? `${message} - Redirecting to Tweets...` : message
+    );
+    /**set classname based on error */
+    error ? setClassName("signup__error") : setClassName("signup__success");
+  }, [isAuthenticated, message, error]);
   return (
     <div className="login">
       <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
@@ -52,6 +67,7 @@ function Login({ loginAction }) {
           value={password}
           onChange={handleChange}
         />
+        <span className={errorClassName}>{authenticating && status}</span>
         <Button className="login__button" onClick={handleLogin}>
           Log in
         </Button>
@@ -63,9 +79,14 @@ function Login({ loginAction }) {
     </div>
   );
 }
-const mapStateToProps = (state) => {
-  console.log("state::", state);
-  return state;
+const mapStateToProps = ({ user }) => {
+  let { error, message, isAuthenticated } = user.user;
+  return {
+    loginStatus: user.authStatus,
+    message,
+    error,
+    isAuthenticated,
+  };
 };
 
 const mapActionToProps = { loginAction };
