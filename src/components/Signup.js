@@ -174,7 +174,10 @@ function Signup() {
             alt=""
           />
           <p>Reset Your Password</p>
-          <h4>you current password has been sent to {email}</h4>
+          <h4>
+            you current password has been sent to{" "}
+            <code style={{ color: "green", fontSize: "12px" }}>{email}</code>
+          </h4>
           <code>Enter Current Password</code>
           <input
             type="password"
