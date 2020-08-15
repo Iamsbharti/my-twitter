@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import "../css/Home.css";
-import { signup } from "../apis/usersApi";
+import { signup, resetPassword } from "../apis/usersApi";
 
 function Signup() {
   let history = useHistory();
@@ -10,11 +10,16 @@ function Signup() {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [username, setUserName] = useState("");
+  let [currentPassword, setCPwd] = useState("");
+  let [password, setPwd] = useState("");
+  let [confirmPwd, setConfirmPwd] = useState("");
   let [LOADING, setLoading] = useState(false);
   let [error, setError] = useState("Processing...");
   let [errorClassName, setClassName] = useState("");
-  let [toggleSignupDiv, setToggleSignup] = useState(true);
-  let [toggleResetDiv, setToggleReset] = useState(false);
+  let [toggleSignupDiv, setToggleSignup] = useState(false);
+  let [toggleResetDiv, setToggleReset] = useState(true);
+  let [pwdValidationError, setPwdValidError] = useState("");
+  let [pwdMatchError, setPwdMatchError] = useState("");
 
   /**manipulate state */
   const handleChange = (e) => {
@@ -28,6 +33,15 @@ function Signup() {
         break;
       case "username":
         setUserName(value);
+        break;
+      case "current":
+        setCPwd(value);
+        break;
+      case "password":
+        setPwd(value);
+        break;
+      case "confirmPwd":
+        setConfirmPwd(value);
         break;
       default:
     }
@@ -61,66 +75,134 @@ function Signup() {
       }, 3000);
     } else {
       /**prompt for password reset */
-      setToggleReset(true);
-      setToggleSignup(false);
+      setToggleReset(!toggleResetDiv);
+      setToggleSignup(!toggleSignupDiv);
     }
   };
-  const resetPassword = () => {
+  const setPassword = async () => {
     console.log("reset password");
+    let resetInfo = {
+      email: email,
+      operation: "set",
+      currentPassword: currentPassword,
+      password: password,
+    };
+    setLoading(true);
+    setError("Processing...");
+    let resetResponse = await resetPassword(resetInfo);
+    let { error, message } = resetResponse;
+    /**set up error message */
+    setError(message);
+    /**set classname based on error */
+    error ? setClassName("signup__error") : setClassName("signup__success");
+
+    /**redirect on success reset to login */
+    setError("Redirecting to Login Page...");
+    setTimeout(() => history.push("/login"), 1400);
   };
+  /**password validation */
+  useEffect(() => {
+    if (password.length > 0) {
+      let pattern = new RegExp(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+      );
+      const PWD_ERROR = `Password should contain atleast
+                     1 Lowercase, 1 Uppercase , 1 Symbol
+                     and mininum of 8 characters;`;
+      let validated = pattern.test(password);
+      validated ? setPwdValidError("") : setPwdValidError(PWD_ERROR);
+
+      /**password and confirm password matcher */
+      let matched = password === confirmPwd;
+      matched
+        ? setPwdMatchError("Passwords Matched")
+        : setPwdMatchError("Passwords Doesn't Match");
+    }
+  }, [password, confirmPwd]);
   return (
-    <>
-      <div className="signup" hidden={toggleSignupDiv}>
-        <div className="signup__content">
-          <div className="signup__nav">
-            <img
-              src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"}
-              alt=""
-            />
+    <div>
+      <div hidden={toggleSignupDiv}>
+        <div className="signup">
+          <div className="signup__content">
+            <div className="signup__nav">
+              <img
+                src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"}
+                alt=""
+              />
+            </div>
+            <p>Create your account</p>
+            <form onSubmit={signUpUser}>
+              <input
+                name="name"
+                type="text"
+                placeholder="name"
+                value={name}
+                onChange={handleChange}
+              />
+              <input
+                name="email"
+                type="text"
+                placeholder="Phone or Email"
+                value={email}
+                onChange={handleChange}
+              />
+              <input
+                name="username"
+                type="text"
+                placeholder="create a username"
+                value={username}
+                onChange={handleChange}
+              />
+              <Button type="submit">Sign up</Button>
+            </form>
+            <br />
+            <span className={errorClassName}>{LOADING && error}</span>
+            <h4 onClick={() => history.push("/")}>Cancel?</h4>
           </div>
-          <p>Create your account</p>
-          <form onSubmit={signUpUser}>
-            <input
-              name="name"
-              type="text"
-              placeholder="name"
-              value={name}
-              onChange={handleChange}
-            />
-            <input
-              name="email"
-              type="text"
-              placeholder="Phone or Email"
-              value={email}
-              onChange={handleChange}
-            />
-            <input
-              name="username"
-              type="text"
-              placeholder="create a username"
-              value={username}
-              onChange={handleChange}
-            />
-            <Button type="submit">Sign up</Button>
-          </form>
-          <br />
-          <span className={errorClassName}>{LOADING && error}</span>
-          <h4 onClick={() => history.push("/")}>Cancel?</h4>
         </div>
       </div>
-      <div className="reset__password" hidden={toggleResetDiv}>
-        <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
-        <p>Reset Your Password</p>
-        <h4>you current password has been sent to {email}</h4>
-        <code>Enter Current Password</code>
-        <input type="password" />
-        <code>Enter New Password</code>
-        <input type="password" />
-        <code>Type Again</code>
-        <input type="password" />
-        <Button onClick={resetPassword}>Reset Password</Button>
+      <div hidden={toggleResetDiv}>
+        <div className="reset__password">
+          <img
+            src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"}
+            alt=""
+          />
+          <p>Reset Your Password</p>
+          <h4>you current password has been sent to {email}</h4>
+          <code>Enter Current Password</code>
+          <input
+            type="password"
+            name="current"
+            value={currentPassword}
+            onChange={handleChange}
+          />
+          <code>Enter New Password</code>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+          <span
+            style={{ color: "red", marginTop: "10px", marginBottom: "10px" }}
+          >
+            {pwdValidationError}
+          </span>
+          <code>Type Again</code>
+          <input
+            type="password"
+            name="confirmPwd"
+            value={confirmPwd}
+            onChange={handleChange}
+          />
+          <span>{pwdMatchError}</span>
+          <Button onClick={setPassword}>Reset Password</Button>
+          <span className={errorClassName} style={{ marginTop: "10px" }}>
+            {LOADING && error}
+          </span>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 export default Signup;

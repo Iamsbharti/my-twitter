@@ -244,7 +244,9 @@
   color: blue;
 }
 /*reset password*/
-
+.reset__password {
+  margin: 20px;
+}
 .reset__password > img {
   width: 45px;
   height: 45px;
@@ -254,10 +256,11 @@
   justify-content: center;
   margin-top: 40px;
 }
-.reset__password > h2 {
+.reset__password > h2,
+h4 {
   font-weight: bolder;
-  font-size: 35px;
-  margin-bottom: 50px;
+  font-size: 20px;
+  margin-bottom: 30px;
 }
 .reset__password > code {
   margin-bottom: 5px;

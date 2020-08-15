@@ -43,3 +43,51 @@ export const loginApi = async ({ loginId, password }) => {
     return error.response.data;
   }
 };
+export const resetPassword = async (resetInfo) => {
+  const {
+    email,
+    recoveryCode,
+    password,
+    currentPassword,
+    operation,
+  } = resetInfo;
+  console.log(
+    "input::",
+    email,
+    recoveryCode,
+    password,
+    currentPassword,
+    operation
+  );
+  /**format request body based on operation */
+  let requestBody;
+  if (operation === "set") {
+    requestBody = {
+      email: email,
+      currentPassword: currentPassword,
+      password: password,
+      operation: operation,
+    };
+  } else {
+    requestBody = {
+      email: email,
+      recoveryCode: recoveryCode,
+      password: password,
+      operation: operation,
+    };
+  }
+  /**call api */
+  try {
+    let resetResponse = await axios.post(
+      `${baseUrl}/api/v1/user/resetPassword`,
+      {
+        ...requestBody,
+      }
+    );
+    console.log("resetresponse::", resetResponse);
+    return resetResponse.data;
+  } catch (error) {
+    console.warn(error.response.data);
+    return error.response.data;
+  }
+};

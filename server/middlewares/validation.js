@@ -55,7 +55,7 @@ exports.resetValidation = (req, res, next) => {
   logger.info("Password Reset validation");
   let resetSchema = joi.object({
     email: joi.string().min(4).email().required(),
-    recoveryCode: joi.string().min(6).required(),
+    recoveryCode: joi.string().min(6).optional(),
     password: joi
       .string()
       .pattern(
@@ -64,6 +64,8 @@ exports.resetValidation = (req, res, next) => {
         )
       )
       .required(),
+    currentPassword: joi.string().optional(),
+    operation: joi.valid("set", "reset").required(),
   });
   let { error } = resetSchema.validate(req.body, options);
   if (error) {

@@ -2,7 +2,7 @@ const User = require("../models/User");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const { sendEmail } = require("../library/sendEmail");
-const { hashPassword } = require("../library/passwordManager");
+const { hashPassword, comparePassword } = require("../library/passwordManager");
 
 exports.getRecoveryCode = async (req, res) => {
   logger.info("Get RecoveryCode Control");
@@ -65,7 +65,13 @@ exports.getRecoveryCode = async (req, res) => {
 };
 exports.resetPassword = async (req, res) => {
   logger.info("Reset Password Control");
-  const { email, recoveryCode, password } = req.body;
+  const {
+    email,
+    recoveryCode,
+    password,
+    currentPassword,
+    operation,
+  } = req.body;
 
   /**user existence */
   const userExistence = async (email) => {
@@ -74,11 +80,19 @@ exports.resetPassword = async (req, res) => {
       ? Promise.resolve(userExists)
       : Promise.reject(formatResponse(true, 404, "User NOt Found", email));
   };
-  /**code match */
-  const codeValidity = (user) => {
-    return recoveryCode === user.recoveryCode
-      ? Promise.resolve(true)
-      : Promise.reject(formatResponse(true, 401, "Not Valid Code", null));
+  /**code or current password match  */
+  const codeValidity = async (user) => {
+    if (operation === "reset") {
+      return recoveryCode === user.recoveryCode
+        ? Promise.resolve(true)
+        : Promise.reject(formatResponse(true, 401, "Not Valid Code", null));
+    } else {
+      return (await comparePassword(currentPassword, user.password))
+        ? Promise.resolve(true)
+        : Promise.reject(
+            formatResponse(true, 401, "current password is not valid", null)
+          );
+    }
   };
   /**update password */
   const updatePassword = async () => {
