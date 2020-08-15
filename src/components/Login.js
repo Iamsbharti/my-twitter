@@ -45,9 +45,15 @@ function Login({ loginAction, message, error, isAuthenticated }) {
     setStatus(
       isAuthenticated ? `${message} - Redirecting to Tweets...` : message
     );
+
     /**set classname based on error */
     error ? setClassName("signup__error") : setClassName("signup__success");
-  }, [isAuthenticated, message, error]);
+
+    /**redirect to tweets upon sucess auth */
+    if (isAuthenticated) {
+      setTimeout(() => history.push("/tweets"), 1200);
+    }
+  }, [isAuthenticated, message, error, history]);
   return (
     <div className="login">
       <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
