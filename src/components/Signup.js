@@ -20,6 +20,7 @@ function Signup() {
   let [toggleResetDiv, setToggleReset] = useState(true);
   let [pwdValidationError, setPwdValidError] = useState("");
   let [pwdMatchError, setPwdMatchError] = useState("");
+  let [doesPwdMatch, setDoesPwdMatch] = useState();
 
   /**manipulate state */
   const handleChange = (e) => {
@@ -97,8 +98,12 @@ function Signup() {
     error ? setClassName("signup__error") : setClassName("signup__success");
 
     /**redirect on success reset to login */
-    setError("Redirecting to Login Page...");
-    setTimeout(() => history.push("/login"), 1400);
+    if (!error) {
+      setError("Redirecting to Login Page...");
+      setTimeout(() => history.push("/login"), 1400);
+    } else {
+      setError(message);
+    }
   };
   /**password validation */
   useEffect(() => {
@@ -114,6 +119,7 @@ function Signup() {
 
       /**password and confirm password matcher */
       let matched = password === confirmPwd;
+      matched ? setDoesPwdMatch(true) : setDoesPwdMatch(false);
       matched
         ? setPwdMatchError("Passwords Matched")
         : setPwdMatchError("Passwords Doesn't Match");
@@ -195,7 +201,9 @@ function Signup() {
             value={confirmPwd}
             onChange={handleChange}
           />
-          <span>{pwdMatchError}</span>
+          <span style={{ color: doesPwdMatch ? "green" : "red" }}>
+            {pwdMatchError}
+          </span>
           <Button onClick={setPassword}>Reset Password</Button>
           <span className={errorClassName} style={{ marginTop: "10px" }}>
             {LOADING && error}
