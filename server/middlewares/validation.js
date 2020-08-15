@@ -51,3 +51,27 @@ exports.recoveryParam = (req, res, next) => {
   }
   next();
 };
+exports.resetValidation = (req, res, next) => {
+  logger.info("Password Reset validation");
+  let resetSchema = joi.object({
+    email: joi.string().min(4).email().required(),
+    recoveryCode: joi.string().min(6).required(),
+    password: joi
+      .string()
+      .pattern(
+        new RegExp(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+        )
+      )
+      .required(),
+  });
+  let { error } = resetSchema.validate(req.body, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message));
+    return res
+      .status(400)
+      .json(formatResponse(true, 400, "In-Valid I/p Parameters", errors));
+  }
+  next();
+};

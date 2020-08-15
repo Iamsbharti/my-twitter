@@ -23,15 +23,14 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(notfound);
-app.use(handleError);
 
 /**init db */
 initdb();
 
 /**add router */
 app.use(process.env.API_VERSION, router);
-
+app.use(notfound);
+app.use(handleError);
 /**listen to server */
 let port = process.env.PORT;
 

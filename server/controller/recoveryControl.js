@@ -2,6 +2,7 @@ const User = require("../models/User");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const { sendEmail } = require("../library/sendEmail");
+const { hashPassword } = require("../library/passwordManager");
 
 exports.getRecoveryCode = async (req, res) => {
   logger.info("Get RecoveryCode Control");
@@ -20,6 +21,7 @@ exports.getRecoveryCode = async (req, res) => {
   /**user existence */
   let userExistence = await User.findOne(query);
   if (userExistence) {
+    const { email } = userExistence;
     /**generate recovery code */
     let recoveryCode = parseInt(Math.random() * 1000000, 10);
     console.log("code::", recoveryCode);
@@ -50,7 +52,7 @@ exports.getRecoveryCode = async (req, res) => {
       if (emailResult === "Email Sent") {
         res
           .status(200)
-          .json(formatResponse(false, 200, "Recovery Email Sent", null));
+          .json(formatResponse(false, 200, "Recovery Email Sent", email));
       } else {
         res
           .status(500)
@@ -60,4 +62,50 @@ exports.getRecoveryCode = async (req, res) => {
   } else {
     res.status(404).json(formatResponse(true, 400, "User Not Found", loginId));
   }
+};
+exports.resetPassword = async (req, res) => {
+  logger.info("Reset Password Control");
+  const { email, recoveryCode, password } = req.body;
+
+  /**user existence */
+  const userExistence = async (email) => {
+    let userExists = await User.findOne({ email: email });
+    return userExists
+      ? Promise.resolve(userExists)
+      : Promise.reject(formatResponse(true, 404, "User NOt Found", email));
+  };
+  /**code match */
+  const codeValidity = (user) => {
+    return recoveryCode === user.recoveryCode
+      ? Promise.resolve(true)
+      : Promise.reject(formatResponse(true, 401, "Not Valid Code", null));
+  };
+  /**update password */
+  const updatePassword = async () => {
+    let query = { email: email };
+    let updateOptions = {
+      password: await hashPassword(password),
+      recoveryCode: "",
+    };
+    let updatedPassword = await User.updateOne(query, updateOptions);
+    let { n } = updatedPassword;
+    n === 1
+      ? Promise.resolve(true)
+      : Promise.reject(
+          formatResponse(true, 500, "Internal Server Error", null)
+        );
+  };
+
+  userExistence(email)
+    .then(codeValidity)
+    .then(updatePassword)
+    .then((result) => {
+      res
+        .status(200)
+        .json(formatResponse(false, 200, "Password Reset Success", email));
+    })
+    .catch((error) => {
+      logger.warn("Error::", error);
+      res.status(error.status).json(error);
+    });
 };
