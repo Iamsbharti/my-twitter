@@ -19,7 +19,7 @@ const app = express();
 /**add middlewares */
 app.use(httpLogger);
 app.use(cors());
-app.use(helmet());
+//app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function (req, res, next) {
