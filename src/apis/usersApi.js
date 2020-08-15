@@ -3,7 +3,7 @@ import axios from "axios";
 export const signup = async ({ name, email, username }) => {
   console.log("signup apicall::", name, email, username);
   try {
-    let response = await axios.post(`${baseUrl}/user/signup`, {
+    let response = await axios.post(`${baseUrl}/api/v1/user/signup`, {
       name: name,
       email: email,
       username: username,
@@ -18,7 +18,7 @@ export const signup = async ({ name, email, username }) => {
 export const loginApi = async ({ loginId, password }) => {
   console.log("login api call", loginId, password);
   try {
-    let response = await axios.post(`${baseUrl}/user/login`, {
+    let response = await axios.post(`${baseUrl}/api/v1/user/login`, {
       loginId: loginId,
       password: password,
     });
