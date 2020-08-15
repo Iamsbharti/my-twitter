@@ -7,7 +7,7 @@ const logger = require("./library/logger");
 const { initdb } = require("./initdb");
 const router = require("./router/router");
 const { notfound, handleError } = require("./middlewares/errorHandlers");
-
+const helmet = require("helmet");
 /**configure envoirnment variables */
 dotenv.config();
 
@@ -21,6 +21,7 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
