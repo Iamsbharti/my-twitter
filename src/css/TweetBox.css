@@ -34,3 +34,7 @@
   padding: 10px;
   margin-left: 10px;
 }
+
+.tweetbox > form > input:focus {
+  outline: none;
+}
