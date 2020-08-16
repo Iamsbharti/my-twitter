@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Widgets.css";
 import Searchicon from "@material-ui/icons/Search";
-import { TwitterTweetEmbed, TwitterTimelineEmbed } from "react-twitter-embed";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 function Widgets() {
   return (
     <div className="widgets">
