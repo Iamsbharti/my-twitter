@@ -13,10 +13,17 @@ exports.signUpParam = (req, res, next) => {
   let { error } = signupSchema.validate(req.body, options);
   if (error) {
     let errors = [];
-    error.details.map((err) => errors.push(err.message));
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
     return res
       .status(400)
-      .json(formatResponse(true, 400, "In-Valid I/p Parameters", errors));
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
   }
   next();
 };
@@ -29,10 +36,17 @@ exports.loginParam = (req, res, next) => {
   let { error } = loginSchema.validate(req.body, options);
   if (error) {
     let errors = [];
-    error.details.map((err) => errors.push(err.message));
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
     return res
       .status(400)
-      .json(formatResponse(true, 400, "In-Valid I/p Parameters", errors));
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
   }
   next();
 };
@@ -44,10 +58,17 @@ exports.recoveryParam = (req, res, next) => {
   let { error } = recoverySchema.validate(req.body, options);
   if (error) {
     let errors = [];
-    error.details.map((err) => errors.push(err.message));
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
     return res
       .status(400)
-      .json(formatResponse(true, 400, "In-Valid I/p Parameters", errors));
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
   }
   next();
 };
@@ -70,10 +91,49 @@ exports.resetValidation = (req, res, next) => {
   let { error } = resetSchema.validate(req.body, options);
   if (error) {
     let errors = [];
-    error.details.map((err) => errors.push(err.message));
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
     return res
       .status(400)
-      .json(formatResponse(true, 400, "In-Valid I/p Parameters", errors));
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
+exports.postValidation = (req, res, next) => {
+  logger.info("Create Post validation");
+  let postSchema = joi.object({
+    description: joi.string().min(4).required(),
+    userAvatar: joi.string().optional(),
+    displayName: joi.string().required(),
+    userName: joi.string().required(),
+    userId: joi.string().required(),
+    verified: joi.boolean().optional(),
+    image: joi.string().optional(),
+    comments: joi.array().optional(),
+    retweets: joi.number().optional(),
+    likes: joi.number().optional(),
+    shares: joi.number().optional(),
+  });
+  let { error } = postSchema.validate(req.body, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
   }
   next();
 };

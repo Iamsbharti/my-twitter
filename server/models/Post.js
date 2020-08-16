@@ -21,8 +21,12 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
   image: {
-    tyoe: String,
+    type: String,
   },
   comments: {
     type: Array,
@@ -39,5 +43,13 @@ const postSchema = mongoose.Schema({
   verified: {
     type: Boolean,
   },
-  timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  modifiedAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
+module.exports = mongoose.model("Post", postSchema);

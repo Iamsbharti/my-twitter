@@ -4,6 +4,7 @@ const { sendEmail } = require("../library/sendEmail");
 const generator = require("generate-password");
 const { formatResponse } = require("../library/formatResponse");
 const { hashPassword } = require("../library/passwordManager");
+const shortid = require("shortid");
 
 exports.signUpControl = async (req, res) => {
   logger.info(`SignUp Control`);
@@ -19,6 +20,7 @@ exports.signUpControl = async (req, res) => {
   const signupuser = async () => {
     console.log("sign up user method");
     let newuser = new User({
+      userId: shortid.generate(),
       name: name,
       email: email,
       username: username,
