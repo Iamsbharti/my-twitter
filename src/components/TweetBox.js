@@ -9,6 +9,11 @@ function TweetBox({ postTweet }) {
     console.log("handle tweet", text, image);
     e.preventDefault();
     postTweet(text, image);
+    /**clear input  */
+    setTimeout(() => {
+      setText("");
+      setImage("");
+    }, 1400);
   };
   return (
     <div className="tweetbox">

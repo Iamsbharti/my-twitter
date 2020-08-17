@@ -71,6 +71,7 @@ const getAllPosts = async (req, res) => {
   Post.find()
     .select(EXCLUDE)
     .lean()
+    .sort({ createdAt: -1 })
     .exec((error, allPosts) => {
       if (error) {
         res
