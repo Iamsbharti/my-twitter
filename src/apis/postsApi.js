@@ -5,12 +5,6 @@ const authToken = localStorage.getItem("authToken");
 export const createPost = async (postInfo) => {
   console.log(("Create Post API Start", postInfo));
   try {
-    /*let createOptions = {
-      method: "POST",
-      headers: { authToken: authToken },
-      url: `${baseUrl}/api/v1/post/createPost`,
-      body: { ...postInfo },
-    };*/
     let url = `${baseUrl}/api/v1/post/createPost`;
     let createPostResponse = await axios.post(
       url,
