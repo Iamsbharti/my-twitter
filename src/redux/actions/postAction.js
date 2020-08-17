@@ -2,7 +2,7 @@ import { GET_ALL_POSTS, CREATE_POST } from "./actionTypes";
 import * as postApi from "../../apis/postsApi";
 
 export const createPostAction = (postInfo) => {
-  console.log("Create post action");
+  console.log("Create post action:", postInfo);
   return async (dispatch) => {
     let createPostResponse = await postApi.createPost(postInfo);
     dispatch({ type: CREATE_POST, createPostResponse });

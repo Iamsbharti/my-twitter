@@ -7,7 +7,8 @@ exports.isAuthorized = (req, res, next) => {
   const reqBodyAuth = req.body.authToken;
   const reqQueryAuth = req.query.authToken;
   const reqHeaderAuth = req.header("authToken");
-  let reqUserId;
+  let reqBodyUserId = req.body.userId;
+  let reqQueryUserId = req.query.userId;
   /**check for valid authtoken */
   if (
     reqBodyAuth !== undefined ||
@@ -21,19 +22,18 @@ exports.isAuthorized = (req, res, next) => {
     );
     console.log("Decoded::", decoded);
     let { userId } = decoded.data;
-    console.log("UserId::", req.query.userId);
-    if (req.body.userId !== undefined) {
-      reqUserId = req.body.userId;
+    let flagInvalidToken = false;
+    console.log(userId, reqQueryUserId, reqBodyUserId);
+    if (reqBodyUserId !== undefined && userId !== reqBodyUserId) {
+      console.log("not valid token");
+      //throw new Error("Not Valid Token");
+      flagInvalidToken = true;
     }
-    if (req.query !== undefined) {
-      reqUserId = req.query.userId;
+    if (reqQueryUserId !== undefined && userId !== reqQueryUserId) {
+      console.log("not valid token");
+      flagInvalidToken = true;
     }
-    if (reqUserId === undefined) {
-      res.status(400);
-      throw new Error("User ID required");
-    }
-    console.log(userId, reqUserId);
-    if (userId !== reqUserId) {
+    if (flagInvalidToken) {
       throw new Error("Not Valid Token");
     }
   } else {
@@ -42,5 +42,6 @@ exports.isAuthorized = (req, res, next) => {
       .status(400)
       .json(formatResponse(true, 400, "Auth Token Missing", null));
   }
+  console.log("Auth success");
   next();
 };

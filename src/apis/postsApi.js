@@ -3,17 +3,22 @@ import axios from "axios";
 const authToken = localStorage.getItem("authToken");
 
 export const createPost = async (postInfo) => {
-  console.log("Create Post API Start");
+  console.log(("Create Post API Start", postInfo));
   try {
-    let createOptions = {
+    /*let createOptions = {
       method: "POST",
       headers: { authToken: authToken },
       url: `${baseUrl}/api/v1/post/createPost`,
       body: { ...postInfo },
-    };
-    let createPostResponse = await axios.post(createOptions);
-    console.log("create post success::", createPostResponse.data);
-    return createPostResponse.data;
+    };*/
+    let url = `${baseUrl}/api/v1/post/createPost`;
+    let createPostResponse = await axios.post(
+      url,
+      { ...postInfo },
+      { headers: { authToken: authToken } }
+    );
+    console.log("create post success::", createPostResponse.data.data);
+    return createPostResponse.data.data;
   } catch (error) {
     console.warn("Create POST Error::", error.response.data);
     return error.response.data;

@@ -11,6 +11,8 @@ import { useHistory } from "react-router-dom";
 function Feed({
   isAuthenticated,
   userId,
+  name,
+  username,
   posts,
   getAllPostsAction,
   createPostAction,
@@ -22,6 +24,18 @@ function Feed({
     /**call get posts action */
     getAllPostsAction(userId);
   }, [userId]);
+  /**tweet */
+  const tweet = (text, image) => {
+    console.log("text::", text, image);
+    let newTweetInfo = {
+      description: text,
+      displayName: name,
+      userId: userId,
+      userName: username,
+    };
+    console.log("tweet::", newTweetInfo);
+    createPostAction(newTweetInfo);
+  };
   return (
     <div className="feed">
       {isAuthenticated ? (
@@ -29,7 +43,7 @@ function Feed({
           <div className="feedHeader">
             <h2>Home</h2>
           </div>
-          <TweetBox />
+          <TweetBox postTweet={tweet} />
           {posts.map((post, index) => (
             <Post key={index} info={post} />
           ))}
@@ -41,8 +55,8 @@ function Feed({
   );
 }
 const mapStateToProps = ({ posts, user }) => {
-  let { userId, isAuthenticated } = user.user;
-  return { posts, userId, isAuthenticated };
+  let { userId, isAuthenticated, name, username } = user.user;
+  return { posts, userId, isAuthenticated, name, username };
 };
 const mapActionToProps = { createPostAction, getAllPostsAction };
 export default connect(mapStateToProps, mapActionToProps)(Feed);
