@@ -1,3 +1,3 @@
 export const LOGIN = "LOGIN";
-export const RESET_PASSWORD = "RESET_PASSWORD";
-export const RECOVER_PASSWORD = "RECOVER_PASSWORD";
+export const CREATE_POST = "CREATE_POST";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
