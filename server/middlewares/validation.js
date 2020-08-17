@@ -3,7 +3,7 @@ const { formatResponse } = require("../library/formatResponse");
 const options = { abortEarly: false };
 const logger = require("../library/logger");
 
-exports.signUpParam = (req, res, next) => {
+const signUpParam = (req, res, next) => {
   logger.info("Sign up validation");
   let signupSchema = joi.object({
     name: joi.string().min(3).required(),
@@ -27,7 +27,7 @@ exports.signUpParam = (req, res, next) => {
   }
   next();
 };
-exports.loginParam = (req, res, next) => {
+const loginParam = (req, res, next) => {
   logger.info("Login validation");
   let loginSchema = joi.object({
     loginId: joi.string().min(4).required(),
@@ -50,7 +50,7 @@ exports.loginParam = (req, res, next) => {
   }
   next();
 };
-exports.recoveryParam = (req, res, next) => {
+const recoveryParam = (req, res, next) => {
   logger.info("Password Recovery validation");
   let recoverySchema = joi.object({
     loginId: joi.string().min(4).required(),
@@ -72,7 +72,7 @@ exports.recoveryParam = (req, res, next) => {
   }
   next();
 };
-exports.resetValidation = (req, res, next) => {
+const resetValidation = (req, res, next) => {
   logger.info("Password Reset validation");
   let resetSchema = joi.object({
     email: joi.string().min(4).email().required(),
@@ -105,7 +105,7 @@ exports.resetValidation = (req, res, next) => {
   }
   next();
 };
-exports.postValidation = (req, res, next) => {
+const postValidation = (req, res, next) => {
   logger.info("Create Post validation");
   let postSchema = joi.object({
     description: joi.string().min(4).required(),
@@ -136,4 +136,11 @@ exports.postValidation = (req, res, next) => {
       );
   }
   next();
+};
+module.exports = {
+  signUpParam,
+  loginParam,
+  recoveryParam,
+  resetValidation,
+  postValidation,
 };

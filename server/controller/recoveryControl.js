@@ -4,7 +4,7 @@ const { formatResponse } = require("../library/formatResponse");
 const { sendEmail } = require("../library/sendEmail");
 const { hashPassword, comparePassword } = require("../library/passwordManager");
 
-exports.getRecoveryCode = async (req, res) => {
+const getRecoveryCode = async (req, res) => {
   logger.info("Get RecoveryCode Control");
   const { loginId } = req.body;
   let query;
@@ -63,7 +63,7 @@ exports.getRecoveryCode = async (req, res) => {
     res.status(404).json(formatResponse(true, 400, "User Not Found", loginId));
   }
 };
-exports.resetPassword = async (req, res) => {
+const resetPassword = async (req, res) => {
   logger.info("Reset Password Control");
   const {
     email,
@@ -122,4 +122,8 @@ exports.resetPassword = async (req, res) => {
       logger.warn("Error::", error);
       res.status(error.status).json(error);
     });
+};
+module.exports = {
+  getRecoveryCode,
+  resetPassword,
 };

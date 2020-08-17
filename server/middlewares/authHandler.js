@@ -28,6 +28,10 @@ exports.isAuthorized = (req, res, next) => {
     if (req.query !== undefined) {
       reqUserId = req.query.userId;
     }
+    if (reqUserId === undefined) {
+      res.status(400);
+      throw new Error("User ID required");
+    }
     console.log(userId, reqUserId);
     if (userId !== reqUserId) {
       throw new Error("Not Valid Token");
