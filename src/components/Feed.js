@@ -21,9 +21,8 @@ function Feed({
   let history = useHistory();
   useEffect(() => {
     /**call get posts action */
-
     getAllPostsAction(localStorage.getItem("userId"));
-  }, [getAllPostsAction]);
+  }, [getAllPostsAction, userId]);
   /**tweet */
   const tweet = (text, image) => {
     console.log("text::", text, image);
