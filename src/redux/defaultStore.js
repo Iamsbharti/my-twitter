@@ -4,3 +4,4 @@ export const session_state = {
     authStatus: "",
   },
 };
+export const posts = [];
