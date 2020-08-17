@@ -22,10 +22,12 @@ function App({ auth }) {
   );
 }
 const mapStateToProps = ({ user }) => {
-  let { isAuthenticated, email } = user.user;
+  let { isAuthenticated, email, userId } = user.user;
+  console.log("App::", user.user);
   let auth = {
     email,
     isAuthenticated,
+    userId,
   };
   return { auth };
 };

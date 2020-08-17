@@ -8,12 +8,10 @@ import { Provider as ReduxProvider } from "react-redux";
 /**init store */
 const store = configureStore();
 ReactDOM.render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </ReduxProvider>
-  </React.StrictMode>,
+  <ReduxProvider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </ReduxProvider>,
   document.getElementById("root")
 );

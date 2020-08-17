@@ -5,15 +5,7 @@ import PublishIcon from "@material-ui/icons/Publish";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
-function Post({
-  displayName,
-  userName,
-  verified,
-  timestamp,
-  text,
-  image,
-  avatar,
-}) {
+function Post({ info }) {
   return (
     <div className="post">
       <div className="post__avatar">
@@ -23,19 +15,19 @@ function Post({
         <div className="post__header">
           <div className="post__headerText">
             <h3>
-              UserName{" "}
+              {info.displayName}{" "}
               <span className="post__verified">
                 <img
                   src={process.env.PUBLIC_URL + "/verified.png"}
                   alt=""
                   className="post__badge"
                 />
-                @username
+                @{info.userName}
               </span>
             </h3>
           </div>
           <div className="post_headerDescription">
-            <p>Challenge you </p>
+            <p>{info.description}</p>
           </div>
         </div>
         <img src={process.env.PUBLIC_URL + "/EfJKhHAXsAAlIFu.jpeg"} alt="" />

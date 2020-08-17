@@ -3,7 +3,7 @@ import SideBar from "./SideBar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
 import "../App.css";
-function TweetsPage() {
+function TweetsPage({ auth }) {
   return (
     <div className="app">
       <SideBar />

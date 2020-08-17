@@ -4,16 +4,10 @@ export function postReducer(_posts = posts, action) {
   console.log("post reducers");
   switch (action.type) {
     case CREATE_POST:
-      return {
-        ..._posts,
-        posts,
-      };
+      return [..._posts, ...action.getAllPostsResponse];
     case GET_ALL_POSTS:
-      return {
-        ..._posts,
-        posts,
-      };
+      return [..._posts, ...action.getAllPostsResponse];
     default:
-      return posts;
+      return _posts;
   }
 }

@@ -1,4 +1,4 @@
-import baseUrl from "./apiUtils";
+import { baseUrl } from "./apiUtils";
 import axios from "axios";
 const authToken = localStorage.getItem("authToken");
 
@@ -25,8 +25,8 @@ export const getAllPosts = async (userId) => {
     let getAllPosts = await axios.get(
       `${baseUrl}/api/v1/post/allPosts?userId=${userId}&authToken=${authToken}`
     );
-    console.log("get all posts success::", getAllPosts.data);
-    return getAllPosts.data;
+    console.log("get all posts success::", getAllPosts.data.data);
+    return getAllPosts.data.data;
   } catch (error) {
     console.warn("GetALl posts error::", error.response.data);
     return error.response.data;
