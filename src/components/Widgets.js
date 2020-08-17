@@ -9,7 +9,7 @@ function Widgets() {
   const handleLogout = () => {
     /**clear localstorage */
     localStorage.clear();
-    setTimeout(() => history.push("/login"), 1000);
+    setTimeout(() => history.push("/home"), 1000);
   };
   return (
     <div className="widgets">
