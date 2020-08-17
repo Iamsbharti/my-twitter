@@ -41,13 +41,7 @@ function Feed({
   );
 }
 const mapStateToProps = ({ posts, user }) => {
-  console.log("posts state:;", typeof posts);
-  console.log("posts state:;", posts.length);
-  posts.map((p) => console.log("post ::", p.userName));
-  console.log("user state::", user);
   let { userId, isAuthenticated } = user.user;
-  let allPosts = Object.entries(posts);
-  console.log("allposts::", allPosts, typeof allPosts);
   return { posts, userId, isAuthenticated };
 };
 const mapActionToProps = { createPostAction, getAllPostsAction };
