@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/Widgets.css";
 import Searchicon from "@material-ui/icons/Search";
+import { Button } from "@material-ui/core";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 function Widgets() {
   return (
@@ -9,6 +10,7 @@ function Widgets() {
         <Searchicon className="widgets__search" />
         <input placeholder="Searh twitter" type="text" />
       </div>
+      <Button>Logout</Button>
       <div className="widgets__container">
         <h2>What's Happening</h2>
         <TwitterTweetEmbed tweetId={"840430824289906688"} />

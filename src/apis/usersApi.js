@@ -23,11 +23,14 @@ export const loginApi = async ({ loginId, password }) => {
       password: password,
     });
     console.log(response.data);
-    let { name, email, authToken } = response.data.data;
+    let { name, email, authToken, userId, username } = response.data.data;
     /**set up localstorage */
     localStorage.setItem("user", name);
     localStorage.setItem("email", email);
     localStorage.setItem("authToken", authToken);
+    localStorage.setItem("userId", userId);
+    localStorage.setItem("username", username);
+
     /**delete authToken */
     let _response = response.data.data;
     delete _response.authToken;

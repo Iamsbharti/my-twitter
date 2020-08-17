@@ -8,9 +8,6 @@ export function userReducer(usersession = session_state.session || {}, action) {
       return {
         ...usersession,
         user: action.loginResponse,
-        authStatus: action.loginResponse.isAuthenticated
-          ? "AUTHENTICATED"
-          : "NOT_AUTHENTICATED",
       };
     default:
       return usersession;

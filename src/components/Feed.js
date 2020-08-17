@@ -20,25 +20,25 @@ function Feed({
   /**define state */
   let history = useHistory();
   useEffect(() => {
-    console.log("userId in Feed::", userId);
     /**call get posts action */
-    getAllPostsAction(userId);
-  }, [userId]);
+
+    getAllPostsAction(localStorage.getItem("userId"));
+  }, [getAllPostsAction]);
   /**tweet */
   const tweet = (text, image) => {
     console.log("text::", text, image);
     let newTweetInfo = {
       description: text,
-      displayName: name,
-      userId: userId,
-      userName: username,
+      displayName: localStorage.getItem("user"),
+      userId: localStorage.getItem("userId"),
+      userName: localStorage.getItem("username"),
     };
     console.log("tweet::", newTweetInfo);
     createPostAction(newTweetInfo);
   };
   return (
     <div className="feed">
-      {isAuthenticated ? (
+      {localStorage.getItem("authToken") ? (
         <>
           <div className="feedHeader">
             <h2>Home</h2>
@@ -56,6 +56,7 @@ function Feed({
 }
 const mapStateToProps = ({ posts, user }) => {
   let { userId, isAuthenticated, name, username } = user.user;
+  console.log("posts in feed com:", posts);
   return { posts, userId, isAuthenticated, name, username };
 };
 const mapActionToProps = { createPostAction, getAllPostsAction };

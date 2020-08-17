@@ -5,8 +5,8 @@ import Signup from "./components/Signup";
 import TweetsPage from "./components/TweetsPage";
 import ForgotPassword from "./components/ForgotPassword";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
-function App({ auth }) {
+
+function App() {
   return (
     <div>
       <Router>
@@ -21,14 +21,5 @@ function App({ auth }) {
     </div>
   );
 }
-const mapStateToProps = ({ user }) => {
-  let { isAuthenticated, email, userId } = user.user;
-  console.log("App::", user.user);
-  let auth = {
-    email,
-    isAuthenticated,
-    userId,
-  };
-  return { auth };
-};
-export default connect(mapStateToProps)(App);
+
+export default App;

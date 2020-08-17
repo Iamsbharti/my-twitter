@@ -3,6 +3,7 @@ import SideBar from "./SideBar";
 import Feed from "./Feed";
 import Widgets from "./Widgets";
 import "../App.css";
+
 function TweetsPage({ auth }) {
   return (
     <div className="app">
@@ -12,4 +13,5 @@ function TweetsPage({ auth }) {
     </div>
   );
 }
+
 export default TweetsPage;
