@@ -8,6 +8,8 @@ import {
   getAllPostsAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Feed({
   isAuthenticated,
   userId,
@@ -50,6 +52,7 @@ function Feed({
       ) : (
         history.push("/login")
       )}
+      <ToastContainer autoClose={1000} hideProgressBar />
     </div>
   );
 }

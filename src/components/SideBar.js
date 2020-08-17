@@ -10,6 +10,7 @@ import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
 import { Button } from "@material-ui/core";
 import "../css/SideBar.css";
+
 function SideBar() {
   return (
     <div className="sidebar">
