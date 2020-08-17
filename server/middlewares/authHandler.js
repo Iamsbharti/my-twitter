@@ -7,7 +7,7 @@ exports.isAuthorized = (req, res, next) => {
   const reqBodyAuth = req.body.authToken;
   const reqQueryAuth = req.query.authToken;
   const reqHeaderAuth = req.header("authToken");
-
+  let reqUserId;
   /**check for valid authtoken */
   if (
     reqBodyAuth !== undefined ||
@@ -21,8 +21,15 @@ exports.isAuthorized = (req, res, next) => {
     );
     console.log("Decoded::", decoded);
     let { userId } = decoded.data;
-    console.log("UserId::", req.body.userId);
-    if (userId !== req.body.userId) {
+    console.log("UserId::", req.query.userId);
+    if (req.body.userId !== undefined) {
+      reqUserId = req.body.userId;
+    }
+    if (req.query !== undefined) {
+      reqUserId = req.query.userId;
+    }
+    console.log(userId, reqUserId);
+    if (userId !== reqUserId) {
       throw new Error("Not Valid Token");
     }
   } else {

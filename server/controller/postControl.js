@@ -3,7 +3,7 @@ const User = require("../models/User");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
-
+const EXCLUDE = "-__v -_id";
 const verifyUser = async (userId) => {
   let userExists = await User.findOne({ userId: userId });
   return userExists
@@ -65,6 +65,25 @@ const createPost = async (req, res) => {
       res.status(error.status).json(error);
     });
 };
+const getAllPosts = async (req, res) => {
+  logger.info("Get All Post Control");
+  /**return all available posts */
+  Post.find()
+    .select(EXCLUDE)
+    .lean()
+    .exec((error, allPosts) => {
+      if (error) {
+        res
+          .status(500)
+          .json(formatResponse(true, 500, "Internal Server Error", error));
+      } else {
+        res
+          .status(200)
+          .json(formatResponse(false, 200, "Fetched All Posts", allPosts));
+      }
+    });
+};
 module.exports = {
   createPost,
+  getAllPosts,
 };

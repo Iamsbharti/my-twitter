@@ -23,4 +23,5 @@ router.post("/user/resetPassword", resetValidation, resetPassword);
 
 /**post management */
 router.post("/post/createPost", isAuthorized, postValidation, posts.createPost);
+router.get("/post/allPosts", isAuthorized, posts.getAllPosts);
 module.exports = router;
