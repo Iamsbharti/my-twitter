@@ -40,8 +40,9 @@ app.use(process.env.API_VERSION, router);
 if (process.env.NODE_ENV === "production") {
   console.log("prod-env");
   app.use(express.static(path.resolve(__dirname, "../build")));
-  app.get("/*", (req, res) => {
-    res.sendFile(path.resolve("index.html"));
+  app.get("*", (req, res) => {
+    const index = path.join(__dirname, "build", "index.html");
+    res.sendFile(index);
   });
 }
 
