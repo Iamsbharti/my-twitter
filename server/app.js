@@ -7,7 +7,7 @@ const logger = require("./library/logger");
 const { initdb } = require("./initdb");
 const router = require("./router/router");
 const { notfound, handleError } = require("./middlewares/errorHandlers");
-const helmet = require("helmet");
+//const helmet = require("helmet");
 const path = require("path");
 
 /**configure envoirnment variables */
