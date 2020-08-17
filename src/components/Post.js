@@ -30,7 +30,7 @@ function Post({ info }) {
             <p>{info.description}</p>
           </div>
         </div>
-        <img src={process.env.PUBLIC_URL + "/EfJKhHAXsAAlIFu.jpeg"} alt="" />
+        {info.image && <img src={info.image} alt="" />}
         <div className="post__footer">
           <ChatBubbleOutlineIcon fontSize="small" />
           <RepeatIcon fontSize="small" />
