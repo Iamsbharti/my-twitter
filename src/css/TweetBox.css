@@ -41,3 +41,11 @@
 .tweetbox > form > input:focus {
   outline: none;
 }
+.gifIcon {
+  margin-left: 20px;
+  cursor: pointer;
+  color: var(--twitter-color);
+}
+.gifIcon:hover {
+  color: blue;
+}

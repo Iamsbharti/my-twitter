@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
+import GifIcon from "@material-ui/icons/Gif";
 function TweetBox({ postTweet }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
@@ -15,6 +16,7 @@ function TweetBox({ postTweet }) {
       setImage("");
     }, 1400);
   };
+
   return (
     <div className="tweetbox">
       <form onSubmit={handleTweet}>
@@ -36,6 +38,15 @@ function TweetBox({ postTweet }) {
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
+        <div className="gifIcon">
+          <a
+            href="https://giphy.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GifIcon fontSize="large" />
+          </a>
+        </div>
         <Button className="tweetBox-button" type="submit">
           Tweet
         </Button>
