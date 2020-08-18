@@ -160,6 +160,30 @@ const updatePostValidation = (req, res, next) => {
   }
   next();
 };
+const deletePostValidation = (req, res, next) => {
+  logger.info(`Delete Post validation:: ${req.query.postId}`);
+  let postSchema = joi.object({
+    postId: joi.string().required(),
+    authToken: joi.string().required(),
+  });
+  let { error } = postSchema.validate(req.query, options);
+  console.log("dele validation err::", error);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 module.exports = {
   signUpParam,
   loginParam,
@@ -167,4 +191,5 @@ module.exports = {
   resetValidation,
   postValidation,
   updatePostValidation,
+  deletePostValidation,
 };

@@ -3,6 +3,7 @@ const User = require("../models/User");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
+const { deleteModel } = require("mongoose");
 const EXCLUDE = "-__v -_id";
 const verifyUser = async (userId) => {
   let userExists = await User.findOne({ userId: userId });
@@ -138,8 +139,34 @@ const updatePost = async (req, res) => {
     }
   });
 };
+const deletePost = async (req, res) => {
+  logger.info("Delete post control");
+  let { postId } = req.query;
+
+  /**check for postId existence */
+  let postExists = await Post.findOne({ postId: postId });
+  if (!postExists) {
+    return res
+      .status(404)
+      .json(formatResponse(true, 404, "Post Not Found", null));
+  }
+  /**delete the post */
+  Post.deleteOne({ postId: postId }, (error, deletedPost) => {
+    if (error) {
+      res
+        .status(500)
+        .json(formatResponse(true, 500, "Internal Server Error", error));
+    } else {
+      let { n } = deletedPost;
+      res
+        .status(200)
+        .json(formatResponse(false, 200, "Post Deleted", `${n}-post deleted`));
+    }
+  });
+};
 module.exports = {
   createPost,
   getAllPosts,
   updatePost,
+  deletePost,
 };
