@@ -28,4 +28,10 @@ router.post(
   posts.createPost
 );
 router.get("/post/allPosts", isAuthorized, posts.getAllPosts);
+router.post(
+  "/post/updatePost",
+  isAuthorized,
+  validation.updatePostValidation,
+  posts.updatePost
+);
 module.exports = router;

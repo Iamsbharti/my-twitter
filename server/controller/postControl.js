@@ -84,7 +84,62 @@ const getAllPosts = async (req, res) => {
       }
     });
 };
+const updatePost = async (req, res) => {
+  logger.error("Update a Post");
+
+  const { postId, update } = req.body;
+  console.log("update body::", postId, update);
+
+  /**search for existing post */
+  let query = { postId: postId };
+  let postExists = await Post.findOne(query);
+  if (!postExists) {
+    return res
+      .status(404)
+      .json(formatResponse(true, 404, "Post Not Found", null));
+  }
+  /** */
+  /**update the specific post */
+  let { comments, retweets, likes, shares } = update;
+  console.log("post--", retweets, likes, shares);
+  let updateOptions = {};
+  if (retweets !== undefined) {
+    updateOptions = {
+      ...updateOptions,
+      retweets: postExists.retweets + 1,
+    };
+  }
+  if (likes !== undefined) {
+    updateOptions = {
+      ...updateOptions,
+      likes: postExists.likes + 1,
+    };
+  }
+  if (shares !== undefined) {
+    updateOptions = {
+      ...updateOptions,
+      shares: postExists.shares + 1,
+    };
+  }
+  if (comments !== undefined) {
+    updateOptions = { ...updateOptions, $push: { comments: comments } };
+  }
+  console.log("update options::", updateOptions);
+  Post.updateOne(query, updateOptions, (error, udpatedPost) => {
+    if (error) {
+      res
+        .status(500)
+        .json(formatResponse(true, 500, "Internal Server Error", error));
+    } else {
+      let { n } = udpatedPost;
+      res
+        .status(200)
+        .json(formatResponse(false, 200, "Post Updated", `${n}-doc updated`));
+    }
+  });
+};
 module.exports = {
   createPost,
   getAllPosts,
+  updatePost,
 };

@@ -137,10 +137,34 @@ const postValidation = (req, res, next) => {
   }
   next();
 };
+const updatePostValidation = (req, res, next) => {
+  logger.info("Update Post validation");
+  let postSchema = joi.object({
+    postId: joi.string().required(),
+    update: joi.object().required(),
+  });
+  let { error } = postSchema.validate(req.body, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 module.exports = {
   signUpParam,
   loginParam,
   recoveryParam,
   resetValidation,
   postValidation,
+  updatePostValidation,
 };
