@@ -3,7 +3,6 @@ const User = require("../models/User");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
-const { deleteModel } = require("mongoose");
 const EXCLUDE = "-__v -_id";
 const verifyUser = async (userId) => {
   let userExists = await User.findOne({ userId: userId });
