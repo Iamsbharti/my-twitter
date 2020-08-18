@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My-Twitter (Clone) App
 
-## Available Scripts
+[Feel It!!](https://my-twitter-media.herokuapp.com/)
 
-In the project directory, you can run:
+### Made Of...
 
-### `yarn start`
+> This app has been created using ReactJS,Express,NodeMailer,HapiJoi,JsonWebToken and MongoDB as persistence manager.
+> Hapi Joi helps in Parameter Validation
+> NodeMailer helps in sending emails for password recovery.
+> Authentication is provided by JsonWebToken
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### What's in it for me ? :metal:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- User can signup and login.
+- Intial Password is sent to email and user is asked to reset password
+- Upon Login success ,user can view all tweets in the system
+- User can tweet , and include any image/gif in the tweet
+- User can comment , like ,retweet and Share the tweet
+- Counts for comments ,likes ,retweets and shares are displayed and updated in realtime
+- User can Delete his own tweet.
 
-### `yarn test`
+### Prerequisite (For Server)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- create a .env file
+- include DB_CONNECT (MongoDB URL from MongoDB server)
+- PORT (API port where you want to run your server)
+- TOKEN_SECRET (any gibberish string for JSON web tokens)
+- API_VERSION (Version of your API)
+- EMAIL (Gmail ID for NodeMailer)
+- PASSWORD (Gmail's password)
 
-### `yarn build`
+## Run API Server
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Run npm install
+- Run npm run start-api
+- API server will be launched at http://localhost:[PORT]
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Launch React App
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Run npm install
+- Run npm run dev
+- Application runs on http://localhost:3000
