@@ -1,4 +1,9 @@
-import { GET_ALL_POSTS, CREATE_POST, UPDATE_POST } from "./actionTypes";
+import {
+  GET_ALL_POSTS,
+  CREATE_POST,
+  UPDATE_POST,
+  DELETE_POST,
+} from "./actionTypes";
 import * as postApi from "../../apis/postsApi";
 
 export const createPostAction = (postInfo) => {
@@ -21,5 +26,13 @@ export const updatePostAction = (postInfo) => {
     let updatedPost = await postApi.updatePost(postInfo);
     console.log("api res-action::", updatedPost);
     dispatch({ type: UPDATE_POST, postInfo });
+  };
+};
+export const deletePostAction = (postId) => {
+  console.log("Delete tweet::", postId);
+  return async (dispatch) => {
+    let deletedTweet = await postApi.deletePost(postId);
+    console.log("Delete action res::", deletedTweet);
+    dispatch({ type: DELETE_POST, postId });
   };
 };

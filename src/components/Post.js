@@ -6,7 +6,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
-function Post({ info, updateTweet }) {
+function Post({ info, updateTweet, deleteTweet }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
@@ -15,6 +15,7 @@ function Post({ info, updateTweet }) {
     SetToggle(!toggleComment);
     tweetsUpdate("comments");
   };
+  /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
     let updateOptions = { postId: info.postId };
@@ -35,6 +36,11 @@ function Post({ info, updateTweet }) {
         break;
     }
     updateTweet(updateOptions);
+  };
+  /**invoke func of parent component for deletion*/
+  const tweetDelete = (postId) => {
+    console.log("delete tweet invoke --post::", postId);
+    deleteTweet(postId);
   };
   return (
     <>
@@ -57,7 +63,10 @@ function Post({ info, updateTweet }) {
                 </span>
               </h3>
               <div className="headerDeleteIcon">
-                <DeleteIcon fontSize="small" />
+                <DeleteIcon
+                  fontSize="small"
+                  onClick={() => tweetDelete(info.postId)}
+                />
               </div>
             </div>
 

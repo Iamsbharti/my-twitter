@@ -57,3 +57,23 @@ export const updatePost = async (postInfo) => {
     return error.response.data;
   }
 };
+export const deletePost = async (postId) => {
+  console.log("delete post api start::", postId);
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let deleteResponse = await axios.delete(
+      `${baseUrl}/api/v1/post/deletePost?postId=${postId}&authToken=${authToken}`
+    );
+    console.log("Delete Tweet response::", deleteResponse.data);
+    let { error } = deleteResponse.data;
+    if (!error) {
+      toast.error("Tweet Deleted");
+      return postId;
+    }
+  } catch (error) {
+    console.warn("Delete post error::", error.response.data);
+    console.log("toast-error");
+    toast.error(error.response.data);
+    return error.response.data;
+  }
+};

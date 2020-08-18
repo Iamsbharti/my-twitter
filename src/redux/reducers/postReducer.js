@@ -2,6 +2,7 @@ import {
   GET_ALL_POSTS,
   CREATE_POST,
   UPDATE_POST,
+  DELETE_POST,
 } from "../actions/actionTypes";
 import { posts } from "../defaultStore";
 
@@ -33,6 +34,8 @@ export function postReducer(_posts = posts, action) {
           : post
       );
 
+    case DELETE_POST:
+      return _posts.filter((post) => post.postId !== action.postId);
     default:
       return _posts;
   }

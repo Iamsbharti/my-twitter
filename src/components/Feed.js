@@ -7,6 +7,7 @@ import {
   createPostAction,
   getAllPostsAction,
   updatePostAction,
+  deletePostAction,
 } from "../redux/actions/postAction";
 import { setUserState } from "../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
@@ -21,6 +22,7 @@ function Feed({
   getAllPostsAction,
   createPostAction,
   updatePostAction,
+  deletePostAction,
   setUserState,
 }) {
   /**define state */
@@ -63,6 +65,11 @@ function Feed({
     console.log("handle udpates feed-API__CALL", updates);
     updatePostAction(updates);
   };
+  /**delete a post/tweet */
+  const handleDelete = (postId) => {
+    console.log("Deleting tweet feed::", postId);
+    deletePostAction(postId);
+  };
   return (
     <div className="feed">
       {localStorage.getItem("authToken") ? (
@@ -72,7 +79,12 @@ function Feed({
           </div>
           <TweetBox postTweet={tweet} />
           {posts.map((post, index) => (
-            <Post key={index} info={post} updateTweet={handleUpates} />
+            <Post
+              key={index}
+              info={post}
+              updateTweet={handleUpates}
+              deleteTweet={handleDelete}
+            />
           ))}
         </>
       ) : (
@@ -94,5 +106,6 @@ const mapActionToProps = {
   getAllPostsAction,
   updatePostAction,
   setUserState,
+  deletePostAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Feed);
