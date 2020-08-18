@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS, CREATE_POST } from "./actionTypes";
+import { GET_ALL_POSTS, CREATE_POST, UPDATE_POST } from "./actionTypes";
 import * as postApi from "../../apis/postsApi";
 
 export const createPostAction = (postInfo) => {
@@ -13,5 +13,13 @@ export const getAllPostsAction = (userId) => {
   return async (dispatch) => {
     let getAllPostsResponse = await postApi.getAllPosts(userId);
     dispatch({ type: GET_ALL_POSTS, getAllPostsResponse });
+  };
+};
+export const updatePostAction = (postInfo) => {
+  console.log("update post action:", postInfo);
+  return async (dispatch) => {
+    let updatedPost = await postApi.updatePost(postInfo);
+    console.log("api res-action::", updatedPost);
+    dispatch({ type: UPDATE_POST, postInfo });
   };
 };

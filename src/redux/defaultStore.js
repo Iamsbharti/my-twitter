@@ -9,10 +9,10 @@ export const posts = [
     createdAt: "2020-08-16T23:39:53.502Z",
     modifiedAt: "2020-08-16T23:39:53.502Z",
     postId: "kDL1mB533",
-    description: "last Tweet",
-    displayName: "Saurabh Bharti",
+    description: "Welcome to My-twitter, Happy Flying!!!",
+    displayName: "My-Twitter",
     userId: "N0_S5oGvi",
-    userName: "sbhbp",
+    userName: "tweetes",
     verified: true,
   },
 ];

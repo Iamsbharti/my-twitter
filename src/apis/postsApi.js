@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 export const createPost = async (postInfo) => {
   const authToken = localStorage.getItem("authToken");
-  console.log(("Create Post API Start", postInfo));
+  console.log("Create Post API Start");
   try {
     let url = `${baseUrl}/api/v1/post/createPost`;
     let createPostResponse = await axios.post(
@@ -11,7 +11,7 @@ export const createPost = async (postInfo) => {
       { ...postInfo },
       { headers: { authToken: authToken } }
     );
-    console.log("create post success::", createPostResponse.data.data);
+    console.log("create post success::");
     toast.success(createPostResponse.data.data.message);
     return createPostResponse.data.data;
   } catch (error) {
@@ -27,12 +27,33 @@ export const getAllPosts = async (userId) => {
     let getAllPosts = await axios.get(
       `${baseUrl}/api/v1/post/allPosts?userId=${userId}&authToken=${authToken}`
     );
-    console.log("get all posts success::", getAllPosts.data.data);
+    console.log("get all posts success::");
     toast.success(getAllPosts.data.data.message);
     return getAllPosts.data.data;
   } catch (error) {
     console.warn("GetALl posts error::", error.response.data);
     toast.error(error.response.data.message);
+    return error.response.data;
+  }
+};
+export const updatePost = async (postInfo) => {
+  console.log("update post api start:", postInfo);
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let url = `${baseUrl}/api/v1/post/updatePost`;
+    let updatePostResponse = await axios.post(
+      url,
+      { ...postInfo },
+      { headers: { authToken: authToken } }
+    );
+    console.log("update post res::", updatePostResponse);
+    console.log("success- toast");
+    toast.success("Tweet updated");
+    return postInfo;
+  } catch (error) {
+    console.warn("Update post error::", error.response.data);
+    console.log("toast-error");
+    toast.error(error.response.data);
     return error.response.data;
   }
 };

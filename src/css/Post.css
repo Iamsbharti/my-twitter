@@ -82,3 +82,8 @@
   margin-left: 9px;
   color: gray;
 }
+.post_single_comments {
+  margin-top: 10px;
+  border-bottom: 1px var(--twitter-bg);
+  border-bottom: 1px medium;
+}

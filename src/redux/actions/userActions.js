@@ -1,4 +1,4 @@
-import { LOGIN } from "./actionTypes";
+import { LOGIN, SESSION_STATE } from "./actionTypes";
 import { loginApi } from "../../apis/usersApi";
 
 export function loginAction(userInfo) {
@@ -7,5 +7,11 @@ export function loginAction(userInfo) {
   return async (dispatch) => {
     let loginResponse = await loginApi(userInfo);
     dispatch({ type: LOGIN, loginResponse });
+  };
+}
+export function setUserState(userInfo) {
+  console.log("userinfo:: set state::", userInfo);
+  return (dispatch) => {
+    dispatch({ type: SESSION_STATE, userInfo });
   };
 }

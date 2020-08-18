@@ -5,12 +5,35 @@ import PublishIcon from "@material-ui/icons/Publish";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
-function Post({ info }) {
+function Post({ info, updateTweet }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
+  const [comment, setComment] = useState("");
   const handleAddReply = () => {
     console.log("handle add reply");
     SetToggle(!toggleComment);
+    tweetsUpdate("comments");
+  };
+  const tweetsUpdate = (updateType) => {
+    console.log("tweets updates invoked in Post ", updateType);
+    let updateOptions = { postId: info.postId };
+    switch (updateType) {
+      case "comments":
+        updateOptions = { ...updateOptions, update: { comments: comment } };
+        break;
+      case "retweets":
+        updateOptions = { ...updateOptions, update: { retweets: 1 } };
+        break;
+      case "likes":
+        updateOptions = { ...updateOptions, update: { likes: 1 } };
+        break;
+      case "shares":
+        updateOptions = { ...updateOptions, update: { shares: 1 } };
+        break;
+      default:
+        break;
+    }
+    updateTweet(updateOptions);
   };
   return (
     <>
@@ -45,23 +68,45 @@ function Post({ info }) {
                 onClick={() => SetToggle(!toggleComment)}
                 fontSize="small"
               />
-              {info.comments.length > 0 && <p>{info.comments}</p>}
+              {info.comments.length > 0 && <p>{info.comments.length}</p>}
             </div>
             <div className="icon__items">
-              <RepeatIcon className="icons" fontSize="small" />
+              <RepeatIcon
+                fontSize="small"
+                className="icons"
+                onClick={() => tweetsUpdate("retweets")}
+              />
               {info.retweets > 0 && <p>{info.retweets}</p>}
             </div>
             <div className="icon__items">
-              <FavoriteBorderIcon className="icons" fontSize="small" />
+              <FavoriteBorderIcon
+                className="icons"
+                fontSize="small"
+                onClick={() => tweetsUpdate("likes")}
+              />
               {info.likes > 0 && <p>{info.likes}</p>}
             </div>
             <div className="icon__items">
-              <PublishIcon className="icons" fontSize="small" />
+              <PublishIcon
+                className="icons"
+                fontSize="small"
+                onClick={() => tweetsUpdate("shares")}
+              />
               {info.shares > 0 && <p>{info.shares}</p>}
             </div>
           </div>
           <div className="post__comments" hidden={toggleComment}>
-            <input type="text" placeholder="Tweet your reply" />
+            {info.comments.length > 0 &&
+              info.comments.map((c, index) => (
+                <p key={index} className="post_single_comments">
+                  {c}-- @username
+                </p>
+              ))}
+            <input
+              type="text"
+              placeholder="Tweet your reply"
+              onChange={(e) => setComment(e.target.value)}
+            />
             <Button onClick={handleAddReply}>Reply</Button>
           </div>
         </div>
