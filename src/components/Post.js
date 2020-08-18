@@ -45,19 +45,19 @@ function Post({ info }) {
                 onClick={() => SetToggle(!toggleComment)}
                 fontSize="small"
               />
-              <p>6</p>
+              {info.comments.length > 0 && <p>{info.comments}</p>}
             </div>
             <div className="icon__items">
               <RepeatIcon className="icons" fontSize="small" />
-              <p>6</p>
+              {info.retweets > 0 && <p>{info.retweets}</p>}
             </div>
             <div className="icon__items">
               <FavoriteBorderIcon className="icons" fontSize="small" />
-              <p>6</p>
+              {info.likes > 0 && <p>{info.likes}</p>}
             </div>
             <div className="icon__items">
               <PublishIcon className="icons" fontSize="small" />
-              <p>6</p>
+              {info.shares > 0 && <p>{info.shares}</p>}
             </div>
           </div>
           <div className="post__comments" hidden={toggleComment}>
