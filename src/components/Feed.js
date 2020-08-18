@@ -53,6 +53,7 @@ function Feed({
       displayName: name,
       userId: userId,
       userName: username,
+      image: image,
     };
     console.log("tweet::", newTweetInfo);
     createPostAction(newTweetInfo);

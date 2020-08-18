@@ -4,6 +4,7 @@ import { Avatar, Button } from "@material-ui/core";
 import PublishIcon from "@material-ui/icons/Publish";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
 function Post({ info, updateTweet }) {
   /**define stated */
@@ -55,11 +56,16 @@ function Post({ info, updateTweet }) {
                   @{info.userName}
                 </span>
               </h3>
+              <div className="headerDeleteIcon">
+                <DeleteIcon fontSize="small" />
+              </div>
             </div>
+
             <div className="post_headerDescription">
               <p>{info.description}</p>
             </div>
           </div>
+
           {info.image && <img src={info.image} alt="" />}
           <div className="post__footer">
             <div className="icon__items">

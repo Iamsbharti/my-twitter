@@ -13,8 +13,17 @@
 }
 .post__body > img {
   border-radius: 15px;
-  width: 400px;
-  height: 200px;
+}
+.headerDeleteIcon {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  justify-content: flex-end;
+  color: rgb(226, 190, 143);
+  cursor: pointer;
+}
+.headerDeleteIcon:hover {
+  color: red;
 }
 .post__footer {
   display: flex;
