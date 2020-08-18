@@ -114,13 +114,15 @@ const postValidation = (req, res, next) => {
     userName: joi.string().required(),
     userId: joi.string().required(),
     verified: joi.boolean().optional(),
-    image: joi.string().optional(),
+    image: joi.optional(),
     comments: joi.array().optional(),
     retweets: joi.number().optional(),
     likes: joi.number().optional(),
     shares: joi.number().optional(),
   });
+
   let { error } = postSchema.validate(req.body, options);
+  console.log("error::", error);
   if (error) {
     let errors = [];
     error.details.map((err) => errors.push(err.message.split("is")[0]));

@@ -83,7 +83,9 @@ function Post({ info, updateTweet, deleteTweet }) {
                 onClick={() => SetToggle(!toggleComment)}
                 fontSize="small"
               />
-              {info.comments.length > 0 && <p>{info.comments.length}</p>}
+              {info.comments && info.comments.length > 0 && (
+                <p>{info.comments.length}</p>
+              )}
             </div>
             <div className="icon__items">
               <RepeatIcon
@@ -111,7 +113,8 @@ function Post({ info, updateTweet, deleteTweet }) {
             </div>
           </div>
           <div className="post__comments" hidden={toggleComment}>
-            {info.comments.length > 0 &&
+            {info.comments &&
+              info.comments.length > 0 &&
               info.comments.map((c, index) => (
                 <p key={index} className="post_single_comments">
                   {c}-- @username

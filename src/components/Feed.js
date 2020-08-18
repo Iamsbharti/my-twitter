@@ -55,7 +55,7 @@ function Feed({
       displayName: name,
       userId: userId,
       userName: username,
-      image: image,
+      image: image !== undefined ? image : "",
     };
     console.log("tweet::", newTweetInfo);
     createPostAction(newTweetInfo);
