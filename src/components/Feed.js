@@ -50,7 +50,7 @@ function Feed({
     console.log("text::", text, image);
     let newTweetInfo = {
       description: text,
-      displayName: username,
+      displayName: name,
       userId: userId,
       userName: username,
     };
