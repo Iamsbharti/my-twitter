@@ -39,14 +39,26 @@ function Post({ info }) {
           </div>
           {info.image && <img src={info.image} alt="" />}
           <div className="post__footer">
-            <ChatBubbleOutlineIcon
-              className="icons"
-              onClick={() => SetToggle(!toggleComment)}
-              fontSize="small"
-            />
-            <RepeatIcon className="icons" fontSize="small" />
-            <FavoriteBorderIcon className="icons" fontSize="small" />
-            <PublishIcon className="icons" fontSize="small" />
+            <div className="icon__items">
+              <ChatBubbleOutlineIcon
+                className="icons"
+                onClick={() => SetToggle(!toggleComment)}
+                fontSize="small"
+              />
+              <p>6</p>
+            </div>
+            <div className="icon__items">
+              <RepeatIcon className="icons" fontSize="small" />
+              <p>6</p>
+            </div>
+            <div className="icon__items">
+              <FavoriteBorderIcon className="icons" fontSize="small" />
+              <p>6</p>
+            </div>
+            <div className="icon__items">
+              <PublishIcon className="icons" fontSize="small" />
+              <p>6</p>
+            </div>
           </div>
           <div className="post__comments" hidden={toggleComment}>
             <input type="text" placeholder="Tweet your reply" />

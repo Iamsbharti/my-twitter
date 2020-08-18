@@ -43,6 +43,12 @@
 }
 .icons {
   cursor: pointer;
+  margin-top: 3px;
+}
+.icons :hover {
+  color: var(--twitter-color);
+  column-fill: var(--twitter-color);
+  size: 20px;
 }
 .post__comments > input {
   border-radius: 5px;
@@ -67,4 +73,12 @@
 }
 .post__comments > input:focus {
   outline: none;
+}
+.icon__items {
+  display: flex;
+  justify-content: left;
+}
+.icon__items > p {
+  margin-left: 9px;
+  color: gray;
 }
