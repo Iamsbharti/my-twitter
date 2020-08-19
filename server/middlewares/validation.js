@@ -186,6 +186,41 @@ const deletePostValidation = (req, res, next) => {
   }
   next();
 };
+const commentValidation = (req, res, next) => {
+  logger.info("Post Comment validation");
+  let commentSchema = joi.object({
+    postId: joi.string().min(4).required(),
+    description: joi.string().min(4).required(),
+    userAvatar: joi.string().optional(),
+    displayName: joi.string().required(),
+    userName: joi.string().required(),
+    userId: joi.string().required(),
+    verified: joi.boolean().optional(),
+    image: joi.optional(),
+    comments: joi.array().optional(),
+    retweets: joi.number().optional(),
+    likes: joi.number().optional(),
+    shares: joi.number().optional(),
+  });
+
+  let { error } = commentSchema.validate(req.body, options);
+  logger.error(`Validation Error-${error}`);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 module.exports = {
   signUpParam,
   loginParam,
@@ -194,4 +229,5 @@ module.exports = {
   postValidation,
   updatePostValidation,
   deletePostValidation,
+  commentValidation,
 };

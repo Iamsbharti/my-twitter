@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
@@ -9,6 +10,12 @@ const verifyUser = async (userId) => {
   return userExists
     ? Promise.resolve()
     : Promise.reject(formatResponse(true, 404, "User Not Found", userExists));
+};
+const verifyPost = async (postId) => {
+  let postExists = await Post.findOne({ postId: postId });
+  return postExists
+    ? postExists
+    : formatResponse(true, 404, "Post Not Found", postExists);
 };
 const createPost = async (req, res) => {
   const {
@@ -92,11 +99,9 @@ const updatePost = async (req, res) => {
 
   /**search for existing post */
   let query = { postId: postId };
-  let postExists = await Post.findOne(query);
-  if (!postExists) {
-    return res
-      .status(404)
-      .json(formatResponse(true, 404, "Post Not Found", null));
+  let isPostValid = await verifyPost(postId);
+  if (isPostValid.error) {
+    return res.status(isPostValid.status).json(isPostValid);
   }
   /** */
   /**update the specific post */
@@ -106,19 +111,19 @@ const updatePost = async (req, res) => {
   if (retweets !== undefined) {
     updateOptions = {
       ...updateOptions,
-      retweets: postExists.retweets + 1,
+      retweets: isPostValid.retweets + 1,
     };
   }
   if (likes !== undefined) {
     updateOptions = {
       ...updateOptions,
-      likes: postExists.likes + 1,
+      likes: isPostValid.likes + 1,
     };
   }
   if (shares !== undefined) {
     updateOptions = {
       ...updateOptions,
-      shares: postExists.shares + 1,
+      shares: isPostValid.shares + 1,
     };
   }
   if (comments !== undefined) {
@@ -142,12 +147,10 @@ const deletePost = async (req, res) => {
   logger.info("Delete post control");
   let { postId } = req.query;
 
-  /**check for postId existence */
-  let postExists = await Post.findOne({ postId: postId });
-  if (!postExists) {
-    return res
-      .status(404)
-      .json(formatResponse(true, 404, "Post Not Found", null));
+  /**search for existing post */
+  let isPostValid = await verifyPost(postId);
+  if (isPostValid.error) {
+    return res.status(isPostValid.status).json(isPostValid);
   }
   /**delete the post */
   Post.deleteOne({ postId: postId }, (error, deletedPost) => {
@@ -165,6 +168,73 @@ const deletePost = async (req, res) => {
 };
 const addComment = async (req, res) => {
   logger.info("Add Comment Control");
+  const {
+    postId,
+    description,
+    userAvatar,
+    displayName,
+    userName,
+    userId,
+    image,
+    comments,
+    retweets,
+    likes,
+    shares,
+    verified,
+  } = req.body;
+  /**search for existing post */
+  let isPostValid = await verifyPost(postId);
+  if (isPostValid.error) {
+    return res.status(isPostValid.status).json(isPostValid);
+  }
+  /**verify userId */
+  let isUserValid = await User.findOne({ userId: userId });
+  if (!isUserValid) {
+    return res
+      .status(404)
+      .json(formatResponse(true, 404, "User Not Found", null));
+  }
+  /**create schema for new comment */
+  let newComment = new Comment({
+    commentId: shortid.generate(),
+    postId: postId,
+    description: description,
+    userAvatar: userAvatar,
+    displayName: displayName,
+    userId: userId,
+    userName: userName,
+    image: image,
+    comments: comments,
+    retweets: retweets,
+    likes: likes,
+    shares: shares,
+    verified: verified,
+  });
+  /**save comment */
+  let savedComment = await Comment.create(newComment);
+  let flagSucessCommentPost = false;
+  if (savedComment) {
+    let commentId = savedComment.commentId;
+    console.log("comment id::", commentId);
+    /**update the post for which this comment was posted */
+    let updateOptions = { $push: { comments: commentId } };
+    let updatedPost = await Post.updateOne({ postId: postId }, updateOptions);
+    if (!updatedPost) {
+      flagSucessCommentPost = true;
+    }
+  } else {
+    flagSucessCommentPost = true;
+  }
+  /**throw error if there is any db error */
+  console.log("flagSucessCommentPost::", flagSucessCommentPost);
+  if (flagSucessCommentPost) {
+    res.status(500);
+    throw new Error("Internal Server Error -can not post comment");
+  } else {
+    res
+      .status(200)
+      .json(formatResponse(false, true, "Comment Posted", savedComment));
+  }
 };
 module.exports = {
   createPost,

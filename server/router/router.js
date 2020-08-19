@@ -40,4 +40,11 @@ router.delete(
   validation.deletePostValidation,
   posts.deletePost
 );
+/**comments management */
+router.post(
+  "/post/addComment",
+  isAuthorized,
+  validation.commentValidation,
+  posts.addComment
+);
 module.exports = router;
