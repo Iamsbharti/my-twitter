@@ -19,10 +19,12 @@
   margin: 0px;
   padding: 0px;
   justify-content: flex-end;
+}
+.headerDeleteIcon > span {
   color: rgb(226, 190, 143);
   cursor: pointer;
 }
-.headerDeleteIcon:hover {
+.headerDeleteIcon > span:hover {
   color: red;
 }
 .post__footer {

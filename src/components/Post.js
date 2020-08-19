@@ -66,10 +66,12 @@ function Post({ info, updateTweet, deleteTweet, userId }) {
               </h3>
               {userId === info.userId && (
                 <div className="headerDeleteIcon">
-                  <DeleteIcon
-                    fontSize="small"
-                    onClick={() => tweetDelete(info.postId)}
-                  />
+                  <span>
+                    <DeleteIcon
+                      fontSize="small"
+                      onClick={() => tweetDelete(info.postId)}
+                    />
+                  </span>
                 </div>
               )}
             </div>
