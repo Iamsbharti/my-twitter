@@ -13,7 +13,7 @@ import {
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
 
-function Post({ info, updatePostAction, deletePostAction, userId }) {
+function Post({ info, updatePostAction, deletePostAction, userId, status }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
@@ -58,15 +58,15 @@ function Post({ info, updatePostAction, deletePostAction, userId }) {
   };
   return (
     <>
-      <div
-        className="post"
-        onClick={() => handlePostClick(info.userName, info.postId)}
-      >
+      <div className="post">
         <div className="post__avatar">
           <Avatar src={process.env.PUBLIC_URL + "/logo512.png"}></Avatar>
         </div>
         <div className="post__body">
-          <div className="post__header">
+          <div
+            className="post__header"
+            onClick={() => handlePostClick(info.userName, info.postId)}
+          >
             <div className="post__headerText">
               <h3>
                 {info.displayName}{" "}
@@ -133,14 +133,15 @@ function Post({ info, updatePostAction, deletePostAction, userId }) {
               {info.shares > 0 && <p>{info.shares}</p>}
             </div>
           </div>
-          <div className="post__comments" hidden={toggleComment}>
-            {info.comments &&
+          {/**  {info.comments &&
               info.comments.length > 0 &&
               info.comments.map((c, index) => (
                 <p key={index} className="post_single_comments">
                   {c}-- @username
                 </p>
-              ))}
+              ))} */}
+
+          <div className="post__comments" hidden={toggleComment}>
             <input
               type="text"
               placeholder="Tweet your reply"
@@ -149,6 +150,16 @@ function Post({ info, updatePostAction, deletePostAction, userId }) {
             <Button onClick={handleAddReply}>Reply</Button>
           </div>
         </div>
+      </div>
+      <div className="tweet__status__comments">
+        {status &&
+          info.comments &&
+          info.comments.length > 0 &&
+          info.comments.map((c, index) => (
+            <p key={index} className="post_single_comments">
+              {c}-- @username
+            </p>
+          ))}
       </div>
     </>
   );

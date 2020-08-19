@@ -67,6 +67,7 @@ function Feed({
       {localStorage.getItem("authToken") ? (
         <>
           <div className="feedHeader">
+            {/**conditionally render single tweet header and all tweets header*/}
             {tweetStatus === undefined ? (
               <h2>Home</h2>
             ) : (
@@ -80,11 +81,14 @@ function Feed({
               </div>
             )}
           </div>
+          {/**conditionally render single tweet view and all tweets */}
           {tweetStatus === undefined ? <TweetBox postTweet={tweet} /> : ""}
           {tweetStatus === undefined ? (
-            posts.map((post, index) => <Post key={index} info={post} />)
+            posts.map((post, index) => (
+              <Post key={index} info={post} status={false} />
+            ))
           ) : (
-            <Post info={tweetStatus} />
+            <Post info={tweetStatus} status={true} />
           )}
         </>
       ) : (

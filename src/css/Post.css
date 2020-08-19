@@ -99,3 +99,6 @@
   border-bottom: 1px var(--twitter-bg);
   border-bottom: 1px medium;
 }
+.tweet__status__comments {
+  margin-left: 60px;
+}
