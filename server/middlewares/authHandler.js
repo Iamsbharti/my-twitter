@@ -3,7 +3,7 @@ const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 
 exports.isAuthorized = (req, res, next) => {
-  logger.info("Authorizing");
+  logger.info(`Authorizing for ${req.originalUrl}`);
   const reqBodyAuth = req.body.authToken;
   const reqQueryAuth = req.query.authToken;
   const reqHeaderAuth = req.header("authToken");
@@ -20,10 +20,10 @@ exports.isAuthorized = (req, res, next) => {
       reqBodyAuth || reqQueryAuth || reqHeaderAuth,
       process.env.TOKEN_SECRET
     );
-    console.log("Decoded::", decoded);
+    //console.log("Decoded::", decoded);
     let { userId } = decoded.data;
     let flagInvalidToken = false;
-    console.log(userId, reqQueryUserId, reqBodyUserId);
+    //console.log(userId, reqQueryUserId, reqBodyUserId);
     if (reqBodyUserId !== undefined && userId !== reqBodyUserId) {
       console.log("not valid token");
       //throw new Error("Not Valid Token");
@@ -34,14 +34,15 @@ exports.isAuthorized = (req, res, next) => {
       flagInvalidToken = true;
     }
     if (flagInvalidToken) {
-      throw new Error("Not Valid Token");
+      res.status(400);
+      throw new Error(`Not Valid Token ${req.originalUrl}`);
     }
   } else {
-    logger.error("Auth Token Missing");
+    logger.error(`Auth Token Missing for ${req.originalUrl}`);
     return res
       .status(400)
       .json(formatResponse(true, 400, "Auth Token Missing", null));
   }
-  console.log("Auth success");
+  logger.error(`Auth success for ${req.originalUrl}`);
   next();
 };

@@ -163,9 +163,13 @@ const deletePost = async (req, res) => {
     }
   });
 };
+const addComment = async (req, res) => {
+  logger.info("Add Comment Control");
+};
 module.exports = {
   createPost,
   getAllPosts,
   updatePost,
   deletePost,
+  addComment,
 };
