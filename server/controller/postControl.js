@@ -62,13 +62,13 @@ const createPost = async (req, res) => {
   verifyUser(userId)
     .then(savePost)
     .then((response) => {
-      console.log("Post create res::", response);
+      logger.info(`Post Created::${response.postId}`);
       res
         .status(200)
         .json(formatResponse(false, 200, "Post Created", response));
     })
     .catch((error) => {
-      logger.error("Create Post Error::", error);
+      logger.error(`Create Post Error:: ${error}`);
       res.status(error.status).json(error);
     });
 };
@@ -93,10 +93,7 @@ const getAllPosts = async (req, res) => {
 };
 const updatePost = async (req, res) => {
   logger.error("Update a Post");
-
   const { postId, update } = req.body;
-  console.log("update body::", postId, update);
-
   /**search for existing post */
   let query = { postId: postId };
   let isPostValid = await verifyPost(postId);
@@ -106,7 +103,6 @@ const updatePost = async (req, res) => {
   /** */
   /**update the specific post */
   let { comments, retweets, likes, shares } = update;
-  console.log("post--", retweets, likes, shares);
   let updateOptions = {};
   if (retweets !== undefined) {
     updateOptions = {
@@ -129,7 +125,6 @@ const updatePost = async (req, res) => {
   if (comments !== undefined) {
     updateOptions = { ...updateOptions, $push: { comments: comments } };
   }
-  console.log("update options::", updateOptions);
   Post.updateOne(query, updateOptions, (error, udpatedPost) => {
     if (error) {
       res
@@ -215,7 +210,6 @@ const addComment = async (req, res) => {
   let flagSucessCommentPost = false;
   if (savedComment) {
     let commentId = savedComment.commentId;
-    console.log("comment id::", commentId);
     /**update the post for which this comment was posted */
     let updateOptions = { $push: { comments: commentId } };
     let updatedPost = await Post.updateOne({ postId: postId }, updateOptions);
@@ -226,11 +220,12 @@ const addComment = async (req, res) => {
     flagSucessCommentPost = true;
   }
   /**throw error if there is any db error */
-  console.log("flagSucessCommentPost::", flagSucessCommentPost);
   if (flagSucessCommentPost) {
+    logger.error(`Error while posting comment`);
     res.status(500);
     throw new Error("Internal Server Error -can not post comment");
   } else {
+    logger.info(`Comment Posted ${savedComment.commentId}`);
     res
       .status(200)
       .json(formatResponse(false, true, "Comment Posted", savedComment));

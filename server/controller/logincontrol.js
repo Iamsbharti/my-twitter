@@ -21,7 +21,6 @@ exports.logincontrol = async (req, res) => {
 
   /**user existence */
   let userExists = await User.findOne(query);
-  console.log("query::", query, userExists);
   let credMatch;
   if (userExists) {
     credMatch = await comparePassword(password, userExists.password);
@@ -50,8 +49,10 @@ exports.logincontrol = async (req, res) => {
       }
     });
   } else if (!userExists) {
+    logger.error(`${loginId}-User Not Found`);
     res.status(404).json(formatResponse(true, 400, "User Not Found", null));
   } else if (!credMatch) {
+    logger.error(`Login failed for -${loginId}`);
     res.status(404).json(formatResponse(true, 400, "Login Failed", null));
   }
 };
