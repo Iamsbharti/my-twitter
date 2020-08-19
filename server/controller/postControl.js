@@ -4,6 +4,7 @@ const Comment = require("../models/Comment");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
+const { object } = require("@hapi/joi");
 const EXCLUDE = "-__v -_id";
 const verifyUser = async (userId) => {
   let userExists = await User.findOne({ userId: userId });
@@ -74,21 +75,47 @@ const createPost = async (req, res) => {
 };
 const getAllPosts = async (req, res) => {
   logger.info("Get All Post Control");
-  /**return all available posts */
+  /**
+   * db.orders.aggregate([
+   {
+     $lookup:
+       {
+         from: "inventory",
+         localField: "item",
+         foreignField: "sku",
+         as: "inventory_docs"
+       }
+  }
+])
+   */
+  Post.aggregate(
+    [
+      {
+        $lookup: {
+          from: "comment",
+          localField: "comments",
+          foreignField: "_id",
+          as: "commentsObj",
+        },
+      },
+    ],
+    (error, posts) => {
+      //console.log("error,posts::", error, posts);
+    }
+  );
+  /**return all available posts with populating the comments */
   Post.find()
-    .select(EXCLUDE)
-    .lean()
-    .sort({ createdAt: -1 })
-    .exec((error, allPosts) => {
-      if (error) {
+    .populate("comments")
+    .exec(function (err, posts) {
+      if (err) {
         res
           .status(500)
-          .json(formatResponse(true, 500, "Internal Server Error", error));
-      } else {
-        res
-          .status(200)
-          .json(formatResponse(false, 200, "Fetched All Posts", allPosts));
+          .json(formatResponse(true, 500, "Internal Server Error", err));
       }
+      console.log("posts::", typeof posts[0]["comments"]);
+      res
+        .status(200)
+        .json(formatResponse(false, 200, "Fetched All Posts", posts));
     });
 };
 const updatePost = async (req, res) => {
@@ -207,12 +234,16 @@ const addComment = async (req, res) => {
   });
   /**save comment */
   let savedComment = await Comment.create(newComment);
+  console.log("comments added::", savedComment);
   let flagSucessCommentPost = false;
   if (savedComment) {
-    let commentId = savedComment.commentId;
+    let comment_unique_Id = savedComment._id;
+    console.log("comment id::", comment_unique_Id);
     /**update the post for which this comment was posted */
-    let updateOptions = { $push: { comments: commentId } };
+    let updateOptions = { $push: { comments: comment_unique_Id } };
+    console.log("update options::", updateOptions);
     let updatedPost = await Post.updateOne({ postId: postId }, updateOptions);
+    console.log("updated posts::", updatedPost);
     if (!updatedPost) {
       flagSucessCommentPost = true;
     }

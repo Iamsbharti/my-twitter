@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 const postSchema = mongoose.Schema({
   postId: {
     type: String,
@@ -28,9 +28,7 @@ const postSchema = mongoose.Schema({
   image: {
     type: String,
   },
-  comments: {
-    type: Array,
-  },
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   retweets: {
     type: Number,
     default: 0,
