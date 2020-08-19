@@ -7,7 +7,11 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import { connect } from "react-redux";
-function Post({ info, updateTweet, deleteTweet, userId }) {
+import {
+  updatePostAction,
+  deletePostAction,
+} from "../redux/actions/postAction";
+function Post({ info, updatePostAction, deletePostAction, userId }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
@@ -37,12 +41,12 @@ function Post({ info, updateTweet, deleteTweet, userId }) {
       default:
         break;
     }
-    updateTweet(updateOptions);
+    updatePostAction(updateOptions);
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
     console.log("delete tweet invoke --post::", postId);
-    deleteTweet(postId);
+    deletePostAction(postId);
   };
   return (
     <>
@@ -142,4 +146,8 @@ const mapStateToProps = ({ user }) => {
   console.log("state-user in post::", user.user);
   return { userId: user.user.userId };
 };
-export default connect(mapStateToProps)(Post);
+const mapActionToProps = {
+  updatePostAction,
+  deletePostAction,
+};
+export default connect(mapStateToProps, mapActionToProps)(Post);

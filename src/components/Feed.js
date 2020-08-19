@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import {
   createPostAction,
   getAllPostsAction,
-  updatePostAction,
-  deletePostAction,
 } from "../redux/actions/postAction";
 import { setUserState } from "../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
@@ -21,8 +19,6 @@ function Feed({
   posts,
   getAllPostsAction,
   createPostAction,
-  updatePostAction,
-  deletePostAction,
   setUserState,
 }) {
   /**define state */
@@ -57,19 +53,9 @@ function Feed({
       userName: username,
       image: image !== undefined ? image : "",
     };
-    console.log("tweet::", newTweetInfo);
     createPostAction(newTweetInfo);
   };
-  /**update a post/tweet */
-  const handleUpates = (updates) => {
-    console.log("handle udpates feed-API__CALL", updates);
-    updatePostAction(updates);
-  };
-  /**delete a post/tweet */
-  const handleDelete = (postId) => {
-    console.log("Deleting tweet feed::", postId);
-    deletePostAction(postId);
-  };
+
   return (
     <div className="feed">
       {localStorage.getItem("authToken") ? (
@@ -79,12 +65,7 @@ function Feed({
           </div>
           <TweetBox postTweet={tweet} />
           {posts.map((post, index) => (
-            <Post
-              key={index}
-              info={post}
-              updateTweet={handleUpates}
-              deleteTweet={handleDelete}
-            />
+            <Post key={index} info={post} />
           ))}
         </>
       ) : (
@@ -96,16 +77,11 @@ function Feed({
 }
 const mapStateToProps = ({ posts, user }) => {
   let { userId, isAuthenticated, name, username } = user.user;
-  console.log("user State in Feed::", user.user);
-  console.log("posts in feed com:", posts);
-  console.log("userid state::", userId);
   return { posts, userId, isAuthenticated, name, username };
 };
 const mapActionToProps = {
   createPostAction,
   getAllPostsAction,
-  updatePostAction,
   setUserState,
-  deletePostAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Feed);
