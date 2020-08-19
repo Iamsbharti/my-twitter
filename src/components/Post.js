@@ -6,7 +6,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
-function Post({ info, updateTweet, deleteTweet }) {
+import { connect } from "react-redux";
+function Post({ info, updateTweet, deleteTweet, userId }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
@@ -15,6 +16,7 @@ function Post({ info, updateTweet, deleteTweet }) {
     SetToggle(!toggleComment);
     tweetsUpdate("comments");
   };
+  console.log("postId-userid::", userId, info.userId);
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
@@ -62,12 +64,14 @@ function Post({ info, updateTweet, deleteTweet }) {
                   @{info.userName}
                 </span>
               </h3>
-              <div className="headerDeleteIcon">
-                <DeleteIcon
-                  fontSize="small"
-                  onClick={() => tweetDelete(info.postId)}
-                />
-              </div>
+              {userId === info.userId && (
+                <div className="headerDeleteIcon">
+                  <DeleteIcon
+                    fontSize="small"
+                    onClick={() => tweetDelete(info.postId)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="post_headerDescription">
@@ -132,4 +136,8 @@ function Post({ info, updateTweet, deleteTweet }) {
     </>
   );
 }
-export default Post;
+const mapStateToProps = ({ user }) => {
+  console.log("state-user in post::", user.user);
+  return { userId: user.user.userId };
+};
+export default connect(mapStateToProps)(Post);

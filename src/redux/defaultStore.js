@@ -11,7 +11,7 @@ export const posts = [
     postId: "kDL1mB533",
     description: "Welcome to My-twitter, Happy Flying!!!",
     displayName: "My-Twitter",
-    userId: "N0_S5oGvi",
+    userId: "XCVFGART",
     userName: "tweetes",
     verified: true,
   },
