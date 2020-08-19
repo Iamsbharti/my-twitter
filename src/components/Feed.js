@@ -11,6 +11,7 @@ import { setUserState } from "../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 function Feed({
   isAuthenticated,
   userId,
@@ -20,6 +21,7 @@ function Feed({
   getAllPostsAction,
   createPostAction,
   setUserState,
+  tweetStatus,
 }) {
   /**define state */
   let history = useHistory();
@@ -55,18 +57,35 @@ function Feed({
     };
     createPostAction(newTweetInfo);
   };
-
+  /**route back to feed  */
+  const handleBackToFeed = () => {
+    console.log("back to feed view");
+    history.push("/tweets");
+  };
   return (
     <div className="feed">
       {localStorage.getItem("authToken") ? (
         <>
           <div className="feedHeader">
-            <h2>Home</h2>
+            {tweetStatus === undefined ? (
+              <h2>Home</h2>
+            ) : (
+              <div className="status__header">
+                <ArrowBackIcon
+                  fontSize="large"
+                  className="status__icon"
+                  onClick={handleBackToFeed}
+                />
+                <h3>Tweet</h3>
+              </div>
+            )}
           </div>
-          <TweetBox postTweet={tweet} />
-          {posts.map((post, index) => (
-            <Post key={index} info={post} />
-          ))}
+          {tweetStatus === undefined ? <TweetBox postTweet={tweet} /> : ""}
+          {tweetStatus === undefined ? (
+            posts.map((post, index) => <Post key={index} info={post} />)
+          ) : (
+            <Post info={tweetStatus} />
+          )}
         </>
       ) : (
         history.push("/login")

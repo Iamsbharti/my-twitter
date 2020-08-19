@@ -26,3 +26,18 @@
   font-size: 20px;
   font-weight: 800;
 }
+.status__header {
+  display: flex;
+}
+.status__header > h3 {
+  margin-top: 8px;
+}
+.status__icon {
+  color: var(--twitter-color);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.status__icon:hover {
+  color: blue;
+  border-radius: 30px;
+}

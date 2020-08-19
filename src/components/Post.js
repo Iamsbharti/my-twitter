@@ -11,6 +11,8 @@ import {
   updatePostAction,
   deletePostAction,
 } from "../redux/actions/postAction";
+import { useHistory } from "react-router-dom";
+
 function Post({ info, updatePostAction, deletePostAction, userId }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -48,9 +50,18 @@ function Post({ info, updatePostAction, deletePostAction, userId }) {
     console.log("delete tweet invoke --post::", postId);
     deletePostAction(postId);
   };
+  /**open a single tweet with comments upon click */
+  let history = useHistory();
+  const handlePostClick = (username, postid) => {
+    console.log("handle post clicks__routing to manage tweet");
+    history.push(`/${username}/status/${postid}`);
+  };
   return (
     <>
-      <div className="post">
+      <div
+        className="post"
+        onClick={() => handlePostClick(info.userName, info.postId)}
+      >
         <div className="post__avatar">
           <Avatar src={process.env.PUBLIC_URL + "/logo512.png"}></Avatar>
         </div>
