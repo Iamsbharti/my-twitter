@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/Post.css";
+import "../css/Comments.css";
 import { Avatar, Button } from "@material-ui/core";
 import PublishIcon from "@material-ui/icons/Publish";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -12,9 +12,14 @@ import {
   deletePostAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
-import Comments from "./Comments";
 
-function Post({ info, updatePostAction, deletePostAction, userId, status }) {
+function Comments({
+  info,
+  updatePostAction,
+  deletePostAction,
+  userId,
+  status,
+}) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
@@ -23,6 +28,7 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
     SetToggle(!toggleComment);
     tweetsUpdate("comments");
   };
+  console.log("postId-userid::", userId, info.userId);
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
@@ -58,23 +64,23 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
   };
   return (
     <>
-      <div className="post">
-        <div className="post__avatar">
+      <div className="comment">
+        <div className="comment__avatar">
           <Avatar src={process.env.PUBLIC_URL + "/logo512.png"}></Avatar>
         </div>
-        <div className="post__body">
+        <div className="comment__body">
           <div
-            className="post__header"
+            className="comment__header"
             onClick={() => handlePostClick(info.userName, info.postId)}
           >
-            <div className="post__headerText">
+            <div className="comment__headerText">
               <h3>
                 {info.displayName}{" "}
-                <span className="post__verified">
+                <span className="comment__verified">
                   <img
                     src={process.env.PUBLIC_URL + "/verified.png"}
                     alt=""
-                    className="post__badge"
+                    className="comment__badge"
                   />
                   @{info.userName}
                 </span>
@@ -91,13 +97,13 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
               )}
             </div>
 
-            <div className="post_headerDescription">
+            <div className="comment_headerDescription">
               <p>{info.description}</p>
             </div>
           </div>
 
           {info.image && <img src={info.image} alt="" />}
-          <div className="post__footer">
+          <div className="comment__footer">
             <div className="icon__items">
               <ChatBubbleOutlineIcon
                 className="icons"
@@ -133,7 +139,8 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
               {info.shares > 0 && <p>{info.shares}</p>}
             </div>
           </div>
-          <div className="post__comments" hidden={toggleComment}>
+
+          <div className="comment__comments" hidden={toggleComment}>
             <input
               type="text"
               placeholder="Tweet your reply"
@@ -143,15 +150,14 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
           </div>
         </div>
       </div>
-      {/**render comments for this tweet */}
       {
-        <div>
+        <div className="tweet__status__comments">
           {status &&
             info.comments &&
             info.comments.map((c, index) => (
-              <div key={index} className="post_single_comments">
-                <Comments info={c} />
-              </div>
+              <p key={index} className="comment_single_comments">
+                {c.description}-- @{c.userName}
+              </p>
             ))}
         </div>
       }
@@ -159,11 +165,11 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
   );
 }
 const mapStateToProps = ({ user }) => {
-  console.log("state-user in post::");
+  console.log("state-user in Comment");
   return { userId: user.user.userId };
 };
 const mapActionToProps = {
   updatePostAction,
   deletePostAction,
 };
-export default connect(mapStateToProps, mapActionToProps)(Post);
+export default connect(mapStateToProps, mapActionToProps)(Comments);

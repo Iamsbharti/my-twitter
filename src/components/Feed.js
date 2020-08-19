@@ -40,11 +40,11 @@ function Feed({
     }
     /**call get posts action */
     console.log("userID while gfetch posts", userId);
-    if (userId !== undefined) {
+    if (userId !== undefined && tweetStatus === undefined) {
       getAllPostsAction(userId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getAllPostsAction, userId]);
+  }, [userId]);
   /**tweet */
   const tweet = (text, image) => {
     console.log("text::", text, image);
@@ -60,7 +60,7 @@ function Feed({
   /**route back to feed  */
   const handleBackToFeed = () => {
     console.log("back to feed view");
-    history.push("/tweets");
+    history.goBack();
   };
   return (
     <div className="feed">
