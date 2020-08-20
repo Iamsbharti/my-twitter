@@ -126,26 +126,26 @@ const updatePost = async (req, res) => {
   if (retweets !== undefined) {
     updateOptions = {
       ...updateOptions,
-      retweets: isPostValid.retweets + 1,
+      retweets: isPostValid.retweets + retweets,
     };
   }
   if (likes !== undefined) {
     updateOptions = {
       ...updateOptions,
-      likes: isPostValid.likes + 1,
+      likes: isPostValid.likes + likes,
     };
   }
   if (shares !== undefined) {
     updateOptions = {
       ...updateOptions,
-      shares: isPostValid.shares + 1,
+      shares: isPostValid.shares + shares,
     };
   }
   if (comments !== undefined) {
     updateOptions = { ...updateOptions, $push: { comments: comments } };
   }
   if (!isComment) {
-    console.log("updating post");
+    console.log("updating post", updateOptions, isPostValid.likes + likes);
     Post.updateOne(query, updateOptions, (error, udpatedPost) => {
       if (error) {
         res

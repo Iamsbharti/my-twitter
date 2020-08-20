@@ -64,6 +64,15 @@ function Post({
   const tweetDelete = (postId) => {
     deletePostAction(postId);
   };
+  /**invoke tweets update on dislike special case */
+  /**const dislikeTweet = () => {
+    let updateOptions = {
+      postId: info.postId,
+      isComment: false,
+      update: { likes: -1 },
+    };
+    updatePostAction(updateOptions);
+  };**/
   /**open a single tweet with comments upon click */
   let history = useHistory();
   const handlePostClick = (username, postid) => {
