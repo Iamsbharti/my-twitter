@@ -27,7 +27,6 @@ function Feed({
   let history = useHistory();
   useEffect(() => {
     /**set user session state upon reload */
-    console.log("username::first time component load:", username, userId, name);
     if (username === undefined) {
       /**let userinfo from localstorage */
       let userInfo = {
@@ -39,7 +38,6 @@ function Feed({
       setUserState(userInfo);
     }
     /**call get posts action */
-    console.log("userID while gfetch posts", userId);
     if (userId !== undefined && tweetStatus === undefined) {
       getAllPostsAction(userId);
     }
@@ -59,7 +57,6 @@ function Feed({
   };
   /**route back to feed  */
   const handleBackToFeed = () => {
-    console.log("back to feed view");
     history.goBack();
   };
   return (

@@ -27,7 +27,6 @@ function Post({
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
   const handleAddReply = () => {
-    console.log("handle add reply");
     setComment("");
     SetToggle(!toggleComment);
     const { userId, userName, displayName, postId } = info;
@@ -38,12 +37,10 @@ function Post({
       description: comment,
       userName: userName,
     };
-    console.log("add comment req body::", updateOptions);
     addCommentAction(updateOptions);
   };
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
-    console.log("tweets updates invoked in Post ", updateType);
     let updateOptions = { postId: info.postId, isComment: false };
     switch (updateType) {
       case "retweets":
@@ -62,13 +59,11 @@ function Post({
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
-    console.log("delete tweet invoke --post::", postId);
     deletePostAction(postId);
   };
   /**open a single tweet with comments upon click */
   let history = useHistory();
   const handlePostClick = (username, postid) => {
-    console.log("handle post clicks__routing to manage tweet");
     history.push(`/${username}/status/${postid}`);
   };
   return (

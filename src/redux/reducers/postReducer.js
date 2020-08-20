@@ -16,13 +16,10 @@ export function postReducer(_posts = posts, action) {
       updatedPost.unshift(action.createPostResponse);
       return [...updatedPost];
     case GET_ALL_POSTS:
-      //return action.getAllPostsResponse;
-      console.log("initial posts::", posts);
       return _posts.length === 0 ? action.getAllPostsResponse : posts;
     case UPDATE_POST:
       const { postId, update } = action.postInfo;
       const { comments, retweets, likes, shares } = update;
-      console.log("action result::", action.postInfo);
       return _posts.map((post) =>
         post.postId === postId
           ? {
@@ -42,10 +39,7 @@ export function postReducer(_posts = posts, action) {
     case UPDATE_POST_COMMENT: {
       const { postId, update, id } = action.commentInfo;
       const { comments, retweets, likes, shares } = update;
-      console.log("action result::", action.commentInfo);
       let toUpdatePost = _posts.filter((p) => p.postId === id);
-      console.log("toUpdatePostComments::", toUpdatePost);
-      console.log("toUpdatePostComments::", toUpdatePost[0].comments);
       let updatedComments = toUpdatePost[0].comments.map((comment) =>
         comment.commentId === postId
           ? {
@@ -64,7 +58,6 @@ export function postReducer(_posts = posts, action) {
             }
           : comment
       );
-      console.log("updated comments::", updatedComments);
       return _posts.map((post) =>
         post.postId === id
           ? {
@@ -77,7 +70,6 @@ export function postReducer(_posts = posts, action) {
     case ADD_COMMENT: {
       const { postId } = action.newComments;
       let toAddComment = action.newComments;
-      console.log("to add comments::", toAddComment);
       return _posts.map((post) =>
         post.postId === postId
           ? { ...post, comments: [...post.comments, toAddComment] }

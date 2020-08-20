@@ -28,7 +28,6 @@ function Comments({
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
   const handleAddReply = () => {
-    console.log("handle add reply");
     SetToggle(!toggleComment);
     tweetsUpdate("comments");
   };
@@ -61,7 +60,6 @@ function Comments({
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (commentId, postId) => {
-    console.log("delete tweet invoke --post::", postId);
     let commentsInfo = {
       commentId: commentId,
       postId: postId,
@@ -71,7 +69,6 @@ function Comments({
   /**open a single tweet with comments upon click */
   let history = useHistory();
   const handlePostClick = (username, postid) => {
-    console.log("handle post clicks__routing to manage tweet");
     history.push(`/${username}/status/${postid}`);
   };
   return (
