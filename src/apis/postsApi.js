@@ -78,7 +78,7 @@ export const deletePost = async (postId) => {
 };
 
 export const setComments = async (commentInfo) => {
-  console.log("update post api start");
+  console.log("update post api start::", commentInfo);
   let authToken = localStorage.getItem("authToken");
   try {
     let url = `${baseUrl}/api/v1/post/addComment`;

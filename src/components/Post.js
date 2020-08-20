@@ -21,6 +21,8 @@ function Post({
   deletePostAction,
   addCommentAction,
   userId,
+  username,
+  name,
   status,
 }) {
   /**define stated */
@@ -29,13 +31,13 @@ function Post({
   const handleAddReply = () => {
     setComment("");
     SetToggle(!toggleComment);
-    const { userId, userName, displayName, postId } = info;
+    const { postId } = info;
     let updateOptions = {
       postId: postId,
       userId: userId,
-      displayName: displayName,
+      displayName: name,
       description: comment,
-      userName: userName,
+      userName: username,
     };
     addCommentAction(updateOptions);
   };
@@ -188,7 +190,8 @@ function Post({
   );
 }
 const mapStateToProps = ({ user }) => {
-  return { userId: user.user.userId };
+  const { name, userId, username } = user.user;
+  return { userId, username, name };
 };
 const mapActionToProps = {
   updatePostAction,
