@@ -16,7 +16,9 @@ export function postReducer(_posts = posts, action) {
       updatedPost.unshift(action.createPostResponse);
       return [...updatedPost];
     case GET_ALL_POSTS:
-      return _posts.length === 0 ? action.getAllPostsResponse : posts;
+      return action.getAllPostsResponse.length === 0
+        ? posts
+        : action.getAllPostsResponse;
     case UPDATE_POST:
       const { postId, update } = action.postInfo;
       const { comments, retweets, likes, shares } = update;

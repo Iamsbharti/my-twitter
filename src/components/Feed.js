@@ -57,7 +57,7 @@ function Feed({
   };
   /**route back to feed  */
   const handleBackToFeed = () => {
-    history.goBack();
+    history.push("/tweets");
   };
   return (
     <>

@@ -99,3 +99,26 @@
   border-bottom: 1px var(--twitter-bg);
   border-bottom: 1px medium;
 }
+.post__details {
+  color: gray;
+  margin-top: 10px;
+}
+.post__details > p {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.post_details__date {
+  border-bottom: 1px solid var(--twitter-bg);
+  margin-bottom: 10px;
+}
+.post_details__date > span {
+  color: var(--twitter-color);
+}
+.post_details__info {
+  border-bottom: 1px solid var(--twitter-bg);
+  margin-bottom: 10px;
+}
+.post_details__info > span {
+  color: black;
+}

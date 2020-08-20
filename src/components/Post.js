@@ -14,7 +14,7 @@ import {
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
 import Comments from "./Comments";
-
+import dateFormat from "dateformat";
 function Post({
   info,
   updatePostAction,
@@ -66,6 +66,10 @@ function Post({
   const handlePostClick = (username, postid) => {
     history.push(`/${username}/status/${postid}`);
   };
+  let postdate = info.createdAt;
+  let dates = new Date(postdate);
+  //"dddd, mmmm dS, yyyy, h:MM:ss TT"
+  console.log(dateFormat(dates, "h:MM TT.mmmm dS,yyyy"));
   return (
     <>
       <div className="post">
@@ -107,6 +111,20 @@ function Post({
           </div>
 
           {info.image && <img src={info.image} alt="" />}
+          {status && (
+            <div className="post__details">
+              <p className="post_details__date">
+                {dateFormat(info.createdAt, "h:MM TT.mmmm dS,yyyy")}
+                &nbsp;&nbsp;&nbsp;
+                <span>Twitter for Web</span>
+              </p>
+              <p className="post_details__info">
+                {info.retweets} &nbsp;<span>Retweets</span>{" "}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                {info.likes} &nbsp;<span>Likes</span>
+              </p>
+            </div>
+          )}
           <div className="post__footer">
             <div className="icon__items">
               <ChatBubbleOutlineIcon
@@ -143,6 +161,7 @@ function Post({
               {info.shares > 0 && <p>{info.shares}</p>}
             </div>
           </div>
+
           <div className="post__comments" hidden={toggleComment}>
             <input
               type="text"
