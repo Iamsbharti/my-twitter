@@ -3,6 +3,7 @@ import {
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
+  UPDATE_POST_COMMENT,
 } from "./actionTypes";
 import * as postApi from "../../apis/postsApi";
 
@@ -26,6 +27,14 @@ export const updatePostAction = (postInfo) => {
     let updatedPost = await postApi.updatePost(postInfo);
     console.log("api res-action::", updatedPost);
     dispatch({ type: UPDATE_POST, postInfo });
+  };
+};
+export const updatePostCommentAction = (commentInfo, id) => {
+  console.log("update postcomment action:", commentInfo);
+  return async (dispatch) => {
+    let updatedPost = await postApi.updatePost(commentInfo);
+    console.log("api res-action::", updatedPost);
+    dispatch({ type: UPDATE_POST_COMMENT, commentInfo });
   };
 };
 export const deletePostAction = (postId) => {

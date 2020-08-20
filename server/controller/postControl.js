@@ -4,7 +4,6 @@ const Comment = require("../models/Comment");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
-const { object } = require("@hapi/joi");
 const EXCLUDE = "-__v -_id";
 const verifyUser = async (userId) => {
   let userExists = await User.findOne({ userId: userId });
@@ -17,6 +16,12 @@ const verifyPost = async (postId) => {
   return postExists
     ? postExists
     : formatResponse(true, 404, "Post Not Found", postExists);
+};
+const verifyCommentPost = async (postId) => {
+  let postExists = await Comment.findOne({ commentId: postId });
+  return postExists
+    ? postExists
+    : formatResponse(true, 404, "CommentPost Not Found", postExists);
 };
 const createPost = async (req, res) => {
   const {
@@ -75,58 +80,45 @@ const createPost = async (req, res) => {
 };
 const getAllPosts = async (req, res) => {
   logger.info("Get All Post Control");
-  /**
-   * db.orders.aggregate([
-   {
-     $lookup:
-       {
-         from: "inventory",
-         localField: "item",
-         foreignField: "sku",
-         as: "inventory_docs"
-       }
-  }
-])
-   */
-  Post.aggregate(
-    [
-      {
-        $lookup: {
-          from: "comment",
-          localField: "comments",
-          foreignField: "_id",
-          as: "commentsObj",
-        },
-      },
-    ],
-    (error, posts) => {
-      //console.log("error,posts::", error, posts);
-    }
-  );
   /**return all available posts with populating the comments */
   Post.find()
     .populate("comments")
+    .select(EXCLUDE)
     .exec(function (err, posts) {
       if (err) {
+        logger.info(`Get Posts Error ${err}`);
         res
           .status(500)
           .json(formatResponse(true, 500, "Internal Server Error", err));
+      } else {
+        logger.info("Posts Fetched");
+        res
+          .status(200)
+          .json(formatResponse(false, 200, "Fetched All Posts", posts));
       }
-      console.log("posts::", typeof posts[0]["comments"]);
-      res
-        .status(200)
-        .json(formatResponse(false, 200, "Fetched All Posts", posts));
     });
 };
 const updatePost = async (req, res) => {
-  logger.error("Update a Post");
-  const { postId, update } = req.body;
+  logger.info("Update a Post");
+  const { postId, update, isComment } = req.body;
   /**search for existing post */
-  let query = { postId: postId };
-  let isPostValid = await verifyPost(postId);
-  if (isPostValid.error) {
-    return res.status(isPostValid.status).json(isPostValid);
+  let query;
+  let isPostValid;
+  /**form query based on isComment */
+  query = isComment ? { commentId: postId } : { postId: postId };
+  console.log("query::", query);
+  if (isComment) {
+    isPostValid = await verifyCommentPost(postId);
+    if (isPostValid.error) {
+      return res.status(isPostValid.status).json(isPostValid);
+    }
+  } else {
+    isPostValid = await verifyPost(postId);
+    if (isPostValid.error) {
+      return res.status(isPostValid.status).json(isPostValid);
+    }
   }
+
   /** */
   /**update the specific post */
   let { comments, retweets, likes, shares } = update;
@@ -152,18 +144,35 @@ const updatePost = async (req, res) => {
   if (comments !== undefined) {
     updateOptions = { ...updateOptions, $push: { comments: comments } };
   }
-  Post.updateOne(query, updateOptions, (error, udpatedPost) => {
-    if (error) {
-      res
-        .status(500)
-        .json(formatResponse(true, 500, "Internal Server Error", error));
-    } else {
-      let { n } = udpatedPost;
-      res
-        .status(200)
-        .json(formatResponse(false, 200, "Post Updated", `${n}-doc updated`));
-    }
-  });
+  if (!isComment) {
+    console.log("updating post");
+    Post.updateOne(query, updateOptions, (error, udpatedPost) => {
+      if (error) {
+        res
+          .status(500)
+          .json(formatResponse(true, 500, "Internal Server Error", error));
+      } else {
+        let { n } = udpatedPost;
+        res
+          .status(200)
+          .json(formatResponse(false, 200, "Post Updated", `${n}-doc updated`));
+      }
+    });
+  } else {
+    console.log("updating comment");
+    Comment.updateOne(query, updateOptions, (error, udpatedPost) => {
+      if (error) {
+        res
+          .status(500)
+          .json(formatResponse(true, 500, "Internal Server Error", error));
+      } else {
+        let { n } = udpatedPost;
+        res
+          .status(200)
+          .json(formatResponse(false, 200, "Post Updated", `${n}-doc updated`));
+      }
+    });
+  }
 };
 const deletePost = async (req, res) => {
   logger.info("Delete post control");

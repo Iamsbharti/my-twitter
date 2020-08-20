@@ -144,6 +144,7 @@ const updatePostValidation = (req, res, next) => {
   let postSchema = joi.object({
     postId: joi.string().required(),
     update: joi.object().required(),
+    isComment: joi.boolean().required(),
   });
   let { error } = postSchema.validate(req.body, options);
   if (error) {

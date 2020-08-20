@@ -26,7 +26,7 @@ function Post({ info, updatePostAction, deletePostAction, userId, status }) {
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
-    let updateOptions = { postId: info.postId };
+    let updateOptions = { postId: info.postId, isComment: false };
     switch (updateType) {
       case "comments":
         updateOptions = { ...updateOptions, update: { comments: comment } };

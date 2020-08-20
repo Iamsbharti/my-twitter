@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import {
   updatePostAction,
   deletePostAction,
+  updatePostCommentAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function Comments({
   info,
   updatePostAction,
   deletePostAction,
+  updatePostCommentAction,
   userId,
   status,
 }) {
@@ -32,7 +34,11 @@ function Comments({
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
-    let updateOptions = { postId: info.postId };
+    let updateOptions = {
+      postId: info.commentId,
+      isComment: true,
+      id: info.postId,
+    };
     switch (updateType) {
       case "comments":
         updateOptions = { ...updateOptions, update: { comments: comment } };
@@ -49,7 +55,7 @@ function Comments({
       default:
         break;
     }
-    updatePostAction(updateOptions);
+    updatePostCommentAction(updateOptions);
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
@@ -90,7 +96,7 @@ function Comments({
                   <span>
                     <DeleteIcon
                       fontSize="small"
-                      onClick={() => tweetDelete(info.postId)}
+                      onClick={() => tweetDelete(info.commentId)}
                     />
                   </span>
                 </div>
@@ -171,5 +177,6 @@ const mapStateToProps = ({ user }) => {
 const mapActionToProps = {
   updatePostAction,
   deletePostAction,
+  updatePostCommentAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Comments);

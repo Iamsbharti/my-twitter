@@ -3,6 +3,7 @@ import {
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
+  UPDATE_POST_COMMENT,
 } from "../actions/actionTypes";
 import { posts } from "../defaultStore";
 
@@ -33,6 +34,42 @@ export function postReducer(_posts = posts, action) {
             }
           : post
       );
+
+    case UPDATE_POST_COMMENT: {
+      const { postId, update, id } = action.commentInfo;
+      const { comments, retweets, likes, shares } = update;
+      console.log("action result::", action.postInfo);
+      let toUpdatePost = _posts.filter((p) => p.postId === id);
+      console.log("toUpdatePostComments::", toUpdatePost);
+      console.log("toUpdatePostComments::", toUpdatePost[0].comments);
+      let updatedComments = toUpdatePost[0].comments.map((comment) =>
+        comment.commentId === postId
+          ? {
+              ...comment,
+              retweets:
+                retweets !== undefined
+                  ? comment.retweets + 1
+                  : comment.retweets,
+              likes: likes !== undefined ? comment.likes + 1 : comment.likes,
+              shares:
+                shares !== undefined ? comment.shares + 1 : comment.shares,
+              comments:
+                comments !== undefined
+                  ? [...comment.comments, comments]
+                  : comment.comments,
+            }
+          : comment
+      );
+      console.log("updated comments::", updatedComments);
+      return _posts.map((post) =>
+        post.postId === id
+          ? {
+              ...post,
+              comments: updatedComments,
+            }
+          : post
+      );
+    }
 
     case DELETE_POST:
       return _posts.filter((post) => post.postId !== action.postId);
