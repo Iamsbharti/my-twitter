@@ -28,9 +28,11 @@ function Comments({
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
+  const [commenterror, setError] = useState(true);
   const handleAddReply = () => {
     SetToggle(!toggleComment);
-    tweetsUpdate("comments");
+    //{/**onClick={() => SetToggle(!toggleComment)}*/}
+    //tweetsUpdate("comments");
   };
   console.log("postId-userid::", userId, info.userId);
   /**invoke func of parent component for updates*/
@@ -116,16 +118,22 @@ function Comments({
 
           {info.image && <img src={info.image} alt="" />}
           <div className="comment__footer">
-            <div className="icon__items">
-              <ChatBubbleOutlineIcon
-                className="icons"
-                onClick={() => SetToggle(!toggleComment)}
-                fontSize="small"
-              />
-              {info.comments && info.comments.length > 0 && (
-                <p>{info.comments.length}</p>
-              )}
-            </div>
+            {commenterror ? (
+              <div className="icon__items">
+                <ChatBubbleOutlineIcon
+                  className="icons"
+                  onClick={() => setError(false)}
+                  fontSize="small"
+                />
+              </div>
+            ) : (
+              <div
+                className="icon__comment__error"
+                onClick={() => setError(true)}
+              >
+                <span>relpies are disabled</span>
+              </div>
+            )}
             <div className="icon__items">
               <RepeatIcon
                 fontSize="small"
