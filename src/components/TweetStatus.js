@@ -16,13 +16,11 @@ function TweetStatus({ history, userId, post, ...props }) {
 }
 const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.match.params.postId;
-  console.log("post id from router ::", postId);
   let { user, posts } = state;
   let post;
   if (postId && posts.length > 0) {
     post = posts.find((twt) => twt.postId === postId);
   }
-  console.log("post obj in Manage::", post, state.user.user);
   return { userId: user.user.userId, post };
 };
 

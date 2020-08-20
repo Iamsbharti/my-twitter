@@ -169,7 +169,6 @@ function Post({
   );
 }
 const mapStateToProps = ({ user }) => {
-  console.log("state-user in post::");
   return { userId: user.user.userId };
 };
 const mapActionToProps = {

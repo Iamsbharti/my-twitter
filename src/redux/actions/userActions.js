@@ -2,7 +2,7 @@ import { LOGIN, SESSION_STATE } from "./actionTypes";
 import { loginApi } from "../../apis/usersApi";
 
 export function loginAction(userInfo) {
-  console.log("login action::", userInfo);
+  console.log("login action");
   //console.log("login-action");
   return async (dispatch) => {
     let loginResponse = await loginApi(userInfo);
@@ -10,7 +10,7 @@ export function loginAction(userInfo) {
   };
 }
 export function setUserState(userInfo) {
-  console.log("userinfo:: set state::", userInfo);
+  console.log("userinfo:: set state");
   return (dispatch) => {
     dispatch({ type: SESSION_STATE, userInfo });
   };
