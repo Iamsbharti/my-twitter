@@ -38,7 +38,7 @@ export function postReducer(_posts = posts, action) {
     case UPDATE_POST_COMMENT: {
       const { postId, update, id } = action.commentInfo;
       const { comments, retweets, likes, shares } = update;
-      console.log("action result::", action.postInfo);
+      console.log("action result::", action.commentInfo);
       let toUpdatePost = _posts.filter((p) => p.postId === id);
       console.log("toUpdatePostComments::", toUpdatePost);
       console.log("toUpdatePostComments::", toUpdatePost[0].comments);
