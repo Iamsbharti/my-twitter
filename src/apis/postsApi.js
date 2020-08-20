@@ -99,3 +99,24 @@ export const setComments = async (commentInfo) => {
     return error.response.data;
   }
 };
+export const deleteComment = async (commentInfo) => {
+  let { commentId } = commentInfo;
+  console.log("delete post api start::", commentId);
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let deleteResponse = await axios.delete(
+      `${baseUrl}/api/v1/post/deleteComment?commentId=${commentId}&authToken=${authToken}`
+    );
+    console.log("Delete comment response::", deleteResponse.data);
+    let { error } = deleteResponse.data;
+    if (!error) {
+      toast.error("comment Deleted");
+      return commentInfo;
+    }
+  } catch (error) {
+    console.warn("Delete comment error::", error.response.data);
+    console.log("toast-error");
+    toast.error(error.response.data);
+    return error.response.data;
+  }
+};

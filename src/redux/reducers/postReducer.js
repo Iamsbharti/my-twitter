@@ -5,6 +5,7 @@ import {
   DELETE_POST,
   UPDATE_POST_COMMENT,
   ADD_COMMENT,
+  DELETE_COMMENT,
 } from "../actions/actionTypes";
 import { posts } from "../defaultStore";
 
@@ -15,7 +16,9 @@ export function postReducer(_posts = posts, action) {
       updatedPost.unshift(action.createPostResponse);
       return [...updatedPost];
     case GET_ALL_POSTS:
-      return action.getAllPostsResponse;
+      //return action.getAllPostsResponse;
+      console.log("initial posts::", posts);
+      return _posts.length === 0 ? action.getAllPostsResponse : posts;
     case UPDATE_POST:
       const { postId, update } = action.postInfo;
       const { comments, retweets, likes, shares } = update;
@@ -81,7 +84,19 @@ export function postReducer(_posts = posts, action) {
           : post
       );
     }
-
+    case DELETE_COMMENT: {
+      const { postId, commentId } = action.commentInfo;
+      return _posts.map((post) =>
+        post.postId === postId
+          ? {
+              ...post,
+              comments: post.comments.filter(
+                (com) => com.commentId !== commentId
+              ),
+            }
+          : post
+      );
+    }
     case DELETE_POST:
       return _posts.filter((post) => post.postId !== action.postId);
     default:

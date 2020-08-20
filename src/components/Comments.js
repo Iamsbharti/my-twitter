@@ -11,6 +11,7 @@ import {
   updatePostAction,
   deletePostAction,
   updatePostCommentAction,
+  deleteCommentAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
 
@@ -19,6 +20,7 @@ function Comments({
   updatePostAction,
   deletePostAction,
   updatePostCommentAction,
+  deleteCommentAction,
   userId,
   status,
 }) {
@@ -58,9 +60,13 @@ function Comments({
     updatePostCommentAction(updateOptions);
   };
   /**invoke func of parent component for deletion*/
-  const tweetDelete = (postId) => {
+  const tweetDelete = (commentId, postId) => {
     console.log("delete tweet invoke --post::", postId);
-    deletePostAction(postId);
+    let commentsInfo = {
+      commentId: commentId,
+      postId: postId,
+    };
+    deleteCommentAction(commentsInfo);
   };
   /**open a single tweet with comments upon click */
   let history = useHistory();
@@ -96,7 +102,7 @@ function Comments({
                   <span>
                     <DeleteIcon
                       fontSize="small"
-                      onClick={() => tweetDelete(info.commentId)}
+                      onClick={() => tweetDelete(info.commentId, info.postId)}
                     />
                   </span>
                 </div>
@@ -178,5 +184,6 @@ const mapActionToProps = {
   updatePostAction,
   deletePostAction,
   updatePostCommentAction,
+  deleteCommentAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Comments);
