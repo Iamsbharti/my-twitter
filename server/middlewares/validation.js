@@ -222,6 +222,29 @@ const commentValidation = (req, res, next) => {
   }
   next();
 };
+const deleteCommentValidation = (req, res, next) => {
+  logger.info(`Delete comment validation:: ${req.query.commentId}`);
+  let commentSchema = joi.object({
+    commentId: joi.string().required(),
+    authToken: joi.string().required(),
+  });
+  let { error } = commentSchema.validate(req.query, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 module.exports = {
   signUpParam,
   loginParam,
@@ -231,4 +254,5 @@ module.exports = {
   updatePostValidation,
   deletePostValidation,
   commentValidation,
+  deleteCommentValidation,
 };

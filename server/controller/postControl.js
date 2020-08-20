@@ -277,10 +277,31 @@ const addComment = async (req, res) => {
       .json(formatResponse(false, true, "Comment Posted", savedComment));
   }
 };
+const deleteComment = async (req, res) => {
+  logger.info("Delete comment control");
+  const { commentId } = req.query;
+  let isPostValid = await verifyCommentPost(commentId);
+  if (isPostValid.error) {
+    return res.status(isPostValid.status).json(isPostValid);
+  }
+  /**delete comment */
+  let deletedComment = await Comment.deleteOne({ commentId: commentId });
+  if (deleteComment) {
+    let { n } = deletedComment;
+    res
+      .status(200)
+      .json(formatResponse(false, 200, "Comment deleted", `${n}-doc deleted`));
+  } else {
+    res
+      .status(500)
+      .json(formatResponse(false, 500, "Internal Server Error", null));
+  }
+};
 module.exports = {
   createPost,
   getAllPosts,
   updatePost,
   deletePost,
   addComment,
+  deleteComment,
 };

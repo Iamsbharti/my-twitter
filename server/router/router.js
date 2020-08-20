@@ -47,4 +47,10 @@ router.post(
   validation.commentValidation,
   posts.addComment
 );
+router.delete(
+  "/post/deleteComment",
+  isAuthorized,
+  validation.deleteCommentValidation,
+  posts.deleteComment
+);
 module.exports = router;
