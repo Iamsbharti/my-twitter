@@ -27,7 +27,7 @@ export const getAllPosts = async (userId) => {
     let getAllPosts = await axios.get(
       `${baseUrl}/api/v1/post/allPosts?userId=${userId}&authToken=${authToken}`
     );
-    console.log("get all posts success::");
+    console.log("get all posts success");
     toast.success(getAllPosts.data.data.message);
     return getAllPosts.data.data;
   } catch (error) {
@@ -37,7 +37,7 @@ export const getAllPosts = async (userId) => {
   }
 };
 export const updatePost = async (postInfo) => {
-  console.log("update post api start:", postInfo);
+  console.log("update post api start");
   let authToken = localStorage.getItem("authToken");
   try {
     let url = `${baseUrl}/api/v1/post/updatePost`;
@@ -46,8 +46,7 @@ export const updatePost = async (postInfo) => {
       { ...postInfo },
       { headers: { authToken: authToken } }
     );
-    console.log("update post res::", updatePostResponse);
-    console.log("success- toast");
+    console.log("update post res::", updatePostResponse.data.data.message);
     toast.success("Tweet updated");
     return postInfo;
   } catch (error) {
@@ -58,13 +57,13 @@ export const updatePost = async (postInfo) => {
   }
 };
 export const deletePost = async (postId) => {
-  console.log("delete post api start::", postId);
+  console.log("delete post api start");
   let authToken = localStorage.getItem("authToken");
   try {
     let deleteResponse = await axios.delete(
       `${baseUrl}/api/v1/post/deletePost?postId=${postId}&authToken=${authToken}`
     );
-    console.log("Delete Tweet response::", deleteResponse.data);
+    console.log("Delete Tweet sucess");
     let { error } = deleteResponse.data;
     if (!error) {
       toast.error("Tweet Deleted");
@@ -79,7 +78,7 @@ export const deletePost = async (postId) => {
 };
 
 export const setComments = async (commentInfo) => {
-  console.log("update post api start:", commentInfo);
+  console.log("update post api start");
   let authToken = localStorage.getItem("authToken");
   try {
     let url = `${baseUrl}/api/v1/post/addComment`;
@@ -88,8 +87,6 @@ export const setComments = async (commentInfo) => {
       { ...commentInfo },
       { headers: { authToken: authToken } }
     );
-    console.log("update post res::", updatePostResponse);
-    console.log("success- toast");
     toast.success("You replied to a tweet");
     return updatePostResponse.data.data;
   } catch (error) {
@@ -101,13 +98,13 @@ export const setComments = async (commentInfo) => {
 };
 export const deleteComment = async (commentInfo) => {
   let { commentId } = commentInfo;
-  console.log("delete post api start::", commentId);
+  console.log("delete post api start");
   let authToken = localStorage.getItem("authToken");
   try {
     let deleteResponse = await axios.delete(
       `${baseUrl}/api/v1/post/deleteComment?commentId=${commentId}&authToken=${authToken}`
     );
-    console.log("Delete comment response::", deleteResponse.data);
+    console.log("Delete comment success");
     let { error } = deleteResponse.data;
     if (!error) {
       toast.error("comment Deleted");
