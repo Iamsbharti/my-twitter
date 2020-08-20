@@ -179,7 +179,7 @@ function Post({
             info.comments &&
             info.comments.map((c, index) => (
               <div key={index} className="post_single_comments">
-                <Comments info={c} />
+                <Comments info={c} userPost={info.userName} />
               </div>
             ))}
         </div>

@@ -23,6 +23,7 @@ function Comments({
   deleteCommentAction,
   userId,
   status,
+  userPost,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -105,7 +106,9 @@ function Comments({
                 </div>
               )}
             </div>
-
+            <div className="comment_replyto">
+              Replying to <span>@{userPost}</span>
+            </div>
             <div className="comment_headerDescription">
               <p>{info.description}</p>
             </div>

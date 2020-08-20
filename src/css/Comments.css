@@ -42,7 +42,7 @@
 }
 .comment_headerDescription {
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 .comment__avatar {
@@ -98,4 +98,11 @@
   margin-top: 10px;
   border-bottom: 1px var(--twitter-bg);
   border-bottom: 1px medium;
+}
+.comment_replyto {
+  font-size: 14px;
+  color: gray;
+}
+.comment_replyto > span {
+  color: var(--twitter-color);
 }

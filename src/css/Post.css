@@ -42,7 +42,7 @@
 }
 .post_headerDescription {
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 .post__avatar {
@@ -102,6 +102,7 @@
 .post__details {
   color: gray;
   margin-top: 10px;
+  font-size: 15px;
 }
 .post__details > p {
   margin-right: 20px;
