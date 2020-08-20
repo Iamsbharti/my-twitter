@@ -10,27 +10,43 @@ import { connect } from "react-redux";
 import {
   updatePostAction,
   deletePostAction,
+  addCommentAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
 import Comments from "./Comments";
 
-function Post({ info, updatePostAction, deletePostAction, userId, status }) {
+function Post({
+  info,
+  updatePostAction,
+  deletePostAction,
+  addCommentAction,
+  userId,
+  status,
+}) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
   const [comment, setComment] = useState("");
   const handleAddReply = () => {
     console.log("handle add reply");
     SetToggle(!toggleComment);
-    tweetsUpdate("comments");
+
+    const { userId, userName, displayName, postId } = info;
+    let updateOptions = {
+      postId: postId,
+      userId: userId,
+      displayName: displayName,
+      description: comment,
+      userName: userName,
+    };
+
+    console.log("add comment req body::", updateOptions);
+    addCommentAction(updateOptions);
   };
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
     console.log("tweets updates invoked in Post ", updateType);
     let updateOptions = { postId: info.postId, isComment: false };
     switch (updateType) {
-      case "comments":
-        updateOptions = { ...updateOptions, update: { comments: comment } };
-        break;
       case "retweets":
         updateOptions = { ...updateOptions, update: { retweets: 1 } };
         break;
@@ -165,5 +181,6 @@ const mapStateToProps = ({ user }) => {
 const mapActionToProps = {
   updatePostAction,
   deletePostAction,
+  addCommentAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Post);

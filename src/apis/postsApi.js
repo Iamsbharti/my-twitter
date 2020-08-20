@@ -77,3 +77,25 @@ export const deletePost = async (postId) => {
     return error.response.data;
   }
 };
+
+export const setComments = async (commentInfo) => {
+  console.log("update post api start:", commentInfo);
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let url = `${baseUrl}/api/v1/post/addComment`;
+    let updatePostResponse = await axios.post(
+      url,
+      { ...commentInfo },
+      { headers: { authToken: authToken } }
+    );
+    console.log("update post res::", updatePostResponse);
+    console.log("success- toast");
+    toast.success("You replied to a tweet");
+    return updatePostResponse.data.data;
+  } catch (error) {
+    console.warn("Update post error::", error.response.data);
+    console.log("toast-error");
+    toast.error(error.response.data);
+    return error.response.data;
+  }
+};

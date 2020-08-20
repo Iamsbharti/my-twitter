@@ -63,39 +63,41 @@ function Feed({
     history.goBack();
   };
   return (
-    <div className="feed">
-      {localStorage.getItem("authToken") ? (
-        <>
-          <div className="feedHeader">
-            {/**conditionally render single tweet header and all tweets header*/}
+    <>
+      <div className="feed">
+        {localStorage.getItem("authToken") ? (
+          <>
+            <div className="feedHeader">
+              {/**conditionally render single tweet header and all tweets header*/}
+              {tweetStatus === undefined ? (
+                <h2>Home</h2>
+              ) : (
+                <div className="status__header">
+                  <ArrowBackIcon
+                    fontSize="large"
+                    className="status__icon"
+                    onClick={handleBackToFeed}
+                  />
+                  <h3>Tweet</h3>
+                </div>
+              )}
+            </div>
+            {/**conditionally render single tweet view and all tweets */}
+            {tweetStatus === undefined ? <TweetBox postTweet={tweet} /> : ""}
             {tweetStatus === undefined ? (
-              <h2>Home</h2>
+              posts.map((post, index) => (
+                <Post key={index} info={post} status={false} />
+              ))
             ) : (
-              <div className="status__header">
-                <ArrowBackIcon
-                  fontSize="large"
-                  className="status__icon"
-                  onClick={handleBackToFeed}
-                />
-                <h3>Tweet</h3>
-              </div>
+              <Post info={tweetStatus} status={true} />
             )}
-          </div>
-          {/**conditionally render single tweet view and all tweets */}
-          {tweetStatus === undefined ? <TweetBox postTweet={tweet} /> : ""}
-          {tweetStatus === undefined ? (
-            posts.map((post, index) => (
-              <Post key={index} info={post} status={false} />
-            ))
-          ) : (
-            <Post info={tweetStatus} status={true} />
-          )}
-        </>
-      ) : (
-        history.push("/login")
-      )}
+          </>
+        ) : (
+          history.push("/login")
+        )}
+      </div>
       <ToastContainer autoClose={1000} hideProgressBar />
-    </div>
+    </>
   );
 }
 const mapStateToProps = ({ posts, user }) => {

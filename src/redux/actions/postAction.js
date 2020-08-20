@@ -4,6 +4,7 @@ import {
   UPDATE_POST,
   DELETE_POST,
   UPDATE_POST_COMMENT,
+  ADD_COMMENT,
 } from "./actionTypes";
 import * as postApi from "../../apis/postsApi";
 
@@ -43,5 +44,13 @@ export const deletePostAction = (postId) => {
     let deletedTweet = await postApi.deletePost(postId);
     console.log("Delete action res::", deletedTweet);
     dispatch({ type: DELETE_POST, postId });
+  };
+};
+export const addCommentAction = (commentInfo) => {
+  console.log("addCommentAction tweet::", commentInfo);
+  return async (dispatch) => {
+    let newComments = await postApi.setComments(commentInfo);
+    console.log("new cooments action::", newComments);
+    dispatch({ type: ADD_COMMENT, newComments });
   };
 };

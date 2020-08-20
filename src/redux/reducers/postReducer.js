@@ -4,6 +4,7 @@ import {
   UPDATE_POST,
   DELETE_POST,
   UPDATE_POST_COMMENT,
+  ADD_COMMENT,
 } from "../actions/actionTypes";
 import { posts } from "../defaultStore";
 
@@ -67,6 +68,16 @@ export function postReducer(_posts = posts, action) {
               ...post,
               comments: updatedComments,
             }
+          : post
+      );
+    }
+    case ADD_COMMENT: {
+      const { postId } = action.newComments;
+      let toAddComment = action.newComments;
+      console.log("to add comments::", toAddComment);
+      return _posts.map((post) =>
+        post.postId === postId
+          ? { ...post, comments: [...post.comments, toAddComment] }
           : post
       );
     }
