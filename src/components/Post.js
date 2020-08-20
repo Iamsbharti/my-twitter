@@ -28,8 +28,8 @@ function Post({
   const [comment, setComment] = useState("");
   const handleAddReply = () => {
     console.log("handle add reply");
+    setComment("");
     SetToggle(!toggleComment);
-
     const { userId, userName, displayName, postId } = info;
     let updateOptions = {
       postId: postId,
@@ -38,7 +38,6 @@ function Post({
       description: comment,
       userName: userName,
     };
-
     console.log("add comment req body::", updateOptions);
     addCommentAction(updateOptions);
   };

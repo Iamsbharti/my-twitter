@@ -183,6 +183,12 @@ const deletePost = async (req, res) => {
   if (isPostValid.error) {
     return res.status(isPostValid.status).json(isPostValid);
   }
+  /**delete comments related to the postId */
+  let deletedComments = await Comment.deleteMany({ postId: postId });
+  if (!deletedComments) {
+    res.status(500);
+    throw new Error(`Internal server error`);
+  }
   /**delete the post */
   Post.deleteOne({ postId: postId }, (error, deletedPost) => {
     if (error) {
