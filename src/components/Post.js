@@ -4,6 +4,7 @@ import { Avatar, Button } from "@material-ui/core";
 import PublishIcon from "@material-ui/icons/Publish";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import { connect } from "react-redux";
@@ -147,11 +148,19 @@ function Post({
               {info.retweets > 0 && <p>{info.retweets}</p>}
             </div>
             <div className="icon__items">
-              <FavoriteBorderIcon
-                className="icons"
-                fontSize="small"
-                onClick={() => tweetsUpdate("likes")}
-              />
+              {info.likes > 0 ? (
+                <FavoriteIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("likes")}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("likes")}
+                />
+              )}
               {info.likes > 0 && <p>{info.likes}</p>}
             </div>
             <div className="icon__items">
