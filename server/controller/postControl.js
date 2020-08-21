@@ -100,7 +100,7 @@ const getAllPosts = async (req, res) => {
 };
 const updatePost = async (req, res) => {
   logger.info("Update a Post");
-  const { postId, update, isComment } = req.body;
+  const { postId, update, isComment, userId } = req.body;
   /**search for existing post */
   let query;
   let isPostValid;
@@ -127,18 +127,28 @@ const updatePost = async (req, res) => {
     updateOptions = {
       ...updateOptions,
       retweets: isPostValid.retweets + retweets,
+      $push: { retweetsBy: userId },
     };
+  }
+  /**likedby query */
+  let likeQuery;
+  if (likes === 1) {
+    likeQuery = { $push: { likedBy: userId } };
+  } else {
+    likeQuery = { $pull: { likedBy: userId } };
   }
   if (likes !== undefined) {
     updateOptions = {
       ...updateOptions,
-      likes: isPostValid.likes + likes,
+      likes: likes === 1 ? isPostValid.likes + likes : isPostValid.likes - 1,
+      ...likeQuery,
     };
   }
   if (shares !== undefined) {
     updateOptions = {
       ...updateOptions,
       shares: isPostValid.shares + shares,
+      $push: { sharedBy: userId },
     };
   }
   if (comments !== undefined) {
