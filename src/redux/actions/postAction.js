@@ -31,11 +31,13 @@ export const updatePostAction = (postInfo) => {
     dispatch({ type: UPDATE_POST, postInfo });
   };
 };
-export const updatePostCommentAction = (commentInfo, id) => {
+export const updatePostCommentAction = (_commentInfo, id) => {
   console.log("update postcomment action:");
   return async (dispatch) => {
-    let updatedPost = await postApi.updatePost(commentInfo);
+    let updatedPost = await postApi.updatePost(_commentInfo);
     console.log("api res-action::", updatedPost);
+    let commentInfo = _commentInfo;
+    commentInfo = { ..._commentInfo, id: id };
     dispatch({ type: UPDATE_POST_COMMENT, commentInfo });
   };
 };

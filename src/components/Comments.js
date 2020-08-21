@@ -6,6 +6,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RepeatIcon from "@material-ui/icons/Repeat";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import { connect } from "react-redux";
 import {
   updatePostAction,
@@ -41,7 +42,7 @@ function Comments({
     let updateOptions = {
       postId: info.commentId,
       isComment: true,
-      id: info.postId,
+      userId: userId,
     };
     switch (updateType) {
       case "comments":
@@ -56,10 +57,13 @@ function Comments({
       case "shares":
         updateOptions = { ...updateOptions, update: { shares: 1 } };
         break;
+      case "dislike":
+        updateOptions = { ...updateOptions, update: { likes: -1 } };
+        break;
       default:
         break;
     }
-    updatePostCommentAction(updateOptions);
+    updatePostCommentAction(updateOptions, info.postId);
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (commentId, postId) => {
@@ -68,6 +72,10 @@ function Comments({
       postId: postId,
     };
     deleteCommentAction(commentsInfo);
+    console.timeLog("invoke delete comments--redirect to /tweets");
+    if (status) {
+      history.push("/tweets");
+    }
   };
   /**open a single tweet with comments upon click */
   let history = useHistory();
@@ -139,15 +147,29 @@ function Comments({
                 fontSize="small"
                 className="icons"
                 onClick={() => tweetsUpdate("retweets")}
+                style={{
+                  color:
+                    info.retweetsBy && info.retweetsBy.includes(userId)
+                      ? "Blue"
+                      : "gray",
+                }}
               />
               {info.retweets > 0 && <p>{info.retweets}</p>}
             </div>
             <div className="icon__items">
-              <FavoriteBorderIcon
-                className="icons"
-                fontSize="small"
-                onClick={() => tweetsUpdate("likes")}
-              />
+              {info.likedBy && info.likedBy.includes(userId) ? (
+                <FavoriteIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("dislike")}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("likes")}
+                />
+              )}
               {info.likes > 0 && <p>{info.likes}</p>}
             </div>
             <div className="icon__items">

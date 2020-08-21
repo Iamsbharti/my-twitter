@@ -44,7 +44,11 @@ function Post({
   };
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
-    let updateOptions = { postId: info.postId, isComment: false };
+    let updateOptions = {
+      postId: info.postId,
+      isComment: false,
+      userId: userId,
+    };
     switch (updateType) {
       case "retweets":
         updateOptions = { ...updateOptions, update: { retweets: 1 } };
@@ -55,6 +59,9 @@ function Post({
       case "shares":
         updateOptions = { ...updateOptions, update: { shares: 1 } };
         break;
+      case "dislike":
+        updateOptions = { ...updateOptions, update: { likes: -1 } };
+        break;
       default:
         break;
     }
@@ -63,25 +70,15 @@ function Post({
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
     deletePostAction(postId);
+    if (status) {
+      setTimeout(() => history.push("/tweets"), 1200);
+    }
   };
-  /**invoke tweets update on dislike special case */
-  /**const dislikeTweet = () => {
-    let updateOptions = {
-      postId: info.postId,
-      isComment: false,
-      update: { likes: -1 },
-    };
-    updatePostAction(updateOptions);
-  };**/
   /**open a single tweet with comments upon click */
   let history = useHistory();
   const handlePostClick = (username, postid) => {
     history.push(`/${username}/status/${postid}`);
   };
-  let postdate = info.createdAt;
-  let dates = new Date(postdate);
-  //"dddd, mmmm dS, yyyy, h:MM:ss TT"
-  console.log(dateFormat(dates, "h:MM TT.mmmm dS,yyyy"));
   return (
     <>
       <div className="post">
@@ -153,15 +150,21 @@ function Post({
                 fontSize="small"
                 className="icons"
                 onClick={() => tweetsUpdate("retweets")}
+                style={{
+                  color:
+                    info.retweetsBy && info.retweetsBy.includes(userId)
+                      ? "Blue"
+                      : "gray",
+                }}
               />
               {info.retweets > 0 && <p>{info.retweets}</p>}
             </div>
             <div className="icon__items">
-              {info.likes > 0 ? (
+              {info.likedBy && info.likedBy.includes(userId) ? (
                 <FavoriteIcon
                   className="icons like_icon"
                   fontSize="small"
-                  onClick={() => tweetsUpdate("likes")}
+                  onClick={() => tweetsUpdate("dislike")}
                 />
               ) : (
                 <FavoriteBorderIcon

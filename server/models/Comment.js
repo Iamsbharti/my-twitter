@@ -35,6 +35,10 @@ const commentSchema = mongoose.Schema({
   comments: {
     type: Array,
   },
+  retweets: {
+    type: Number,
+    default: 0,
+  },
   retweetsBy: {
     type: Array,
     default: [],

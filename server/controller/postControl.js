@@ -118,19 +118,29 @@ const updatePost = async (req, res) => {
       return res.status(isPostValid.status).json(isPostValid);
     }
   }
-
-  /** */
   /**update the specific post */
   let { comments, retweets, likes, shares } = update;
   let updateOptions = {};
+  /**retweeted by and undo retweet query */
+  let retweetsByQuery;
+  if (isPostValid.retweetsBy.includes(userId)) {
+    retweetsByQuery = {
+      $pull: { retweetsBy: userId },
+      retweets: isPostValid.retweets - 1,
+    };
+  } else {
+    retweetsByQuery = {
+      $push: { retweetsBy: userId },
+      retweets: isPostValid.retweets + retweets,
+    };
+  }
   if (retweets !== undefined) {
     updateOptions = {
       ...updateOptions,
-      retweets: isPostValid.retweets + retweets,
-      $push: { retweetsBy: userId },
+      ...retweetsByQuery,
     };
   }
-  /**likedby query */
+  /**like & dislike  query */
   let likeQuery;
   if (likes === 1) {
     likeQuery = { $push: { likedBy: userId } };

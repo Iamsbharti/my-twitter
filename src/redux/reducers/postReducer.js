@@ -20,15 +20,39 @@ export function postReducer(_posts = posts, action) {
         ? posts
         : action.getAllPostsResponse;
     case UPDATE_POST:
-      const { postId, update } = action.postInfo;
+      const { postId, update, userId } = action.postInfo;
       const { comments, retweets, likes, shares } = update;
+      console.log("retweets:likes", retweets, likes);
       return _posts.map((post) =>
         post.postId === postId
           ? {
               ...post,
               retweets:
-                retweets !== undefined ? post.retweets + 1 : post.retweets,
-              likes: likes !== undefined ? post.likes + 1 : post.likes,
+                retweets !== undefined
+                  ? retweets === 1 && post.retweetsBy.includes(userId)
+                    ? post.retweets - 1
+                    : post.retweets + 1
+                  : post.retweets,
+              retweetsBy:
+                retweets !== undefined
+                  ? post.retweetsBy.includes(userId)
+                    ? post.retweetsBy.filter((user) => user !== userId)
+                    : [...post.retweetsBy, userId]
+                  : post.retweetsBy,
+              likes:
+                likes !== undefined
+                  ? likes === 1
+                    ? post.likes + 1
+                    : post.likes === 0
+                    ? 0
+                    : post.likes - 1
+                  : post.likes,
+              likedBy:
+                likes !== undefined
+                  ? likes === -1
+                    ? post.likedBy.filter((user) => user !== userId)
+                    : [...post.likedBy, userId]
+                  : post.likedBy,
               shares: shares !== undefined ? post.shares + 1 : post.shares,
               comments:
                 comments !== undefined
@@ -39,7 +63,7 @@ export function postReducer(_posts = posts, action) {
       );
 
     case UPDATE_POST_COMMENT: {
-      const { postId, update, id } = action.commentInfo;
+      const { postId, update, id, userId } = action.commentInfo;
       const { comments, retweets, likes, shares } = update;
       let toUpdatePost = _posts.filter((p) => p.postId === id);
       let updatedComments = toUpdatePost[0].comments.map((comment) =>
@@ -48,9 +72,30 @@ export function postReducer(_posts = posts, action) {
               ...comment,
               retweets:
                 retweets !== undefined
-                  ? comment.retweets + 1
+                  ? retweets === 1 && comment.retweetsBy.includes(userId)
+                    ? comment.retweets - 1
+                    : comment.retweets + 1
                   : comment.retweets,
-              likes: likes !== undefined ? comment.likes + 1 : comment.likes,
+              retweetsBy:
+                retweets !== undefined
+                  ? comment.retweetsBy.includes(userId)
+                    ? comment.retweetsBy.filter((user) => user !== userId)
+                    : [...comment.retweetsBy, userId]
+                  : comment.retweetsBy,
+              likes:
+                likes !== undefined
+                  ? likes === 1
+                    ? comment.likes + 1
+                    : comment.likes === 0
+                    ? 0
+                    : comment.likes - 1
+                  : comment.likes,
+              likedBy:
+                likes !== undefined
+                  ? likes === -1
+                    ? comment.likedBy.filter((user) => user !== userId)
+                    : [...comment.likedBy, userId]
+                  : comment.likedBy,
               shares:
                 shares !== undefined ? comment.shares + 1 : comment.shares,
               comments:
