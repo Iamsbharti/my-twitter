@@ -33,13 +33,25 @@ const postSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  retweetsBy: {
+    type: Array,
+    default: [],
+  },
   likes: {
     type: Number,
     default: 0,
   },
+  likedBy: {
+    type: Array,
+    default: [],
+  },
   shares: {
     type: Number,
     default: 0,
+  },
+  sharedBy: {
+    type: Array,
+    default: [],
   },
   verified: {
     type: Boolean,
