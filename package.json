@@ -24,6 +24,7 @@
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
+    "react-cool-portal": "^1.0.17",
     "react-dom": "^16.13.1",
     "react-flip-move": "^3.0.4",
     "react-redux": "^7.2.1",
