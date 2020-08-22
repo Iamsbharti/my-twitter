@@ -23,7 +23,7 @@ function Feed({
   setUserState,
   tweetStatus,
   bookmark,
-  bookmarkedposts,
+  bookmarks,
 }) {
   /**define state */
   let history = useHistory();
@@ -44,7 +44,7 @@ function Feed({
       getAllPostsAction(userId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, bookmark]);
+  }, [userId]);
   /**tweet */
   const tweet = (text, image) => {
     console.log("text::", text, image);
@@ -107,10 +107,9 @@ function Feed({
             )}
             {tweetStatus === undefined ? (
               bookmark ? (
-                <Post
-                  info={posts.find((twt) => twt.bookMarkedBy.includes(userId))}
-                  status={false}
-                />
+                bookmarks.map((post, index) => (
+                  <Post key={index} info={post} status={false} />
+                ))
               ) : (
                 posts.map((post, index) => (
                   <Post key={index} info={post} status={false} />
