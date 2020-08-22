@@ -21,8 +21,15 @@ export function postReducer(_posts = posts, action) {
         : action.getAllPostsResponse;
     case UPDATE_POST:
       const { postId, update, userId } = action.postInfo;
-      const { comments, retweets, likes, shares } = update;
-      console.log("retweets:likes", retweets, likes);
+      const { comments, retweets, likes, shares, bookmark } = update;
+      console.log(
+        "retweets:likes",
+        retweets,
+        likes,
+        "ll--",
+        likes === -1,
+        userId
+      );
       return _posts.map((post) =>
         post.postId === postId
           ? {
@@ -58,6 +65,12 @@ export function postReducer(_posts = posts, action) {
                 comments !== undefined
                   ? [...post.comments, comments]
                   : post.comments,
+              bookMarkedBy:
+                bookmark !== undefined
+                  ? bookmark
+                    ? [...post.bookMarkedBy, userId]
+                    : post.bookMarkedBy.filter((id) => id !== userId)
+                  : post.bookMarkedBy,
             }
           : post
       );

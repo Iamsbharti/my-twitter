@@ -64,6 +64,12 @@ function Post({
       case "dislike":
         updateOptions = { ...updateOptions, update: { likes: -1 } };
         break;
+      case "bookUnMark":
+        updateOptions = { ...updateOptions, update: { bookmark: false } };
+        break;
+      case "bookMark":
+        updateOptions = { ...updateOptions, update: { bookmark: true } };
+        break;
       default:
         break;
     }
@@ -81,10 +87,7 @@ function Post({
   const handlePostClick = (username, postid) => {
     history.push(`/${username}/status/${postid}`);
   };
-  /**toggle tweet options */
-  const handleAddBookMark = (e) => {
-    console.log("adding as bookmark");
-  };
+
   return (
     <>
       <div className="post">
@@ -105,16 +108,25 @@ function Post({
                   />
                   @{info.userName}
                 </span>
-                <div>
-                  {!status && (
-                    <span className="headerDropDown">
-                      <BookmarkIcon
-                        fontSize="small"
-                        onClick={handleAddBookMark}
-                      />
-                    </span>
-                  )}
-                </div>
+                {!status && (
+                  <div>
+                    {info.bookMarkedBy && info.bookMarkedBy.includes(userId) ? (
+                      <span className="headerDropDown">
+                        <BookmarkIcon
+                          fontSize="small"
+                          onClick={() => tweetsUpdate("bookUnMark")}
+                        />
+                      </span>
+                    ) : (
+                      <span className="headerDropDown">
+                        <BookmarkBorderIcon
+                          fontSize="small"
+                          onClick={() => tweetsUpdate("bookMark")}
+                        />
+                      </span>
+                    )}
+                  </div>
+                )}
               </h3>
               {status && userId === info.userId && (
                 <div className="headerDeleteIcon">
@@ -147,65 +159,65 @@ function Post({
                 </p>
               </div>
             )}
-            <div className="post__footer">
-              <div className="icon__items">
-                <ChatBubbleOutlineIcon
-                  className="icons"
-                  onClick={() => SetToggle(!toggleComment)}
-                  fontSize="small"
-                />
-                {info.comments && info.comments.length > 0 && (
-                  <p>{info.comments.length}</p>
-                )}
-              </div>
-              <div className="icon__items">
-                <RepeatIcon
-                  fontSize="small"
-                  className="icons"
-                  onClick={() => tweetsUpdate("retweets")}
-                  style={{
-                    color:
-                      info.retweetsBy && info.retweetsBy.includes(userId)
-                        ? "Blue"
-                        : "gray",
-                  }}
-                />
-                {info.retweets > 0 && <p>{info.retweets}</p>}
-              </div>
-              <div className="icon__items">
-                {info.likedBy && info.likedBy.includes(userId) ? (
-                  <FavoriteIcon
-                    className="icons like_icon"
-                    fontSize="small"
-                    onClick={() => tweetsUpdate("dislike")}
-                  />
-                ) : (
-                  <FavoriteBorderIcon
-                    className="icons like_icon"
-                    fontSize="small"
-                    onClick={() => tweetsUpdate("likes")}
-                  />
-                )}
-                {info.likes > 0 && <p>{info.likes}</p>}
-              </div>
-              <div className="icon__items">
-                <PublishIcon
-                  className="icons"
-                  fontSize="small"
-                  onClick={() => tweetsUpdate("shares")}
-                />
-                {info.shares > 0 && <p>{info.shares}</p>}
-              </div>
-            </div>
-
-            <div className="post__comments" hidden={toggleComment}>
-              <input
-                type="text"
-                placeholder="Tweet your reply"
-                onChange={(e) => setComment(e.target.value)}
+          </div>
+          <div className="post__footer">
+            <div className="icon__items">
+              <ChatBubbleOutlineIcon
+                className="icons"
+                onClick={() => SetToggle(!toggleComment)}
+                fontSize="small"
               />
-              <Button onClick={handleAddReply}>Reply</Button>
+              {info.comments && info.comments.length > 0 && (
+                <p>{info.comments.length}</p>
+              )}
             </div>
+            <div className="icon__items">
+              <RepeatIcon
+                fontSize="small"
+                className="icons"
+                onClick={() => tweetsUpdate("retweets")}
+                style={{
+                  color:
+                    info.retweetsBy && info.retweetsBy.includes(userId)
+                      ? "Blue"
+                      : "gray",
+                }}
+              />
+              {info.retweets > 0 && <p>{info.retweets}</p>}
+            </div>
+            <div className="icon__items">
+              {info.likedBy && info.likedBy.includes(userId) ? (
+                <FavoriteIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("dislike")}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  className="icons like_icon"
+                  fontSize="small"
+                  onClick={() => tweetsUpdate("likes")}
+                />
+              )}
+              {info.likes > 0 && <p>{info.likes}</p>}
+            </div>
+            <div className="icon__items">
+              <PublishIcon
+                className="icons"
+                fontSize="small"
+                onClick={() => tweetsUpdate("shares")}
+              />
+              {info.shares > 0 && <p>{info.shares}</p>}
+            </div>
+          </div>
+
+          <div className="post__comments" hidden={toggleComment}>
+            <input
+              type="text"
+              placeholder="Tweet your reply"
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <Button onClick={handleAddReply}>Reply</Button>
           </div>
         </div>
       </div>

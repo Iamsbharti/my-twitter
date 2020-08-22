@@ -130,7 +130,6 @@ function Feed({
 }
 const mapStateToProps = ({ posts, user }, ownProps) => {
   let { userId, isAuthenticated, name, username } = user.user;
-  console.log("Feed::", ownProps);
   return { posts, userId, isAuthenticated, name, username };
 };
 const mapActionToProps = {
