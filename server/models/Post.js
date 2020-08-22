@@ -45,6 +45,10 @@ const postSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  bookMarkedBy: {
+    type: Array,
+    default: [],
+  },
   shares: {
     type: Number,
     default: 0,

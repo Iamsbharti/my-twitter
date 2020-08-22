@@ -119,7 +119,7 @@ const updatePost = async (req, res) => {
     }
   }
   /**update the specific post */
-  let { comments, retweets, likes, shares } = update;
+  let { comments, retweets, likes, shares, bookmark } = update;
   let updateOptions = {};
   /**retweeted by and undo retweet query */
   let retweetsByQuery;
@@ -163,6 +163,9 @@ const updatePost = async (req, res) => {
   }
   if (comments !== undefined) {
     updateOptions = { ...updateOptions, $push: { comments: comments } };
+  }
+  if (bookmark) {
+    updateOptions = { ...updateOptions, $push: { bookMarkedBy: userId } };
   }
   if (!isComment) {
     console.log("updating post", updateOptions, isPostValid.likes + likes);
