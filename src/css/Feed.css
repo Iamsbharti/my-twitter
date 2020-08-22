@@ -26,6 +26,16 @@
   font-size: 20px;
   font-weight: 800;
 }
+.feedHeader > p {
+  margin-top: 10px;
+  margin-left: 43px;
+  padding: 9px;
+  font-size: 22px;
+  border: 1px solid var(--twitter-color);
+  border-radius: 5px;
+  width: 140px;
+  box-sizing: border-box;
+}
 .status__header {
   display: flex;
 }

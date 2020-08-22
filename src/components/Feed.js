@@ -22,6 +22,8 @@ function Feed({
   createPostAction,
   setUserState,
   tweetStatus,
+  bookmark,
+  bookmarkedposts,
 }) {
   /**define state */
   let history = useHistory();
@@ -42,7 +44,7 @@ function Feed({
       getAllPostsAction(userId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [userId, bookmark]);
   /**tweet */
   const tweet = (text, image) => {
     console.log("text::", text, image);
@@ -67,7 +69,21 @@ function Feed({
             <div className="feedHeader">
               {/**conditionally render single tweet header and all tweets header*/}
               {tweetStatus === undefined ? (
-                <h2>Home</h2>
+                bookmark ? (
+                  <>
+                    <div className="status__header">
+                      <ArrowBackIcon
+                        fontSize="large"
+                        className="status__icon"
+                        onClick={handleBackToFeed}
+                      />
+                      <h3>Tweet</h3>
+                    </div>
+                    <p>BookMarks</p>
+                  </>
+                ) : (
+                  <h2>Home</h2>
+                )
               ) : (
                 <div className="status__header">
                   <ArrowBackIcon
@@ -80,11 +96,26 @@ function Feed({
               )}
             </div>
             {/**conditionally render single tweet view and all tweets */}
-            {tweetStatus === undefined ? <TweetBox postTweet={tweet} /> : ""}
             {tweetStatus === undefined ? (
-              posts.map((post, index) => (
-                <Post key={index} info={post} status={false} />
-              ))
+              bookmark ? (
+                ""
+              ) : (
+                <TweetBox postTweet={tweet} />
+              )
+            ) : (
+              ""
+            )}
+            {tweetStatus === undefined ? (
+              bookmark ? (
+                <Post
+                  info={posts.find((twt) => twt.bookMarkedBy.includes(userId))}
+                  status={false}
+                />
+              ) : (
+                posts.map((post, index) => (
+                  <Post key={index} info={post} status={false} />
+                ))
+              )
             ) : (
               <Post info={tweetStatus} status={true} />
             )}
@@ -97,8 +128,9 @@ function Feed({
     </>
   );
 }
-const mapStateToProps = ({ posts, user }) => {
+const mapStateToProps = ({ posts, user }, ownProps) => {
   let { userId, isAuthenticated, name, username } = user.user;
+  console.log("Feed::", ownProps);
   return { posts, userId, isAuthenticated, name, username };
 };
 const mapActionToProps = {

@@ -106,12 +106,14 @@ function Post({
                   @{info.userName}
                 </span>
                 <div>
-                  <span className="headerDropDown">
-                    <BookmarkIcon
-                      fontSize="medium"
-                      onClick={handleAddBookMark}
-                    />
-                  </span>
+                  {!status && (
+                    <span className="headerDropDown">
+                      <BookmarkIcon
+                        fontSize="small"
+                        onClick={handleAddBookMark}
+                      />
+                    </span>
+                  )}
                 </div>
               </h3>
               {status && userId === info.userId && (

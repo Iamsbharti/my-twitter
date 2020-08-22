@@ -6,6 +6,7 @@ import TweetsPage from "./components/TweetsPage";
 import ForgotPassword from "./components/ForgotPassword";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import TweetStatus from "./components/TweetStatus";
+import Bookmarks from "./components/Bookmarks";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             path="/:userName/status/:postId"
             component={TweetStatus}
           />
+          <Route exact path="/bookmarks" component={Bookmarks} />
         </Switch>
       </Router>
     </div>
