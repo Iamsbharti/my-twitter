@@ -40,6 +40,12 @@ router.delete(
   validation.deletePostValidation,
   posts.deletePost
 );
+router.get(
+  "/post/getBookmarks",
+  isAuthorized,
+  validation.bookmarkValidation,
+  posts.getBookamrks
+);
 /**comments management */
 router.post(
   "/post/addComment",
@@ -53,4 +59,5 @@ router.delete(
   validation.deleteCommentValidation,
   posts.deleteComment
 );
+
 module.exports = router;

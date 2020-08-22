@@ -162,9 +162,11 @@ const updatePost = async (req, res) => {
       $push: { sharedBy: userId },
     };
   }
+  /**comment update query */
   if (comments !== undefined) {
     updateOptions = { ...updateOptions, $push: { comments: comments } };
   }
+  /**bookmark update query */
   if (bookmark !== undefined && bookmark) {
     updateOptions = { ...updateOptions, $push: { bookMarkedBy: userId } };
   }
@@ -324,6 +326,28 @@ const deleteComment = async (req, res) => {
       .json(formatResponse(false, 500, "Internal Server Error", null));
   }
 };
+const getBookamrks = async (req, res) => {
+  const { userId } = req.query;
+  /**verify userid */
+  let userExists = await User.findOne({ userId: userId });
+  if (!userExists) {
+    return res
+      .status(404)
+      .json(formatResponse(true, 404, "User Not Found", null));
+  }
+  /**fetch all posts bookmarked by this userId */
+  Post.find({ bookMarkedBy: userId }, (error, bookmarks) => {
+    if (error) {
+      res
+        .status(500)
+        .json(formatResponse(true, 500, "Internal Server Error", error));
+    } else {
+      res
+        .status(200)
+        .json(formatResponse(false, 200, "BookMark Fetched", bookmarks));
+    }
+  });
+};
 module.exports = {
   createPost,
   getAllPosts,
@@ -331,4 +355,5 @@ module.exports = {
   deletePost,
   addComment,
   deleteComment,
+  getBookamrks,
 };

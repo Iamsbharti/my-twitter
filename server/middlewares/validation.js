@@ -246,6 +246,29 @@ const deleteCommentValidation = (req, res, next) => {
   }
   next();
 };
+const bookmarkValidation = (req, res, next) => {
+  logger.info(`Bookmark validation:: ${req.query.userId}`);
+  let postSchema = joi.object({
+    userId: joi.string().required(),
+    authToken: joi.string().required(),
+  });
+  let { error } = postSchema.validate(req.query, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 module.exports = {
   signUpParam,
   loginParam,
@@ -256,4 +279,5 @@ module.exports = {
   deletePostValidation,
   commentValidation,
   deleteCommentValidation,
+  bookmarkValidation,
 };
