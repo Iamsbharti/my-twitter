@@ -143,15 +143,12 @@ const updatePost = async (req, res) => {
   /**like & dislike  query */
   let likeQuery;
   if (likes === 1) {
-    console.log("push userid-likes");
     likeQuery = { $push: { likedBy: userId } };
   } else if (likes === -1) {
-    console.log("pull userid-likes");
     likeQuery = { $pull: { likedBy: userId } };
   }
-  console.log("likedby query::", likeQuery);
+
   if (likes !== undefined) {
-    console.log("updating like query with::", likeQuery);
     updateOptions = {
       ...updateOptions,
       likes: likes === 1 ? isPostValid.likes + likes : isPostValid.likes - 1,
@@ -175,7 +172,7 @@ const updatePost = async (req, res) => {
     updateOptions = { ...updateOptions, $pull: { bookMarkedBy: userId } };
   }
   if (!isComment) {
-    console.log("updating post", updateOptions);
+    logger.info("updating post");
     Post.updateOne(query, updateOptions, (error, udpatedPost) => {
       if (error) {
         res
@@ -189,7 +186,7 @@ const updatePost = async (req, res) => {
       }
     });
   } else {
-    console.log("updating comment");
+    logger.info("updating comment");
     Comment.updateOne(query, updateOptions, (error, udpatedPost) => {
       if (error) {
         res
