@@ -208,19 +208,19 @@ function Post({
             </div>
           </div>
         </div>
-        {/**render comments for this tweet */}
-        {
-          <div>
-            {status &&
-              info.comments &&
-              info.comments.map((c, index) => (
-                <div key={index} className="post_single_comments">
-                  <Comments info={c} userPost={info.userName} />
-                </div>
-              ))}
-          </div>
-        }
       </div>
+      {/**render comments for this tweet */}
+      {
+        <div>
+          {status &&
+            info.comments &&
+            info.comments.map((c, index) => (
+              <div key={index} className="post_single_comments">
+                <Comments info={c} userPost={info.userName} />
+              </div>
+            ))}
+        </div>
+      }
     </>
   );
 }
