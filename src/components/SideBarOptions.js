@@ -3,15 +3,27 @@ import "../css/SideBar.css";
 import { useHistory } from "react-router-dom";
 function SideBarOptions({ text, Icon, active }) {
   let history = useHistory();
-  const handleBookMarks = () => {
-    console.log("handle book marks");
-    history.push("/bookmarks");
+  const handleSideOptionsClick = (e) => {
+    console.log("handle book marks", e.target.innerHTML);
+    switch (e.target.innerHTML) {
+      case "Booksmarks":
+        history.push("/bookmarks");
+        break;
+      case "Explore":
+        console.log("opening explore page");
+        history.push("/explore");
+        break;
+      case "Profile":
+        console.log("opening profile page");
+        history.push("/profile");
+        break;
+      default:
+    }
   };
-  const dummy = () => {};
   return (
     <div
       className={`sideBarOptions ${active && "sideBarOptions--active"}`}
-      onClick={text === "Booksmarks" ? handleBookMarks : dummy}
+      onClick={handleSideOptionsClick}
     >
       <Icon />
       <h2>{text}</h2>

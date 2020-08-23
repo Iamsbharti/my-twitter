@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Homeicon from "@material-ui/icons/Home";
 import Searchicon from "@material-ui/icons/Search";
 import NotificationsNoneicon from "@material-ui/icons/NotificationsNone";
@@ -27,7 +27,6 @@ function SideBar() {
       <SideBarOptions text="Lists" Icon={ListAlticon} />
       <SideBarOptions text="Profile" Icon={PermIdentityicon} />
       <SideBarOptions text="More" Icon={MoreHorizicon} />
-
       <Button className="sidebar__tweet" variant="outlined" fullWidth>
         Tweet
       </Button>

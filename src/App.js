@@ -7,6 +7,9 @@ import ForgotPassword from "./components/ForgotPassword";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import TweetStatus from "./components/TweetStatus";
 import Bookmarks from "./components/Bookmarks";
+import Explore from "./components/Explore";
+import Profile from "./components/Profile";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
             component={TweetStatus}
           />
           <Route exact path="/bookmarks" component={Bookmarks} />
+          <Route exact path="/explore" component={Explore} />
+          <Route exact path="/profile" component={Profile} />
+          <Route component={PageNotFound} />
         </Switch>
       </Router>
     </div>
