@@ -60,6 +60,10 @@ const postSchema = mongoose.Schema({
   verified: {
     type: Boolean,
   },
+  hashTags: {
+    type: Array,
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

@@ -39,6 +39,8 @@ const createPost = async (req, res) => {
   } = req.body;
   const savePost = async () => {
     /**create new post schema*/
+    /**filter the hashtags from description */
+    let tags = description.split(" ").filter((s) => s.startsWith("#"));
     let newPost = new Post({
       postId: shortid.generate(),
       description: description,
@@ -52,9 +54,9 @@ const createPost = async (req, res) => {
       likes: likes,
       shares: shares,
       verified: verified,
+      hashTags: tags,
     });
     /**save post */
-
     let createdPost = await Post.create(newPost);
     if (createdPost) {
       return Promise.resolve(createdPost);
@@ -326,28 +328,6 @@ const deleteComment = async (req, res) => {
       .json(formatResponse(false, 500, "Internal Server Error", null));
   }
 };
-const getBookamrks = async (req, res) => {
-  const { userId } = req.query;
-  /**verify userid */
-  let userExists = await User.findOne({ userId: userId });
-  if (!userExists) {
-    return res
-      .status(404)
-      .json(formatResponse(true, 404, "User Not Found", null));
-  }
-  /**fetch all posts bookmarked by this userId */
-  Post.find({ bookMarkedBy: userId }, (error, bookmarks) => {
-    if (error) {
-      res
-        .status(500)
-        .json(formatResponse(true, 500, "Internal Server Error", error));
-    } else {
-      res
-        .status(200)
-        .json(formatResponse(false, 200, "BookMark Fetched", bookmarks));
-    }
-  });
-};
 module.exports = {
   createPost,
   getAllPosts,
@@ -355,5 +335,4 @@ module.exports = {
   deletePost,
   addComment,
   deleteComment,
-  getBookamrks,
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Homeicon from "@material-ui/icons/Home";
 import Searchicon from "@material-ui/icons/Search";
 import NotificationsNoneicon from "@material-ui/icons/NotificationsNone";
