@@ -142,7 +142,16 @@ function Post({
           </div>
           <div onClick={() => handlePostClick(info.userName, info.postId)}>
             <div className="post_headerDescription">
-              <p>{info.description}</p>
+              <p>
+                {info.description.split(" ").map((desc, index) => (
+                  <span
+                    key={index}
+                    style={{ color: desc.startsWith("#") ? "blue" : "" }}
+                  >
+                    {desc}{" "}
+                  </span>
+                ))}
+              </p>
             </div>
             {info.image && <img src={info.image} alt="" />}
             {status && (

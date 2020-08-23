@@ -15,5 +15,6 @@ export const posts = [
     userName: "tweetes",
     verified: true,
     bookMarkedBy: [],
+    hashTags: [],
   },
 ];
