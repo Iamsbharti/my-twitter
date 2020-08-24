@@ -7,7 +7,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import TweetStatus from "./components/TweetStatus";
 import Bookmarks from "./components/Bookmarks";
-import Explore from "./components/Explore";
+import Explore from "./components/explore/Explore";
 import Profile from "./components/Profile";
 import PageNotFound from "./components/PageNotFound";
 
