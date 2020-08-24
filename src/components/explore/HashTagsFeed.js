@@ -23,7 +23,9 @@ function HashTagsFeed({ hashtags }) {
                     <div className="post__header">
                       <div className="post__headerText">
                         <span>{key}</span>
-                        <span>{hashtags.get(key)}</span>
+                        <div>
+                          <span>{hashtags.get(key)}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
