@@ -145,3 +145,25 @@
   align-items: flex-end;
   flex-direction: column;
 }
+.post__header__counter {
+  margin-top: 10px;
+}
+.tag__post {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--twitter-bg);
+  padding-bottom: 10px;
+}
+.post__headerText {
+  color: blue;
+}
+.post__header__counter {
+  color: gray;
+}
+.status__header > img {
+  width: 400px;
+  height: 400px;
+}
+.status__header__img {
+  margin-top: 40px;
+}

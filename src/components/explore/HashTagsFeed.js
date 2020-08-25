@@ -13,20 +13,26 @@ function HashTagsFeed({ hashtags }) {
           <>
             <div className="feedHeader">
               <div className="status__header">
-                <h3>HashTags</h3>
+                <div>
+                  <h3>HashTags</h3>
+                </div>
+                <div className="status__header__img">
+                  <img src={process.env.PUBLIC_URL + "/hashtags.png"} alt="" />
+                </div>
               </div>
             </div>
             {hashtags &&
               [...hashtags.keys()].map((key) => (
-                <div className="post" key={key}>
+                <div className="tag__post" key={key}>
                   <div className="post__body">
-                    <div className="post__header">
-                      <div className="post__headerText">
-                        <span>{key}</span>
-                        <div>
-                          <span>{hashtags.get(key)}</span>
-                        </div>
-                      </div>
+                    <div className="post__headerText">
+                      <span>{key}</span>
+                    </div>
+                    <div className="post__header__counter">
+                      <span>
+                        {hashtags.get(key)}{" "}
+                        {hashtags.get(key) === 1 ? "Tweet" : "Tweets"}
+                      </span>
                     </div>
                   </div>
                 </div>
