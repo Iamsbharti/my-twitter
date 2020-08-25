@@ -4,12 +4,7 @@ import { getAllPostsAction } from "../../redux/actions/postAction";
 import SideBar from "../SideBar";
 import Widgets from "../Widgets";
 import HashTagsFeed from "./HashTagsFeed";
-function Explore({
-  userId,
-  tweetCountMap,
-  tweetCountArray,
-  getAllPostsAction,
-}) {
+function Explore({ userId, tweetCountArray, getAllPostsAction }) {
   useEffect(() => {
     /**call get allpost for each reload */
     getAllPostsAction();
@@ -17,7 +12,7 @@ function Explore({
   return (
     <div className="app">
       <SideBar />
-      <HashTagsFeed hashtags={tweetCountMap} hashTagsArray={tweetCountArray} />
+      <HashTagsFeed hashTagsArray={tweetCountArray} />
       <Widgets />
     </div>
   );
@@ -77,7 +72,7 @@ const mapStateToProps = ({ user, posts }) => {
   }));
   console.log("tweetcountarray::", tweetCountArray);
 
-  return { userId: user.userId, tweetCountMap, tweetCountArray };
+  return { userId: user.userId, tweetCountArray };
 };
 const mapActionToProps = {
   getAllPostsAction,

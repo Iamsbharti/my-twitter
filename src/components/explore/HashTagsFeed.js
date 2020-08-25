@@ -3,7 +3,7 @@ import "../../css/Feed.css";
 import "../../css/Post.css";
 import { useHistory } from "react-router-dom";
 
-function HashTagsFeed({ hashtags, hashTagsArray }) {
+function HashTagsFeed({ hashTagsArray }) {
   /**define state */
   let history = useHistory();
   return (
