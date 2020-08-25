@@ -17,6 +17,10 @@ function SideBarOptions({ text, Icon, active }) {
         console.log("opening profile page");
         history.push("/profile");
         break;
+      case "Home":
+        console.log("opening home page");
+        history.push("/tweets");
+        break;
       default:
     }
   };
