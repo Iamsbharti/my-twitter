@@ -167,3 +167,7 @@
 .status__header__img {
   margin-top: 40px;
 }
+.post__header__usernames {
+  margin-top: 10px;
+  color: gray;
+}

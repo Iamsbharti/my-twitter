@@ -3,7 +3,7 @@ import "../../css/Feed.css";
 import "../../css/Post.css";
 import { useHistory } from "react-router-dom";
 
-function HashTagsFeed({ hashtags }) {
+function HashTagsFeed({ hashtags, hashTagsArray }) {
   /**define state */
   let history = useHistory();
   return (
@@ -21,18 +21,20 @@ function HashTagsFeed({ hashtags }) {
                 </div>
               </div>
             </div>
-            {hashtags &&
-              [...hashtags.keys()].map((key) => (
-                <div className="tag__post" key={key}>
+            {hashTagsArray &&
+              hashTagsArray.map((val, index) => (
+                <div className="tag__post" key={index}>
                   <div className="post__body">
                     <div className="post__headerText">
-                      <span>{key}</span>
+                      <span>{val.tag}</span>
                     </div>
                     <div className="post__header__counter">
                       <span>
-                        {hashtags.get(key)}{" "}
-                        {hashtags.get(key) === 1 ? "Tweet" : "Tweets"}
+                        {val.count} {val.count === 1 ? "Tweet" : "Tweets"}
                       </span>
+                    </div>
+                    <div className="post__header__usernames">
+                      {val.name && val.name}
                     </div>
                   </div>
                 </div>
