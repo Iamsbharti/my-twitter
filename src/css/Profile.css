@@ -1,0 +1,97 @@
+.profile {
+  flex: 0.5;
+  border-right: 1px solid var(--twitter-bg);
+  min-width: fit-content;
+  overflow-y: scroll;
+}
+/*Hide scrollbar for chrome,safari*/
+.profile::-webkit-scrollbar {
+  display: none;
+}
+/*Hide scrollbar for IE,Edge,Firefox*/
+.profile::-webkit-scrollbar {
+  -ms-overflow-style: none; /*IE & Edge*/
+  scrollbar-width: none; /* FireFox */
+}
+.profileHeader {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  /**border: 1px solid var(--twitter-bg);*/
+  padding: 15px 20px;
+}
+.profileHeader > h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+.profileHeader > p {
+  margin-top: 10px;
+  margin-left: 43px;
+  padding: 9px;
+  font-size: 22px;
+  border: 1px solid var(--twitter-color);
+  border-radius: 5px;
+  width: 140px;
+  box-sizing: border-box;
+}
+.status__header {
+  display: flex;
+}
+.status__header > h3 {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.status__icon {
+  color: var(--twitter-color);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.status__icon:hover {
+  color: blue;
+  border-radius: 30px;
+}
+.profile__coverpic {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.profile__coverpic > button {
+  background-color: white !important;
+  border: 2px solid var(--twitter-color) !important;
+  border-color: var(--twitter-color) !important;
+  color: var(--twitter-color) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  text-transform: inherit !important;
+  height: 39px !important;
+  margin-left: 470px !important;
+  border-radius: 20px !important;
+  margin-top: 10px !important;
+  width: 130px !important;
+}
+.profile__coverpic > button:hover {
+  background-color: var(--twitter-color) !important;
+  color: white !important;
+}
+.profile__coverpic > img {
+  width: 600px;
+  height: 250px;
+}
+.coverPic {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.profile__user__avatar {
+  border-radius: 124px;
+  position: absolute;
+  top: 211px !important;
+  left: 25px !important;
+  color: transparent !important;
+  width: 24% !important;
+  height: 42% !important;
+  object-fit: cover !important;
+  text-align: center !important;
+  text-indent: 10000px !important;
+}
