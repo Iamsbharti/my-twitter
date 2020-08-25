@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Utility.css";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-function Profile() {
+function Messages() {
   let history = useHistory();
   const handleClick = () => {
     history.push("/tweets");
@@ -23,4 +23,4 @@ function Profile() {
     </div>
   );
 }
-export default Profile;
+export default Messages;

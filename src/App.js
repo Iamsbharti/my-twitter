@@ -10,6 +10,10 @@ import Bookmarks from "./components/Bookmarks";
 import Explore from "./components/explore/Explore";
 import Profile from "./components/Profile";
 import PageNotFound from "./components/PageNotFound";
+import More from "./components/More";
+import Notifications from "./components/Notifications";
+import Messages from "./components/Messages";
+import Lists from "./components/Lists";
 
 function App() {
   return (
@@ -27,8 +31,12 @@ function App() {
             component={TweetStatus}
           />
           <Route exact path="/bookmarks" component={Bookmarks} />
-          <Route exact path="/explore" component={Explore} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/explore" component={Explore} />
+          <Route exact path="/more" component={More} />
+          <Route exact path="/notifications" component={Notifications} />
+          <Route exact path="/messages" component={Messages} />
+          <Route exact path="/lists" component={Lists} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

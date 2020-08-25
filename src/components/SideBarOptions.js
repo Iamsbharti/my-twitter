@@ -21,6 +21,22 @@ function SideBarOptions({ text, Icon, active }) {
         console.log("opening home page");
         history.push("/tweets");
         break;
+      case "More":
+        console.log("opening more page");
+        history.push("/more");
+        break;
+      case "Notifications":
+        console.log("opening notifications page");
+        history.push("/notifications");
+        break;
+      case "Messages":
+        console.log("opening messages page");
+        history.push("/messages");
+        break;
+      case "Lists":
+        console.log("opening lists page");
+        history.push("/lists");
+        break;
       default:
     }
   };

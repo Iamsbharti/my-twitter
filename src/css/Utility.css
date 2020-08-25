@@ -1,0 +1,20 @@
+.header {
+  margin: 30px;
+  padding: 20px;
+}
+.banner > img {
+  border-radius: 10px;
+  width: 400px;
+  height: 400px;
+}
+.bottom > button {
+  background-color: var(--twitter-color) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 900 !important;
+  font-size: 19px !important;
+  text-transform: inherit !important;
+  height: 39px !important;
+  margin-top: 10px !important;
+  border-radius: 11px !important;
+}
