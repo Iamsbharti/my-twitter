@@ -7,3 +7,5 @@ export const DELETE_POST = "DELETE_POST";
 export const UPDATE_POST_COMMENT = "UPDATE_POST_COMMENT";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const GET_USER_INFO = "GET_USER_INFO";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
