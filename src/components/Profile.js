@@ -81,7 +81,20 @@ function Profile({ name, email, userId, username }) {
                     <span className="userinteraction__span">Followers</span>
                   </p>
                 </div>
-                <div></div>
+              </div>
+              <div className="profile__user__tweets__bar">
+                <div className="profile__tweets__bar">
+                  <Button>Tweets</Button>
+                </div>
+                <div className="profile__tweets__bar">
+                  <Button>Tweets & Replies</Button>
+                </div>
+                <div className="profile__tweets__bar">
+                  <Button>Media</Button>
+                </div>
+                <div className="profile__tweets__bar">
+                  <Button>Likes</Button>
+                </div>
               </div>
             </>
           ) : (
