@@ -44,17 +44,17 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
               <div className="profile__header__userinfo">
                 <p className="profile__header__username">{userInfo.name}</p>
                 <p className="profile__header__userid">@{userInfo.username}</p>
-                <p className="profile__header__bio">You know who I am</p>
+                <p className="profile__header__bio">{userInfo.bio}</p>
               </div>
               <div className="profile__header__otherinfo">
                 <div>
                   <RoomIcon fontSize="small" />
-                  <span className="otherinfo">India</span>
+                  <span className="otherinfo">{userInfo.country}</span>
                 </div>
 
                 <div>
                   <CakeIcon fontSize="small" />
-                  <span className="otherinfo"> Born April 26,1995</span>
+                  <span className="otherinfo"> {userInfo.birthdate}</span>
                 </div>
 
                 <div>
@@ -65,13 +65,17 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
               <div className="profile__userinteraction">
                 <div className="profile__user__following">
                   <p>
-                    <span className="userinteraction__number">56</span>
+                    <span className="userinteraction__number">
+                      {userInfo.following}
+                    </span>
                     <span className="userinteraction__span">Following</span>
                   </p>
                 </div>
                 <div className="profile__user__followers">
                   <p>
-                    <span className="userinteraction__number">56</span>
+                    <span className="userinteraction__number">
+                      {userInfo.followers.length}
+                    </span>
                     <span className="userinteraction__span">Followers</span>
                   </p>
                 </div>

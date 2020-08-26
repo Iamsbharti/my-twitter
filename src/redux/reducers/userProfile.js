@@ -1,15 +1,16 @@
 import { GET_USER_INFO, UPDATE_USER_INFO } from "../actions/actionTypes";
-export function userReducer(userprofile = {}, action) {
+import { userprofile } from "../defaultStore";
+export function profileReducer(_userprofile = userprofile, action) {
   switch (action.type) {
     case GET_USER_INFO:
       return action.userInfo;
     case UPDATE_USER_INFO: {
       return {
-        ...userprofile,
+        ..._userprofile,
         ...action.userInfo,
       };
     }
     default:
-      return userprofile;
+      return _userprofile;
   }
 }

@@ -120,7 +120,7 @@ export const getUserInfo = async (userId) => {
     );
     console.log("get user api res::", userInfoResponse);
     if (!userInfoResponse.data.error) {
-      return userInfoResponse;
+      return userInfoResponse.data.data;
     }
   } catch (error) {
     console.warn("Error get User api::", error.response.data);

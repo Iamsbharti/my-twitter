@@ -15,7 +15,7 @@ function SideBarOptions({ text, Icon, active }) {
         break;
       case "Profile":
         console.log("opening profile page");
-        history.push("/profile");
+        history.push(`/profile/${localStorage.getItem("userId")}`);
         break;
       case "Home":
         console.log("opening home page");

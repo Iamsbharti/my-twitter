@@ -18,3 +18,17 @@ export const posts = [
     hashTags: [],
   },
 ];
+export const userprofile = {
+  followers: [],
+  tweetsCount: 0,
+  following: 2,
+  userId: "N0_S5oGvi",
+  name: "saurabh bharti",
+  email: "saurabhbharti9@gmail.com",
+  username: "sbhbp",
+  recoveryCode: "",
+  tweetCount: 2,
+  country: "India",
+  bio: "You Know who I am",
+  birthdate: "",
+};

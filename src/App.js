@@ -26,12 +26,12 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/forgotPwd" component={ForgotPassword} />
           <Route
-            excat
+            exact
             path="/:userName/status/:postId"
             component={TweetStatus}
           />
           <Route exact path="/bookmarks" component={Bookmarks} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile/:userId" component={Profile} />
           <Route exact path="/explore" component={Explore} />
           <Route exact path="/more" component={More} />
           <Route exact path="/notifications" component={Notifications} />
