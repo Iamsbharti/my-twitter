@@ -3,6 +3,7 @@
   border-right: 1px solid var(--twitter-bg);
   min-width: fit-content;
   overflow-y: scroll;
+  border-bottom: 1px solid var(--twitter-color);
 }
 /*Hide scrollbar for chrome,safari*/
 .profile::-webkit-scrollbar {
@@ -94,4 +95,56 @@
   object-fit: cover !important;
   text-align: center !important;
   text-indent: 10000px !important;
+}
+.profile__header__userinfo {
+  margin-top: 10px;
+  margin-left: 35px;
+}
+.profile__header__username {
+  font-weight: 900;
+  font-size: 18px;
+}
+.profile__header__userid {
+  margin-top: 6px;
+  color: gray;
+  font-size: 15px;
+}
+.profile__header__bio {
+  margin-top: 12px;
+  font-size: 17px;
+}
+.profile__header__otherinfo {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: -55px;
+  margin-top: 10px;
+  color: gray;
+}
+.profile__header__otherinfo > span {
+  margin-top: 10px;
+}
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 1.25rem;
+  margin-top: 4px;
+  margin-left: 37px;
+}
+.otherinfo {
+  position: relative;
+  top: -4px;
+}
+.profile__userinteraction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 35px;
+  margin-top: 15px;
+  width: 309px;
+}
+.userinteraction__span {
+  margin-left: 9px;
+  color: gray;
+}
+.userinteraction__number {
+  font-weight: 700;
+  font-size: 17px;
 }
