@@ -20,7 +20,7 @@ const getUserInfo = async (req, res) => {
     res.status(404).json(userFound);
   } else {
     /**user found return res */
-    let userInfo = userFound;
+    let userInfo = userFound.toObject();
     delete userInfo.password;
     delete userInfo._id;
     delete userInfo.__v;

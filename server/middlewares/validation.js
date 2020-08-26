@@ -270,12 +270,12 @@ const getUserValidation = (req, res, next) => {
   next();
 };
 const updateUserValidation = (req, res, next) => {
-  logger.info(`Get UserInfo validation:: ${req.query.userId}`);
+  logger.info(`Update UserInfo validation:: ${req.body.userId}`);
   let userSchema = joi.object({
     userId: joi.string().required(),
     updates: joi.object().required(),
   });
-  let { error } = userSchema.validate(req.query, options);
+  let { error } = userSchema.validate(req.body, options);
   if (error) {
     let errors = [];
     error.details.map((err) => errors.push(err.message.split("is")[0]));
