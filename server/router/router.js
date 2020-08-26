@@ -4,6 +4,7 @@ const validation = require("../middlewares/validation");
 const { logincontrol } = require("../controller/logincontrol");
 const { isAuthorized } = require("../middlewares/authHandler");
 const posts = require("../controller/postControl");
+const users = require("../controller/userControl");
 const managePassword = require("../controller/recoveryControl");
 
 /**user management */
@@ -19,7 +20,18 @@ router.post(
   validation.resetValidation,
   managePassword.resetPassword
 );
-
+router.get(
+  "/user/getUser",
+  isAuthorized,
+  validation.getUserValidation,
+  users.getUserInfo
+);
+router.post(
+  "/user/updateUser",
+  isAuthorized,
+  validation.updateUserValidation,
+  users.updateUserInfo
+);
 /**post management */
 router.post(
   "/post/createPost",
