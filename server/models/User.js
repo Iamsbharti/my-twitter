@@ -32,6 +32,26 @@ let userSchema = mongoose.Schema(
     password: {
       type: String,
     },
+    tweetsCount: {
+      type: Number,
+      default: 0,
+    },
+    country: {
+      type: String,
+    },
+    birthdate: {
+      type: Date,
+    },
+    following: {
+      type: Number,
+      default: 0,
+    },
+    coverPicture: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
   },
   {
     timestamp: true,
