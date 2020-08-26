@@ -8,7 +8,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import TweetStatus from "./components/TweetStatus";
 import Bookmarks from "./components/Bookmarks";
 import Explore from "./components/explore/Explore";
-import Profile from "./components/Profile";
+import Profile from "./components/profile/ProfileContainer";
 import PageNotFound from "./components/PageNotFound";
 import More from "./components/More";
 import Notifications from "./components/Notifications";

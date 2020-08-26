@@ -1,22 +1,16 @@
 import React from "react";
-import "../css/Profile.css";
+import "../../css/Profile.css";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import SideBar from "./SideBar";
-import Widgets from "./Widgets";
-import { connect } from "react-redux";
+import SideBar from "../SideBar";
+import Widgets from "../Widgets";
 import RoomIcon from "@material-ui/icons/Room";
 import CakeIcon from "@material-ui/icons/Cake";
 import EventNoteIcon from "@material-ui/icons/EventNote";
-function Profile({ name, email, userId, username }) {
+function ProfilePresentation({ userInfo, handleGoBack }) {
   let history = useHistory();
-  /*const handleClick = () => {
-    history.push("/tweets");
-  };*/
-  const handleBackToprofile = () => {
-    history.goBack();
-  };
+  console.log("porps from container::", userInfo);
   return (
     <>
       <div className="app">
@@ -29,9 +23,9 @@ function Profile({ name, email, userId, username }) {
                   <ArrowBackIcon
                     fontSize="large"
                     className="status__icon"
-                    onClick={handleBackToprofile}
+                    onClick={handleGoBack}
                   />
-                  <h3>{name}</h3>
+                  <h3>{userInfo.name}</h3>
                 </div>
                 <div className="profile__coverpic">
                   <img
@@ -48,8 +42,8 @@ function Profile({ name, email, userId, username }) {
                 </div>
               </div>
               <div className="profile__header__userinfo">
-                <p className="profile__header__username">saurabh</p>
-                <p className="profile__header__userid">@sbhbp</p>
+                <p className="profile__header__username">{userInfo.name}</p>
+                <p className="profile__header__userid">@{userInfo.username}</p>
                 <p className="profile__header__bio">You know who I am</p>
               </div>
               <div className="profile__header__otherinfo">
@@ -106,9 +100,5 @@ function Profile({ name, email, userId, username }) {
     </>
   );
 }
-const mapStateToProps = ({ user }) => {
-  const { name, email, userId, username } = user.user;
-  return { name, email, userId, username };
-};
-const mapActionToProps = {};
-export default connect(mapStateToProps, mapActionToProps)(Profile);
+
+export default ProfilePresentation;
