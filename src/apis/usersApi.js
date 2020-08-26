@@ -1,5 +1,6 @@
 import { baseUrl } from "./apiUtils";
 import axios from "axios";
+import { toast } from "react-toastify";
 export const signup = async ({ name, email, username }) => {
   console.log("signup apicall::", name, email, username);
   try {
@@ -107,6 +108,42 @@ export const recoverPassword = async (loginId) => {
     return recoverResponse.data;
   } catch (error) {
     console.log("Error::", error.response.data);
+    return error.response.data;
+  }
+};
+export const getUserInfo = async (userId) => {
+  console.log("get userInfo api:", userId);
+  try {
+    let authToken = localStorage.getItem("authToken");
+    let userInfoResponse = await axios.get(
+      `${baseUrl}/api/v1/user/getUser?userId=${userId}&authToken=${authToken}`
+    );
+    console.log("get user api res::", userInfoResponse);
+    if (!userInfoResponse.data.error) {
+      return userInfoResponse;
+    }
+  } catch (error) {
+    console.warn("Error get User api::", error.response.data);
+    return error.response.data;
+  }
+};
+export const updateUserInfo = async (userInfo) => {
+  console.log("Update user info api:", userInfo);
+  try {
+    let authToken = localStorage.getItem("authToken");
+    let url = `${baseUrl}/api/v1/user/updateUser`;
+    let updateUserResponse = await axios.post(
+      url,
+      { ...userInfo },
+      { headers: { authToken: authToken } }
+    );
+    if (!updateUserResponse.data.error) {
+      toast.success("Profile Updated");
+      return updateUserResponse.data.data;
+    }
+  } catch (error) {
+    console.warn("Error update user api");
+    toast.error(error.response.data.message);
     return error.response.data;
   }
 };
