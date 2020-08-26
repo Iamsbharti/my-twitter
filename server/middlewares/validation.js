@@ -246,13 +246,36 @@ const deleteCommentValidation = (req, res, next) => {
   }
   next();
 };
-const bookmarkValidation = (req, res, next) => {
-  logger.info(`Bookmark validation:: ${req.query.userId}`);
-  let postSchema = joi.object({
+const getUserValidation = (req, res, next) => {
+  logger.info(`Get UserInfo validation:: ${req.query.userId}`);
+  let userSchema = joi.object({
     userId: joi.string().required(),
     authToken: joi.string().required(),
   });
-  let { error } = postSchema.validate(req.query, options);
+  let { error } = userSchema.validate(req.query, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
+const updateUserValidation = (req, res, next) => {
+  logger.info(`Get UserInfo validation:: ${req.query.userId}`);
+  let userSchema = joi.object({
+    userId: joi.string().required(),
+    updates: joi.object().required(),
+  });
+  let { error } = userSchema.validate(req.query, options);
   if (error) {
     let errors = [];
     error.details.map((err) => errors.push(err.message.split("is")[0]));
@@ -279,5 +302,6 @@ module.exports = {
   deletePostValidation,
   commentValidation,
   deleteCommentValidation,
-  bookmarkValidation,
+  getUserValidation,
+  updateUserValidation,
 };
