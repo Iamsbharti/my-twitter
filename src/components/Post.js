@@ -87,7 +87,10 @@ function Post({
   const handlePostClick = (username, postid) => {
     history.push(`/${username}/status/${postid}`);
   };
-
+  /**view profile */
+  const handleViewProfile = (userId) => {
+    history.push(`/profile/${userId}`);
+  };
   return (
     <>
       <div className="post">
@@ -99,7 +102,12 @@ function Post({
           <div className="post__header">
             <div className="post__headerText">
               <h3>
-                {info.displayName}{" "}
+                <span
+                  className="post__headertext__name"
+                  onClick={() => handleViewProfile(info.userId)}
+                >
+                  {info.displayName}
+                </span>
                 <span className="post__verified">
                   <img
                     src={process.env.PUBLIC_URL + "/verified.png"}

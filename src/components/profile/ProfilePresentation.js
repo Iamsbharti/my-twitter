@@ -54,7 +54,13 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
 
                 <div>
                   <CakeIcon fontSize="small" />
-                  <span className="otherinfo"> {userInfo.birthdate}</span>
+                  <span className="otherinfo">
+                    {" "}
+                    {userInfo.birthdate === "" ||
+                    userInfo.birthdate === undefined
+                      ? "Not Updated"
+                      : userInfo.birthdate}
+                  </span>
                 </div>
 
                 <div>
