@@ -58,6 +58,13 @@ const createPost = async (req, res) => {
     });
     /**save post */
     let createdPost = await Post.create(newPost);
+    /**update tweets counts in User's Model */
+    let userExists = await User.findOne({ userId: userId });
+    console.log("userExists::", userExists.tweetsCount);
+    let updateOptions = { tweetsCount: userExists.tweetsCount + 1 };
+    let updatedUser = await User.updateOne({ userId: userId }, updateOptions);
+    let { n } = updatedUser;
+    logger.info(`${n} user's tweet count updated`);
     if (createdPost) {
       return Promise.resolve(createdPost);
     } else {
