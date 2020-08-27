@@ -41,7 +41,7 @@
 }
 .status__header > h3 {
   margin-top: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 .status__icon {
   color: var(--twitter-color);
@@ -116,7 +116,7 @@
 .profile__header__otherinfo {
   display: flex;
   justify-content: space-evenly;
-  margin-left: -55px;
+  margin-left: -68px;
   margin-top: 10px;
   color: gray;
 }
@@ -172,4 +172,9 @@
 }
 .profile__tweets__bar __selected {
   border-bottom: 2px solid var(--twitter-color) !important;
+}
+.status__header__tweetcount {
+  color: gray;
+  margin-left: 55px;
+  padding-bottom: 6px;
 }

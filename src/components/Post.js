@@ -165,7 +165,7 @@ function Post({
             {status && (
               <div className="post__details">
                 <p className="post_details__date">
-                  {dateFormat(info.createdAt, "h:MM TT.mmmm dS,yyyy")}
+                  {dateFormat(new Date(info.createdAt), "h:MM TT.mmmm dS,yyyy")}
                   &nbsp;&nbsp;&nbsp;
                   <span>Twitter for Web</span>
                 </p>

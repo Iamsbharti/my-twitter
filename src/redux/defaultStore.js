@@ -30,5 +30,5 @@ export const userprofile = {
   tweetCount: 2,
   country: "loading...",
   bio: "loading...",
-  birthdate: "loading...",
+  birthdate: "Wed Apr 26 1995 00:00:00 GMT+0530 (India Standard Time)",
 };

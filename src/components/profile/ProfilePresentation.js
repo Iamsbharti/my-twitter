@@ -8,9 +8,11 @@ import Widgets from "../Widgets";
 import RoomIcon from "@material-ui/icons/Room";
 import CakeIcon from "@material-ui/icons/Cake";
 import EventNoteIcon from "@material-ui/icons/EventNote";
+import dateFormat from "dateformat";
 function ProfilePresentation({ userInfo, handleGoBack }) {
   let history = useHistory();
   console.log("porps from container::", userInfo);
+
   return (
     <>
       <div className="app">
@@ -26,6 +28,11 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
                     onClick={handleGoBack}
                   />
                   <h3>{userInfo.name}</h3>
+                </div>
+                <div className="status__header__tweetcount">
+                  <p>
+                    <span>{userInfo.tweetsCount} Tweets</span>
+                  </p>
                 </div>
                 <div className="profile__coverpic">
                   <img
@@ -59,7 +66,7 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
                     {userInfo.birthdate === "" ||
                     userInfo.birthdate === undefined
                       ? "Not Updated"
-                      : userInfo.birthdate}
+                      : dateFormat(userInfo.birthdate, "mmmm  dd,  yyyy")}
                   </span>
                 </div>
 
