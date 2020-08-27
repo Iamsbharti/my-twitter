@@ -9,10 +9,15 @@ import RoomIcon from "@material-ui/icons/Room";
 import CakeIcon from "@material-ui/icons/Cake";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import dateFormat from "dateformat";
-function ProfilePresentation({ userInfo, handleGoBack }) {
+import Post from "../Post";
+function ProfilePresentation({
+  userInfo,
+  handleGoBack,
+  handleShowTweets,
+  showTweetsDiv,
+  usersTweets,
+}) {
   let history = useHistory();
-  console.log("porps from container::", userInfo);
-
   return (
     <>
       <div className="app">
@@ -95,17 +100,22 @@ function ProfilePresentation({ userInfo, handleGoBack }) {
               </div>
               <div className="profile__user__tweets__bar">
                 <div className="profile__tweets__bar">
-                  <Button>Tweets</Button>
+                  <Button onClick={handleShowTweets}>Tweets</Button>
                 </div>
                 <div className="profile__tweets__bar">
-                  <Button>Tweets & Replies</Button>
+                  <Button onClick={handleShowTweets}>Tweets & Replies</Button>
                 </div>
                 <div className="profile__tweets__bar">
-                  <Button>Media</Button>
+                  <Button onClick={handleShowTweets}>Media</Button>
                 </div>
                 <div className="profile__tweets__bar">
-                  <Button>Likes</Button>
+                  <Button onClick={handleShowTweets}>Likes</Button>
                 </div>
+              </div>
+              <div className="userInfo_tweets" hidden={showTweetsDiv}>
+                {usersTweets.map((tweet, index) => (
+                  <Post key={index} info={tweet} status={false} />
+                ))}
               </div>
             </>
           ) : (

@@ -16,6 +16,8 @@ export const posts = [
     verified: true,
     bookMarkedBy: [],
     hashTags: [],
+    likedBy: [],
+    image: "",
   },
 ];
 export const userprofile = {

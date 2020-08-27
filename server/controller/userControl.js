@@ -1,9 +1,10 @@
 const User = require("../models/User");
+const Post = require("../models/Post");
 const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
-
+const EXCLUDE = "-__v -_id -password";
 const verifyUserId = async (userId) => {
-  let userExists = await User.findOne({ userId: userId });
+  let userExists = await User.findOne({ userId: userId }).select(EXCLUDE);
   return userExists
     ? userExists
     : formatResponse(true, 404, "User Not Found", null);
@@ -20,10 +21,8 @@ const getUserInfo = async (req, res) => {
     res.status(404).json(userFound);
   } else {
     /**user found return res */
+
     let userInfo = userFound.toObject();
-    delete userInfo.password;
-    delete userInfo._id;
-    delete userInfo.__v;
     res.status(200).json(formatResponse(false, 200, "User Found", userInfo));
   }
 };
