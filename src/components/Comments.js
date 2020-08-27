@@ -24,6 +24,7 @@ function Comments({
   deleteCommentAction,
   userId,
   status,
+  profilecomments,
   userPost,
 }) {
   /**define stated */

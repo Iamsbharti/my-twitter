@@ -19,7 +19,6 @@ function Profile({
   const [showMediaTweets, toggleMediaTweets] = useState(true);
   const [showLikedTweets, toggleLikesTweets] = useState(true);
   const [activeTweetsTab, setActiveTab] = useState(false);
-  const [tweetsToDisplay, setTweetsDisp] = useState([]);
   let history = useHistory();
   const handleBackToTweets = () => {
     history.goBack();
@@ -70,7 +69,6 @@ function Profile({
         userInfo={profile}
         handleGoBack={handleBackToTweets}
         handleShowTweets={handleTweets}
-        usersTweets={tweetsToDisplay}
         tweets={tweets}
         tweetsReplies={tweetsReplies}
         mediaTweets={mediaTweets}
@@ -108,15 +106,10 @@ const mapStateToProps = (state, ownProps) => {
   const userId = ownProps.match.params.userId;
   const { profile } = state;
   const { posts } = state;
-  console.log("posts--state-change:", posts);
   const tweets = getTweetsByUser(posts, userId);
   const tweetsReplies = getTweetRepliesByUser(posts, userId);
   const mediaTweets = getUsersMediaTweets(posts, userId);
   const likedTweets = getTweetsLikedByUser(posts, userId);
-  /*console.log("tweets::", tweets);
-  console.log("tweetsReplies::", tweetsReplies);
-  console.log("mediaTweets::", mediaTweets);
-  console.log("likedTweets::", likedTweets);*/
   return {
     userId,
     profile,

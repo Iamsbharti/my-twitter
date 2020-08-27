@@ -27,6 +27,7 @@ function Post({
   username,
   name,
   status,
+  profilecomments,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -242,6 +243,17 @@ function Post({
       {
         <div>
           {status &&
+            info.comments &&
+            info.comments.map((c, index) => (
+              <div key={index} className="post_single_comments">
+                <Comments info={c} userPost={info.userName} />
+              </div>
+            ))}
+        </div>
+      }
+      {
+        <div>
+          {profilecomments &&
             info.comments &&
             info.comments.map((c, index) => (
               <div key={index} className="post_single_comments">

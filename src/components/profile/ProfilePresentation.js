@@ -155,7 +155,12 @@ function ProfilePresentation({
               <div className="userInfo_tweets" hidden={showRelpiesTweets}>
                 {tweetsReplies && tweetsReplies.length > 0 ? (
                   tweetsReplies.map((tweet, index) => (
-                    <Post key={index} info={tweet} status={false} />
+                    <Post
+                      key={index}
+                      info={tweet}
+                      status={false}
+                      profilecomments={true}
+                    />
                   ))
                 ) : (
                   <h3>You haven't replied to any tweet</h3>
