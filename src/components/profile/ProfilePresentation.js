@@ -14,10 +14,25 @@ function ProfilePresentation({
   userInfo,
   handleGoBack,
   handleShowTweets,
-  showTweetsDiv,
-  usersTweets,
+  showTweets,
+  showRelpiesTweets,
+  showMediaTweets,
+  showLikedTweets,
+  tweets,
+  tweetsReplies,
+  mediaTweets,
+  likedTweets,
+  activeTweetsTab,
 }) {
   let history = useHistory();
+  console.log(
+    "render profile tweets,replies,media,liked",
+    tweets,
+    tweetsReplies,
+    mediaTweets,
+    likedTweets,
+    activeTweetsTab
+  );
   return (
     <>
       <div className="app">
@@ -99,23 +114,70 @@ function ProfilePresentation({
                 </div>
               </div>
               <div className="profile__user__tweets__bar">
-                <div className="profile__tweets__bar">
+                <div
+                  className={`profile__tweets__bar ${
+                    !showTweets && "profile__tweets__bar__selected"
+                  } `}
+                >
                   <Button onClick={handleShowTweets}>Tweets</Button>
                 </div>
-                <div className="profile__tweets__bar">
+                <div
+                  className={`profile__tweets__bar ${
+                    !showRelpiesTweets && "profile__tweets__bar__selected"
+                  } `}
+                >
                   <Button onClick={handleShowTweets}>Tweets & Replies</Button>
                 </div>
-                <div className="profile__tweets__bar">
+                <div
+                  className={`profile__tweets__bar ${
+                    !showMediaTweets && "profile__tweets__bar__selected"
+                  } `}
+                >
                   <Button onClick={handleShowTweets}>Media</Button>
                 </div>
-                <div className="profile__tweets__bar">
+                <div
+                  className={`profile__tweets__bar ${
+                    !showLikedTweets && "profile__tweets__bar__selected"
+                  } `}
+                >
                   <Button onClick={handleShowTweets}>Likes</Button>
                 </div>
               </div>
-              <div className="userInfo_tweets" hidden={showTweetsDiv}>
-                {usersTweets.map((tweet, index) => (
-                  <Post key={index} info={tweet} status={false} />
-                ))}
+              <div className="userInfo_tweets" hidden={showTweets}>
+                {tweets && tweets.length > 0 ? (
+                  tweets.map((tweet, index) => (
+                    <Post key={index} info={tweet} status={false} />
+                  ))
+                ) : (
+                  <h3>You haven't posted any tweets</h3>
+                )}
+              </div>
+              <div className="userInfo_tweets" hidden={showRelpiesTweets}>
+                {tweetsReplies && tweetsReplies.length > 0 ? (
+                  tweetsReplies.map((tweet, index) => (
+                    <Post key={index} info={tweet} status={false} />
+                  ))
+                ) : (
+                  <h3>You haven't replied to any tweet</h3>
+                )}
+              </div>
+              <div className="userInfo_tweets" hidden={showMediaTweets}>
+                {mediaTweets && mediaTweets.length > 0 ? (
+                  mediaTweets.map((tweet, index) => (
+                    <Post key={index} info={tweet} status={false} />
+                  ))
+                ) : (
+                  <h3>You don't have any tweets with media</h3>
+                )}
+              </div>
+              <div className="userInfo_tweets" hidden={showLikedTweets}>
+                {likedTweets && likedTweets.length > 0 ? (
+                  likedTweets.map((tweet, index) => (
+                    <Post key={index} info={tweet} status={false} />
+                  ))
+                ) : (
+                  <h3>You haven't liked any Tweets</h3>
+                )}
               </div>
             </>
           ) : (

@@ -9,11 +9,16 @@ function Profile({
   getUserInfo,
   profile,
   tweets,
+  posts,
   tweetsReplies,
   mediaTweets,
   likedTweets,
 }) {
-  const [toggleTweetsInfo, setToggleTweets] = useState(true);
+  const [showTweets, toggleTweets] = useState(false);
+  const [showRelpiesTweets, toggleRepliesTweets] = useState(true);
+  const [showMediaTweets, toggleMediaTweets] = useState(true);
+  const [showLikedTweets, toggleLikesTweets] = useState(true);
+  const [activeTweetsTab, setActiveTab] = useState(false);
   const [tweetsToDisplay, setTweetsDisp] = useState([]);
   let history = useHistory();
   const handleBackToTweets = () => {
@@ -23,20 +28,32 @@ function Profile({
     console.log("Handle--", e.target.innerHTML);
     switch (e.target.innerHTML) {
       case "Tweets":
-        setTweetsDisp(tweets);
-        setToggleTweets(!toggleTweetsInfo);
+        toggleTweets(false);
+        toggleRepliesTweets(true);
+        setActiveTab(true);
+        toggleMediaTweets(true);
+        toggleLikesTweets(true);
         break;
       case "Tweets &amp; Replies":
-        setTweetsDisp(tweetsReplies);
-        setToggleTweets(!toggleTweetsInfo);
+        toggleTweets(true);
+        toggleRepliesTweets(false);
+        setActiveTab(true);
+        toggleMediaTweets(true);
+        toggleLikesTweets(true);
         break;
       case "Media":
-        setTweetsDisp(mediaTweets);
-        setToggleTweets(!toggleTweetsInfo);
+        toggleTweets(true);
+        toggleRepliesTweets(true);
+        toggleMediaTweets(false);
+        setActiveTab(true);
+        toggleLikesTweets(true);
         break;
       case "Likes":
-        setTweetsDisp(likedTweets);
-        setToggleTweets(!toggleTweetsInfo);
+        toggleTweets(true);
+        toggleRepliesTweets(true);
+        toggleMediaTweets(true);
+        toggleLikesTweets(false);
+        setActiveTab(true);
         break;
       default:
         break;
@@ -45,15 +62,24 @@ function Profile({
   /**call get user info api */
   useEffect(() => {
     getUserInfo(userId);
-  }, [userId, getUserInfo]);
+  }, [userId, getUserInfo, posts]);
+
   return (
     <>
       <ProfilePresentation
         userInfo={profile}
         handleGoBack={handleBackToTweets}
         handleShowTweets={handleTweets}
-        showTweetsDiv={toggleTweetsInfo}
         usersTweets={tweetsToDisplay}
+        tweets={tweets}
+        tweetsReplies={tweetsReplies}
+        mediaTweets={mediaTweets}
+        likedTweets={likedTweets}
+        showTweets={showTweets}
+        showRelpiesTweets={showRelpiesTweets}
+        showMediaTweets={showMediaTweets}
+        showLikedTweets={showLikedTweets}
+        activeTweetsTab={activeTweetsTab}
       />
     </>
   );
@@ -82,16 +108,24 @@ const mapStateToProps = (state, ownProps) => {
   const userId = ownProps.match.params.userId;
   const { profile } = state;
   const { posts } = state;
-  //console.log("posts:", posts);
+  console.log("posts--state-change:", posts);
   const tweets = getTweetsByUser(posts, userId);
   const tweetsReplies = getTweetRepliesByUser(posts, userId);
   const mediaTweets = getUsersMediaTweets(posts, userId);
   const likedTweets = getTweetsLikedByUser(posts, userId);
-  console.log("tweets::", tweets);
+  /*console.log("tweets::", tweets);
   console.log("tweetsReplies::", tweetsReplies);
   console.log("mediaTweets::", mediaTweets);
-  console.log("likedTweets::", likedTweets);
-  return { userId, profile, tweets, tweetsReplies, mediaTweets, likedTweets };
+  console.log("likedTweets::", likedTweets);*/
+  return {
+    userId,
+    profile,
+    posts,
+    tweets,
+    tweetsReplies,
+    mediaTweets,
+    likedTweets,
+  };
 };
 const mapActionToProps = { getUserInfo };
 export default connect(mapStateToProps, mapActionToProps)(Profile);

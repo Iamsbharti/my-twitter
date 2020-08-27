@@ -15,7 +15,7 @@
   scrollbar-width: none; /* FireFox */
 }
 .profileHeader {
-  position: sticky;
+  position: relative;
   top: 0;
   background-color: white;
   z-index: 100;
@@ -90,7 +90,7 @@
   top: 211px !important;
   left: 25px !important;
   color: transparent !important;
-  width: 24% !important;
+  width: 26% !important;
   height: 42% !important;
   object-fit: cover !important;
   text-align: center !important;
@@ -165,16 +165,22 @@
   margin-left: 10px !important;
 }
 
-.profile__tweets__bar > button:hover {
-  color: var(--twitter-color) !important;
-  border-bottom: 2px solid var(--twitter-color) !important;
-  transition: color 100ms ease-out;
+.profile__tweets__bar :hover {
+  color: var(--twitter-color);
+  background-color: white;
+  border-left: 3px solid var(--twitter-color);
+  border-right: 3px solid var(--twitter-color);
 }
-.profile__tweets__bar __selected {
-  border-bottom: 2px solid var(--twitter-color) !important;
+.profile__tweets__bar__selected {
+  border-bottom: 4px solid var(--twitter-color) !important;
+  margin-left: 2px;
 }
 .status__header__tweetcount {
   color: gray;
   margin-left: 55px;
   padding-bottom: 6px;
+}
+.userInfo_tweets > h3 {
+  margin-left: 152px;
+  margin-top: 35px;
 }
