@@ -26,6 +26,7 @@ function Comments({
   status,
   profilecomments,
   userPost,
+  posts,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -207,9 +208,9 @@ function Comments({
     </>
   );
 }
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, posts }) => {
   console.log("state-user in Comment");
-  return { userId: user.user.userId };
+  return { userId: user.user.userId, posts };
 };
 const mapActionToProps = {
   updatePostAction,

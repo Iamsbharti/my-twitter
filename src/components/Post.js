@@ -28,6 +28,7 @@ function Post({
   name,
   status,
   profilecomments,
+  posts,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -79,6 +80,7 @@ function Post({
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
     deletePostAction(postId);
+    console.log("posts::", posts.length);
     if (status) {
       setTimeout(() => history.push("/tweets"), 1200);
     }
@@ -257,7 +259,7 @@ function Post({
             info.comments &&
             info.comments.map((c, index) => (
               <div key={index} className="post_single_comments">
-                <Comments info={c} userPost={info.userName} />
+                <Comments info={c} userPost={info.userName} status={false} />
               </div>
             ))}
         </div>
@@ -265,9 +267,9 @@ function Post({
     </>
   );
 }
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, posts }) => {
   const { name, userId, username } = user.user;
-  return { userId, username, name };
+  return { userId, username, name, posts };
 };
 const mapActionToProps = {
   updatePostAction,
