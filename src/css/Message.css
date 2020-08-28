@@ -51,3 +51,27 @@
   color: blue;
   border-radius: 30px;
 }
+.peoplelist__search {
+  width: 400px;
+}
+.peoplelist__input {
+  display: flex;
+  align-items: center;
+  background-color: var(--twitter-bg);
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+.peoplelist__input > input {
+  width: 444px;
+  border: none;
+  background-color: var(--twitter-bg);
+}
+.peoplelist__input > input,
+.peoplelist__input > input::-webkit-input-placeholder {
+  font-size: 18px;
+  line-height: 1.5;
+}
+.peoplelist__input > input:focus {
+  outline: none;
+}
