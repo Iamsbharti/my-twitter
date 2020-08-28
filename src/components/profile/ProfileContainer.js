@@ -23,6 +23,10 @@ function Profile({
   const handleBackToTweets = () => {
     history.goBack();
   };
+  /**invoke specific hide and show div when the tweet tab is clicked
+   * and update the current post state accordingly and mark the clicked
+   * tab active
+   */
   const handleTweets = (e) => {
     console.log("Handle--", e.target.innerHTML);
     switch (e.target.innerHTML) {
@@ -82,9 +86,11 @@ function Profile({
     </>
   );
 }
+/**compute the tweets by the current user */
 const getTweetsByUser = (posts, userId) => {
   return posts.filter((post) => post.userId === userId);
 };
+/**compute the replied to tweets by the current user */
 const getTweetRepliesByUser = (posts, userId) => {
   return posts.filter((post) =>
     post.comments.length > 0
@@ -92,12 +98,14 @@ const getTweetRepliesByUser = (posts, userId) => {
       : ""
   );
 };
+/**compute the pictures and videos tweeted by the current user */
 const getUsersMediaTweets = (posts, userId) => {
   return posts.filter(
     (post) =>
       post.userId === userId && post.image !== undefined && post.image !== ""
   );
 };
+/**compute the liked tweets by the current user */
 const getTweetsLikedByUser = (posts, userId) => {
   return posts.filter((post) => post.likedBy.includes(userId));
 };
