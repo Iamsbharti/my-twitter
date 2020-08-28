@@ -11,6 +11,7 @@ import EventNoteIcon from "@material-ui/icons/EventNote";
 import dateFormat from "dateformat";
 import Post from "../Post";
 function ProfilePresentation({
+  currentUser,
   userInfo,
   handleGoBack,
   handleShowTweets,
@@ -25,14 +26,7 @@ function ProfilePresentation({
   activeTweetsTab,
 }) {
   let history = useHistory();
-  console.log(
-    "render profile tweets,replies,media,liked",
-    tweets,
-    tweetsReplies,
-    mediaTweets,
-    likedTweets,
-    activeTweetsTab
-  );
+  //console.log("current user,profile user", currentUser, userInfo);
   return (
     <>
       <div className="app">
@@ -65,7 +59,11 @@ function ProfilePresentation({
                     src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
                     alt=""
                   />
-                  <Button>Edit Profile</Button>
+                  <Button>
+                    {currentUser === userInfo.userId
+                      ? "Edit Profile"
+                      : "Follow"}
+                  </Button>
                 </div>
               </div>
               <div className="profile__header__userinfo">

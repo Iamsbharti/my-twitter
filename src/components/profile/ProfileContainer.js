@@ -13,6 +13,7 @@ function Profile({
   tweetsReplies,
   mediaTweets,
   likedTweets,
+  currentUserId,
 }) {
   const [showTweets, toggleTweets] = useState(false);
   const [showRelpiesTweets, toggleRepliesTweets] = useState(true);
@@ -70,6 +71,7 @@ function Profile({
   return (
     <>
       <ProfilePresentation
+        currentUser={currentUserId}
         userInfo={profile}
         handleGoBack={handleBackToTweets}
         handleShowTweets={handleTweets}
@@ -114,6 +116,7 @@ const mapStateToProps = (state, ownProps) => {
   const userId = ownProps.match.params.userId;
   const { profile } = state;
   const { posts } = state;
+  const currentUserId = localStorage.getItem("userId");
   const tweets = getTweetsByUser(posts, userId);
   const tweetsReplies = getTweetRepliesByUser(posts, userId);
   const mediaTweets = getUsersMediaTweets(posts, userId);
@@ -126,6 +129,7 @@ const mapStateToProps = (state, ownProps) => {
     tweetsReplies,
     mediaTweets,
     likedTweets,
+    currentUserId,
   };
 };
 const mapActionToProps = { getUserInfo };

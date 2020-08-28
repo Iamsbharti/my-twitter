@@ -1,0 +1,53 @@
+.peoplelist {
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-bg);
+  min-width: fit-content;
+  overflow-y: scroll;
+}
+/*Hide scrollbar for chrome,safari*/
+.peoplelist::-webkit-scrollbar {
+  display: none;
+}
+/*Hide scrollbar for IE,Edge,Firefox*/
+.peoplelist::-webkit-scrollbar {
+  -ms-overflow-style: none; /*IE & Edge*/
+  scrollbar-width: none; /* FireFox */
+}
+.peoplelistHeader {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border-bottom: 1px solid var(--twitter-bg);
+  /**border: 1px solid var(--twitter-bg);*/
+  padding: 15px 20px;
+}
+.peoplelistHeader > h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+.peoplelistHeader > p {
+  margin-top: 10px;
+  margin-left: 43px;
+  padding: 9px;
+  font-size: 22px;
+  border: 1px solid var(--twitter-color);
+  border-radius: 5px;
+  width: 140px;
+  box-sizing: border-box;
+}
+.status__header {
+  display: flex;
+}
+.status__header > h3 {
+  margin-top: 8px;
+}
+.status__icon {
+  color: var(--twitter-color);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.status__icon:hover {
+  color: blue;
+  border-radius: 30px;
+}

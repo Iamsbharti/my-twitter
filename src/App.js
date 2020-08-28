@@ -12,7 +12,7 @@ import Profile from "./components/profile/ProfileContainer";
 import PageNotFound from "./components/PageNotFound";
 import More from "./components/More";
 import Notifications from "./components/Notifications";
-import Messages from "./components/Messages";
+import Messages from "./components/message/Messages";
 import Lists from "./components/Lists";
 
 function App() {
