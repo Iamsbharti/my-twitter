@@ -160,7 +160,7 @@
   color: gray;
 }
 .user__chats {
-  height: 60vh;
+  height: 52vh;
   width: auto;
   overflow-y: scroll;
 }
@@ -216,6 +216,31 @@
   margin: 5px;
 }
 .send__chat {
-  border: 1px solid black;
   margin: 10px;
+  display: grid;
+  align-items: center;
+  background-color: var(--twitter-bg);
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.send__chat > input {
+  border: none;
+  background-color: var(--twitter-bg);
+}
+.send__chat > input:focus {
+  outline: none;
+}
+.send__icon {
+  display: grid;
+  justify-content: flex-end;
+  margin-top: -30px;
+}
+.send__chat > input,
+.send__chat > input::-webkit-input-placeholder {
+  font-size: 18px;
+  line-height: 1.5;
 }

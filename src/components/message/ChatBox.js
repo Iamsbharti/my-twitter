@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
+import SendIcon from "@material-ui/icons/Send";
 function ChatBox() {
   return (
     <div className="chatbox">
@@ -57,6 +58,9 @@ function ChatBox() {
       </div>
       <div className="send__chat">
         <input placeholder="write your message" />
+        <div className="send__icon">
+          <SendIcon fontSize="small" />
+        </div>
       </div>
     </div>
   );
