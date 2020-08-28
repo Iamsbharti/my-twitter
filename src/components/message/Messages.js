@@ -3,7 +3,7 @@ import "../../css/Message.css";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Sidebar from "../SideBar";
-import Widgets from "../Widgets";
+import ChatBox from "./ChatBox";
 import PeopleList from "./PeopleList";
 function Messages() {
   let history = useHistory();
@@ -14,7 +14,7 @@ function Messages() {
     <div className="app">
       <Sidebar />
       <PeopleList />
-      <Widgets />
+      <ChatBox />
     </div>
   );
 }
