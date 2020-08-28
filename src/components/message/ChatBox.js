@@ -31,6 +31,33 @@ function ChatBox() {
           </div>
         </div>
       </div>
+      <div className="user__chats">
+        <div className="sent__message">
+          <div className="message__sent">
+            <p>Hifsdfsdfsdfsdsdfsdfsdf</p>
+          </div>
+          <div className="msg__date__sent">
+            <p>26/07/ 5:67:00</p>
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        {/**recieved__message */}
+        <div className="recieved__message">
+          <div className="message__recieved">
+            <p>Hifsdfsdfsdfsdsdfsdfsdf</p>
+          </div>
+          <div className="msg__date__recieved">
+            <p>26/07/ 5:67:00</p>
+          </div>
+        </div>
+      </div>
+      <div className="send__chat">
+        <input placeholder="write your message" />
+      </div>
     </div>
   );
 }

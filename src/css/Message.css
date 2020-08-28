@@ -159,3 +159,63 @@
 .span__gray {
   color: gray;
 }
+.user__chats {
+  height: 60vh;
+  width: auto;
+  overflow-y: scroll;
+}
+.sent__message {
+  display: flex;
+  float: right;
+  color: white;
+  margin: 11px;
+  flex-direction: column;
+}
+.message__sent {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  float: right;
+  height: auto;
+  border-radius: 13px 13px 0px 13px;
+  margin: 5px;
+  padding: 10px;
+  overflow-wrap: break-word;
+  background-color: var(--twitter-color);
+}
+.msg__date__sent {
+  display: flex;
+  justify-content: flex-end;
+  color: gray;
+}
+.recieved__message {
+  display: flex;
+  float: left;
+  color: black;
+  margin: 11px;
+  flex-direction: column;
+}
+.message__recieved {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  float: right;
+  height: auto;
+  border-radius: 0px 13px 13px 13px;
+  margin: 5px;
+  padding: 10px;
+  overflow-wrap: break-word;
+  background-color: rgb(218, 206, 188);
+}
+.msg__date__recieved {
+  display: flex;
+  justify-content: flex-start;
+  color: gray;
+}
+.recieved__message > p {
+  margin: 5px;
+}
+.send__chat {
+  border: 1px solid black;
+  margin: 10px;
+}
