@@ -123,7 +123,6 @@
   margin-left: 20px;
   padding: 20px;
   background-color: honeydew;
-  border-radius: 20px;
 }
 .chatbox__container > h2 {
   font-size: 18px;
@@ -140,5 +139,23 @@
 .chat__header__username {
   margin-left: 53px;
   margin-top: -18px;
+  color: gray;
+}
+.chatbox__userinfo {
+  display: flex;
+  flex-flow: column;
+  margin-left: 95px;
+}
+.user__followers__count,
+.userinfo {
+  display: flex;
+  flex-flow: row;
+  margin: 3px;
+}
+.userinfo__name {
+  font-weight: 700;
+  font-size: 16px;
+}
+.span__gray {
   color: gray;
 }
