@@ -292,6 +292,7 @@ const updateUserValidation = (req, res, next) => {
   }
   next();
 };
+
 module.exports = {
   signUpParam,
   loginParam,

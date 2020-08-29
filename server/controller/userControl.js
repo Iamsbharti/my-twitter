@@ -50,8 +50,14 @@ const updateUserInfo = async (req, res) => {
     }
   });
 };
+const getUserList = async (req, res) => {
+  logger.info("Get userList control");
+  let users = await User.find().select(EXCLUDE);
 
+  res.status(200).json(formatResponse(false, 200, "Users List", users));
+};
 module.exports = {
   getUserInfo,
   updateUserInfo,
+  getUserList,
 };

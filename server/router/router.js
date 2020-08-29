@@ -32,6 +32,7 @@ router.post(
   validation.updateUserValidation,
   users.updateUserInfo
 );
+router.get("/user/allUsers", isAuthorized, users.getUserList);
 /**post management */
 router.post(
   "/post/createPost",
