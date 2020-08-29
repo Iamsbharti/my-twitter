@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Post = require("../models/Post");
+//const Post = require("../models/Post");
 const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
 const EXCLUDE = "-__v -_id -password";
