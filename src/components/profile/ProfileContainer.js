@@ -24,6 +24,7 @@ function Profile({
   const [showMediaTweets, toggleMediaTweets] = useState(true);
   const [showLikedTweets, toggleLikesTweets] = useState(true);
   const [activeTweetsTab, setActiveTab] = useState(false);
+  const [showManageProfile, toggleManageProfile] = useState(false);
   let history = useHistory();
   const handleBackToTweets = () => {
     history.goBack();
@@ -76,12 +77,12 @@ function Profile({
   useEffect(() => {
     getAllPostsAction();
   }, [userId, getAllPostsAction]);
-
   /**take appropiate action follow,unfollow,edit profile  */
   const editFollowBtn = (e) => {
     console.log("Edit -follow-unfollow");
     switch (e.target.innerHTML) {
       case "Edit Profile":
+        toggleManageProfile(true);
         break;
       case "Follow": {
         let userInfo = {
@@ -101,6 +102,21 @@ function Profile({
       default:
     }
   };
+  /**save profile or update user info */
+  const saveProfile = (updatedUserInfo) => {
+    let toUpdate = updatedUserInfo;
+    delete toUpdate.followers;
+    delete toUpdate.userId;
+
+    let userInfo = {
+      userId: currentUserId,
+      updates: {
+        ...toUpdate,
+      },
+    };
+    updateUserInfo(userInfo);
+    toggleManageProfile(false);
+  };
   return (
     <>
       <ProfilePresentation
@@ -118,6 +134,8 @@ function Profile({
         showLikedTweets={showLikedTweets}
         activeTweetsTab={activeTweetsTab}
         handleBtnClick={editFollowBtn}
+        handleManageProfile={showManageProfile}
+        saveProfile={saveProfile}
       />
     </>
   );

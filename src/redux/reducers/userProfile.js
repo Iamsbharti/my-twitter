@@ -14,12 +14,11 @@ export function profileReducer(_userprofile = userprofile, action) {
       console.log("followerid,action:", followerId, ops);
       return {
         ..._userprofile,
+        ...updates,
         followers:
-          followers !== undefined
-            ? ops === "follow"
-              ? [...userprofile.followers, followerId]
-              : userprofile.followers.filter((id) => id !== followerId)
-            : { ...action.userInfo },
+          followers !== undefined && ops === "follow"
+            ? [...userprofile.followers, followerId]
+            : userprofile.followers.filter((id) => id !== followerId),
       };
     }
     default:

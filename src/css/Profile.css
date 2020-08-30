@@ -184,3 +184,56 @@
   margin-left: 152px;
   margin-top: 35px;
 }
+/**manage profile*/
+.manage__header__userinfo {
+  margin-top: 10px;
+  margin-left: 35px;
+}
+.manage__header__userinfo > div > input {
+  margin: 10px;
+  padding: 10px;
+  width: 84%;
+  border: none;
+  border-bottom: 3px solid var(--twitter-color);
+  font-weight: 900;
+  font-size: 18px;
+}
+.manage__header__userinfo > div > input :focus {
+  outline: none;
+}
+.manage__header__userinfo > div > input :hover {
+  cursor: pointer;
+  color: var(--twitter-bg);
+}
+.manage__header__username > input:focus {
+  outline: none;
+}
+
+.manage__header__bio > input:focus {
+  outline: none;
+}
+
+.manage__header__location > input:focus {
+  outline: none;
+}
+
+.manage__header__website > input:focus {
+  outline: none;
+}
+
+.manage__header__birthday > input:focus {
+  outline: none;
+}
+
+.manage__user__avatar {
+  border-radius: 89px;
+  position: absolute;
+  top: 208px !important;
+  left: 25px !important;
+  color: transparent !important;
+  width: 25% !important;
+  height: 44% !important;
+  object-fit: cover !important;
+  text-align: center !important;
+  text-indent: 10000px !important;
+}

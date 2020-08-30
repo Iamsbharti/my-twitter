@@ -14,6 +14,7 @@ import More from "./components/More";
 import Notifications from "./components/Notifications";
 import Messages from "./components/message/Messages";
 import Lists from "./components/Lists";
+import ManageProfile from "./components/profile/ManageProfile";
 
 function App() {
   return (
@@ -32,6 +33,11 @@ function App() {
           />
           <Route exact path="/bookmarks" component={Bookmarks} />
           <Route exact path="/profile/:userId" component={Profile} />
+          <Route
+            exact
+            path="/manageProfile/:username"
+            component={ManageProfile}
+          />
           <Route exact path="/explore" component={Explore} />
           <Route exact path="/more" component={More} />
           <Route exact path="/notifications" component={Notifications} />
