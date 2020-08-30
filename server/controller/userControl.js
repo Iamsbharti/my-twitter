@@ -2,7 +2,6 @@ const User = require("../models/User");
 //const Post = require("../models/Post");
 const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
-const { update } = require("../models/User");
 const EXCLUDE = "-__v -_id -password";
 const verifyUserId = async (userId) => {
   let userExists = await User.findOne({ userId: userId }).select(EXCLUDE);
