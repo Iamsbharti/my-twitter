@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/Profile.css";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -27,8 +27,20 @@ function ProfilePresentation({
   handleBtnClick,
 }) {
   let history = useHistory();
-  //console.log("current user,profile user", currentUser, userInfo);
-
+  console.log("current user,profile user", currentUser, userInfo);
+  const [btnText, setBtnText] = useState();
+  useEffect(() => {
+    if (currentUser === userInfo.userId) {
+      setBtnText("Edit Profile");
+    } else if (
+      userInfo.followers.length > 0 &&
+      userInfo.followers.includes(currentUser)
+    ) {
+      setBtnText("Unfollow");
+    } else {
+      setBtnText("Follow");
+    }
+  }, [currentUser, userInfo]);
   return (
     <>
       <div className="app">
@@ -61,11 +73,7 @@ function ProfilePresentation({
                     src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
                     alt=""
                   />
-                  <Button onClick={handleBtnClick}>
-                    {currentUser === userInfo.userId
-                      ? "Edit Profile"
-                      : "Follow"}
-                  </Button>
+                  <Button onClick={handleBtnClick}>{btnText}</Button>
                 </div>
               </div>
               <div className="profile__header__userinfo">
