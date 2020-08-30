@@ -14,7 +14,6 @@ function Messages() {
     <div className="app">
       <Sidebar />
       <PeopleList />
-      <ChatBox />
     </div>
   );
 }

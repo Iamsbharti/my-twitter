@@ -6,9 +6,11 @@ import "../../css/Message.css";
 import Searchicon from "@material-ui/icons/Search";
 import { getUsersList } from "../../apis/usersApi";
 import { Avatar } from "@material-ui/core";
+import ChatBox from "./ChatBox";
 function PeopleList() {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
+  const [chatBoxContent, setChatBoxContent] = useState(false);
   const userId = localStorage.getItem("userId");
   /**api call */
   useEffect(() => {
@@ -62,6 +64,7 @@ function PeopleList() {
           history.push("/login")
         )}
       </div>
+      <ChatBox content={chatBoxContent} />
       <ToastContainer autoClose={1000} hideProgressBar />
     </>
   );

@@ -279,3 +279,10 @@
 .people__name {
   font-size: 18px;
 }
+.chatbox__init__content {
+  margin-top: 200px;
+  margin-left: 70px;
+}
+.chatbox__init__content > p {
+  color: gray;
+}
