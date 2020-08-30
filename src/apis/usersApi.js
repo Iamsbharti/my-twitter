@@ -147,3 +147,20 @@ export const updateUserInfo = async (userInfo) => {
     return error.response.data;
   }
 };
+export const getUsersList = async (userId) => {
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let usersListResponse = await axios.get(
+      `${baseUrl}/api/v1/user/allUsers?userId=${userId}&authToken=${authToken}`
+    );
+    console.log("users list res::", usersListResponse.data);
+    if (!usersListResponse.data.error) {
+      toast.success("Users Fetched");
+      return usersListResponse.data.data;
+    }
+  } catch (error) {
+    console.warn("Error fetching Users list");
+    toast.error(error.response.data.message);
+    return error.response.data;
+  }
+};

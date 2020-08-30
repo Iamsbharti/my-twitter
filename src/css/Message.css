@@ -245,3 +245,37 @@
   font-size: 18px;
   line-height: 1.5;
 }
+.peoplelist__users {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--twitter-bg);
+  padding-bottom: 20px;
+}
+.people__avatar {
+  padding: 12px;
+}
+.peoplelist__body {
+  padding: 2px;
+}
+.peoplelist__users:hover {
+  background-color: #f3f5f7;
+  cursor: pointer;
+}
+.people__badge {
+  font-size: 14px !important;
+  color: var(--twitter-color);
+  width: 15px;
+  height: 15px;
+  margin-top: 0px;
+}
+.people__verified {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
+.people__details {
+  margin-top: 9px;
+}
+.people__name {
+  font-size: 18px;
+}
