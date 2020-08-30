@@ -286,3 +286,7 @@
 .chatbox__init__content > p {
   color: gray;
 }
+.otherinfo__bio {
+  color: var(--twitter-color);
+  margin-left: 20px;
+}

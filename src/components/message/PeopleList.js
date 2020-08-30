@@ -11,16 +11,22 @@ function PeopleList() {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
   const [chatBoxContent, setChatBoxContent] = useState(false);
+  const [chatUser, setChatUser] = useState({});
   const userId = localStorage.getItem("userId");
   /**api call */
   useEffect(() => {
     async function fetchData() {
       const response = await getUsersList(userId);
       console.log("res::", response);
-      setUserList(response);
+      setUserList(response.filter((usr) => usr.userId !== userId));
     }
     fetchData();
   }, [userId]);
+  /**handle user selction */
+  const handleUserSelection = (user) => {
+    setChatBoxContent(!chatBoxContent);
+    setChatUser(user);
+  };
   return (
     <>
       <div className="peoplelist">
@@ -36,7 +42,11 @@ function PeopleList() {
               </div>
             </div>
             {userList.map((user, index) => (
-              <div className="peoplelist__users" key={index}>
+              <div
+                className="peoplelist__users"
+                key={index}
+                onClick={() => handleUserSelection(user)}
+              >
                 <div className="people__avatar">
                   <Avatar
                     src={process.env.PUBLIC_URL + "/logo512.png"}
@@ -64,7 +74,7 @@ function PeopleList() {
           history.push("/login")
         )}
       </div>
-      <ChatBox content={chatBoxContent} />
+      <ChatBox content={chatBoxContent} user={chatUser} />
       <ToastContainer autoClose={1000} hideProgressBar />
     </>
   );

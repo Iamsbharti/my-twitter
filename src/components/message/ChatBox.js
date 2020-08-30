@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
-function ChatBox({ content }) {
+function ChatBox({ content, user }) {
   return (
     <div className="chatbox">
       {!content ? (
@@ -17,27 +17,32 @@ function ChatBox({ content }) {
               <Avatar
                 src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
               ></Avatar>
-              <h3>John Wick</h3>
+              <h3>{user.name}</h3>
             </div>
             <div className="chat__header__username">
-              <span>@wicky</span>
+              <span>@{user.username}</span>
             </div>
           </div>
 
           <div className="chatbox__container">
             <div className="chatbox__userinfo">
               <div className="userinfo">
-                <span className="userinfo__name">John Wick</span>&nbsp; &nbsp;
-                <span className="span__gray">@wicky</span>
+                <span className="userinfo__name">{user.name}</span>&nbsp; &nbsp;
+                <span className="span__gray">@{user.username}</span>
               </div>
               <div className="user__followers__count">
-                50 &nbsp; <span className="span__gray">Following</span>
-                &nbsp; &nbsp; 56 &nbsp;
+                {user.followers && user.followers.length === 0
+                  ? 0
+                  : user.followers.length}{" "}
+                &nbsp; <span className="span__gray">Following</span>
+                &nbsp; &nbsp; {user.following && user.following}
+                &nbsp;
                 <span className="span__gray">Followers</span>
               </div>
               <div className="span__gray">
                 <EventNoteIcon fontSize="small" />
                 <span className="otherinfo">Joined April 26 2010</span>
+                <p className="otherinfo__bio">{user.bio && user.bio}</p>
               </div>
             </div>
           </div>
