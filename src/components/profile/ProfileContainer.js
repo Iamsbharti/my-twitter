@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import ProfilePresentation from "./ProfilePresentation";
 import { getUserInfo } from "../../redux/actions/userActions";
+import { getAllPostsAction } from "../../redux/actions/postAction";
+import { updateUserInfo } from "../../redux/actions/userActions";
 function Profile({
   userId,
   getUserInfo,
@@ -14,6 +16,8 @@ function Profile({
   mediaTweets,
   likedTweets,
   currentUserId,
+  getAllPostsAction,
+  updateUserInfo,
 }) {
   const [showTweets, toggleTweets] = useState(false);
   const [showRelpiesTweets, toggleRepliesTweets] = useState(true);
@@ -68,6 +72,35 @@ function Profile({
     getUserInfo(userId);
   }, [userId, getUserInfo, posts]);
 
+  /**get the post state after any reload */
+  useEffect(() => {
+    getAllPostsAction();
+  }, [userId, getAllPostsAction]);
+
+  /**take appropiate action follow,unfollow,edit profile  */
+  const editFollowBtn = (e) => {
+    console.log("Edit -follow-unfollow");
+    switch (e.target.innerHTML) {
+      case "Edit Profile":
+        break;
+      case "Follow": {
+        let userInfo = {
+          userId: userId,
+          updates: { followers: `${currentUserId}:follow` },
+        };
+        updateUserInfo(userInfo);
+        break;
+      }
+      case "Unfollow":
+        let userInfo = {
+          userId: userId,
+          updates: { followers: `${currentUserId}:unfollow` },
+        };
+        updateUserInfo(userInfo);
+        break;
+      default:
+    }
+  };
   return (
     <>
       <ProfilePresentation
@@ -84,6 +117,7 @@ function Profile({
         showMediaTweets={showMediaTweets}
         showLikedTweets={showLikedTweets}
         activeTweetsTab={activeTweetsTab}
+        handleBtnClick={editFollowBtn}
       />
     </>
   );
@@ -132,5 +166,5 @@ const mapStateToProps = (state, ownProps) => {
     currentUserId,
   };
 };
-const mapActionToProps = { getUserInfo };
+const mapActionToProps = { getUserInfo, getAllPostsAction, updateUserInfo };
 export default connect(mapStateToProps, mapActionToProps)(Profile);

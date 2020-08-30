@@ -24,9 +24,11 @@ function ProfilePresentation({
   mediaTweets,
   likedTweets,
   activeTweetsTab,
+  handleBtnClick,
 }) {
   let history = useHistory();
   //console.log("current user,profile user", currentUser, userInfo);
+
   return (
     <>
       <div className="app">
@@ -59,7 +61,7 @@ function ProfilePresentation({
                     src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
                     alt=""
                   />
-                  <Button>
+                  <Button onClick={handleBtnClick}>
                     {currentUser === userInfo.userId
                       ? "Edit Profile"
                       : "Follow"}

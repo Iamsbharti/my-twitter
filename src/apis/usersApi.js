@@ -139,7 +139,7 @@ export const updateUserInfo = async (userInfo) => {
     );
     if (!updateUserResponse.data.error) {
       toast.success("Profile Updated");
-      return updateUserResponse.data.data;
+      return userInfo;
     }
   } catch (error) {
     console.warn("Error update user api");
