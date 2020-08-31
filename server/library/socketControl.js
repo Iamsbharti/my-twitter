@@ -1,5 +1,5 @@
 const socketio = require("socket.io");
-const User = require("../models/User");
+//const User = require("../models/User");
 const Post = require("../models/Post");
 exports.socketServer = (server) => {
   console.log("Socket Sever Init");
