@@ -59,5 +59,9 @@ let userSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  website: {
+    type: String,
+    default: "",
+  },
 });
 module.exports = mongoose.model("User", userSchema);

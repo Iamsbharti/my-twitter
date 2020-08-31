@@ -33,4 +33,5 @@ export const userprofile = {
   country: "loading...",
   bio: "loading...",
   birthdate: "Wed Apr 26 1995 00:00:00 GMT+0530 (India Standard Time)",
+  website: "loading...",
 };

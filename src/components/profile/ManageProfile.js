@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Profile.css";
 import { Button } from "@material-ui/core";
-
+import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const ManageProfile = ({ userInfo, handleGoBack, handleSaveProfile }) => {
   const [userProfile, setProfile] = useState({});
@@ -11,6 +12,7 @@ const ManageProfile = ({ userInfo, handleGoBack, handleSaveProfile }) => {
   const handleChange = (event) => {
     console.log("handle chag");
     const { name, value } = event.target;
+    console.log("name,val:", name, value);
     setProfile({
       ...userProfile,
       [name]: value,
