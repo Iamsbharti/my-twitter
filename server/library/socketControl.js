@@ -10,7 +10,11 @@ exports.socketServer = (server) => {
     console.log("connected client");
     /**Emmitt welcome text */
     socket.emit("welcome", "Welcome to My-Twitter");
-
+    let roomId = "followers";
+    socket.join(roomId);
+    socket.on("post_tweet", (data) => {
+      socket.to(roomId).emit("new_tweet", data);
+    });
     /**Listen to room name and emit online users list */
     socket.on("room", (room) => {
       console.log("Room", room);

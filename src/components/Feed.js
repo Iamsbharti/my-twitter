@@ -30,6 +30,7 @@ function Feed({
   /**define state */
   let history = useHistory();
 
+  /**initialize socket */
   const url =
     process.env.NODE_ENV === "production" ? "" : "http://localhost:3001/chat";
 
@@ -69,11 +70,28 @@ function Feed({
       image: image !== undefined ? image : "",
     };
     createPostAction(newTweetInfo);
+    /**emit tweets action to the followers */
+    let socketInfo = { tweetsUserId: userId, name: name };
+    socket.emit("post_tweet", socketInfo);
   };
   /**route back to feed  */
   const handleBackToFeed = () => {
     history.push("/tweets");
   };
+  /**toast new notification from any users */
+  useEffect(() => {
+    if (userId !== undefined) {
+      socket.on("new_tweet", (data) => {
+        let { tweetsUserId, name } = data;
+        if (userId !== undefined && tweetsUserId !== userId) {
+          toast.info(`${name} tweeted a while ago`);
+          setTimeout(() => getAllPostsAction(userId), 1200);
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, getAllPostsAction]);
+
   return (
     <>
       <div className="feed">

@@ -93,6 +93,7 @@ const getAllPosts = async (req, res) => {
   Post.find()
     .populate("comments")
     .select(EXCLUDE)
+    .sort({ createdAt: "desc" })
     .exec(function (err, posts) {
       if (err) {
         logger.info(`Get Posts Error ${err}`);
