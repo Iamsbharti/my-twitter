@@ -4,7 +4,11 @@ import { Button } from "@material-ui/core";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-const ManageProfile = ({ userInfo, handleGoBack, handleSaveProfile }) => {
+const ManageProfile = ({
+  userInfo,
+  handleGoBackToProfile,
+  handleSaveProfile,
+}) => {
   const [userProfile, setProfile] = useState({});
   useEffect(() => {
     setProfile(userInfo);
@@ -26,7 +30,7 @@ const ManageProfile = ({ userInfo, handleGoBack, handleSaveProfile }) => {
           <ArrowBackIcon
             fontSize="large"
             className="status__icon"
-            onClick={handleGoBack}
+            onClick={handleGoBackToProfile}
           />
           <h3>Edit Profile for {userInfo.name}</h3>
         </div>
@@ -89,6 +93,7 @@ const ManageProfile = ({ userInfo, handleGoBack, handleSaveProfile }) => {
             value={userProfile.birthday && userProfile.birthday}
             onChange={handleChange}
             name="birthday"
+            placeholder="Birth Day"
           />
         </div>
       </div>

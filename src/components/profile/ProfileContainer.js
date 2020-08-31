@@ -117,6 +117,10 @@ function Profile({
     updateUserInfo(userInfo);
     toggleManageProfile(false);
   };
+  /**cancel edit profile */
+  const cancelEditProfile = () => {
+    toggleManageProfile(false);
+  };
   return (
     <>
       <ProfilePresentation
@@ -136,6 +140,7 @@ function Profile({
         handleBtnClick={editFollowBtn}
         handleManageProfile={showManageProfile}
         saveProfile={saveProfile}
+        handleGoBackToProfile={cancelEditProfile}
       />
     </>
   );

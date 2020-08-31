@@ -30,6 +30,7 @@ function ProfilePresentation({
   handleBtnClick,
   handleManageProfile,
   saveProfile,
+  handleGoBackToProfile,
 }) {
   let history = useHistory();
   const [btnText, setBtnText] = useState();
@@ -52,7 +53,7 @@ function ProfilePresentation({
         <SideBar />
         {handleManageProfile ? (
           <ManageProfile
-            handleGoBack={handleGoBack}
+            handleGoBackToProfile={handleGoBackToProfile}
             userInfo={userInfo}
             handleSaveProfile={saveProfile}
           />
