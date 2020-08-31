@@ -1,34 +1,36 @@
 const socketio = require("socket.io");
-const mongoose = require("mongoose");
-const events = require("events");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
 
-const socketContol = (server) => {
+exports.socketServer = (server) => {
+  console.log("Socket Sever Init");
   let io = socketio.listen(server);
-  io.origins("*:*");
-  io.on("connection", (socket) => {
-    console.log("Emit on connection");
-    socket.emit("authenticate", "");
+  let myio = io.of("/chat");
+  let onlineUsers = [];
+  //on connection
+  myio.on("connection", (socket) => {
+    console.log("connected client");
+    /**Emmitt welcome text */
+    socket.emit("welcome", "Welcome to My-Twitter");
 
-    //authorize user
-    socket.on("set-user", (authToken) => {
-      console.log("Authenticating user");
-      if (authToken) {
-        jwt.verify(authToken, process.env.TOKEN_SECRET, (error, decoded) => {
-          if (error != null) {
-            console.error("Auth-Error");
-            socket.emit("Auth-Error", error);
-          } else {
-            console.error("Auth Success");
-            socket.emit("auth-success");
-          }
-        });
-      }
+    /**Listen to room name and emit online users list */
+    socket.on("room", (room) => {
+      console.log("Room", room);
+      //join chat room
+      socket.join(room);
+      console.log("onlineusers-array", onlineUsers);
+      myio.to(room).emit("online-users", onlineUsers);
+    });
+    /**Listen to text-message */
+    socket.on("textSent", (data) => {
+      console.log("Recieved text ", data);
+      myio.emit("textRecieved", data);
+    });
+    /**Listen to disconnect event */
+    socket.on("offline", (data) => {
+      console.log("Client Disconnected", data);
+      myio.emit("userOffline", `${data} left the room`);
+      onlineUsers = onlineUsers.filter((user) => user !== data);
+      console.log("offline", onlineUsers);
+      return onlineUsers;
     });
   });
-};
-
-module.exports = {
-  socketContol,
 };

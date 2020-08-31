@@ -3,7 +3,7 @@ const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 
 exports.isAuthorized = (req, res, next) => {
-  logger.info(`Authorizing for ${req.originalUrl}`);
+  logger.info(`Authorizing`);
   const reqBodyAuth = req.body.authToken;
   const reqQueryAuth = req.query.authToken;
   const reqHeaderAuth = req.header("authToken");
@@ -44,6 +44,6 @@ exports.isAuthorized = (req, res, next) => {
       .status(400)
       .json(formatResponse(true, 400, "Auth Token Missing", null));
   }
-  logger.error(`Auth success for ${req.originalUrl}`);
+  logger.error(`Auth success`);
   next();
 };

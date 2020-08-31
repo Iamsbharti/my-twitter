@@ -9,9 +9,11 @@ import {
 } from "../redux/actions/postAction";
 import { setUserState } from "../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import io from "socket.io-client";
+
 function Feed({
   isAuthenticated,
   userId,
@@ -27,6 +29,12 @@ function Feed({
 }) {
   /**define state */
   let history = useHistory();
+
+  const url =
+    process.env.NODE_ENV === "production" ? "" : "http://localhost:3001/chat";
+
+  const socket = io(url);
+  console.log("socket:", socket);
   useEffect(() => {
     /**set user session state upon reload */
     if (username === undefined) {
@@ -39,9 +47,14 @@ function Feed({
       };
       setUserState(userInfo);
     }
+
     /**call get posts action */
     if (userId !== undefined && tweetStatus === undefined) {
+      console.log("invoke get post");
       getAllPostsAction(userId);
+      socket.on("welcome", (data) => {
+        toast.success(data);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);

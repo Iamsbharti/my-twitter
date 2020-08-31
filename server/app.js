@@ -7,7 +7,7 @@ const logger = require("./library/logger");
 const { initdb } = require("./initdb");
 const router = require("./router/router");
 const { notfound, handleError } = require("./middlewares/errorHandlers");
-const { socketContol } = require("./library/socketControl");
+const { socketServer } = require("./library/socketControl");
 //const helmet = require("helmet");
 const path = require("path");
 
@@ -16,7 +16,7 @@ dotenv.config();
 
 /**init express app */
 const app = express();
-const server = require("http").createServer(app);
+
 /**add middlewares */
 app.use(httpLogger);
 app.use(cors());
@@ -53,7 +53,10 @@ app.use(handleError);
 /**listen to server */
 let port = process.env.PORT || process.env.API_PORT;
 
-server.listen(port, () => logger.info(`API Server Running at:${port}`));
+let server = app.listen(port, () =>
+  logger.info(`API Server Running at:${port}`)
+);
 
-/**configure socket */
-socketContol(server);
+//attach socket to the sever
+let socketInit = socketServer(server);
+console.log("socketInit", socketInit);
