@@ -84,6 +84,18 @@ function Feed({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, getAllPostsAction]);
+  /**listen for comments on post */
+  useEffect(() => {
+    socket.on("comment_on_post", (data) => {
+      console.log("data from serversocket::", data);
+      const { usersPostID, displayName } = data;
+      console.log("comments socket::", usersPostID, displayName);
+      if (usersPostID === userId) {
+        toast.info(`${displayName} commented on your post`);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
   return (
     <>
@@ -147,7 +159,7 @@ function Feed({
           history.push("/login")
         )}
       </div>
-      <ToastContainer autoClose={1000} hideProgressBar />
+      <ToastContainer autoClose={1599} hideProgressBar />
     </>
   );
 }

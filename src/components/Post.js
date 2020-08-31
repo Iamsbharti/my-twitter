@@ -18,6 +18,7 @@ import {
 import { useHistory } from "react-router-dom";
 import Comments from "./Comments";
 import dateFormat from "dateformat";
+import socket from "./message/socket";
 function Post({
   info,
   updatePostAction,
@@ -45,6 +46,7 @@ function Post({
       userName: username,
     };
     addCommentAction(updateOptions);
+    socket.emit("user_added_comment", updateOptions);
   };
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
