@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import io from "socket.io-client";
+import socket from "./message/socket";
 
 function Feed({
   isAuthenticated,
@@ -29,13 +29,6 @@ function Feed({
 }) {
   /**define state */
   let history = useHistory();
-
-  /**initialize socket */
-  const url =
-    process.env.NODE_ENV === "production" ? "" : "http://localhost:3001/chat";
-
-  const socket = io(url);
-  console.log("socket:", socket);
   useEffect(() => {
     /**set user session state upon reload */
     if (username === undefined) {
