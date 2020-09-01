@@ -78,6 +78,7 @@ function Post({
         break;
     }
     updatePostAction(updateOptions);
+    /**emit event for real time notification */
     socket.emit("action_on_post", updateOptions);
   };
   /**invoke func of parent component for deletion*/
