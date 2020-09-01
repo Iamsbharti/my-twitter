@@ -48,7 +48,6 @@ function Feed({
 
     /**call get posts action */
     if (userId !== undefined && tweetStatus === undefined) {
-      console.log("invoke get post");
       getAllPostsAction(userId);
       socket.on("welcome", (data) => {
         toast.success(data);
