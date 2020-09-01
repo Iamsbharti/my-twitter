@@ -112,12 +112,10 @@ function Feed({
   /**listen(socket) for any action on post */
   useEffect(() => {
     socket.on("notify_post_action", (data) => {
-      console.log("data from server socket::", data);
       const { postOwnerId, message, postInfo } = data;
-      console.log("action post::", postOwnerId, message);
       if (postOwnerId === userId) {
         toast.success(message);
-        /**update the post */
+        /**update the poststate minimize reload*/
         updatePostBasedOnSocket(postInfo);
       }
     });
