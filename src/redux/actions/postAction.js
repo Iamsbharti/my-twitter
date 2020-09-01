@@ -18,7 +18,6 @@ export const createPostAction = (postInfo) => {
   };
 };
 export const socketCreatePostAction = (newPost) => {
-  console.log("socket create new post::", newPost);
   let createPostResponse = newPost;
   return (dispatch) => {
     dispatch({ type: CREATE_POST, createPostResponse });
