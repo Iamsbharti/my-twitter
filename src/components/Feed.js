@@ -102,9 +102,7 @@ function Feed({
   /**listen(socket) for comments on post */
   useEffect(() => {
     socket.on("comment_on_post", (data) => {
-      console.log("data from serversocket::", data);
       const { usersPostID, displayName } = data;
-      console.log("comments socket::", usersPostID, displayName);
       if (usersPostID === userId) {
         toast.info(`${displayName} commented on your post`);
       }

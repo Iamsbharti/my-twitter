@@ -26,7 +26,6 @@ exports.socketServer = (server) => {
     socket.on("user_added_comment", async (data) => {
       /**find the user related to the commented post */
       let postFound = await Post.findOne({ postId: data.postId });
-      console.log("post found::", postFound.userId);
       socket.to(roomId).emit("comment_on_post", {
         ...data,
         usersPostID: postFound.userId,
@@ -38,7 +37,6 @@ exports.socketServer = (server) => {
       /**find the user related to the commented post */
       let postFound = await Post.findOne({ postId: data.postId });
       let actionUser = await User.findOne({ userId: data.userId });
-      console.log("post found:", postFound.userId);
       /**compute action based on update's value of data */
       let { update } = data;
       let postAction = "";
