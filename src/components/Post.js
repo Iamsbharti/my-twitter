@@ -84,7 +84,6 @@ function Post({
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
     deletePostAction(postId);
-    console.log("posts::", posts.length);
     if (status) {
       setTimeout(() => history.push("/tweets"), 1200);
     }
@@ -98,7 +97,6 @@ function Post({
   const handleViewProfile = (userId) => {
     history.push(`/profile/${userId}`);
   };
-  console.log("info::", info);
   return (
     <>
       <div className="post">
