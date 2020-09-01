@@ -66,18 +66,16 @@ function Feed({
       userName: username,
       image: image !== undefined ? image : "",
     };
-    let newPostresponse;
-    newPostresponse = await createPostAction(newTweetInfo);
-    /**emit tweets action to the followers */
-    //let finalPost = newPostresponse.then((data) => data);
 
-    console.log("finalpost::", newPostresponse);
+    /**get the new post response and emit the same */
+    let newPostresponse = await createPostAction(newTweetInfo);
+
+    /**emit tweets action to the followers */
     let socketInfo = {
       tweetsUserId: userId,
       name: name,
       newPost: newPostresponse,
     };
-    console.log("socket info for new post::", socketInfo);
     socket.emit("post_tweet", socketInfo);
   };
   /**route back to feed  */
