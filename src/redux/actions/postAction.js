@@ -14,6 +14,14 @@ export const createPostAction = (postInfo) => {
   return async (dispatch) => {
     let createPostResponse = await postApi.createPost(postInfo);
     dispatch({ type: CREATE_POST, createPostResponse });
+    return createPostResponse;
+  };
+};
+export const socketCreatePostAction = (newPost) => {
+  console.log("socket create new post::", newPost);
+  let createPostResponse = newPost;
+  return (dispatch) => {
+    dispatch({ type: CREATE_POST, createPostResponse });
   };
 };
 export const getAllPostsAction = (userId) => {
@@ -39,6 +47,12 @@ export const updatePostCommentAction = (_commentInfo, id) => {
     let commentInfo = _commentInfo;
     commentInfo = { ..._commentInfo, id: id };
     dispatch({ type: UPDATE_POST_COMMENT, commentInfo });
+  };
+};
+export const updatePostBasedOnSocket = (postInfo) => {
+  console.log("socket updates:", postInfo);
+  return (dispatch) => {
+    dispatch({ type: UPDATE_POST, postInfo });
   };
 };
 export const deletePostAction = (postId) => {

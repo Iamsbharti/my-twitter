@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import {
   createPostAction,
   getAllPostsAction,
+  updatePostBasedOnSocket,
+  socketCreatePostAction,
 } from "../redux/actions/postAction";
 import { setUserState } from "../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
@@ -26,6 +28,8 @@ function Feed({
   tweetStatus,
   bookmark,
   bookmarks,
+  updatePostBasedOnSocket,
+  socketCreatePostAction,
 }) {
   /**define state */
   let history = useHistory();
@@ -53,7 +57,7 @@ function Feed({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
   /**tweet */
-  const tweet = (text, image) => {
+  const tweet = async (text, image) => {
     console.log("text::", text, image);
     let newTweetInfo = {
       description: text,
@@ -62,9 +66,18 @@ function Feed({
       userName: username,
       image: image !== undefined ? image : "",
     };
-    createPostAction(newTweetInfo);
+    let newPostresponse;
+    newPostresponse = await createPostAction(newTweetInfo);
     /**emit tweets action to the followers */
-    let socketInfo = { tweetsUserId: userId, name: name };
+    //let finalPost = newPostresponse.then((data) => data);
+
+    console.log("finalpost::", newPostresponse);
+    let socketInfo = {
+      tweetsUserId: userId,
+      name: name,
+      newPost: newPostresponse,
+    };
+    console.log("socket info for new post::", socketInfo);
     socket.emit("post_tweet", socketInfo);
   };
   /**route back to feed  */
@@ -78,13 +91,15 @@ function Feed({
         let { tweetsUserId, name } = data;
         if (userId !== undefined && tweetsUserId !== userId) {
           toast.info(`${name} tweeted a while ago`);
-          setTimeout(() => getAllPostsAction(userId), 1200);
+          //updates state to minimize reload page
+          socketCreatePostAction(data.newPost);
         }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, getAllPostsAction]);
-  /**listen for comments on post */
+  }, [userId, socketCreatePostAction]);
+
+  /**listen(socket) for comments on post */
   useEffect(() => {
     socket.on("comment_on_post", (data) => {
       console.log("data from serversocket::", data);
@@ -94,8 +109,21 @@ function Feed({
         toast.info(`${displayName} commented on your post`);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  /**listen(socket) for any action on post */
+  useEffect(() => {
+    socket.on("notify_post_action", (data) => {
+      console.log("data from server socket::", data);
+      const { postOwnerId, message, postInfo } = data;
+      console.log("action post::", postOwnerId, message);
+      if (postOwnerId === userId) {
+        toast.success(message);
+        /**update the post */
+        updatePostBasedOnSocket(postInfo);
+      }
+    });
+  }, [userId, updatePostBasedOnSocket]);
 
   return (
     <>
@@ -171,5 +199,7 @@ const mapActionToProps = {
   createPostAction,
   getAllPostsAction,
   setUserState,
+  updatePostBasedOnSocket,
+  socketCreatePostAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(Feed);

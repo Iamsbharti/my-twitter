@@ -78,6 +78,7 @@ function Post({
         break;
     }
     updatePostAction(updateOptions);
+    socket.emit("action_on_post", updateOptions);
   };
   /**invoke func of parent component for deletion*/
   const tweetDelete = (postId) => {
@@ -96,6 +97,7 @@ function Post({
   const handleViewProfile = (userId) => {
     history.push(`/profile/${userId}`);
   };
+  console.log("info::", info);
   return (
     <>
       <div className="post">

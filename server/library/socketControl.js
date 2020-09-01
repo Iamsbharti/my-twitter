@@ -1,5 +1,5 @@
 const socketio = require("socket.io");
-//const User = require("../models/User");
+const User = require("../models/User");
 const Post = require("../models/Post");
 exports.socketServer = (server) => {
   console.log("Socket Sever Init");
@@ -32,6 +32,36 @@ exports.socketServer = (server) => {
         usersPostID: postFound.userId,
       });
     });
+
+    /**listen for actions(like,retweets,shares,bookmarks) on post  */
+    socket.on("action_on_post", async (data) => {
+      /**find the user related to the commented post */
+      let postFound = await Post.findOne({ postId: data.postId });
+      let actionUser = await User.findOne({ userId: data.userId });
+      console.log("post found:", postFound.userId);
+      /**compute action based on update's value of data */
+      let { update } = data;
+      let postAction = "";
+      if (update.hasOwnProperty("retweets")) postAction = "retweeted";
+      if (update.hasOwnProperty("likes") && update.likes === 1)
+        postAction = "liked";
+      if (update.hasOwnProperty("likes") && update.likes === -1)
+        postAction = "disliked";
+      if (update.hasOwnProperty("shares")) postAction = "shared";
+      if (update.hasOwnProperty("bookmark") && update.bookmark)
+        postAction = "bookmarked";
+      if (update.hasOwnProperty("bookmark") && !update.bookmark)
+        postAction = "removed from bookmarks";
+
+      /**notify clients for this action on their post */
+      let notificationPayLoad = {
+        postOwnerId: postFound.userId,
+        message: `${actionUser.name} ${postAction} your post`,
+        postInfo: data,
+      };
+      socket.to(roomId).emit("notify_post_action", notificationPayLoad);
+    });
+
     /**Listen to room name and emit online users list */
     socket.on("room", (room) => {
       console.log("Room", room);
