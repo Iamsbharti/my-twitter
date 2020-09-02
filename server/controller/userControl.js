@@ -94,7 +94,7 @@ const getUserList = async (req, res) => {
 };
 const getChatsBetweenUsers = async (req, res) => {
   logger.info("Get chat control");
-  const { senderId, recieverId } = req.body;
+  const { senderId, recieverId } = req.query;
   let findChatQuery = {
     $or: [
       {

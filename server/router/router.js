@@ -33,6 +33,12 @@ router.post(
   users.updateUserInfo
 );
 router.get("/user/allUsers", isAuthorized, users.getUserList);
+router.get(
+  "/user/getChat",
+  isAuthorized,
+  validation.getChatValidation,
+  users.getChatsBetweenUsers
+);
 /**post management */
 router.post(
   "/post/createPost",

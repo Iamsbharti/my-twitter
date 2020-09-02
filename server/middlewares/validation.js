@@ -296,9 +296,10 @@ const getChatValidation = (req, res, next) => {
   logger.info(`Get Chat validation`);
   let chatSchema = joi.object({
     senderId: joi.string().required(),
-    recieverId: joi.object().required(),
+    recieverId: joi.string().required(),
+    authToken: joi.string().required(),
   });
-  let { error } = chatSchema.validate(req.body, options);
+  let { error } = chatSchema.validate(req.query, options);
   if (error) {
     let errors = [];
     error.details.map((err) => errors.push(err.message.split("is")[0]));
