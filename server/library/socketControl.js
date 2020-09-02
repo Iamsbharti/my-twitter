@@ -1,6 +1,12 @@
 const socketio = require("socket.io");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const Chat = require("../models/Chat");
+const events = require("events");
+const logger = require("../library/logger");
+const eventEmitter = new events.EventEmitter();
+const shortid = require("shortid");
+
 exports.socketServer = (server) => {
   console.log("Socket Sever Init");
   let io = socketio.listen(server);
@@ -60,13 +66,13 @@ exports.socketServer = (server) => {
       socket.to(roomId).emit("notify_post_action", notificationPayLoad);
     });
 
-    /**Listen to room name and emit online users list */
-    socket.on("room", (room) => {
-      console.log("Room", room);
-      //join chat room
-      socket.join(room);
-      console.log("onlineusers-array", onlineUsers);
-      socket.to(room).emit("online-users", onlineUsers);
+    /**listen to new message event and save it */
+    socket.on("new_text", (data) => {
+      logger.info("New text arrived");
+      //emit event emiiter to save the message
+      setTimeout(() => eventEmitter.emit("save-chat", data), 1000);
+      /**emit new text for reciever */
+      myio.emit(data.recieverId, data);
     });
     /**Listen to text-message */
     socket.on("textSent", (data) => {
@@ -80,6 +86,28 @@ exports.socketServer = (server) => {
       onlineUsers = onlineUsers.filter((user) => user !== data);
       console.log("offline", onlineUsers);
       return onlineUsers;
+    });
+  });
+
+  /**save chat emitEmitter listener */
+  eventEmitter.on("save-chat", (data) => {
+    const { senderId, senderName, recieverId, recieverName, message } = data;
+    /**create new chat schema */
+    let newChat = new Chat({
+      chatId: shortid.generate(),
+      senderId: senderId,
+      senderName: senderName,
+      recieverId: recieverId,
+      recieverName: recieverName,
+      message: message,
+    });
+    /**save chat */
+    Chat.create(newChat, (error, savedChat) => {
+      if (error) {
+        logger.error(`Error Saving Chat::${error}`);
+      } else {
+        logger.info(`Chat Save Sucess::${savedChat.chatId}`);
+      }
     });
   });
 };

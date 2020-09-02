@@ -18,6 +18,10 @@ const chatSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  recieverName: {
+    type: String,
+    required: true,
+  },
   message: {
     type: String,
     required: true,
