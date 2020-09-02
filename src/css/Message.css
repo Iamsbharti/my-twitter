@@ -290,3 +290,11 @@
   color: var(--twitter-color);
   margin-left: 20px;
 }
+.user_chat_no_msg {
+  margin-top: 111px;
+  margin-left: 34px;
+}
+.user_chat_no_msg > p {
+  margin-top: 19px;
+  margin-left: 135px;
+}

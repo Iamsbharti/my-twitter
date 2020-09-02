@@ -2,7 +2,10 @@ import React from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
-function ChatBox({ content, user }) {
+import { getAllChatAction } from "../../redux/actions/chatAction";
+import { connect } from "react-redux";
+import dateFormat from "dateformat";
+function ChatBox({ content, user, currentUserId, messageList }) {
   return (
     <div className="chatbox">
       {!content ? (
@@ -46,30 +49,41 @@ function ChatBox({ content, user }) {
               </div>
             </div>
           </div>
-          <div className="user__chats">
-            <div className="sent__message">
-              <div className="message__sent">
-                <p>Hifsdfsdfsdfsdsdfsdfsdf</p>
-              </div>
-              <div className="msg__date__sent">
-                <p>26/07/ 5:67:00</p>
-              </div>
+          {content && messageList.length === 0 ? (
+            <div className="user__chats">
+              <p className="user_chat_no_msg">
+                You haven't started conversation with <span>{user.name}</span>
+                <p>Say Hi ...</p>
+              </p>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            {/**recieved__message */}
-            <div className="recieved__message">
-              <div className="message__recieved">
-                <p>Hifsdfsdfsdfsdsdfsdfsdf</p>
+          ) : (
+            messageList.map((msg) => (
+              <div className="user__chats">
+                <div className="sent__message">
+                  <div className="message__sent">
+                    {msg.senderId === currentUserId && <p>{msg.message}</p>}
+                  </div>
+                  <div className="msg__date__sent">
+                    <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                {/**recieved__message */}
+                <div className="recieved__message">
+                  <div className="message__recieved">
+                    {msg.senderId !== currentUserId && <p>{msg.message}</p>}
+                  </div>
+                  <div className="msg__date__recieved">
+                    <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
+                  </div>
+                </div>
               </div>
-              <div className="msg__date__recieved">
-                <p>26/07/ 5:67:00</p>
-              </div>
-            </div>
-          </div>
+            ))
+          )}
           <div className="send__chat">
             <input placeholder="write your message" />
             <div className="send__icon">
@@ -81,4 +95,11 @@ function ChatBox({ content, user }) {
     </div>
   );
 }
-export default ChatBox;
+const mapStateToProps = ({ user, chat }) => {
+  console.log("chat:", chat);
+  return { currentUserId: user.user.userId, messageList: chat };
+};
+const mapActionToProps = {
+  getAllChatAction,
+};
+export default connect(mapStateToProps, mapActionToProps)(ChatBox);

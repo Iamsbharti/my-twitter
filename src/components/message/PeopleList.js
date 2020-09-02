@@ -7,6 +7,8 @@ import Searchicon from "@material-ui/icons/Search";
 import { getUsersList } from "../../apis/usersApi";
 import { Avatar } from "@material-ui/core";
 import ChatBox from "./ChatBox";
+import { getAllChatAction } from "../../redux/actions/chatAction";
+import { connect } from "react-redux";
 function PeopleList() {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
@@ -24,6 +26,12 @@ function PeopleList() {
   }, [userId]);
   /**handle user selction */
   const handleUserSelection = (user) => {
+    /**get chat details between the selected user and current user */
+    let chatInfo = {
+      senderId: user.userId,
+      recieverId: userId,
+    };
+    getAllChatAction(chatInfo);
     setChatBoxContent(!chatBoxContent);
     setChatUser(user);
   };
@@ -79,4 +87,11 @@ function PeopleList() {
     </>
   );
 }
-export default PeopleList;
+const mapStateToProps = ({ user, chat }) => {
+  console.log("chat::", chat);
+  return { chat };
+};
+const mapActionToProps = {
+  getAllChatAction,
+};
+export default connect(mapStateToProps, mapActionToProps)(PeopleList);
