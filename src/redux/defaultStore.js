@@ -35,3 +35,8 @@ export const userprofile = {
   birthdate: "Wed Apr 26 1995 00:00:00 GMT+0530 (India Standard Time)",
   website: "loading...",
 };
+export const currentchat = [
+  {
+    message: "No Messages yet , send Hi to your friend",
+  },
+];
