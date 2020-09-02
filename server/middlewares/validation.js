@@ -292,6 +292,29 @@ const updateUserValidation = (req, res, next) => {
   }
   next();
 };
+const getChatValidation = (req, res, next) => {
+  logger.info(`Get Chat validation`);
+  let chatSchema = joi.object({
+    senderId: joi.string().required(),
+    recieverId: joi.object().required(),
+  });
+  let { error } = chatSchema.validate(req.body, options);
+  if (error) {
+    let errors = [];
+    error.details.map((err) => errors.push(err.message.split("is")[0]));
+    return res
+      .status(400)
+      .json(
+        formatResponse(
+          true,
+          400,
+          `${errors.toString()} ${errors.length > 1 ? "are" : "is"} required`,
+          errors
+        )
+      );
+  }
+  next();
+};
 
 module.exports = {
   signUpParam,
@@ -305,4 +328,5 @@ module.exports = {
   deleteCommentValidation,
   getUserValidation,
   updateUserValidation,
+  getChatValidation,
 };
