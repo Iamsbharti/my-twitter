@@ -164,3 +164,20 @@ export const getUsersList = async (userId) => {
     return error.response.data;
   }
 };
+export const getAllChats = async ({ senderId, recieverId }) => {
+  console.log("get all chat api:", senderId, recieverId);
+  let authToken = localStorage.getItem("authToken");
+  try {
+    let allChats = await axios.get(
+      `${baseUrl}/getChat?senderId=${senderId}&recieverId=${recieverId}&authToken=${authToken}`
+    );
+    if (!allChats.error) {
+      toast.success("Chat Loaded");
+      return allChats.data.data;
+    }
+  } catch (error) {
+    console.warn("Error fetching Users chat");
+    toast.error(error.response.data.message);
+    return error.response.data;
+  }
+};
