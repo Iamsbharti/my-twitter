@@ -71,8 +71,6 @@ exports.socketServer = (server) => {
       logger.info("New text arrived");
       //emit event emiiter to save the message
       setTimeout(() => eventEmitter.emit("save-chat", data), 1000);
-      /**emit new text for reciever */
-      myio.emit(data.recieverId, data);
     });
     /**Listen to text-message */
     socket.on("textSent", (data) => {
@@ -90,7 +88,7 @@ exports.socketServer = (server) => {
   });
 
   /**save chat emitEmitter listener */
-  eventEmitter.on("save-chat", (data) => {
+  eventEmitter.on("save-chat", async (data) => {
     const { senderId, senderName, recieverId, recieverName, message } = data;
     /**create new chat schema */
     let newChat = new Chat({
@@ -102,12 +100,8 @@ exports.socketServer = (server) => {
       message: message,
     });
     /**save chat */
-    Chat.create(newChat, (error, savedChat) => {
-      if (error) {
-        logger.error(`Error Saving Chat::${error}`);
-      } else {
-        logger.info(`Chat Save Sucess::${savedChat.chatId}`);
-      }
-    });
+    let savedChat = await Chat.create(newChat);
+    /**emit new text for reciever */
+    myio.emit(data.recieverId, savedChat);
   });
 };

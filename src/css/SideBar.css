@@ -44,3 +44,9 @@
   height: 45px;
   margin-left: 15px;
 }
+
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+}

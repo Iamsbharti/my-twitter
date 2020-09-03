@@ -2,12 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
-import { getAllChatAction } from "../../redux/actions/chatAction";
+import {
+  getAllChatAction,
+  updateChatAction,
+} from "../../redux/actions/chatAction";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
 import socket from "./socket";
 import { toast } from "react-toastify";
-function ChatBox({ content, user, currentUserId, currentName, messageList }) {
+function ChatBox({
+  content,
+  user,
+  currentUserId,
+  currentName,
+  messageList,
+  updateChatAction,
+}) {
   const [text, setTextMsg] = useState("");
   /**send message */
   const sendMessage = () => {
@@ -21,21 +31,17 @@ function ChatBox({ content, user, currentUserId, currentName, messageList }) {
     console.log("message payload::", textMessagePayload);
     /**emit new text message event */
     socket.emit("new_text", textMessagePayload);
+    updateChatAction(textMessagePayload);
+    setTextMsg("");
   };
   /**listen to new text events if any */
   useEffect(() => {
-    socket.on(
-      currentUserId,
-      (data) => {
-        console.log("new text recieved::", data);
-        toast.success(`${data.senderName} sent you message`);
-      },
-      [messageList, currentUserId]
-    );
     socket.on(currentUserId, (data) => {
-      console.log("Text recieved::", data);
+      console.log("text recieved::", data);
+      toast.success(`${data.senderName} sent you a text`);
+      updateChatAction(data);
     });
-  });
+  }, [currentUserId, updateChatAction]);
   return (
     <div className="chatbox">
       {!content ? (
@@ -87,34 +93,35 @@ function ChatBox({ content, user, currentUserId, currentName, messageList }) {
               </div>
             </div>
           ) : (
-            messageList.map((msg, index) => (
-              <div className="user__chats" key="index">
-                {msg.senderId === currentUserId && (
-                  <div className="sent__message">
-                    <div className="message__sent">{<p>{msg.message}</p>}</div>
-                    <div className="msg__date__sent">
-                      <p>{dateFormat(msg.createdAt, "h:MM TT")}</p>
+            <div className="user__chats">
+              {messageList.map((msg, index) => (
+                <div key={index}>
+                  {msg.senderId === currentUserId && (
+                    <div className="sent__message">
+                      <div className="message__sent">
+                        <div className="sent__text">{<p>{msg.message}</p>}</div>
+                      </div>
+                      <div className="msg__date__sent">
+                        <p>{dateFormat(msg.createdAt, "h:MM TT")}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                {/**recieved__message */}
-                {msg.senderId === user.userId && (
-                  <div className="recieved__message">
-                    <div className="message__recieved">
-                      {<p>{msg.message}</p>}
+                  )}
+                  {/**recieved__message */}
+                  {msg.senderId === user.userId && (
+                    <div className="recieved__message">
+                      <div className="message__recieved">
+                        <div className="recieved__text">
+                          {<p>{msg.message}</p>}
+                        </div>
+                      </div>
+                      <div className="msg__date__recieved">
+                        <p>{dateFormat(msg.createdAt, "h:MM TT")}</p>
+                      </div>
                     </div>
-                    <div className="msg__date__recieved">
-                      <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))
+                  )}
+                </div>
+              ))}
+            </div>
           )}
           <div className="send__chat">
             <input
@@ -141,11 +148,15 @@ const mapStateToProps = ({ user, chat }) => {
       user.user.userId !== undefined
         ? user.user.userId
         : localStorage.getItem("userId"),
-    currentName: user.user.name,
+    currentName:
+      user.user.name !== undefined
+        ? user.user.name
+        : localStorage.getItem("user"),
     messageList: chat,
   };
 };
 const mapActionToProps = {
   getAllChatAction,
+  updateChatAction,
 };
 export default connect(mapStateToProps, mapActionToProps)(ChatBox);

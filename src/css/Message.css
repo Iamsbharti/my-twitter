@@ -166,21 +166,27 @@
 }
 .sent__message {
   display: flex;
-  float: right;
   color: white;
   margin: 11px;
   flex-direction: column;
 }
 .message__sent {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: auto;
   float: right;
   height: auto;
+  overflow-wrap: break-word;
+  color: var(--twitter-color);
+}
+.sent__text {
   border-radius: 13px 13px 0px 13px;
+  width: fit-content;
+  height: fit-content;
   margin: 5px;
   padding: 10px;
   overflow-wrap: break-word;
+  color: white;
   background-color: var(--twitter-color);
 }
 .msg__date__sent {
@@ -190,21 +196,26 @@
 }
 .recieved__message {
   display: flex;
-  float: left;
-  color: black;
+  color: white;
   margin: 11px;
   flex-direction: column;
 }
 .message__recieved {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   width: auto;
   float: right;
   height: auto;
+  overflow-wrap: break-word;
+}
+.recieved__text {
   border-radius: 0px 13px 13px 13px;
+  width: fit-content;
+  height: fit-content;
   margin: 5px;
   padding: 10px;
   overflow-wrap: break-word;
+  color: black;
   background-color: rgb(218, 206, 188);
 }
 .msg__date__recieved {
@@ -299,4 +310,12 @@
 .user_chat_no_msg > p {
   margin-top: 19px;
   margin-left: 135px;
+}
+@media (max-width: 800px) {
+  .peoplelist {
+    display: none;
+  }
+  .chatbox {
+    flex: 0.9;
+  }
 }
