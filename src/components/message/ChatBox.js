@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
 import { getAllChatAction } from "../../redux/actions/chatAction";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
-function ChatBox({ content, user, currentUserId, messageList }) {
+import socket from "./socket";
+import { toast } from "react-toastify";
+function ChatBox({ content, user, currentUserId, currentName, messageList }) {
+  const [text, setTextMsg] = useState("");
+  /**send message */
+  const sendMessage = () => {
+    let textMessagePayload = {
+      senderId: currentUserId,
+      senderName: currentName,
+      recieverId: user.userId,
+      recieverName: user.name,
+      message: text,
+    };
+    console.log("message payload::", textMessagePayload);
+    /**emit new text message event */
+    socket.emit("new_text", textMessagePayload);
+  };
+  /**listen to new text events if any */
+  useEffect(() => {
+    socket.on(
+      currentUserId,
+      (data) => {
+        console.log("new text recieved::", data);
+        toast.success(`${data.senderName} sent you message`);
+      },
+      [messageList, currentUserId]
+    );
+    socket.on(currentUserId, (data) => {
+      console.log("Text recieved::", data);
+    });
+  });
   return (
     <div className="chatbox">
       {!content ? (
@@ -51,43 +81,51 @@ function ChatBox({ content, user, currentUserId, messageList }) {
           </div>
           {content && messageList.length === 0 ? (
             <div className="user__chats">
-              <p className="user_chat_no_msg">
+              <div className="user_chat_no_msg">
                 You haven't started conversation with <span>{user.name}</span>
                 <p>Say Hi ...</p>
-              </p>
+              </div>
             </div>
           ) : (
-            messageList.map((msg) => (
-              <div className="user__chats">
-                <div className="sent__message">
-                  <div className="message__sent">
-                    {msg.senderId === currentUserId && <p>{msg.message}</p>}
+            messageList.map((msg, index) => (
+              <div className="user__chats" key="index">
+                {msg.senderId === currentUserId && (
+                  <div className="sent__message">
+                    <div className="message__sent">{<p>{msg.message}</p>}</div>
+                    <div className="msg__date__sent">
+                      <p>{dateFormat(msg.createdAt, "h:MM TT")}</p>
+                    </div>
                   </div>
-                  <div className="msg__date__sent">
-                    <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
-                  </div>
-                </div>
+                )}
                 <br />
                 <br />
                 <br />
                 <br />
                 <br />
                 {/**recieved__message */}
-                <div className="recieved__message">
-                  <div className="message__recieved">
-                    {msg.senderId !== currentUserId && <p>{msg.message}</p>}
+                {msg.senderId === user.userId && (
+                  <div className="recieved__message">
+                    <div className="message__recieved">
+                      {<p>{msg.message}</p>}
+                    </div>
+                    <div className="msg__date__recieved">
+                      <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
+                    </div>
                   </div>
-                  <div className="msg__date__recieved">
-                    <p>{dateFormat(msg.createdAt, "h:MM TT.mmmm dS,yyyy")}</p>
-                  </div>
-                </div>
+                )}
               </div>
             ))
           )}
           <div className="send__chat">
-            <input placeholder="write your message" />
+            <input
+              type="text"
+              placeholder="write your message"
+              name="text_msg"
+              value={text}
+              onChange={(e) => setTextMsg(e.target.value)}
+            />
             <div className="send__icon">
-              <SendIcon fontSize="small" />
+              <SendIcon fontSize="small" onClick={sendMessage} />
             </div>
           </div>
         </>
@@ -97,7 +135,15 @@ function ChatBox({ content, user, currentUserId, messageList }) {
 }
 const mapStateToProps = ({ user, chat }) => {
   console.log("chat:", chat);
-  return { currentUserId: user.user.userId, messageList: chat };
+  console.log("curent user::", user.user.userId);
+  return {
+    currentUserId:
+      user.user.userId !== undefined
+        ? user.user.userId
+        : localStorage.getItem("userId"),
+    currentName: user.user.name,
+    messageList: chat,
+  };
 };
 const mapActionToProps = {
   getAllChatAction,

@@ -230,6 +230,7 @@
 .send__chat > input {
   border: none;
   background-color: var(--twitter-bg);
+  width: fit-content;
 }
 .send__chat > input:focus {
   outline: none;
@@ -239,6 +240,7 @@
   justify-content: flex-end;
   margin-top: -30px;
   color: var(--twitter-color);
+  cursor: pointer;
 }
 .send__chat > input,
 .send__chat > input::-webkit-input-placeholder {

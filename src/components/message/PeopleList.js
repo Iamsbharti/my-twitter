@@ -9,7 +9,7 @@ import { Avatar } from "@material-ui/core";
 import ChatBox from "./ChatBox";
 import { getAllChatAction } from "../../redux/actions/chatAction";
 import { connect } from "react-redux";
-function PeopleList() {
+function PeopleList({ getAllChatAction }) {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
   const [chatBoxContent, setChatBoxContent] = useState(false);

@@ -169,7 +169,7 @@ export const getAllChats = async ({ senderId, recieverId }) => {
   let authToken = localStorage.getItem("authToken");
   try {
     let allChats = await axios.get(
-      `${baseUrl}/getChat?senderId=${senderId}&recieverId=${recieverId}&authToken=${authToken}`
+      `${baseUrl}/api/v1/user/getChat?senderId=${senderId}&recieverId=${recieverId}&authToken=${authToken}`
     );
     if (!allChats.error) {
       toast.success("Chat Loaded");
