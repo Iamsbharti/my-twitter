@@ -241,7 +241,6 @@
 .send__chat > input {
   border: none;
   background-color: var(--twitter-bg);
-  width: fit-content;
 }
 .send__chat > input:focus {
   outline: none;
