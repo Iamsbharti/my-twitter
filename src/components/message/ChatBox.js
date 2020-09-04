@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Avatar, Button } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Avatar } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
 import {
