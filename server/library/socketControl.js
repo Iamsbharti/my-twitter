@@ -101,6 +101,7 @@ exports.socketServer = (server) => {
     });
     /**save chat */
     let savedChat = await Chat.create(newChat);
+    console.log("chat saved::", savedChat.chatId);
     /**emit new text for reciever */
     myio.emit(data.recieverId, savedChat);
   });

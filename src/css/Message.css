@@ -78,7 +78,7 @@
 /**********chat  box styles********************************/
 .chatbox {
   flex: 0.4;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 /*Hide scrollbar for chrome,safari*/
 .chatbox::-webkit-scrollbar {

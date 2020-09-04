@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
@@ -19,6 +19,8 @@ function ChatBox({
   updateChatAction,
 }) {
   const [text, setTextMsg] = useState("");
+  const messagesEndRef = React.createRef();
+
   /**send message */
   const sendMessage = () => {
     let textMessagePayload = {
@@ -33,7 +35,19 @@ function ChatBox({
     socket.emit("new_text", textMessagePayload);
     updateChatAction(textMessagePayload);
     setTextMsg("");
+    scrollToBottom();
   };
+  const scrollToBottom = () => {
+    console.log(
+      "setting scoll position::",
+      messagesEndRef.current.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+      })
+    );
+    messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
+  };
+
   /**listen to new text events if any */
   useEffect(() => {
     socket.on(currentUserId, (data) => {
@@ -93,7 +107,7 @@ function ChatBox({
               </div>
             </div>
           ) : (
-            <div className="user__chats">
+            <div className="user__chats" ref={messagesEndRef}>
               {messageList.map((msg, index) => (
                 <div key={index}>
                   {msg.senderId === currentUserId && (

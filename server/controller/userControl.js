@@ -109,7 +109,6 @@ const getChatsBetweenUsers = async (req, res) => {
     .select("-_id -__v")
     .sort("-createdOn")
     .lean()
-    .limit(10)
     .exec((error, foundChat) => {
       if (error) {
         res
