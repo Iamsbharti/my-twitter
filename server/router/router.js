@@ -6,7 +6,11 @@ const { isAuthorized } = require("../middlewares/authHandler");
 const posts = require("../controller/postControl");
 const users = require("../controller/userControl");
 const managePassword = require("../controller/recoveryControl");
-const { storage, fileFilter } = require("../controller/uploadControl");
+const {
+  storage,
+  fileFilter,
+  fetchPictures,
+} = require("../controller/uploadControl");
 const multer = require("multer");
 
 /**init upload */
@@ -54,6 +58,7 @@ router.post(
   upload.single("file"),
   users.uploadUsersPictures
 );
+router.get("/user/fetchPicture", isAuthorized, fetchPictures);
 /**post management */
 router.post(
   "/post/createPost",

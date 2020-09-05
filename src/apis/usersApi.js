@@ -181,3 +181,15 @@ export const getAllChats = async ({ senderId, recieverId }) => {
     return error.response.data;
   }
 };
+export const fetchPictures = async (filename) => {
+  console.log("Fetch pictures");
+  let authToken = localStorage.getItem("authToken");
+  try {
+    return await axios.get(
+      `${baseUrl}/api/v1/user/fetchPicture?filename=${filename}&authToken=${authToken}`
+    );
+  } catch (error) {
+    console.warn("Error fetching Users chat");
+    return error.response.data;
+  }
+};

@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import dateFormat from "dateformat";
 import socket from "./socket";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../apis/apiUtils";
 function ChatBox({
   content,
   user,
@@ -56,6 +57,8 @@ function ChatBox({
       updateChatAction(data);
     });
   }, [currentUserId, updateChatAction]);
+  /**fetch pictures */
+
   return (
     <div className="chatbox">
       {!content ? (
@@ -67,7 +70,11 @@ function ChatBox({
         <>
           <div className="peoplelistHeader">
             <div className="chat__header">
-              <Avatar src={`/images/${user.profile.filename}`}></Avatar>
+              <Avatar
+                src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+                  user.profile.filename
+                }&authToken=${localStorage.getItem("authToken")}`}
+              ></Avatar>
               <h3>{user.name}</h3>
             </div>
             <div className="chat__header__username">

@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
 const crypto = require("crypto");
+const { formatResponse } = require("../library/formatResponse");
+const logger = require("../library/logger");
 const mongoURI = process.env.DB_CONNECT;
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -52,8 +54,21 @@ const fileFilter = (req, file, cb) => {
     cb(new Error("File Extension not allowed"), false);
   }
 };
-
+const fetchPictures = (req, res) => {
+  logger.info(`Fetch Pictures${req.query.filename}`);
+  gfs.files.findOne({ filename: req.query.filename }, (error, file) => {
+    /**file existence */
+    if (!file || file.length === 0) {
+      return res
+        .status(404)
+        .json(formatResponse(true, 404, "File Not Found", ""));
+    }
+    const readStream = gfs.createReadStream(file.filename);
+    readStream.pipe(res);
+  });
+};
 module.exports = {
   storage,
   fileFilter,
+  fetchPictures,
 };

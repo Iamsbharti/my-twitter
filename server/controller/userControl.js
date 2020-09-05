@@ -158,6 +158,7 @@ const uploadUsersPictures = async (req, res) => {
       .json(formatResponse(true, 500, "Internal Server Error", null));
   }
 };
+
 module.exports = {
   getUserInfo,
   updateUserInfo,
