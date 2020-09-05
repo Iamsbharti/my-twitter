@@ -24,9 +24,9 @@ const getUserInfo = async (req, res) => {
     res.status(404).json(userFound);
   } else {
     /**user found return res */
-    let userDeatails = await User.findOne({ userId: userId }).populate(
-      "profile"
-    );
+    let userDeatails = await User.findOne({ userId: userId })
+      .select(EXCLUDE)
+      .populate("profile");
 
     //let userInfo = userFound.toObject();
     res
