@@ -9,6 +9,7 @@ import { Avatar } from "@material-ui/core";
 import ChatBox from "./ChatBox";
 import { getAllChatAction } from "../../redux/actions/chatAction";
 import { connect } from "react-redux";
+import { baseUrl } from "../../apis/apiUtils";
 function PeopleList({ getAllChatAction }) {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
@@ -56,7 +57,11 @@ function PeopleList({ getAllChatAction }) {
                 onClick={() => handleUserSelection(user)}
               >
                 <div className="people__avatar">
-                  <Avatar src={user.profile.filename}></Avatar>
+                  <Avatar
+                    src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+                      user.profile.filename
+                    }&authToken=${localStorage.getItem("authToken")}`}
+                  ></Avatar>
                 </div>
                 <div className="peoplelist__body">
                   <div className="people__details">
