@@ -67,9 +67,7 @@ function ChatBox({
         <>
           <div className="peoplelistHeader">
             <div className="chat__header">
-              <Avatar
-                src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
-              ></Avatar>
+              <Avatar src={user.profile.filename}></Avatar>
               <h3>{user.name}</h3>
             </div>
             <div className="chat__header__username">

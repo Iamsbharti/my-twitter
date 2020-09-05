@@ -93,7 +93,7 @@ const updateUserInfo = async (req, res) => {
 };
 const getUserList = async (req, res) => {
   logger.info("Get userList control");
-  let users = await User.find().select(EXCLUDE);
+  let users = await User.find().select(EXCLUDE).populate("profile");
 
   res.status(200).json(formatResponse(false, 200, "Users List", users));
 };

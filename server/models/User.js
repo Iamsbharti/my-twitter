@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Pictures = require("./Pictures");
-const { loggers } = require("winston");
-loggers.info("Models::", Pictures.db);
+
 let userSchema = mongoose.Schema({
   userId: {
     type: String,
