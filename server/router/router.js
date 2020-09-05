@@ -51,7 +51,7 @@ router.get(
 router.post(
   "/user/fileUpload",
   isAuthorized,
-  upload.single("profile"),
+  upload.single("file"),
   users.uploadUsersPictures
 );
 /**post management */

@@ -77,13 +77,13 @@ function ProfilePresentation({
                   </div>
                   <div className="profile__coverpic">
                     <img
-                      src={process.env.PUBLIC_URL + "/coverpic.jpeg"}
+                      src={userInfo.coverPicture.filename}
                       className="coverPic"
-                      alt=""
+                      alt="cover pic"
                     />
                     <img
                       className="profile__user__avatar"
-                      src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
+                      src={userInfo.profile.filename}
                       alt=""
                     />
                     <Button className="btn" onClick={handleBtnClick}>

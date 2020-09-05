@@ -56,9 +56,7 @@ function PeopleList({ getAllChatAction }) {
                 onClick={() => handleUserSelection(user)}
               >
                 <div className="people__avatar">
-                  <Avatar
-                    src={process.env.PUBLIC_URL + "/logo512.png"}
-                  ></Avatar>
+                  <Avatar src={user.profile.filename}></Avatar>
                 </div>
                 <div className="peoplelist__body">
                   <div className="people__details">

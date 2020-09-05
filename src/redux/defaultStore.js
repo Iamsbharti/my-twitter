@@ -34,5 +34,11 @@ export const userprofile = {
   bio: "loading...",
   birthdate: "Wed Apr 26 1995 00:00:00 GMT+0530 (India Standard Time)",
   website: "loading...",
+  profile: {
+    filename: "411d24d34dad8a1a91f12c2dcd9e5030",
+  },
+  coverPicture: {
+    filename: "d13158fd5048dd911bfea441768a0f50",
+  },
 };
 export const currentchat = [];

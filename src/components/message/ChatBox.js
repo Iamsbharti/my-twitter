@@ -67,7 +67,7 @@ function ChatBox({
         <>
           <div className="peoplelistHeader">
             <div className="chat__header">
-              <Avatar src={user.profile.filename}></Avatar>
+              <Avatar src={`/images/${user.profile.filename}`}></Avatar>
               <h3>{user.name}</h3>
             </div>
             <div className="chat__header__username">

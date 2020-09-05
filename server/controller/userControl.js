@@ -25,7 +25,8 @@ const getUserInfo = async (req, res) => {
     /**user found return res */
     let userDeatails = await User.findOne({ userId: userId })
       .select(EXCLUDE)
-      .populate("profile");
+      .populate("profile")
+      .populate("coverPicture");
 
     //let userInfo = userFound.toObject();
     res
@@ -93,7 +94,10 @@ const updateUserInfo = async (req, res) => {
 };
 const getUserList = async (req, res) => {
   logger.info("Get userList control");
-  let users = await User.find().select(EXCLUDE).populate("profile");
+  let users = await User.find()
+    .select(EXCLUDE)
+    .populate("profile")
+    .populate("coverPicture");
 
   res.status(200).json(formatResponse(false, 200, "Users List", users));
 };
@@ -140,7 +144,7 @@ const uploadUsersPictures = async (req, res) => {
   updateOptions =
     type === "profile"
       ? { ...updateOptions, profile: req.file.id }
-      : { ...updateOptions, coverpic: req.file.id };
+      : { ...updateOptions, coverPicture: req.file.id };
 
   let updatedUser = await User.updateOne(updateQuery, updateOptions);
   console.log("updated user post upload::", updatedUser.n);
