@@ -13,6 +13,7 @@ import Post from "../Post";
 import ManageProfile from "./ManageProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { baseUrl } from "../../apis/apiUtils";
 function ProfilePresentation({
   currentUser,
   userInfo,
@@ -77,13 +78,17 @@ function ProfilePresentation({
                   </div>
                   <div className="profile__coverpic">
                     <img
-                      src={userInfo.coverPicture.filename}
+                      src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+                        userInfo.coverPicture.filename
+                      }&authToken=${localStorage.getItem("authToken")}`}
                       className="coverPic"
                       alt="cover pic"
                     />
                     <img
                       className="profile__user__avatar"
-                      src={userInfo.profile.filename}
+                      src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+                        userInfo.profile.filename
+                      }&authToken=${localStorage.getItem("authToken")}`}
                       alt=""
                     />
                     <Button className="btn" onClick={handleBtnClick}>
