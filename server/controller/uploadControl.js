@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
 const crypto = require("crypto");
-const shortid = require("shortid");
 const mongoURI = process.env.DB_CONNECT;
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);

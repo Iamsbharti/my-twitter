@@ -4,7 +4,6 @@ const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
 const Chat = require("../models/Chat");
 const EXCLUDE = "-__v -_id -password";
-const mongoose = require("mongoose");
 
 const verifyUserId = async (userId) => {
   let userExists = await User.findOne({ userId: userId }).select(EXCLUDE);
