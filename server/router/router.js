@@ -6,7 +6,16 @@ const { isAuthorized } = require("../middlewares/authHandler");
 const posts = require("../controller/postControl");
 const users = require("../controller/userControl");
 const managePassword = require("../controller/recoveryControl");
+const { storage, fileFilter } = require("../controller/uploadControl");
+const multer = require("multer");
 
+/**init upload */
+const upload = multer({
+  storage: storage,
+  limits: 1024 * 1024 * 6,
+  fileFilter: fileFilter,
+});
+console.log("uploadd::", upload.fields);
 /**user management */
 router.post("/user/signup", validation.signUpParam, signUpControl);
 router.post("/user/login", validation.loginParam, logincontrol);
@@ -38,6 +47,12 @@ router.get(
   isAuthorized,
   validation.getChatValidation,
   users.getChatsBetweenUsers
+);
+router.post(
+  "/user/fileUpload",
+  isAuthorized,
+  upload.single("profile"),
+  users.uploadUsersPictures
 );
 /**post management */
 router.post(

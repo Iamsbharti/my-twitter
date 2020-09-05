@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-
+/*var Pictures = mongoose.model(
+  "Pictures",
+  new mongoose.Schema({}, { strict: false }),
+  "pictures.files"
+);*/
+const Pictures = require("./Pictures");
 let userSchema = mongoose.Schema({
   userId: {
     type: String,
@@ -26,7 +31,8 @@ let userSchema = mongoose.Schema({
     type: Array,
   },
   profile: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pictures",
   },
   password: {
     type: String,
@@ -46,7 +52,8 @@ let userSchema = mongoose.Schema({
     default: 0,
   },
   coverPicture: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pictures",
   },
   bio: {
     type: String,

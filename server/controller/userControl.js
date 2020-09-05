@@ -4,6 +4,7 @@ const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
 const Chat = require("../models/Chat");
 const EXCLUDE = "-__v -_id -password";
+const mongoose = require("mongoose");
 
 const verifyUserId = async (userId) => {
   let userExists = await User.findOne({ userId: userId }).select(EXCLUDE);
@@ -23,9 +24,14 @@ const getUserInfo = async (req, res) => {
     res.status(404).json(userFound);
   } else {
     /**user found return res */
+    let userDeatails = await User.findOne({ userId: userId }).populate(
+      "profile"
+    );
 
-    let userInfo = userFound.toObject();
-    res.status(200).json(formatResponse(false, 200, "User Found", userInfo));
+    //let userInfo = userFound.toObject();
+    res
+      .status(200)
+      .json(formatResponse(false, 200, "User Found", userDeatails));
   }
 };
 const updateUserInfo = async (req, res) => {
@@ -121,9 +127,38 @@ const getChatsBetweenUsers = async (req, res) => {
       }
     });
 };
+const uploadUsersPictures = async (req, res) => {
+  logger.info("upload control::", req.file);
+  const type = req.body.type;
+  const userId = req.body.userId;
+  console.log("save profile/coverpic of users::", userId);
+
+  /**update the user schema */
+  const updateQuery = { userId: userId };
+  let updateOptions = {};
+  //let imageId = mongoose.Schema.Types.ObjectId;
+  console.log("file_obj::", req.file);
+  updateOptions =
+    type === "profile"
+      ? { ...updateOptions, profile: req.file.id }
+      : { ...updateOptions, coverpic: req.file.id };
+
+  let updatedUser = await User.updateOne(updateQuery, updateOptions);
+  console.log("updated user post upload::", updatedUser.n);
+  if (updatedUser) {
+    res
+      .status(200)
+      .json(formatResponse(false, 200, "Image Upload Success", null));
+  } else {
+    res
+      .status(500)
+      .json(formatResponse(true, 500, "Internal Server Error", null));
+  }
+};
 module.exports = {
   getUserInfo,
   updateUserInfo,
   getUserList,
   getChatsBetweenUsers,
+  uploadUsersPictures,
 };

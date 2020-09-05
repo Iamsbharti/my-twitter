@@ -10,7 +10,7 @@ const { notfound, handleError } = require("./middlewares/errorHandlers");
 const { socketServer } = require("./library/socketControl");
 //const helmet = require("helmet");
 const path = require("path");
-
+const methodOverride = require("method-override");
 /**configure envoirnment variables */
 dotenv.config();
 
@@ -20,6 +20,7 @@ const app = express();
 /**add middlewares */
 app.use(httpLogger);
 app.use(cors());
+app.use(methodOverride("_method"));
 //app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
