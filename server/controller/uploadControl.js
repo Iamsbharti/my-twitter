@@ -29,7 +29,6 @@ const storage = new GridFsStorage({
   url: mongoURI,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
-      console.log("file::", file);
       crypto.randomBytes(16, (err, buffer) => {
         if (err) {
           return reject(err);
@@ -48,7 +47,6 @@ const storage = new GridFsStorage({
 });
 /**file filter for incoming files */
 const fileFilter = (req, file, cb) => {
-  console.log("req::", file);
   // reject a file
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
     cb(null, true);
@@ -78,7 +76,6 @@ const fetchPicturesForUserId = async (req, res) => {
       .populate("profile");
 
     let { profile } = userDetails;
-    console.log("user-profile::", profile);
     const filename = profile.filename;
     return { filename: filename };
   };
