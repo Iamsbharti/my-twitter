@@ -160,7 +160,6 @@ function Profile({
   };
   /**update picture */
   const updatePicture = (fileType, uploadedfile) => {
-    console.log("updating picture:", fileType, uploadedfile);
     const userInfo = {
       type: fileType,
       file: uploadedfile,
