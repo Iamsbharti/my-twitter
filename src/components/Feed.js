@@ -51,7 +51,6 @@ function Feed({
   }, [userId]);
   /**tweet */
   const tweet = async (text, image) => {
-    console.log("text::", text, image);
     let newTweetInfo = {
       description: text,
       displayName: name,

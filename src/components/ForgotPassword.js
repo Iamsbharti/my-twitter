@@ -21,7 +21,6 @@ function ForgotPassword() {
 
   /**send password recovery code */
   const sendRecoveryCode = async () => {
-    console.log("Find user");
     setError("Processing...");
     let recoveryResponse = await recoverPassword(loginId);
     let { error, message, data } = recoveryResponse;
@@ -60,7 +59,6 @@ function ForgotPassword() {
   /**reset password api call */
   const handleResetPassword = async () => {
     setPwdMatchError("");
-    console.log("reset password");
     let resetInfo = {
       email: email,
       recoveryCode: code,
