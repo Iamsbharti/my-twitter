@@ -39,7 +39,7 @@ function Feed({
       /**let userinfo from localstorage */
       setUserState(localStorage.getItem("userId"));
     }
-
+    setUserState(localStorage.getItem("userId"));
     /**call get posts action */
     if (userId !== undefined && tweetStatus === undefined) {
       getAllPostsAction(userId);

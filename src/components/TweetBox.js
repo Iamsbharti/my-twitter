@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "../css/TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
 import GifIcon from "@material-ui/icons/Gif";
-function TweetBox({ postTweet }) {
+import { connect } from "react-redux";
+import { baseUrl } from "../apis/apiUtils";
+function TweetBox({ postTweet, profile }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   /**tweet */
@@ -21,7 +23,14 @@ function TweetBox({ postTweet }) {
     <div className="tweetbox">
       <form onSubmit={handleTweet}>
         <div className="tweet--input">
-          <Avatar src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}></Avatar>
+          <Avatar
+            src={
+              profile &&
+              `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                profile.filename
+              }&authToken=${localStorage.getItem("authToken")}`
+            }
+          ></Avatar>
           <input
             placeholder="What's happening?"
             type="text"
@@ -54,4 +63,9 @@ function TweetBox({ postTweet }) {
     </div>
   );
 }
-export default TweetBox;
+const mapStateToProps = ({ user }) => {
+  const { profile } = user.user;
+  console.log("profile:", profile);
+  return { profile };
+};
+export default connect(mapStateToProps)(TweetBox);
