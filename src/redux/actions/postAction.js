@@ -10,7 +10,6 @@ import {
 import * as postApi from "../../apis/postsApi";
 
 export const createPostAction = (postInfo) => {
-  console.log("Create post action:");
   return async (dispatch) => {
     let createPostResponse = await postApi.createPost(postInfo);
     dispatch({ type: CREATE_POST, createPostResponse });
@@ -24,14 +23,12 @@ export const socketCreatePostAction = (newPost) => {
   };
 };
 export const getAllPostsAction = (userId) => {
-  console.log("Get all post action ::");
   return async (dispatch) => {
     let getAllPostsResponse = await postApi.getAllPosts(userId);
     dispatch({ type: GET_ALL_POSTS, getAllPostsResponse });
   };
 };
 export const updatePostAction = (postInfo) => {
-  console.log("update post action:");
   return async (dispatch) => {
     let updatedPost = await postApi.updatePost(postInfo);
     console.log("api res-action::", updatedPost);
@@ -39,7 +36,6 @@ export const updatePostAction = (postInfo) => {
   };
 };
 export const updatePostCommentAction = (_commentInfo, id) => {
-  console.log("update postcomment action:");
   return async (dispatch) => {
     let updatedPost = await postApi.updatePost(_commentInfo);
     console.log("api res-action::", updatedPost);
@@ -49,13 +45,11 @@ export const updatePostCommentAction = (_commentInfo, id) => {
   };
 };
 export const updatePostBasedOnSocket = (postInfo) => {
-  console.log("socket updates:", postInfo);
   return (dispatch) => {
     dispatch({ type: UPDATE_POST, postInfo });
   };
 };
 export const deletePostAction = (postId) => {
-  console.log("Delete tweet::");
   return async (dispatch) => {
     let deletedTweet = await postApi.deletePost(postId);
     console.log("Delete action res::", deletedTweet);
@@ -63,15 +57,12 @@ export const deletePostAction = (postId) => {
   };
 };
 export const addCommentAction = (commentInfo) => {
-  console.log("addCommentAction tweet::");
   return async (dispatch) => {
     let newComments = await postApi.setComments(commentInfo);
-    console.log("new cooments action::");
     dispatch({ type: ADD_COMMENT, newComments });
   };
 };
 export const deleteCommentAction = (commentInfo) => {
-  console.log("Delete tweet comment::");
   return async (dispatch) => {
     let deletedTweetComment = await postApi.deleteComment(commentInfo);
     console.log("Delete action res::", deletedTweetComment);
