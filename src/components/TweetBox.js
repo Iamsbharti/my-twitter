@@ -65,7 +65,6 @@ function TweetBox({ postTweet, profile }) {
 }
 const mapStateToProps = ({ user }) => {
   const { profile } = user.user;
-  console.log("profile:", profile);
   return { profile };
 };
 export default connect(mapStateToProps)(TweetBox);
