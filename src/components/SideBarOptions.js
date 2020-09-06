@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 function SideBarOptions({ text, Icon, active }) {
   let history = useHistory();
   const handleSideOptionsClick = (e) => {
-    console.log("handle book marks", e.target.innerHTML);
     switch (e.target.innerHTML) {
       case "Booksmarks":
         history.push("/bookmarks");
