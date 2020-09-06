@@ -31,7 +31,6 @@ function ChatBox({
       recieverName: user.name,
       message: text,
     };
-    console.log("message payload::", textMessagePayload);
     /**emit new text message event */
     socket.emit("new_text", textMessagePayload);
     updateChatAction(textMessagePayload);
@@ -52,7 +51,6 @@ function ChatBox({
   /**listen to new text events if any */
   useEffect(() => {
     socket.on(currentUserId, (data) => {
-      console.log("text recieved::", data);
       toast.success(`${data.senderName} sent you a text`);
       updateChatAction(data);
     });
