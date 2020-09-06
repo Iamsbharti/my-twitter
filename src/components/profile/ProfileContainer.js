@@ -42,7 +42,6 @@ function Profile({
    * tab active
    */
   const handleTweets = (e) => {
-    console.log("Handle--", e.target.innerHTML);
     switch (e.target.innerHTML) {
       case "Tweets":
         toggleTweets(false);
@@ -87,7 +86,6 @@ function Profile({
   }, [userId, getAllPostsAction]);
   /**take appropiate action follow,unfollow,edit profile  */
   const editFollowBtn = (e) => {
-    console.log("Edit -follow-unfollow");
     switch (e.target.innerHTML) {
       case "Edit Profile":
         toggleManageProfile(true);
@@ -147,8 +145,6 @@ function Profile({
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        console.log("data::", response.data);
         if (response.data.message === "File Extension Not Allowed") {
           toast.error(response.data.message);
         }
@@ -158,7 +154,7 @@ function Profile({
         }
       })
       .catch(function (error) {
-        console.log(error);
+        console.warn(error);
         toast.success(`File Upload Error`);
       });
   };
