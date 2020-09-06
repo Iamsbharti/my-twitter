@@ -23,9 +23,7 @@ const ManageProfile = ({
     setProfile(userInfo);
   }, [userInfo]);
   const handleChange = (event) => {
-    console.log("handle chag");
     const { name, value } = event.target;
-    console.log("name,val:", name, value);
     setProfile({
       ...userProfile,
       [name]: value,
@@ -35,6 +33,7 @@ const ManageProfile = ({
   const handleFileChange = (event) => {
     uploadPicture(event);
   };
+  /**toggle edit birthday button */
   const handleToggle = () => {
     setToggleBirthdate(!toggleEditBirthDate);
   };
@@ -52,7 +51,6 @@ const ManageProfile = ({
         ).toDateString(),
       };
     }
-    console.log("post birthdate updates::", userProfile);
     handleSaveProfile(userProfile);
   };
   return (
