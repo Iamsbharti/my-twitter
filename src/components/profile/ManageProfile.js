@@ -6,15 +6,13 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { baseUrl } from "../../apis/apiUtils";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import axios from "axios";
-import FormData from "form-data";
-import { toast } from "react-toastify";
 
 const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
   handleSaveProfile,
   handleUpdatePictures,
+  uploadPicture,
 }) => {
   const [userProfile, setProfile] = useState({});
 
@@ -34,47 +32,7 @@ const ManageProfile = ({
   const handleFileChange = (event) => {
     uploadPicture(event);
   };
-  const uploadPicture = (event) => {
-    console.log("uplaoding file");
-    let data = new FormData();
-    let types = event.target.name;
-    data.append("userId", userInfo.userId);
-    data.append("type", event.target.name);
-    data.append("file", event.target.files[0]);
-    let config = {
-      method: "post",
-      url: `${baseUrl}/api/v1/user/fileUpload?authToken=${localStorage.getItem(
-        "authToken"
-      )}`,
-      data: data,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        console.log("data::", response.data);
-        if (response.data.message === "File Extension Not Allowed") {
-          toast.error(response.data.message);
-        }
-        if (response.data.status === 200) {
-          toast.success(`File upload Sucess`);
-          updatePicture(types, response.data.data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        toast.success(`File Upload Error`);
-      });
-  };
-  /**update picture */
-  const updatePicture = (fileType, uploadedfile) => {
-    console.log("updating picture:", fileType, uploadedfile);
-    const userInfo = {
-      type: fileType,
-      file: uploadedfile,
-    };
-    handleUpdatePictures(userInfo);
-  };
+  const handleBirthDay = () => {};
   return (
     <div className="profile">
       <div className="profileHeader">
@@ -173,8 +131,22 @@ const ManageProfile = ({
           <input
             type="text"
             value={userProfile.birthday && userProfile.birthday}
-            onChange={handleChange}
-            name="birthday"
+            onChange={handleBirthDay}
+            name="date"
+            placeholder="Birth Day"
+          />
+          <input
+            type="text"
+            value={userProfile.birthday && userProfile.birthday}
+            onChange={handleBirthDay}
+            name="month"
+            placeholder="Birth Day"
+          />
+          <input
+            type="text"
+            value={userProfile.birthday && userProfile.birthday}
+            onChange={handleBirthDay}
+            name="year"
             placeholder="Birth Day"
           />
         </div>

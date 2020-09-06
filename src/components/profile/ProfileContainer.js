@@ -9,7 +9,10 @@ import {
   updateUserInfo,
   updateUserPictures,
 } from "../../redux/actions/userActions";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import FormData from "form-data";
+import { baseUrl } from "../../apis/apiUtils";
 function Profile({
   userId,
   getUserInfo,
@@ -126,6 +129,48 @@ function Profile({
   const cancelEditProfile = () => {
     toggleManageProfile(false);
   };
+
+  const uploadPicture = (event) => {
+    console.log("uplaoding file");
+    let data = new FormData();
+    let types = event.target.name;
+    data.append("userId", profile.userId);
+    data.append("type", event.target.name);
+    data.append("file", event.target.files[0]);
+    let config = {
+      method: "post",
+      url: `${baseUrl}/api/v1/user/fileUpload?authToken=${localStorage.getItem(
+        "authToken"
+      )}`,
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log("data::", response.data);
+        if (response.data.message === "File Extension Not Allowed") {
+          toast.error(response.data.message);
+        }
+        if (response.data.status === 200) {
+          toast.success(`File upload Sucess`);
+          updatePicture(types, response.data.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.success(`File Upload Error`);
+      });
+  };
+  /**update picture */
+  const updatePicture = (fileType, uploadedfile) => {
+    console.log("updating picture:", fileType, uploadedfile);
+    const userInfo = {
+      type: fileType,
+      file: uploadedfile,
+    };
+    updatePictures(userInfo);
+  };
   /**update uploaded pictures */
   const updatePictures = (userInfo) => {
     updateUserPictures(userInfo);
@@ -151,6 +196,7 @@ function Profile({
         saveProfile={saveProfile}
         handleGoBackToProfile={cancelEditProfile}
         updatePictures={updatePictures}
+        uploadPicture={uploadPicture}
       />
       <ToastContainer autoClose={1000} hideProgressBar />
     </>

@@ -34,6 +34,7 @@ function ProfilePresentation({
   saveProfile,
   handleGoBackToProfile,
   updatePictures,
+  uploadPicture,
 }) {
   let history = useHistory();
   const [btnText, setBtnText] = useState();
@@ -60,6 +61,7 @@ function ProfilePresentation({
             userInfo={userInfo}
             handleSaveProfile={saveProfile}
             handleUpdatePictures={updatePictures}
+            uploadPicture={uploadPicture}
           />
         ) : (
           <div className="profile">
