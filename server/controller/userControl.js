@@ -28,7 +28,6 @@ const getUserInfo = async (req, res) => {
       .populate("profile")
       .populate("coverPicture");
 
-    //let userInfo = userFound.toObject();
     res
       .status(200)
       .json(formatResponse(false, 200, "User Found", userDeatails));
@@ -134,20 +133,17 @@ const uploadUsersPictures = async (req, res) => {
   logger.info("upload control::", req.file);
   const type = req.body.type;
   const userId = req.body.userId;
-  console.log("save profile/coverpic of users::", userId);
 
   /**update the user schema */
   const updateQuery = { userId: userId };
   let updateOptions = {};
-  //let imageId = mongoose.Schema.Types.ObjectId;
-  console.log("file_obj::", req.file);
   updateOptions =
     type === "profile"
       ? { ...updateOptions, profile: req.file.id }
       : { ...updateOptions, coverPicture: req.file.id };
 
   let updatedUser = await User.updateOne(updateQuery, updateOptions);
-  console.log("updated user post upload::", updatedUser.n);
+
   if (updatedUser) {
     res
       .status(200)
