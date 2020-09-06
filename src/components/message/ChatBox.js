@@ -146,6 +146,7 @@ function ChatBox({
               placeholder="write your message"
               name="text_msg"
               value={text}
+              autoFocus
               onChange={(e) => setTextMsg(e.target.value)}
             />
             <div className="send__icon">
