@@ -14,9 +14,10 @@ export function loginAction(userInfo) {
     dispatch({ type: LOGIN, loginResponse });
   };
 }
-export function setUserState(userInfo) {
-  console.log("userinfo:: set state");
-  return (dispatch) => {
+export function setUserState(userId) {
+  console.log("userinfo:: set state:", userId);
+  return async (dispatch) => {
+    let userInfo = await userApi.getUserInfo(userId);
     dispatch({ type: SESSION_STATE, userInfo });
   };
 }

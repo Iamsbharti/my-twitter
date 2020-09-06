@@ -37,13 +37,7 @@ function Feed({
     /**set user session state upon reload */
     if (username === undefined) {
       /**let userinfo from localstorage */
-      let userInfo = {
-        name: localStorage.getItem("user"),
-        email: localStorage.getItem("email"),
-        userId: localStorage.getItem("userId"),
-        username: localStorage.getItem("username"),
-      };
-      setUserState(userInfo);
+      setUserState(localStorage.getItem("userId"));
     }
 
     /**call get posts action */
