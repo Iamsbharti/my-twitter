@@ -99,15 +99,7 @@ function Post({
   const handleViewProfile = (userId) => {
     history.push(`/profile/${userId}`);
   };
-  /**fetch avatar */
-  const getAvatar = (userId) => {
-    console.log("getAvatar:", userId);
-    return fetch(
-      `${baseUrl}/api/v1/user/fetchPicture?filename=${
-        currentUserProfile.filename
-      }&authToken=${localStorage.getItem("authToken")}`
-    );
-  };
+
   return (
     <>
       <div className="post">
@@ -122,7 +114,14 @@ function Post({
               }
             ></Avatar>
           ) : (
-            <Avatar src={() => getAvatar(info.userId)}></Avatar>
+            <Avatar
+              src={
+                currentUserProfile &&
+                `${baseUrl}/api/v1/user/usersProfilePic?userId=${
+                  info.userId
+                }&authToken=${localStorage.getItem("authToken")}`
+              }
+            ></Avatar>
           )}
         </div>
 
