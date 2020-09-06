@@ -153,7 +153,6 @@ export const getUsersList = async (userId) => {
     let usersListResponse = await axios.get(
       `${baseUrl}/api/v1/user/allUsers?userId=${userId}&authToken=${authToken}`
     );
-    console.log("users list res::", usersListResponse.data);
     if (!usersListResponse.data.error) {
       toast.success("Users Fetched");
       return usersListResponse.data.data;
