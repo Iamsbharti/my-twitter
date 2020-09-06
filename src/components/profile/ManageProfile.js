@@ -11,7 +11,6 @@ const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
   handleSaveProfile,
-  handleUpdatePictures,
   uploadPicture,
 }) => {
   const [userProfile, setProfile] = useState({});
