@@ -22,14 +22,7 @@ export function postReducer(_posts = posts, action) {
     case UPDATE_POST:
       const { postId, update, userId } = action.postInfo;
       const { comments, retweets, likes, shares, bookmark } = update;
-      console.log(
-        "retweets:likes",
-        retweets,
-        likes,
-        "ll--",
-        likes === -1,
-        userId
-      );
+
       return _posts.map((post) =>
         post.postId === postId
           ? {
