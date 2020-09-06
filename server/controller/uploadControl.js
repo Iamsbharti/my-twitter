@@ -53,7 +53,7 @@ const fileFilter = (req, file, cb) => {
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
     cb(null, true);
   } else {
-    cb(new Error("File Extension not allowed"), false);
+    cb(formatResponse(true, 500, "File Extension Not Allowed", null), false);
   }
 };
 const fetchPictures = (req, res) => {

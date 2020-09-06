@@ -33,6 +33,7 @@ function ProfilePresentation({
   handleManageProfile,
   saveProfile,
   handleGoBackToProfile,
+  updatePictures,
 }) {
   let history = useHistory();
   const [btnText, setBtnText] = useState();
@@ -58,6 +59,7 @@ function ProfilePresentation({
             handleGoBackToProfile={handleGoBackToProfile}
             userInfo={userInfo}
             handleSaveProfile={saveProfile}
+            handleUpdatePictures={updatePictures}
           />
         ) : (
           <div className="profile">

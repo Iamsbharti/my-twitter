@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 import ProfilePresentation from "./ProfilePresentation";
 import { getUserInfo } from "../../redux/actions/userActions";
 import { getAllPostsAction } from "../../redux/actions/postAction";
-import { updateUserInfo } from "../../redux/actions/userActions";
+import {
+  updateUserInfo,
+  updateUserPictures,
+} from "../../redux/actions/userActions";
 import { ToastContainer } from "react-toastify";
 function Profile({
   userId,
@@ -19,6 +22,7 @@ function Profile({
   currentUserId,
   getAllPostsAction,
   updateUserInfo,
+  updateUserPictures,
 }) {
   const [showTweets, toggleTweets] = useState(false);
   const [showRelpiesTweets, toggleRepliesTweets] = useState(true);
@@ -122,6 +126,10 @@ function Profile({
   const cancelEditProfile = () => {
     toggleManageProfile(false);
   };
+  /**update uploaded pictures */
+  const updatePictures = (userInfo) => {
+    updateUserPictures(userInfo);
+  };
   return (
     <>
       <ProfilePresentation
@@ -142,6 +150,7 @@ function Profile({
         handleManageProfile={showManageProfile}
         saveProfile={saveProfile}
         handleGoBackToProfile={cancelEditProfile}
+        updatePictures={updatePictures}
       />
       <ToastContainer autoClose={1000} hideProgressBar />
     </>
@@ -191,5 +200,10 @@ const mapStateToProps = (state, ownProps) => {
     currentUserId,
   };
 };
-const mapActionToProps = { getUserInfo, getAllPostsAction, updateUserInfo };
+const mapActionToProps = {
+  getUserInfo,
+  getAllPostsAction,
+  updateUserInfo,
+  updateUserPictures,
+};
 export default connect(mapStateToProps, mapActionToProps)(Profile);

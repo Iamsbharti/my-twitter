@@ -151,7 +151,7 @@ const uploadUsersPictures = async (req, res) => {
   if (updatedUser) {
     res
       .status(200)
-      .json(formatResponse(false, 200, "Image Upload Success", null));
+      .json(formatResponse(false, 200, "Image Upload Success", req.file));
   } else {
     res
       .status(500)

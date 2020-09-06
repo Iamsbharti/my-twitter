@@ -14,8 +14,10 @@ const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
   handleSaveProfile,
+  handleUpdatePictures,
 }) => {
   const [userProfile, setProfile] = useState({});
+  const [fileType, setFileType] = useState("");
   useEffect(() => {
     setProfile(userInfo);
   }, [userInfo]);
@@ -30,11 +32,14 @@ const ManageProfile = ({
   };
   /**upload handler */
   const handleFileChange = (event) => {
+    console.log(event.target);
+    setFileType(event.target.name);
     uploadPicture(event);
   };
   const uploadPicture = (event) => {
     console.log("uplaoding file");
     let data = new FormData();
+    let types = event.target.name;
     data.append("userId", userInfo.userId);
     data.append("type", event.target.name);
     data.append("file", event.target.files[0]);
@@ -49,14 +54,28 @@ const ManageProfile = ({
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        if (!response.data.error) {
-          toast.success(`${event.target.name} Upload Sucess`);
+        console.log("data::", response.data);
+        if (response.data.message === "File Extension Not Allowed") {
+          toast.error(response.data.message);
+        }
+        if (response.data.status === 200) {
+          toast.success(`File upload Sucess`);
+          updatePicture(types, response.data.data);
         }
       })
       .catch(function (error) {
         console.log(error);
-        toast.success(`${event.target.name} Upload Error`);
+        toast.success(`File Upload Error`);
       });
+  };
+  /**update picture */
+  const updatePicture = (fileType, uploadedfile) => {
+    console.log("updating picture:", fileType, uploadedfile);
+    const userInfo = {
+      type: fileType,
+      file: uploadedfile,
+    };
+    handleUpdatePictures(userInfo);
   };
   return (
     <div className="profile">
@@ -107,12 +126,12 @@ const ManageProfile = ({
             />
           </div>
           <div>
-            <label htmlFor="file-upload" className="custom-file-upload">
+            <label htmlFor="profile-upload" className="custom-file-upload">
               <CloudUploadIcon />
               <p className="coverpic_label">Change Profile Pic</p>
             </label>
             <input
-              id="file-upload"
+              id="profile-upload"
               type="file"
               name="profile"
               onChange={handleFileChange}

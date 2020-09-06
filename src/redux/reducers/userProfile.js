@@ -1,4 +1,8 @@
-import { GET_USER_INFO, UPDATE_USER_INFO } from "../actions/actionTypes";
+import {
+  GET_USER_INFO,
+  UPDATE_USER_INFO,
+  UPDATE_USER_FILE,
+} from "../actions/actionTypes";
 import { userprofile } from "../defaultStore";
 export function profileReducer(_userprofile = userprofile, action) {
   switch (action.type) {
@@ -20,6 +24,21 @@ export function profileReducer(_userprofile = userprofile, action) {
             ? [...userprofile.followers, followerId]
             : userprofile.followers.filter((id) => id !== followerId),
       };
+    }
+    case UPDATE_USER_FILE: {
+      const { type, file } = action.userInfo;
+      console.log("type::", type);
+      if (type === "coverPicture") {
+        return {
+          ..._userprofile,
+          coverPicture: { ...file },
+        };
+      } else {
+        return {
+          ..._userprofile,
+          profile: { ...file },
+        };
+      }
     }
     default:
       return _userprofile;

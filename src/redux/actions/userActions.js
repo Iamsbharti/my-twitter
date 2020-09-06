@@ -3,6 +3,7 @@ import {
   SESSION_STATE,
   GET_USER_INFO,
   UPDATE_USER_INFO,
+  UPDATE_USER_FILE,
 } from "./actionTypes";
 import * as userApi from "../../apis/usersApi";
 
@@ -34,5 +35,11 @@ export function updateUserInfo(userInfo) {
     let updatedInfo = await userApi.updateUserInfo(userInfo);
     console.log("udpatedInfo::", updatedInfo);
     dispatch({ type: UPDATE_USER_INFO, userInfo });
+  };
+}
+export function updateUserPictures(userInfo) {
+  console.log("update user pictures::", userInfo);
+  return (dispatch) => {
+    dispatch({ type: UPDATE_USER_FILE, userInfo });
   };
 }
