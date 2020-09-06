@@ -91,7 +91,6 @@ function PeopleList({ getAllChatAction }) {
   );
 }
 const mapStateToProps = ({ user, chat }) => {
-  console.log("chat::", chat);
   return { chat };
 };
 const mapActionToProps = {
