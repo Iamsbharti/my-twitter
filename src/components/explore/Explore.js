@@ -47,7 +47,6 @@ const mapStateToProps = ({ user, posts }) => {
   let hashTags = posts
     .map((post) => post.hashTags !== "" && post.hashTags)
     .toString();
-  console.log("hashtags::", hashTags);
 
   /**count the hashtags and hence its no of uses */
   let tweetCountMap = new Map();
@@ -59,7 +58,7 @@ const mapStateToProps = ({ user, posts }) => {
         ? tweetCountMap.set(tag, tweetCountMap.get(tag) + 1)
         : tweetCountMap.set(tag, count)
     );
-  console.log("tweetcountmap,", tweetCountMap);
+
   /**create an array of tags and related info */
   let tweetCountArray = [];
   [...tweetCountMap.keys()].map((key) =>
@@ -76,7 +75,6 @@ const mapStateToProps = ({ user, posts }) => {
     ...val,
     name: getFinalTrendsString(val.name),
   }));
-  console.log("tweetcountarray::", tweetCountArray);
 
   return { userId: user.userId, tweetCountArray };
 };
