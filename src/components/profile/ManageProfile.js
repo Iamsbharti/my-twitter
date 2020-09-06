@@ -17,7 +17,7 @@ const ManageProfile = ({
   handleUpdatePictures,
 }) => {
   const [userProfile, setProfile] = useState({});
-  const [fileType, setFileType] = useState("");
+
   useEffect(() => {
     setProfile(userInfo);
   }, [userInfo]);
@@ -32,8 +32,6 @@ const ManageProfile = ({
   };
   /**upload handler */
   const handleFileChange = (event) => {
-    console.log(event.target);
-    setFileType(event.target.name);
     uploadPicture(event);
   };
   const uploadPicture = (event) => {
