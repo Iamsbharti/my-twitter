@@ -34,13 +34,10 @@ function Comments({
   const [commenterror, setError] = useState(true);
   const handleAddReply = () => {
     SetToggle(!toggleComment);
-    //{/**onClick={() => SetToggle(!toggleComment)}*/}
-    //tweetsUpdate("comments");
   };
-  console.log("postId-userid::", userId, info.userId);
+
   /**invoke func of parent component for updates*/
   const tweetsUpdate = (updateType) => {
-    console.log("tweets updates invoked in Post ", updateType);
     let updateOptions = {
       postId: info.commentId,
       isComment: true,
@@ -74,7 +71,6 @@ function Comments({
       postId: postId,
     };
     deleteCommentAction(commentsInfo);
-    console.timeLog("invoke delete comments--redirect to /tweets");
     if (status) {
       history.push("/tweets");
     }
