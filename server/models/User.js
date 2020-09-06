@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Pictures = require("./Pictures");
-
+console.log("pictures:", Pictures.db.config);
 let userSchema = mongoose.Schema({
   userId: {
     type: String,
