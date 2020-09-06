@@ -8,29 +8,24 @@ import {
 import * as userApi from "../../apis/usersApi";
 
 export function loginAction(userInfo) {
-  console.log("login action");
-  //console.log("login-action");
   return async (dispatch) => {
     let loginResponse = await userApi.loginApi(userInfo);
     dispatch({ type: LOGIN, loginResponse });
   };
 }
 export function setUserState(userId) {
-  console.log("userinfo:: set state:", userId);
   return async (dispatch) => {
     let userInfo = await userApi.getUserInfo(userId);
     dispatch({ type: SESSION_STATE, userInfo });
   };
 }
 export function getUserInfo(userId) {
-  console.log("get user action");
   return async (dispatch) => {
     let userInfo = await userApi.getUserInfo(userId);
     dispatch({ type: GET_USER_INFO, userInfo });
   };
 }
 export function updateUserInfo(userInfo) {
-  console.log("update user action");
   return async (dispatch) => {
     let updatedInfo = await userApi.updateUserInfo(userInfo);
     console.log("udpatedInfo::", updatedInfo);
@@ -38,7 +33,6 @@ export function updateUserInfo(userInfo) {
   };
 }
 export function updateUserPictures(userInfo) {
-  console.log("update user pictures::", userInfo);
   return (dispatch) => {
     dispatch({ type: UPDATE_USER_FILE, userInfo });
   };
