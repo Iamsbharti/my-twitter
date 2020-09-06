@@ -188,6 +188,7 @@
 .manage__header__userinfo {
   margin-top: 40px;
   margin-left: 35px;
+  width: 600px;
 }
 .manage__header__userinfo > div > input {
   margin: 10px;
@@ -220,11 +221,41 @@
 .manage__header__website > input:focus {
   outline: none;
 }
-
+.manage__header__birthday {
+  display: flex;
+}
+.manage__header__birthday > input {
+  margin: 10px;
+  padding: 10px;
+  width: 84%;
+  border: none;
+  border-bottom: 3px solid var(--twitter-color);
+  font-weight: 900;
+  font-size: 18px;
+}
+.bday_label {
+  display: flex;
+  color: rgb(0, 145, 0);
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.bday_label > p {
+  margin-top: -25px;
+  margin-left: 26px;
+}
 .manage__header__birthday > input:focus {
   outline: none;
 }
-
+.edit_bdate_button {
+  background-color: white !important;
+  border: none !important;
+  color: var(--twitter-color) !important;
+  font-weight: 800 !important;
+  font-size: 16px !important;
+  text-transform: inherit !important;
+  margin-left: 10px !important;
+}
 .manage__user__avatar {
   border-radius: 89px;
   position: absolute;
@@ -252,4 +283,7 @@ input[type="file"] {
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+input[type="text"] {
+  outline: none;
 }

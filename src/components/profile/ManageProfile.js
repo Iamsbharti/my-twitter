@@ -6,15 +6,19 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { baseUrl } from "../../apis/apiUtils";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-
+import CakeIcon from "@material-ui/icons/Cake";
+import dateFormat from "dateformat";
 const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
   handleSaveProfile,
   uploadPicture,
 }) => {
-  const [userProfile, setProfile] = useState({});
-
+  let [userProfile, setProfile] = useState({});
+  const [date, setDate] = useState(dateFormat(userInfo.birthdate, "dd"));
+  const [month, setMonth] = useState(dateFormat(userInfo.birthdate, "mm"));
+  const [year, setYear] = useState(dateFormat(userInfo.birthdate, "yyyy"));
+  const [toggleEditBirthDate, setToggleBirthdate] = useState(true);
   useEffect(() => {
     setProfile(userInfo);
   }, [userInfo]);
@@ -31,7 +35,26 @@ const ManageProfile = ({
   const handleFileChange = (event) => {
     uploadPicture(event);
   };
-  const handleBirthDay = () => {};
+  const handleToggle = () => {
+    setToggleBirthdate(!toggleEditBirthDate);
+  };
+  /**save profile */
+  const saveProfile = () => {
+    console.log("save profile");
+    console.log("dateupdates::", date, month, year);
+    if (date !== undefined) {
+      userProfile = {
+        ...userProfile,
+        birthdate: new Date(
+          year,
+          (parseInt(month, 10) - 1).toString(),
+          date
+        ).toDateString(),
+      };
+    }
+    console.log("post birthdate updates::", userProfile);
+    handleSaveProfile(userProfile);
+  };
   return (
     <div className="profile">
       <div className="profileHeader">
@@ -58,10 +81,7 @@ const ManageProfile = ({
             }&authToken=${localStorage.getItem("authToken")}`}
             alt=""
           />
-          <Button
-            className="btn"
-            onClick={() => handleSaveProfile(userProfile)}
-          >
+          <Button className="btn" onClick={saveProfile}>
             Save Profile
           </Button>
         </div>
@@ -96,9 +116,9 @@ const ManageProfile = ({
         <div className="manage__header__username">
           <input
             type="text"
-            name="name"
             value={userProfile.name}
             onChange={handleChange}
+            name="name"
           />
         </div>
         <div className="manage__header__bio">
@@ -126,28 +146,46 @@ const ManageProfile = ({
             name="website"
           />
         </div>
-        <div className="manage__header__birthday">
+        <label htmlFor="birthday" className="bday_label">
+          <CakeIcon />
+          <p className="bday_p">BirthDay</p>
+        </label>
+        <Button className="edit_bdate_button" onClick={handleToggle}>
+          Edit
+        </Button>
+        <div>
           <input
             type="text"
-            value={userProfile.birthday && userProfile.birthday}
-            onChange={handleBirthDay}
-            name="date"
-            placeholder="Birth Day"
+            value={dateFormat(userProfile.birthdate, "mmmm dS,yyyy")}
+            onChange={handleChange}
+            name="birthday"
+            placeholder="You were born on"
           />
-          <input
-            type="text"
-            value={userProfile.birthday && userProfile.birthday}
-            onChange={handleBirthDay}
-            name="month"
-            placeholder="Birth Day"
-          />
-          <input
-            type="text"
-            value={userProfile.birthday && userProfile.birthday}
-            onChange={handleBirthDay}
-            name="year"
-            placeholder="Birth Day"
-          />
+        </div>
+        <div hidden={toggleEditBirthDate}>
+          <div className="manage__header__birthday">
+            <input
+              type="text"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              name="date"
+              placeholder="Date e.g. 26"
+            />
+            <input
+              type="text"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+              name="month"
+              placeholder="Month e.g. 04"
+            />
+            <input
+              type="text"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              name="year"
+              placeholder="Year e.g. 1995"
+            />
+          </div>
         </div>
       </div>
     </div>

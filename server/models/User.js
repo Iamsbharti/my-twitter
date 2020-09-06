@@ -41,7 +41,7 @@ let userSchema = mongoose.Schema({
     type: String,
   },
   birthdate: {
-    type: String,
+    type: Date,
   },
   following: {
     type: Number,

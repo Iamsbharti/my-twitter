@@ -121,9 +121,13 @@ function ProfilePresentation({
                     <span className="otherinfo">
                       {" "}
                       {userInfo.birthdate === "" ||
-                      userInfo.birthdate === undefined
+                      userInfo.birthdate === undefined ||
+                      userInfo.birthdate === null
                         ? "Not Updated"
-                        : dateFormat(userInfo.birthdate, "mmmm  dd,  yyyy")}
+                        : dateFormat(
+                            new Date(userInfo.birthdate),
+                            "mmmm  dd,  yyyy"
+                          )}
                     </span>
                   </div>
 
