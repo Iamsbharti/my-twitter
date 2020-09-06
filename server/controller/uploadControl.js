@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const path = require("path");
 const crypto = require("crypto");
+const User = require("../models/User");
+const EXCLUDE = "-__v -_id -password";
 const { formatResponse } = require("../library/formatResponse");
 const logger = require("../library/logger");
 const mongoURI = process.env.DB_CONNECT;
@@ -12,9 +14,9 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useUnifiedTopology", true);
 mongoose.connect(mongoURI.toString());
-const connection = mongoose.connection;
-/**init db connection */
 
+/**init db connection */
+const connection = mongoose.connection;
 /**init gfs */
 let gfs;
 connection.once("open", () => {
@@ -67,8 +69,33 @@ const fetchPictures = (req, res) => {
     readStream.pipe(res);
   });
 };
+const fetchPicturesForUserId = async (req, res) => {
+  logger.info(`Fetch Pictures for ${req.query.userId}`);
+  /**find file name of users*/
+  const getFileName = async () => {
+    let userDetails = await User.findOne({ userId: req.query.userId })
+      .select(EXCLUDE)
+      .populate("profile");
+
+    let { profile } = userDetails;
+    console.log("user-profile::", profile);
+    const filename = profile.filename;
+    return { filename: filename };
+  };
+
+  gfs.files.findOne(getFileName(), (error, file) => {
+    if (!file || file.length === 0) {
+      return res
+        .status(404)
+        .json(formatResponse(true, 404, "File Not Found", ""));
+    }
+    const readStream = gfs.createReadStream(file.filename);
+    readStream.pipe(res);
+  });
+};
 module.exports = {
   storage,
   fileFilter,
   fetchPictures,
+  fetchPicturesForUserId,
 };

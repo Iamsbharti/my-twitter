@@ -10,6 +10,7 @@ const {
   storage,
   fileFilter,
   fetchPictures,
+  fetchPicturesForUserId,
 } = require("../controller/uploadControl");
 const multer = require("multer");
 
@@ -59,6 +60,7 @@ router.post(
   users.uploadUsersPictures
 );
 router.get("/user/fetchPicture", isAuthorized, fetchPictures);
+router.get("/user/usersProfilePic", isAuthorized, fetchPicturesForUserId);
 /**post management */
 router.post(
   "/post/createPost",

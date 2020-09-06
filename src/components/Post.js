@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import Comments from "./Comments";
 import dateFormat from "dateformat";
 import socket from "./message/socket";
+import { baseUrl } from "../apis/apiUtils";
 function Post({
   info,
   updatePostAction,
@@ -30,6 +31,7 @@ function Post({
   status,
   profilecomments,
   posts,
+  currentUserProfile,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -97,11 +99,31 @@ function Post({
   const handleViewProfile = (userId) => {
     history.push(`/profile/${userId}`);
   };
+  /**fetch avatar */
+  const getAvatar = (userId) => {
+    console.log("getAvatar:", userId);
+    return fetch(
+      `${baseUrl}/api/v1/user/fetchPicture?filename=${
+        currentUserProfile.filename
+      }&authToken=${localStorage.getItem("authToken")}`
+    );
+  };
   return (
     <>
       <div className="post">
         <div className="post__avatar">
-          <Avatar src={process.env.PUBLIC_URL + "/logo512.png"}></Avatar>
+          {info.userId === userId ? (
+            <Avatar
+              src={
+                currentUserProfile &&
+                `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                  currentUserProfile.filename
+                }&authToken=${localStorage.getItem("authToken")}`
+              }
+            ></Avatar>
+          ) : (
+            <Avatar src={() => getAvatar(info.userId)}></Avatar>
+          )}
         </div>
 
         <div className="post__body">
@@ -271,8 +293,9 @@ function Post({
   );
 }
 const mapStateToProps = ({ user, posts }) => {
-  const { name, userId, username } = user.user;
-  return { userId, username, name, posts };
+  const { name, userId, username, profile } = user.user;
+
+  return { userId, username, name, currentUserProfile: profile, posts };
 };
 const mapActionToProps = {
   updatePostAction,
