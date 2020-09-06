@@ -4,6 +4,8 @@ import { Button } from "@material-ui/core";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { baseUrl } from "../../apis/apiUtils";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
@@ -36,13 +38,17 @@ const ManageProfile = ({
         </div>
         <div className="profile__coverpic">
           <img
-            src={process.env.PUBLIC_URL + "/coverpic.jpeg"}
+            src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+              userInfo.coverPicture.filename
+            }&authToken=${localStorage.getItem("authToken")}`}
             className="coverPic"
             alt=""
           />
           <img
             className="manage__user__avatar"
-            src={process.env.PUBLIC_URL + "/saurabh (2).jpg"}
+            src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+              userInfo.profile.filename
+            }&authToken=${localStorage.getItem("authToken")}`}
             alt=""
           />
           <Button
@@ -54,6 +60,22 @@ const ManageProfile = ({
         </div>
       </div>
       <div className="manage__header__userinfo">
+        <div className="upload_cover">
+          <div>
+            <label for="file-upload" class="custom-file-upload">
+              <CloudUploadIcon />
+              <p className="coverpic_label">Change Cover Pic</p>
+            </label>
+            <input id="file-upload" type="file" />
+          </div>
+          <div>
+            <label for="file-upload" class="custom-file-upload">
+              <CloudUploadIcon />
+              <p className="coverpic_label">Change Profile Pic</p>
+            </label>
+            <input id="file-upload" type="file" />
+          </div>
+        </div>
         <div className="manage__header__username">
           <input
             type="text"

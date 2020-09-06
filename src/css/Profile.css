@@ -186,7 +186,7 @@
 }
 /**manage profile*/
 .manage__header__userinfo {
-  margin-top: 10px;
+  margin-top: 40px;
   margin-left: 35px;
 }
 .manage__header__userinfo > div > input {
@@ -236,4 +236,20 @@
   object-fit: cover !important;
   text-align: center !important;
   text-indent: 10000px !important;
+}
+.upload_cover {
+  display: flex;
+}
+.coverpic_label {
+  margin-top: -25px;
+  margin-left: 26px;
+}
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  color: var(--twitter-color);
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
