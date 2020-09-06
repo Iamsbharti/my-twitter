@@ -15,7 +15,7 @@ import {
   deleteCommentAction,
 } from "../redux/actions/postAction";
 import { useHistory } from "react-router-dom";
-
+import { baseUrl } from "../apis/apiUtils";
 function Comments({
   info,
   updatePostAction,
@@ -27,6 +27,7 @@ function Comments({
   profilecomments,
   userPost,
   posts,
+  currentUserProfile,
 }) {
   /**define stated */
   const [toggleComment, SetToggle] = useState(true);
@@ -84,7 +85,22 @@ function Comments({
     <>
       <div className="comment">
         <div className="comment__avatar">
-          <Avatar src={process.env.PUBLIC_URL + "/logo512.png"}></Avatar>
+          {info.userId === userId ? (
+            <Avatar
+              src={
+                info &&
+                `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                  info.profile.filename
+                }&authToken=${localStorage.getItem("authToken")}`
+              }
+            ></Avatar>
+          ) : (
+            <Avatar
+              src={`${baseUrl}/api/v1/user/usersProfilePic?userId=${
+                info.userId
+              }&authToken=${localStorage.getItem("authToken")}`}
+            ></Avatar>
+          )}
         </div>
         <div className="comment__body">
           <div
@@ -206,7 +222,8 @@ function Comments({
 }
 const mapStateToProps = ({ user, posts }) => {
   console.log("state-user in Comment");
-  return { userId: user.user.userId, posts };
+
+  return { userId: user.user.userId, posts, currentUserProfile: user.user };
 };
 const mapActionToProps = {
   updatePostAction,
