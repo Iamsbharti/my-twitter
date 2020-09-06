@@ -6,6 +6,10 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { baseUrl } from "../../apis/apiUtils";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import axios from "axios";
+import FormData from "form-data";
+import { toast } from "react-toastify";
+
 const ManageProfile = ({
   userInfo,
   handleGoBackToProfile,
@@ -24,7 +28,36 @@ const ManageProfile = ({
       [name]: value,
     });
   };
+  /**upload handler */
+  const handleFileChange = (event) => {
+    uploadPicture(event);
+  };
+  const uploadPicture = (event) => {
+    console.log("uplaoding file");
+    let data = new FormData();
+    data.append("userId", userInfo.userId);
+    data.append("type", event.target.name);
+    data.append("file", event.target.files[0]);
+    let config = {
+      method: "post",
+      url: `${baseUrl}/api/v1/user/fileUpload?authToken=${localStorage.getItem(
+        "authToken"
+      )}`,
+      data: data,
+    };
 
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        if (!response.data.error) {
+          toast.success(`${event.target.name} Upload Sucess`);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.success(`${event.target.name} Upload Error`);
+      });
+  };
   return (
     <div className="profile">
       <div className="profileHeader">
@@ -62,18 +95,28 @@ const ManageProfile = ({
       <div className="manage__header__userinfo">
         <div className="upload_cover">
           <div>
-            <label for="file-upload" class="custom-file-upload">
+            <label htmlFor="file-upload" className="custom-file-upload">
               <CloudUploadIcon />
               <p className="coverpic_label">Change Cover Pic</p>
             </label>
-            <input id="file-upload" type="file" />
+            <input
+              id="file-upload"
+              type="file"
+              name="coverPicture"
+              onChange={handleFileChange}
+            />
           </div>
           <div>
-            <label for="file-upload" class="custom-file-upload">
+            <label htmlFor="file-upload" className="custom-file-upload">
               <CloudUploadIcon />
               <p className="coverpic_label">Change Profile Pic</p>
             </label>
-            <input id="file-upload" type="file" />
+            <input
+              id="file-upload"
+              type="file"
+              name="profile"
+              onChange={handleFileChange}
+            />
           </div>
         </div>
         <div className="manage__header__username">

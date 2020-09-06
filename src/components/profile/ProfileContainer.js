@@ -6,6 +6,7 @@ import ProfilePresentation from "./ProfilePresentation";
 import { getUserInfo } from "../../redux/actions/userActions";
 import { getAllPostsAction } from "../../redux/actions/postAction";
 import { updateUserInfo } from "../../redux/actions/userActions";
+import { ToastContainer } from "react-toastify";
 function Profile({
   userId,
   getUserInfo,
@@ -142,6 +143,7 @@ function Profile({
         saveProfile={saveProfile}
         handleGoBackToProfile={cancelEditProfile}
       />
+      <ToastContainer autoClose={1000} hideProgressBar />
     </>
   );
 }
