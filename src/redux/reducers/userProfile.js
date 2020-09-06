@@ -10,12 +10,12 @@ export function profileReducer(_userprofile = userprofile, action) {
       return action.userInfo;
     case UPDATE_USER_INFO: {
       const { userId, updates } = action.userInfo;
-      console.log("userid,updates::", userId, updates);
+      console.log("userid,updates::", userId);
       const { followers } = updates;
       if (followers) {
         var [followerId, ops] = followers.split(":");
       }
-      console.log("followerid,action:", followerId, ops);
+
       return {
         ..._userprofile,
         ...updates,
@@ -27,7 +27,6 @@ export function profileReducer(_userprofile = userprofile, action) {
     }
     case UPDATE_USER_FILE: {
       const { type, file } = action.userInfo;
-      console.log("type::", type);
       if (type === "coverPicture") {
         return {
           ..._userprofile,
