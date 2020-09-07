@@ -44,9 +44,19 @@
   height: 45px;
   margin-left: 15px;
 }
-
+.sidebar__responsive {
+  display: none;
+}
 @media (max-width: 800px) {
   .sidebar {
     display: none;
+  }
+  .sidebar__responsive {
+    display: block;
+    margin: 10px;
+  }
+  .sidebar_responsive_avatar > .MuiAvatar-root {
+    width: 30px !important;
+    height: 30px !important;
   }
 }
