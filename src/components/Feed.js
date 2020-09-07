@@ -18,7 +18,19 @@ import { Avatar } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { baseUrl } from "../apis/apiUtils";
 import socket from "./message/socket";
-
+import Homeicon from "@material-ui/icons/Home";
+import Searchicon from "@material-ui/icons/Search";
+import NotificationsNoneicon from "@material-ui/icons/NotificationsNone";
+import Emailicon from "@material-ui/icons/Email";
+import BookmarkBordericon from "@material-ui/icons/BookmarkBorder";
+import ListAlticon from "@material-ui/icons/ListAlt";
+import PermIdentityicon from "@material-ui/icons/PermIdentity";
+import MoreHorizicon from "@material-ui/icons/MoreHoriz";
+import SideBarOptions from "./SideBarOptions";
+import "../css/SideBar.css";
+import { Button } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 function Feed({
   isAuthenticated,
   userId,
@@ -34,6 +46,7 @@ function Feed({
   updatePostBasedOnSocket,
   socketCreatePostAction,
   profile,
+  userInfo,
 }) {
   /**define state */
   let history = useHistory();
@@ -143,22 +156,70 @@ function Feed({
 
     return windowDimensions;
   }
-  /**hide tweetbox for mobile device */
+  /**hide tweetbox & header for mobile device */
+  const [displayHeader, setHeader] = useState(false);
   const { height, width } = useWindowDimensions();
   useEffect(() => {
-    console.log("windowdimensions::", height, width);
     if (width <= 800) {
       console.log("hiding tweet box");
       setAddTweetBox(true);
+      setHeader(true);
     }
   }, [height, width]);
   /**toggle tweet box */
   const handleToggleTweetBox = () => {
     setAddTweetBox(!toggleAddtweet);
   };
+  /**handle responsive sidebar nav */
+  const [toggleSideBar, setToggleSideBar] = useState(true);
+  const handleDisplaySideBar = () => {
+    setToggleSideBar(!toggleSideBar);
+  };
+  let responsiveSideBar = (
+    <div>
+      <div className="sidebar__responsive">
+        <div className="sidebar_responsive_header">
+          <p>Account info</p>
+          <span>
+            <CloseIcon onClick={handleDisplaySideBar} />
+          </span>
+        </div>
+        <div className="sidebar_responsive__userinfo">
+          <p>{userInfo.name}</p>
+          <p>@{userInfo.username}</p>
+        </div>
+        <div className="sidebar__responsive__profile">
+          <p>
+            <span className="sidebar__responsive__number">
+              {userInfo.following}
+            </span>
+            <span className="sidebar__responsive__span">Following</span>
+          </p>
+
+          <p>
+            <span className="sidebar__responsive__number">
+              {userInfo.followers && userInfo.followers.length}
+            </span>
+            <span className="sidebar__responsive__span">Followers</span>
+          </p>
+        </div>
+
+        <SideBarOptions text="Home" Icon={Homeicon} active />
+        <SideBarOptions text="Explore" Icon={Searchicon} />
+        <SideBarOptions text="Notifications" Icon={NotificationsNoneicon} />
+        <SideBarOptions text="Messages" Icon={Emailicon} />
+        <SideBarOptions text="Booksmarks" Icon={BookmarkBordericon} />
+        <SideBarOptions text="Lists" Icon={ListAlticon} />
+        <SideBarOptions text="Profile" Icon={PermIdentityicon} />
+        <SideBarOptions text="More" Icon={MoreHorizicon} />
+        <SideBarOptions text="Logout" Icon={ExitToAppIcon} />
+      </div>
+    </div>
+  );
 
   return (
     <>
+      <div hidden={toggleSideBar}>{responsiveSideBar}</div>
       <div className="feed">
         {localStorage.getItem("authToken") ? (
           <>
@@ -179,21 +240,29 @@ function Feed({
                   </>
                 ) : (
                   <>
-                    <Avatar
-                      className="header__responsive"
-                      src={
-                        profile &&
-                        `${baseUrl}/api/v1/user/fetchPicture?filename=${
-                          profile.filename
-                        }&authToken=${localStorage.getItem("authToken")}`
-                      }
-                    ></Avatar>
-                    <h2>Home</h2>
-                    <AddCircleOutlineIcon
-                      className="header__responsive addTweetIcon"
-                      fontSize="large"
-                      onClick={handleToggleTweetBox}
-                    />
+                    {displayHeader ? (
+                      <>
+                        <Avatar
+                          className="header__responsive"
+                          hidden={toggleAddtweet}
+                          onClick={handleDisplaySideBar}
+                          src={
+                            profile &&
+                            `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                              profile.filename
+                            }&authToken=${localStorage.getItem("authToken")}`
+                          }
+                        ></Avatar>
+                        <h2>Home</h2>
+                        <AddCircleOutlineIcon
+                          className="header__responsive addTweetIcon"
+                          fontSize="large"
+                          onClick={handleToggleTweetBox}
+                        />
+                      </>
+                    ) : (
+                      <h2>Home</h2>
+                    )}
                   </>
                 )
               ) : (
@@ -243,7 +312,15 @@ function Feed({
 }
 const mapStateToProps = ({ posts, user }, ownProps) => {
   let { userId, isAuthenticated, name, username, profile } = user.user;
-  return { posts, userId, isAuthenticated, name, username, profile };
+  return {
+    posts,
+    userId,
+    isAuthenticated,
+    name,
+    username,
+    profile,
+    userInfo: user.user,
+  };
 };
 const mapActionToProps = {
   createPostAction,

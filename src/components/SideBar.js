@@ -9,12 +9,10 @@ import PermIdentityicon from "@material-ui/icons/PermIdentity";
 import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
 import "../css/SideBar.css";
-import { Avatar, Button } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-
-import { baseUrl } from "../apis/apiUtils";
+import { Button, Avatar } from "@material-ui/core";
 import { connect } from "react-redux";
-
+import CloseIcon from "@material-ui/icons/Close";
+import { baseUrl } from "../apis/apiUtils";
 function SideBar({ userInfo }) {
   return (
     <>
@@ -36,7 +34,7 @@ function SideBar({ userInfo }) {
           Tweet
         </Button>
       </div>
-      <div>
+      {/*<div>
         <div className="sidebar__responsive">
           <div className="sidebar_responsive_header">
             <p>Account info</p>
@@ -86,7 +84,7 @@ function SideBar({ userInfo }) {
             Logout
           </Button>
         </div>
-      </div>
+      </div>*/}
     </>
   );
 }

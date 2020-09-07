@@ -88,3 +88,79 @@
     cursor: pointer;
   }
 }
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+  .sidebar__responsive_menubar {
+    display: block;
+  }
+  .sidebar__responsive {
+    display: block;
+    border-right: 1px solid var(--twitter-bg);
+    min-width: 250px;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    position: fixed;
+    z-index: 1;
+    top: 58px;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.9s;
+    background-color: aliceblue;
+  }
+  .sidebar_responsive_header {
+    display: flex;
+    border-bottom: 1px solid var(--twitter-color);
+    justify-content: space-between;
+  }
+  .sidebar_responsive_header > span {
+    color: var(--twitter-color);
+  }
+  .sidebar_responsive_header > p {
+    font-weight: 800;
+    font-size: 15px;
+    padding: 5px;
+    margin-bottom: 9px;
+  }
+  .sidebar_responsive_avatar {
+    margin-top: 8px;
+  }
+  .sidebar_responsive_avatar > .MuiAvatar-root {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .sidebar_responsive__userinfo {
+    margin-top: 8px;
+  }
+  .sidebar_responsive__userinfo > p {
+    color: gray;
+    font-size: 14px;
+  }
+  .sidebar__responsive__profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-left: -43px;
+  }
+  .sidebar__responsive__span {
+    margin-left: 3px;
+    color: gray;
+    font-size: 14px;
+  }
+  .sidebar__responsive__number {
+    font-weight: 200;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+  .sideBarOptions > .MuiSvgIcon-root {
+    padding: 15px 15px 15px 0px;
+  }
+  .sideBarOptions > h2 {
+    font-weight: 450;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+}
