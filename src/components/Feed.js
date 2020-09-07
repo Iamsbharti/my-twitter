@@ -27,8 +27,6 @@ import ListAlticon from "@material-ui/icons/ListAlt";
 import PermIdentityicon from "@material-ui/icons/PermIdentity";
 import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
-import "../css/SideBar.css";
-import { Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 function Feed({

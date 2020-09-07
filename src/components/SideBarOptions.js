@@ -36,6 +36,12 @@ function SideBarOptions({ text, Icon, active }) {
         console.log("opening lists page");
         history.push("/lists");
         break;
+      case "Logout":
+        console.log("logging out");
+        /**clear localstorage */
+        localStorage.clear();
+        setTimeout(() => history.push("/"), 1000);
+        break;
       default:
     }
   };
