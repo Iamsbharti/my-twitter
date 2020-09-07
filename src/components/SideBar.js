@@ -10,6 +10,7 @@ import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
 import "../css/SideBar.css";
 import { Avatar, Button } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { baseUrl } from "../apis/apiUtils";
 import { connect } from "react-redux";
 function SideBar({ userInfo }) {
@@ -34,6 +35,12 @@ function SideBar({ userInfo }) {
         </Button>
       </div>
       <div className="sidebar__responsive">
+        <div className="sidebar_responsive_header">
+          <p>Account info</p>
+          <span>
+            <CloseIcon />
+          </span>
+        </div>
         <div className="sidebar_responsive_avatar">
           <Avatar
             src={
@@ -44,6 +51,7 @@ function SideBar({ userInfo }) {
             }
           ></Avatar>
         </div>
+
         <SideBarOptions text="Home" Icon={Homeicon} active />
         <SideBarOptions text="Explore" Icon={Searchicon} />
         <SideBarOptions text="Notifications" Icon={NotificationsNoneicon} />

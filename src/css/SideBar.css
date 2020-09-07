@@ -55,6 +55,23 @@
     display: block;
     margin: 10px;
   }
+  .sidebar_responsive_header {
+    display: flex;
+    border-bottom: 1px solid var(--twitter-color);
+    justify-content: space-between;
+  }
+  .sidebar_responsive_header > span {
+    color: var(--twitter-color);
+  }
+  .sidebar_responsive_header > p {
+    font-weight: 800;
+    font-size: 15px;
+    padding: 2px;
+    margin-bottom: 9px;
+  }
+  .sidebar_responsive_avatar {
+    margin-top: 8px;
+  }
   .sidebar_responsive_avatar > .MuiAvatar-root {
     width: 30px !important;
     height: 30px !important;
