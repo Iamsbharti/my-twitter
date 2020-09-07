@@ -55,6 +55,7 @@ function Feed({
   }, [userId]);
   /**tweet */
   const tweet = async (text, image) => {
+    console.log("new tweets");
     let newTweetInfo = {
       description: text,
       displayName: name,
@@ -62,10 +63,14 @@ function Feed({
       userName: username,
       image: image !== undefined ? image : "",
     };
-
+    console.log("new tweet info:", newTweetInfo);
     /**get the new post response and emit the same */
     let newPostresponse = await createPostAction(newTweetInfo);
-
+    /**hide tweetbox after new tweet is posted for mobile device */
+    if (width <= 800) {
+      console.log("hiding tweet box");
+      setAddTweetBox(true);
+    }
     /**emit tweets action to the followers */
     let socketInfo = {
       tweetsUserId: userId,
@@ -147,6 +152,10 @@ function Feed({
       setAddTweetBox(true);
     }
   }, [height, width]);
+  /**toggle tweet box */
+  const handleToggleTweetBox = () => {
+    setAddTweetBox(!toggleAddtweet);
+  };
 
   return (
     <>
@@ -183,6 +192,7 @@ function Feed({
                     <AddCircleOutlineIcon
                       className="header__responsive addTweetIcon"
                       fontSize="large"
+                      onClick={handleToggleTweetBox}
                     />
                   </>
                 )

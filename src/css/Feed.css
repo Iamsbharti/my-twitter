@@ -85,5 +85,6 @@
     color: var(--twitter-color);
     margin-top: 6px;
     margin-left: 175px;
+    cursor: pointer;
   }
 }
