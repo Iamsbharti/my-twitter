@@ -175,3 +175,17 @@
   border-bottom: 2px solid var(--twitter-color);
   transition: cubic-bezier(0.19, 1, 0.22, 1);
 }
+/**/
+@media (max-width: 800px) {
+  .post__footer {
+    display: flex;
+    justify-content: space-between;
+    margin-left: -42px;
+  }
+  .post__avatar {
+    padding: 15px 15px 15px 0px;
+  }
+  .post__body {
+    padding: 10px;
+  }
+}

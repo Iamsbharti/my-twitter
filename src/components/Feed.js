@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Feed.css";
 import TweetBox from "./TweetBox";
 import Post from "./Post";
@@ -14,6 +14,9 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Avatar } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { baseUrl } from "../apis/apiUtils";
 import socket from "./message/socket";
 
 function Feed({
@@ -30,6 +33,7 @@ function Feed({
   bookmarks,
   updatePostBasedOnSocket,
   socketCreatePostAction,
+  profile,
 }) {
   /**define state */
   let history = useHistory();
@@ -110,6 +114,39 @@ function Feed({
       }
     });
   }, [userId, updatePostBasedOnSocket]);
+  /**handle responsiveness for tweet box and side bar */
+  /**compute the current window size */
+  const [toggleAddtweet, setAddTweetBox] = useState(false);
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
+  function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(
+      getWindowDimensions()
+    );
+    useEffect(() => {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+      }
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return windowDimensions;
+  }
+  /**hide tweetbox for mobile device */
+  const { height, width } = useWindowDimensions();
+  useEffect(() => {
+    console.log("windowdimensions::", height, width);
+    if (width <= 800) {
+      console.log("hiding tweet box");
+      setAddTweetBox(true);
+    }
+  }, [height, width]);
 
   return (
     <>
@@ -132,7 +169,22 @@ function Feed({
                     <p>BookMarks</p>
                   </>
                 ) : (
-                  <h2>Home</h2>
+                  <>
+                    <Avatar
+                      className="header__responsive"
+                      src={
+                        profile &&
+                        `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                          profile.filename
+                        }&authToken=${localStorage.getItem("authToken")}`
+                      }
+                    ></Avatar>
+                    <h2>Home</h2>
+                    <AddCircleOutlineIcon
+                      className="header__responsive addTweetIcon"
+                      fontSize="large"
+                    />
+                  </>
                 )
               ) : (
                 <div className="status__header">
@@ -150,7 +202,9 @@ function Feed({
               bookmark ? (
                 ""
               ) : (
-                <TweetBox postTweet={tweet} />
+                <div hidden={toggleAddtweet}>
+                  <TweetBox postTweet={tweet} />
+                </div>
               )
             ) : (
               ""
@@ -178,8 +232,8 @@ function Feed({
   );
 }
 const mapStateToProps = ({ posts, user }, ownProps) => {
-  let { userId, isAuthenticated, name, username } = user.user;
-  return { posts, userId, isAuthenticated, name, username };
+  let { userId, isAuthenticated, name, username, profile } = user.user;
+  return { posts, userId, isAuthenticated, name, username, profile };
 };
 const mapActionToProps = {
   createPostAction,

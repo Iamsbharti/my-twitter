@@ -47,13 +47,24 @@
 .sidebar__responsive {
   display: none;
 }
+.sidebar__responsive_menubar {
+  display: none;
+}
 @media (max-width: 800px) {
   .sidebar {
     display: none;
   }
-  .sidebar__responsive {
+  .sidebar__responsive_menubar {
     display: block;
-    margin: 10px;
+  }
+  .sidebar__responsive {
+    display: none;
+    border-right: 1px solid var(--twitter-bg);
+    flex: 0.2;
+    min-width: 250px;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
   }
   .sidebar_responsive_header {
     display: flex;
@@ -75,5 +86,37 @@
   .sidebar_responsive_avatar > .MuiAvatar-root {
     width: 30px !important;
     height: 30px !important;
+  }
+  .sidebar_responsive__userinfo {
+    margin-top: 8px;
+  }
+  .sidebar_responsive__userinfo > p {
+    color: gray;
+    font-size: 14px;
+  }
+  .sidebar__responsive__profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-left: -43px;
+  }
+  .sidebar__responsive__span {
+    margin-left: 3px;
+    color: gray;
+    font-size: 14px;
+  }
+  .sidebar__responsive__number {
+    font-weight: 200;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+  .sideBarOptions > .MuiSvgIcon-root {
+    padding: 15px 15px 15px 0px;
+  }
+  .sideBarOptions > h2 {
+    font-weight: 450;
+    font-size: 14px;
+    margin-right: 10px;
   }
 }

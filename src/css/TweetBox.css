@@ -49,3 +49,9 @@
 .gifIcon:hover {
   color: blue;
 }
+@media (max-width: 800px) {
+  .tweet--input {
+    display: flex;
+    padding: 20px 20px 20px 0px;
+  }
+}

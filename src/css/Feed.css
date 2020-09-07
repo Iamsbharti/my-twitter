@@ -51,3 +51,39 @@
   color: blue;
   border-radius: 30px;
 }
+.header__responsive {
+  display: none;
+}
+@media (max-width: 800px) {
+  .feed {
+    flex: 1.1;
+    flex-basis: auto;
+    border-right: 1px solid var(--twitter-bg);
+    min-width: fit-content;
+    overflow-y: scroll;
+  }
+  .header__responsive {
+    display: inline;
+  }
+  .header___nonresponsive {
+    display: none;
+  }
+  .feedHeader {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid var(--twitter-bg);
+    padding: 15px 20px 20px 0px;
+  }
+  .feedHeader > h2 {
+    margin-top: 11px;
+    margin-left: 50px;
+  }
+  .addTweetIcon {
+    color: var(--twitter-color);
+    margin-top: 6px;
+    margin-left: 175px;
+  }
+}
