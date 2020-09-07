@@ -2,10 +2,14 @@ import React from "react";
 import "../../css/Feed.css";
 import "../../css/Post.css";
 import { useHistory } from "react-router-dom";
-
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 function HashTagsFeed({ hashTagsArray }) {
   /**define state */
   let history = useHistory();
+  /**route back to feed  */
+  const handleBackToFeed = () => {
+    history.push("/tweets");
+  };
   return (
     <>
       <div className="feed">
@@ -13,9 +17,13 @@ function HashTagsFeed({ hashTagsArray }) {
           <>
             <div className="feedHeader">
               <div className="status__header">
-                <div>
-                  <h3>HashTags</h3>
-                </div>
+                <ArrowBackIcon
+                  fontSize="large"
+                  className="status__icon"
+                  onClick={handleBackToFeed}
+                />
+                <h3>HashTags</h3>
+
                 <div className="status__header__img">
                   <img src={process.env.PUBLIC_URL + "/hashtags.png"} alt="" />
                 </div>
