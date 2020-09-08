@@ -437,4 +437,21 @@
     border: none;
     background-color: var(--twitter-bg);
   }
+  .peoplelistHeader {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid var(--twitter-bg);
+    padding: 15px 20px;
+  }
+  .chat__header {
+    display: flex;
+    padding: 5px;
+  }
+  .chat__header__username {
+    margin-left: 105px;
+    margin-top: -17px;
+    color: gray;
+  }
 }

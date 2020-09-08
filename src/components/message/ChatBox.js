@@ -11,6 +11,9 @@ import dateFormat from "dateformat";
 import socket from "./socket";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../apis/apiUtils";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { useHistory } from "react-router-dom";
+
 function ChatBox({
   content,
   user,
@@ -21,7 +24,11 @@ function ChatBox({
 }) {
   const [text, setTextMsg] = useState("");
   const messagesEndRef = React.createRef();
-
+  /**route back to feed  */
+  let history = useHistory();
+  const handleBackToFeed = () => {
+    history.goBack();
+  };
   /**send message */
   const sendMessage = () => {
     let textMessagePayload = {
@@ -72,6 +79,11 @@ function ChatBox({
         <>
           <div className="peoplelistHeader">
             <div className="chat__header">
+              <ArrowBackIcon
+                fontSize="large"
+                className="status__icon"
+                onClick={handleBackToFeed}
+              />
               <Avatar
                 src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
                   user.profile.filename

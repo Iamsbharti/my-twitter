@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { baseUrl } from "../../apis/apiUtils";
 import CloseIcon from "@material-ui/icons/Close";
 import ListIcon from "@material-ui/icons/List";
+
 function PeopleList({ getAllChatAction }) {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
@@ -19,6 +20,7 @@ function PeopleList({ getAllChatAction }) {
   const [chatUser, setChatUser] = useState({});
   const [toggleFriendList, setToggleList] = useState(true);
   const userId = localStorage.getItem("userId");
+
   /**api call */
   useEffect(() => {
     async function fetchData() {
