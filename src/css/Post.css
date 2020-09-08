@@ -210,4 +210,13 @@
     margin-top: 8px !important;
     border-radius: 29px !important;
   }
+  .post__details > p {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  .post_details__date > span {
+    color: var(--twitter-color);
+    margin-left: 51px;
+  }
 }
