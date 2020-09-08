@@ -54,8 +54,13 @@ function Login({ loginAction, message, error, isAuthenticated }) {
       setTimeout(() => history.push("/tweets"), 1200);
     }
   }, [isAuthenticated, message, error, history]);
+  const handleLoginByEnter = (event) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
   return (
-    <div className="login">
+    <div className="login" onKeyDown={handleLoginByEnter}>
       <img src={process.env.PUBLIC_URL + "/apple-icon-114x114.png"} alt="" />
       <h2>Log in to my-twitter</h2>
       <div className="login__inputs">
@@ -63,6 +68,8 @@ function Login({ loginAction, message, error, isAuthenticated }) {
           type="text"
           placeholder="email or username"
           name="loginId"
+          autoFocus
+          required
           value={loginId}
           onChange={handleChange}
         />
@@ -71,6 +78,7 @@ function Login({ loginAction, message, error, isAuthenticated }) {
           placeholder="Password"
           name="password"
           value={password}
+          required
           onChange={handleChange}
         />
         <span className={errorClassName}>{authenticating && status}</span>

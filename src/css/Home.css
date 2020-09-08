@@ -445,6 +445,16 @@ h4 {
     margin-left: 20px;
     margin-top: 14px;
   }
+  .signup__success {
+    color: green;
+    transition: ease-in 2sec;
+    margin-left: 20px;
+  }
+  .signup__error {
+    color: red;
+    transition: ease-in 2sec;
+    margin-left: 20px;
+  }
 }
 @media (max-width: 320px) {
   .signup {
@@ -533,6 +543,16 @@ h4 {
   .span__message {
     margin-left: 20px;
     margin-top: 20px;
+  }
+  .signup__success {
+    color: green;
+    transition: ease-in 2sec;
+    margin-left: 20px;
+  }
+  .signup__error {
+    color: red;
+    transition: ease-in 2sec;
+    margin-left: 20px;
   }
 }
 @media (min-width: 1024px) {
