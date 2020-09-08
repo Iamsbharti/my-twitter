@@ -371,6 +371,38 @@ h4 {
     margin-left: 13px;
     width: max-content;
   }
+  .forgot__password > h2 {
+    font-weight: bolder;
+    font-size: 29px;
+    margin-bottom: 50px;
+    margin: 22px;
+  }
+  .forgot__password > code {
+    margin-bottom: 50px;
+    font-size: 24px;
+    margin-left: 20px;
+  }
+  .forgot__password > input {
+    border-radius: 20px;
+    width: 311px;
+    height: 34px;
+    font-size: 20px;
+    margin-left: 20px;
+    border-color: var(--twitter-color);
+  }
+  .forgot__password > button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px !important;
+    margin-top: 20px !important;
+    margin-left: 20px !important;
+    width: 120px;
+  }
 }
 @media (max-width: 320px) {
   .signup {
@@ -396,7 +428,44 @@ h4 {
     font-size: 20px;
     border-bottom: 1px solid var(--twitter-color);
   }
+  .forgot__password > input {
+    border-radius: 20px;
+    width: 289px;
+    height: 34px;
+    font-size: 20px;
+    margin-left: 5px;
+    border-color: var(--twitter-color);
+  }
+  .forgot__password > button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px !important;
+    margin-top: 47px !important;
+    margin-left: 81px !important;
+    width: 120px;
+  }
 }
+@media (min-width: 1024px) {
+  .forgot__password {
+    display: grid;
+    justify-content: center;
+    margin-top: 228px;
+    font-size: 30px;
+  }
+  .forgot__nav {
+    display: flex;
+    border-bottom: 1px solid var(--twitter-color);
+    justify-content: center;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    font-size: 30px;
+  }
+}
+
 /*@media (max-width: 768px) {
   .login {
     display: block;
