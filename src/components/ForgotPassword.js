@@ -90,10 +90,15 @@ function ForgotPassword() {
           <input
             type="text"
             name="loginId"
+            autoFocus
+            required
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
           />
           <Button onClick={sendRecoveryCode}>Search</Button>
+          <p className="cancel__span" onClick={() => history.goBack()}>
+            Cancel
+          </p>
           <span
             style={{ color: apiErrorRes ? "red" : "green", marginTop: "10px" }}
           >
@@ -139,6 +144,7 @@ function ForgotPassword() {
           </span>
           <Button onClick={handleResetPassword}>Reset Password</Button>
           <span
+            className="span__message"
             style={{ color: apiErrorRes ? "red" : "green", marginTop: "10px" }}
           >
             {errorRes}

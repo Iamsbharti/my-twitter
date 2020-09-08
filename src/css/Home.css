@@ -295,6 +295,13 @@ h4 {
 .reset__password > input:focus {
   outline: none;
 }
+.cancel__span {
+  margin-left: 20px;
+  margin-top: 20px;
+  color: var(--twitter-color);
+  font-size: 20px;
+  cursor: pointer;
+}
 @media (max-width: 800px) {
   .home {
     display: block;
@@ -403,6 +410,41 @@ h4 {
     margin-left: 20px !important;
     width: 120px;
   }
+  .recovery__code > h2 {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-left: 21px;
+  }
+  .recovery__code > code {
+    margin-left: 20px;
+  }
+  .recovery__code > input {
+    border-radius: 20px;
+    width: 350px;
+    height: 34px;
+    font-size: 20px;
+    border-color: var(--twitter-color);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+  }
+  .recovery__code > button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 40px !important;
+    margin-top: 20px !important;
+    width: 350px;
+    margin-left: 20px !important;
+  }
+  .recovery__code > span {
+    margin-left: 20px;
+    margin-top: 14px;
+  }
 }
 @media (max-width: 320px) {
   .signup {
@@ -449,12 +491,55 @@ h4 {
     margin-left: 81px !important;
     width: 120px;
   }
+  .recovery__code {
+    display: grid;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 16px;
+    margin-left: 29px;
+  }
+  .recovery__code > h2 {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-left: 22px;
+    font-size: 18px;
+  }
+  .recovery__code > code {
+    margin-left: 20px;
+  }
+  .recovery__code > input {
+    border-radius: 20px;
+    width: 330px;
+    height: 34px;
+    font-size: 20px;
+    border-color: var(--twitter-color);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 23px;
+  }
+  .recovery__code > button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 40px !important;
+    margin-top: 20px !important;
+    width: 350px;
+    margin-left: 20px !important;
+  }
+  .span__message {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
 }
 @media (min-width: 1024px) {
   .forgot__password {
     display: grid;
     justify-content: center;
-    margin-top: 228px;
+    margin-top: 20px;
     font-size: 30px;
   }
   .forgot__nav {
