@@ -287,3 +287,66 @@ input[type="file"] {
 input[type="text"] {
   outline: none;
 }
+@media (max-width: 800px) {
+  .profile {
+    flex: 1.1;
+    border-right: 1px solid var(--twitter-bg);
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    overflow-y: scroll;
+    border-bottom: 1px solid var(--twitter-color);
+  }
+  .profileHeader {
+    position: relative;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    padding: 15px 20px;
+  }
+  .profile__coverpic > img {
+    width: 362px;
+    height: 197px;
+  }
+  .profile__user__avatar {
+    border-radius: 124px;
+    position: absolute;
+    top: 211px !important;
+    left: 25px !important;
+    color: transparent !important;
+    width: 22% !important;
+    height: 27% !important;
+    object-fit: cover !important;
+    text-align: center !important;
+    text-indent: 10000px !important;
+  }
+  .profile__coverpic > button {
+    background-color: white !important;
+    border: 2px solid var(--twitter-color) !important;
+    border-color: var(--twitter-color) !important;
+    color: var(--twitter-color) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    text-transform: inherit !important;
+    height: 39px !important;
+    margin-left: 234px !important;
+    border-radius: 20px !important;
+    margin-top: 10px !important;
+    width: 130px !important;
+  }
+  .profile__header__userinfo {
+    margin-top: -1px;
+    margin-left: 18px;
+  }
+  .profile__header__otherinfo {
+    display: grid;
+    margin-left: -24px;
+    margin-top: 10px;
+    color: gray;
+    justify-content: flex-start;
+  }
+  .otherinfo {
+    position: relative;
+    top: -5px;
+    margin-left: 8px;
+  }
+}
