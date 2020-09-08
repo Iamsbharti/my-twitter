@@ -109,3 +109,13 @@
 .icon__comment__error > span {
   color: gray;
 }
+@media (max-width: 800px) {
+  .comment__footer {
+    display: flex;
+    justify-content: space-between;
+    margin-left: -42px;
+  }
+  .comment__body {
+    padding: 10px;
+  }
+}

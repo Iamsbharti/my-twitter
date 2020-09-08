@@ -90,7 +90,7 @@ function Comments({
               src={
                 info &&
                 `${baseUrl}/api/v1/user/fetchPicture?filename=${
-                  info.profile.filename
+                  currentUserProfile.profile.filename
                 }&authToken=${localStorage.getItem("authToken")}`
               }
             ></Avatar>
