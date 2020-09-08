@@ -3,7 +3,8 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import "../css/Home.css";
 import { signup, resetPassword } from "../apis/usersApi";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Signup() {
   let history = useHistory();
   /**define signup-state */
@@ -66,7 +67,10 @@ function Signup() {
     error ? setClassName("signup__error") : setClassName("signup__success");
     /**clear the form */
     if (error) {
-      setError("Try Again...");
+      if (message === "") {
+        setError("Try Again...");
+      }
+
       setTimeout(() => {
         setName("");
         setEmail("");
@@ -125,10 +129,15 @@ function Signup() {
         : setPwdMatchError("Passwords Doesn't Match");
     }
   }, [password, confirmPwd]);
+  const handleSignUpByLogin = (event) => {
+    if (event.key === "Enter") {
+      signUpUser(event);
+    }
+  };
   return (
     <div>
       <div hidden={toggleSignupDiv}>
-        <div className="signup">
+        <div className="signup" onKeyDown={handleSignUpByLogin}>
           <div className="signup__content">
             <div className="signup__nav">
               <img
@@ -215,6 +224,7 @@ function Signup() {
           </span>
         </div>
       </div>
+      <ToastContainer autoClose={1000} hideProgressBar />
     </div>
   );
 }
