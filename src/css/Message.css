@@ -310,11 +310,96 @@
   margin-top: 19px;
   margin-left: 135px;
 }
+.responsive__friendList_menu {
+  display: none;
+}
 @media (max-width: 800px) {
   .peoplelist {
     display: none;
   }
   .chatbox {
     flex: 0.9;
+  }
+  .responsive__friendList_menu {
+    display: block;
+    margin: 15px;
+    padding: 10px;
+    color: var(--twitter-color);
+  }
+}
+@media (max-width: 800px) {
+  .friendList {
+    display: none;
+  }
+  .friendList__responsive_menubar {
+    display: block;
+  }
+  .friendList__responsive {
+    display: block;
+    border-right: 1px solid var(--twitter-bg);
+    min-width: 250px;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    position: fixed;
+    z-index: 1;
+    top: 58px;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.9s;
+    background-color: aliceblue;
+  }
+  .friendList_responsive_header {
+    display: flex;
+    border-bottom: 1px solid var(--twitter-color);
+  }
+  .friendList_responsive_header > span {
+    color: var(--twitter-color);
+  }
+  .friendList_responsive_header > p {
+    font-weight: 800;
+    font-size: 15px;
+    padding: 5px;
+    margin-bottom: 9px;
+  }
+  .friendList_responsive_avatar {
+    margin-top: 8px;
+  }
+  .friendList_responsive_avatar > .MuiAvatar-root {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .friendList_responsive__userinfo {
+    margin-top: 8px;
+    width: 400px;
+  }
+  .friendList_responsive__userinfo > p {
+    color: gray;
+    font-size: 14px;
+  }
+  .friendList__responsive__profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-left: -43px;
+  }
+  .friendList__responsive__span {
+    margin-left: 3px;
+    color: gray;
+    font-size: 14px;
+  }
+  .friendList__responsive__number {
+    font-weight: 200;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+  .friendListOptions > .MuiSvgIcon-root {
+    padding: 15px 15px 15px 0px;
+  }
+  .friendListOptions > h2 {
+    font-weight: 450;
+    font-size: 14px;
+    margin-right: 10px;
   }
 }
