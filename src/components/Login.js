@@ -48,7 +48,9 @@ function Login({ loginAction, message, error, isAuthenticated }) {
 
     /**set classname based on error */
     error ? setClassName("signup__error") : setClassName("signup__success");
-
+    if (error) {
+      setTimeout(() => setStatus(""), 1200);
+    }
     /**redirect to tweets upon sucess auth */
     if (isAuthenticated) {
       setTimeout(() => history.push("/tweets"), 1200);
@@ -82,7 +84,11 @@ function Login({ loginAction, message, error, isAuthenticated }) {
           onChange={handleChange}
         />
         <span className={errorClassName}>{authenticating && status}</span>
-        <Button className="login__button" onClick={handleLogin}>
+        <Button
+          className="login__button"
+          onClick={handleLogin}
+          disabled={loginId || password ? false : true}
+        >
           Log in
         </Button>
       </div>
