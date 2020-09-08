@@ -188,4 +188,26 @@
   .post__body {
     padding: 10px;
   }
+  .post__comments > input {
+    border-radius: 5px;
+    width: 303px;
+    height: 34px;
+    font-size: 20px;
+    border-color: var(--twitter-color);
+    margin-top: 20px;
+    text-emphasis: none;
+    font-size: 15px;
+  }
+  .post__comments > button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-transform: inherit !important;
+    height: 34px !important;
+    margin-left: -3px !important;
+    margin-top: 8px !important;
+    border-radius: 29px !important;
+  }
 }
