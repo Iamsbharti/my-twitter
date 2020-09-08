@@ -55,7 +55,11 @@ function ChatBox({
       updateChatAction(data);
     });
   }, [currentUserId, updateChatAction]);
-  /**fetch pictures */
+  const handleEnterSendMessage = (event) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  };
 
   return (
     <div className="chatbox">
@@ -148,6 +152,7 @@ function ChatBox({
               value={text}
               autoFocus
               onChange={(e) => setTextMsg(e.target.value)}
+              onKeyDown={handleEnterSendMessage}
             />
             <div className="send__icon">
               <SendIcon fontSize="small" onClick={sendMessage} />
