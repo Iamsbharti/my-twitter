@@ -70,6 +70,13 @@ function ChatBox({
 
   return (
     <div className="chatbox">
+      <div className="chat__header__goback">
+        <ArrowBackIcon
+          fontSize="large"
+          className="status__icon"
+          onClick={handleBackToFeed}
+        />
+      </div>
       {!content ? (
         <div className="chatbox__init__content">
           <h3>You don’t have a message selected</h3>
@@ -79,11 +86,13 @@ function ChatBox({
         <>
           <div className="peoplelistHeader">
             <div className="chat__header">
-              <ArrowBackIcon
-                fontSize="large"
-                className="status__icon"
-                onClick={handleBackToFeed}
-              />
+              <div className="chat__responsive__goback">
+                <ArrowBackIcon
+                  fontSize="large"
+                  className="status__icon"
+                  onClick={handleBackToFeed}
+                />
+              </div>
               <Avatar
                 src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
                   user.profile.filename

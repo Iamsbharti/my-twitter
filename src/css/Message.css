@@ -313,6 +313,12 @@
 .responsive__friendList_menu {
   display: none;
 }
+.chat__header__goback {
+  display: none;
+}
+.chat__responsive__goback {
+  display: none;
+}
 @media (max-width: 800px) {
   .peoplelist {
     display: none;
@@ -448,6 +454,11 @@
   .chat__header {
     display: flex;
     padding: 5px;
+  }
+  .chat__header__goback {
+    display: flex;
+    padding: 5px;
+    justify-content: flex-end;
   }
   .chat__header__username {
     margin-left: 105px;
