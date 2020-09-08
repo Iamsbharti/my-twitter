@@ -295,3 +295,17 @@ h4 {
 .reset__password > input:focus {
   outline: none;
 }
+@media (max-width: 800px) {
+  .home {
+    display: block;
+    width: 255px;
+    margin: 50px;
+    padding: 20px;
+  }
+  .home > h2 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-weight: 900;
+    font-size: 40px;
+  }
+}
