@@ -142,6 +142,8 @@ function Signup() {
                 name="name"
                 type="text"
                 placeholder="name"
+                required
+                autoFocus
                 value={name}
                 onChange={handleChange}
               />

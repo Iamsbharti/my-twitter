@@ -331,6 +331,46 @@ h4 {
     font-size: 20px;
     border-bottom: 1px solid var(--twitter-color);
   }
+
+  .login {
+    display: block;
+    width: 200px;
+  }
+  .login > h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 352px;
+    margin-left: 22px;
+  }
+  .login__inputs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 345px;
+    margin-bottom: 20px;
+    margin-left: 3px;
+  }
+  .login__button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px !important;
+    margin-top: 20px !important;
+    margin-left: 18px !important;
+  }
+  .login__footer {
+    display: block;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 54px;
+    color: var(--twitter-color);
+    margin-left: 13px;
+    width: max-content;
+  }
 }
 @media (max-width: 320px) {
   .signup {
@@ -357,3 +397,50 @@ h4 {
     border-bottom: 1px solid var(--twitter-color);
   }
 }
+/*@media (max-width: 768px) {
+  .login {
+    display: block;
+    width: 200px;
+    font-size: 23px;
+  }
+  .login > img {
+    margin-left: 66px;
+    margin-top: 30px;
+  }
+  .login > h2 {
+    margin-top: 77px;
+    margin-bottom: 20px;
+    width: 352px;
+    margin-left: 95px;
+  }
+  .login__inputs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 545px;
+    margin-bottom: 20px;
+    margin-left: 75px;
+  }
+  .login__button {
+    background-color: var(--twitter-color) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 19px !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 50px !important;
+    margin-top: 20px !important;
+    margin-left: 18px !important;
+  }
+  .login__footer {
+    display: block;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 54px;
+    color: var(--twitter-color);
+    margin-left: 80px;
+    width: max-content;
+  }
+}
+*/
