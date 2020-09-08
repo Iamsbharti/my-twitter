@@ -17,6 +17,7 @@ function PeopleList({ getAllChatAction }) {
   const [userList, setUserList] = useState([]);
   const [chatBoxContent, setChatBoxContent] = useState(false);
   const [chatUser, setChatUser] = useState({});
+  const [toggleFriendList, setToggleList] = useState(true);
   const userId = localStorage.getItem("userId");
   /**api call */
   useEffect(() => {
@@ -37,16 +38,45 @@ function PeopleList({ getAllChatAction }) {
     getAllChatAction(chatInfo);
     setChatBoxContent(!chatBoxContent);
     setChatUser(user);
+    /**close the friendlist bar for mobile devices */
+    if (width <= 800) {
+      setToggleList(true);
+    }
   };
   /**responsive peoplelist */
-  const [toggleFriendList, setToggleList] = useState(true);
+
   const handleDisplayFriendList = () => {
     setToggleList(!toggleFriendList);
   };
+  /**compute the current window size */
+  /**hide  for mobile device */
+  const { height, width } = useWindowDimensions();
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
+  function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(
+      getWindowDimensions()
+    );
+    useEffect(() => {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+      }
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return windowDimensions;
+  }
+
   let responsiveSideBar = (
     <div>
       <div className="friendList__responsive">
-        <div className="friendList__responsive_header">
+        <div className="friendList_responsive_header">
           <p>Friend List</p>
           <span>
             <CloseIcon onClick={handleDisplayFriendList} />
@@ -137,8 +167,10 @@ function PeopleList({ getAllChatAction }) {
           history.push("/login")
         )}
       </div>
-      <div className="responsive__friendList_menu">
-        <ListIcon fontSize="large" onClick={handleDisplayFriendList} />
+      <div hidden={false}>
+        <div className="responsive__friendList_menu">
+          <ListIcon fontSize="large" onClick={handleDisplayFriendList} />
+        </div>
       </div>
       <ChatBox content={chatBoxContent} user={chatUser} />
       <ToastContainer autoClose={1000} hideProgressBar />

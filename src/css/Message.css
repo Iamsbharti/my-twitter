@@ -337,13 +337,10 @@
   .friendList__responsive {
     display: block;
     border-right: 1px solid var(--twitter-bg);
-    min-width: 250px;
-    margin-top: 20px;
-    padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 12px;
     position: fixed;
     z-index: 1;
-    top: 58px;
+    top: 88px;
     left: 0;
     overflow-x: hidden;
     transition: 0.9s;
@@ -351,7 +348,10 @@
   }
   .friendList_responsive_header {
     display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid var(--twitter-color);
+    padding: 2px;
+    margin-top: 4px;
   }
   .friendList_responsive_header > span {
     color: var(--twitter-color);
@@ -401,5 +401,14 @@
     font-weight: 450;
     font-size: 14px;
     margin-right: 10px;
+  }
+  .chatbox__init__content {
+    margin-top: 295px;
+    margin-left: 0px;
+  }
+  .peoplelist__users {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--twitter-bg);
   }
 }
