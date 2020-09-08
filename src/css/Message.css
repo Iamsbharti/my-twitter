@@ -428,4 +428,13 @@
     flex-direction: row;
     align-items: flex-end;
   }
+  .send__chat > input,
+  .send__chat > input::-webkit-input-placeholder {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .send__chat > input {
+    border: none;
+    background-color: var(--twitter-bg);
+  }
 }
