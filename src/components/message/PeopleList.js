@@ -167,11 +167,11 @@ function PeopleList({ getAllChatAction }) {
           history.push("/login")
         )}
       </div>
-      <div hidden={false}>
-        <div className="responsive__friendList_menu">
-          <ListIcon fontSize="large" onClick={handleDisplayFriendList} />
-        </div>
+
+      <div className="responsive__friendList_menu">
+        <ListIcon fontSize="large" onClick={handleDisplayFriendList} />
       </div>
+
       <ChatBox content={chatBoxContent} user={chatUser} />
       <ToastContainer autoClose={1000} hideProgressBar />
     </>
