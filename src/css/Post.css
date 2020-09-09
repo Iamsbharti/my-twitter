@@ -12,10 +12,16 @@
   flex: 1;
   padding: 5px;
 }
-.post__body > img {
+
+.post__link__img {
   border-radius: 15px;
-  width: 200px;
-  height: 200px;
+  width: 516px;
+  height: 292px;
+}
+.post__img {
+  border-radius: 9px;
+  width: 500px;
+  height: 300px;
 }
 .headerDeleteIcon {
   display: flex;
@@ -187,6 +193,21 @@
   }
   .post__body {
     padding: 10px;
+  }
+  .post__body > img {
+    border-radius: 15px;
+    width: fit-content;
+    height: fit-content;
+  }
+  .post__img {
+    border-radius: 9px;
+    width: 298px;
+    height: 146px;
+  }
+  .post__link__img {
+    border-radius: 15px;
+    width: 303px;
+    height: 200px;
   }
   .post__comments > input {
     border-radius: 5px;
