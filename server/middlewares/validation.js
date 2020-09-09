@@ -107,17 +107,7 @@ const resetValidation = (req, res, next) => {
 };
 const postValidation = (req, res, next) => {
   logger.info(`Create Post validation:${req.body}`);
-  let param = req.body;
-  let { userId } = param;
-  console.log("userid::", userId);
-  /*
-  let obj = {
-    description: param.description,
-    displayName: param.displayName,
-    userName: param.userName,
-    userId: param.userId,
-  };*/
-  //console.log("obj::", obj);
+
   let postSchema = joi.object({
     description: joi.string().min(4).required(),
     userAvatar: joi.string().optional(),
@@ -132,7 +122,7 @@ const postValidation = (req, res, next) => {
     shares: joi.number().optional(),
   });
 
-  let { error } = postSchema.validate(obj, options);
+  let { error } = postSchema.validate(req.body, options);
   // console.log("error::", error);
   if (error) {
     let errors = [];

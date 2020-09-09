@@ -1,5 +1,3 @@
-const { formatResponse } = require("../library/formatResponse");
-
 exports.notfound = (req, res, next) => {
   const error = new Error(`${req.originalUrl} requested path doesn't exists `);
   res.status(404);
