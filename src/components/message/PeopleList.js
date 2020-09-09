@@ -53,6 +53,7 @@ function PeopleList({ getAllChatAction, user }) {
   /**compute the current window size */
   /**hide  for mobile device */
   const { height, width } = useWindowDimensions();
+  console.log("height", height);
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {

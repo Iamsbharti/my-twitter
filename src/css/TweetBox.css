@@ -41,12 +41,22 @@
 .tweetbox > form > input:focus {
   outline: none;
 }
-.gifIcon {
+.icon {
+  display: flex;
   margin-left: 20px;
   cursor: pointer;
   color: var(--twitter-color);
 }
-.gifIcon:hover {
+.gifIcon {
+  margin-left: 0px !important;
+}
+.insertPicIcon {
+  margin-top: 8px !important;
+  margin-left: 1px !important;
+  color: var(--twitter-color);
+}
+.gifIcon,
+.insertPicIcon:hover {
   color: blue;
 }
 @media (max-width: 800px) {
