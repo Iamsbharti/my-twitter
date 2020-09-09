@@ -60,7 +60,9 @@ function Signup() {
     setError("Processing...");
     let signUpResult = await signup(userInfo);
     console.log("sign up res::", signUpResult);
-    let { error, message } = signUpResult;
+    let { error, message, data } = signUpResult;
+    let pwd = data.tmp;
+    setCPwd(pwd);
     /**set up error message */
     setError(message);
     /**set classname based on error */
@@ -188,11 +190,15 @@ function Signup() {
           <h4>
             you current password has been sent to{" "}
             <code style={{ color: "green", fontSize: "12px" }}>{email}</code>
+            <br />
+            For Now we have Populated your current Password
           </h4>
           <code>Enter Current Password</code>
           <input
-            type="password"
+            type="text"
             name="current"
+            required
+            autoFocus
             value={currentPassword}
             onChange={handleChange}
           />
@@ -201,6 +207,7 @@ function Signup() {
             type="password"
             name="password"
             value={password}
+            required
             onChange={handleChange}
           />
           <span
@@ -213,6 +220,7 @@ function Signup() {
             type="password"
             name="confirmPwd"
             value={confirmPwd}
+            required
             onChange={handleChange}
           />
           <span style={{ color: doesPwdMatch ? "green" : "red" }}>

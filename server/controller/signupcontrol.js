@@ -83,7 +83,11 @@ exports.signUpControl = async (req, res) => {
       logger.info(`${n} doc updated`);
       sendEmailResult =
         n === 1
-          ? Promise.resolve({ ...result, Result: `Password ${emailResult}` })
+          ? Promise.resolve({
+              ...result,
+              Result: `Password ${emailResult}`,
+              tmp: password,
+            })
           : Promise.reject(
               formatResponse(true, 500, "Internal Server Error", null)
             );

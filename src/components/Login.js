@@ -83,7 +83,9 @@ function Login({ loginAction, message, error, isAuthenticated }) {
           required
           onChange={handleChange}
         />
-        <span className={errorClassName}>{authenticating && status}</span>
+        <span className={errorClassName} style={{ marginLeft: "20px" }}>
+          {authenticating && status}
+        </span>
         <Button
           className="login__button"
           onClick={handleLogin}
