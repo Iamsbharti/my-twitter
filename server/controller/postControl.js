@@ -1,6 +1,7 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
 const Comment = require("../models/Comment");
+const mongoose = require("mongoose");
 const logger = require("../library/logger");
 const { formatResponse } = require("../library/formatResponse");
 const shortid = require("shortid");
@@ -51,7 +52,9 @@ const createPost = async (req, res) => {
       userId: userId,
       userName: userName,
       image: image,
-      postImage: req.file ? req.file.id : "",
+      postImage: req.file
+        ? req.file.id
+        : new mongoose.Types.ObjectId("123456789012"),
       comments: comments,
       retweets: retweets,
       likes: likes,

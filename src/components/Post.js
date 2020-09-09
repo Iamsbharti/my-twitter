@@ -189,6 +189,14 @@ function Post({
               </p>
             </div>
             {info.image && <img src={info.image} alt="" />}
+            {info.postImage && (
+              <img
+                src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
+                  info.postImage.filename
+                }&authToken=${localStorage.getItem("authToken")}`}
+                alt=""
+              />
+            )}
             {status && (
               <div className="post__details">
                 <p className="post_details__date">
