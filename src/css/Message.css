@@ -465,4 +465,17 @@
     margin-top: -17px;
     color: gray;
   }
+  .user__chats {
+    height: 52vh;
+    width: auto;
+    overflow-y: scroll;
+  }
+  .user_chat_no_msg {
+    margin-top: 102px;
+    margin-left: 4px;
+  }
+  .user_chat_no_msg > p {
+    margin-top: 21px;
+    margin-left: 88px;
+  }
 }

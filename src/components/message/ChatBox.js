@@ -94,9 +94,12 @@ function ChatBox({
                 />
               </div>
               <Avatar
-                src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
-                  user.profile.filename
-                }&authToken=${localStorage.getItem("authToken")}`}
+                src={
+                  user.profile &&
+                  `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                    user.profile.filename
+                  }&authToken=${localStorage.getItem("authToken")}`
+                }
               ></Avatar>
               <h3>{user.name}</h3>
             </div>
