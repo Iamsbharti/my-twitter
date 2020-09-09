@@ -24,6 +24,7 @@ const verifyCommentPost = async (postId) => {
     : formatResponse(true, 404, "CommentPost Not Found", postExists);
 };
 const createPost = async (req, res) => {
+  logger.info("Create post info");
   const {
     description,
     userAvatar,
@@ -38,6 +39,7 @@ const createPost = async (req, res) => {
     verified,
   } = req.body;
   const savePost = async () => {
+    logger.info("Save post");
     /**create new post schema*/
     /**filter the hashtags from description */
     let tags = description.split(" ").filter((s) => s.startsWith("#"));
@@ -49,6 +51,7 @@ const createPost = async (req, res) => {
       userId: userId,
       userName: userName,
       image: image,
+      postImage: req.file ? req.file.id : "",
       comments: comments,
       retweets: retweets,
       likes: likes,
@@ -336,6 +339,7 @@ const deleteComment = async (req, res) => {
       .json(formatResponse(false, 500, "Internal Server Error", null));
   }
 };
+
 module.exports = {
   createPost,
   getAllPosts,

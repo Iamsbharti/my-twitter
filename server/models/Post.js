@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Pictures = require("./Pictures");
+console.log("pictures:", Pictures.db.config);
 const postSchema = mongoose.Schema({
   postId: {
     type: String,
@@ -27,6 +29,10 @@ const postSchema = mongoose.Schema({
   },
   image: {
     type: String,
+  },
+  postImage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pictures",
   },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   retweets: {

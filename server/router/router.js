@@ -65,7 +65,7 @@ router.get("/user/usersProfilePic", isAuthorized, fetchPicturesForUserId);
 router.post(
   "/post/createPost",
   isAuthorized,
-  validation.postValidation,
+  upload.single("file"),
   posts.createPost
 );
 router.get("/post/allPosts", isAuthorized, posts.getAllPosts);
