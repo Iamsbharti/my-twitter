@@ -58,7 +58,11 @@ function TweetBox({ postTweet, profile }) {
             <GifIcon fontSize="large" />
           </a>
         </div>
-        <Button className="tweetBox-button" type="submit">
+        <Button
+          className="tweetBox-button"
+          type="submit"
+          disabled={text ? false : true}
+        >
           Tweet
         </Button>
       </form>

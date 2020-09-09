@@ -65,7 +65,7 @@
   margin-bottom: 25px;
   border-bottom: 1px solid var(--twitter-color);
 }
-.login__button > form {
+.login__button {
   background-color: var(--twitter-color) !important;
   border: none !important;
   color: white !important;
