@@ -95,6 +95,7 @@ const getAllPosts = async (req, res) => {
   /**return all available posts with populating the comments */
   Post.find()
     .populate("comments")
+    .populate("postImage")
     .select(EXCLUDE)
     .sort({ createdAt: "desc" })
     .exec(function (err, posts) {
