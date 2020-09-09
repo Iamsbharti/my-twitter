@@ -8,18 +8,22 @@ import { baseUrl } from "../apis/apiUtils";
 function TweetBox({ postTweet, profile }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
+  const [postImage, setPostImage] = useState(undefined);
   /**tweet */
   const handleTweet = (e) => {
-    console.log("handle tweet", text, image);
+    console.log("handle tweet", text, image, postImage);
     e.preventDefault();
-    postTweet(text, image);
+    postTweet(text, image, postImage);
     /**clear input  */
     setTimeout(() => {
       setText("");
       setImage("");
     }, 1400);
   };
-
+  const handleFileChange = (event) => {
+    console.log("filecahnge", event.target.files[0]);
+    setPostImage(event.target.files[0]);
+  };
   return (
     <div className="tweetbox">
       <form onSubmit={handleTweet}>
@@ -58,7 +62,17 @@ function TweetBox({ postTweet, profile }) {
           >
             <GifIcon fontSize="large" className="gifIcon" />
           </a>
-          <InsertPhotoIcon className="insertPicIcon" fontSize="small" />
+          <div className="upload_cover">
+            <label htmlFor="postimage-upload" className="custom-file-upload">
+              <InsertPhotoIcon />
+            </label>
+            <input
+              id="postimage-upload"
+              type="file"
+              name="postImage"
+              onChange={handleFileChange}
+            />
+          </div>
         </div>
         <Button
           className="tweetBox-button"

@@ -65,7 +65,7 @@ function Feed({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
   /**tweet */
-  const tweet = async (text, image) => {
+  const tweet = async (text, image, postImage) => {
     console.log("new tweets");
     let newTweetInfo = {
       description: text,
@@ -73,6 +73,7 @@ function Feed({
       userId: userId,
       userName: username,
       image: image !== undefined ? image : "",
+      postImage: postImage,
     };
     console.log("new tweet info:", newTweetInfo);
     /**get the new post response and emit the same */

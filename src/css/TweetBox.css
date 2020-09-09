@@ -59,6 +59,15 @@
 .insertPicIcon:hover {
   color: blue;
 }
+.custom-file-upload {
+  color: var(--twitter-color);
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+input[type="file"] {
+  display: none;
+}
 @media (max-width: 800px) {
   .tweet--input {
     display: flex;

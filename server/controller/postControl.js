@@ -63,6 +63,7 @@ const createPost = async (req, res) => {
       hashTags: tags,
     });
     /**save post */
+
     let createdPost = await Post.create(newPost);
     /**update tweets counts in User's Model */
     let userExists = await User.findOne({ userId: userId });
@@ -72,7 +73,13 @@ const createPost = async (req, res) => {
     let { n } = updatedUser;
     logger.info(`${n} user's tweet count updated`);
     if (createdPost) {
-      return Promise.resolve(createdPost);
+      var newCreatedPost = await Post.findOne({
+        postId: newPost.postId,
+      }).populate("postImage");
+    }
+
+    if (newCreatedPost) {
+      return Promise.resolve(newCreatedPost);
     } else {
       return Promise.reject(
         formatResponse(true, 500, "Internal DB Error", null)

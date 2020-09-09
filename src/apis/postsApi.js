@@ -1,16 +1,37 @@
 import { baseUrl } from "./apiUtils";
 import axios from "axios";
 import { toast } from "react-toastify";
+import FormData from "form-data";
+
 export const createPost = async (postInfo) => {
+  const {
+    description,
+    displayName,
+    userId,
+    userName,
+    image,
+    postImage,
+  } = postInfo;
   const authToken = localStorage.getItem("authToken");
-  console.log("Create Post API Start");
+  console.log("Create Post API Start:", postImage);
+  let data = new FormData();
+  data.append("description", description);
+  data.append("displayName", displayName);
+  data.append("userId", userId);
+  data.append("userName", userName);
+  data.append("image", image);
+  data.append("file", postImage);
+
+  var createPostConfig = {
+    method: "post",
+    url: `${baseUrl}/api/v1/post/createPost`,
+    headers: {
+      authToken: authToken,
+    },
+    data: data,
+  };
   try {
-    let url = `${baseUrl}/api/v1/post/createPost`;
-    let createPostResponse = await axios.post(
-      url,
-      { ...postInfo },
-      { headers: { authToken: authToken } }
-    );
+    let createPostResponse = await axios(createPostConfig);
     console.log("create post success::");
     toast.success(createPostResponse.data.data.message);
     return createPostResponse.data.data;
