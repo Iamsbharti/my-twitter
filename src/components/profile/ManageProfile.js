@@ -89,7 +89,7 @@ const ManageProfile = ({
           <div>
             <label htmlFor="file-upload" className="custom-file-upload">
               <CloudUploadIcon />
-              <p className="coverpic_label">Change Cover Pic</p>
+              <p className="coverpic_label">Upload Cover</p>
             </label>
             <input
               id="file-upload"
@@ -101,7 +101,7 @@ const ManageProfile = ({
           <div>
             <label htmlFor="profile-upload" className="custom-file-upload">
               <CloudUploadIcon />
-              <p className="coverpic_label">Change Profile Pic</p>
+              <p className="coverpic_label">Upload Profile</p>
             </label>
             <input
               id="profile-upload"

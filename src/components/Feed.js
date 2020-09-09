@@ -78,7 +78,7 @@ function Feed({
     /**get the new post response and emit the same */
     let newPostresponse = await createPostAction(newTweetInfo);
     /**hide tweetbox after new tweet is posted for mobile device */
-    if (width <= 800) {
+    if (width <= 800 && width >= 300) {
       console.log("hiding tweet box");
       setAddTweetBox(true);
     }
