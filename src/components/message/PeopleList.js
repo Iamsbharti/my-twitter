@@ -38,7 +38,7 @@ function PeopleList({ getAllChatAction, user }) {
       recieverId: userId,
     };
     getAllChatAction(chatInfo);
-    setChatBoxContent(!chatBoxContent);
+    setChatBoxContent(true);
     setChatUser(user);
     /**close the friendlist bar for mobile devices */
     if (width <= 800) {
