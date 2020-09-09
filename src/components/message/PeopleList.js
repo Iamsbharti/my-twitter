@@ -13,7 +13,7 @@ import { baseUrl } from "../../apis/apiUtils";
 import CloseIcon from "@material-ui/icons/Close";
 import ListIcon from "@material-ui/icons/List";
 
-function PeopleList({ getAllChatAction }) {
+function PeopleList({ getAllChatAction, user }) {
   let history = useHistory();
   const [userList, setUserList] = useState([]);
   const [chatBoxContent, setChatBoxContent] = useState(false);
@@ -29,7 +29,7 @@ function PeopleList({ getAllChatAction }) {
       setUserList(response.filter((usr) => usr.userId !== userId));
     }
     fetchData();
-  }, [userId]);
+  }, [userId, user]);
   /**handle user selction */
   const handleUserSelection = (user) => {
     /**get chat details between the selected user and current user */
@@ -93,9 +93,12 @@ function PeopleList({ getAllChatAction }) {
             >
               <div className="people__avatar">
                 <Avatar
-                  src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
-                    user.profile.filename
-                  }&authToken=${localStorage.getItem("authToken")}`}
+                  src={
+                    user.profile &&
+                    `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                      user.profile.filename
+                    }&authToken=${localStorage.getItem("authToken")}`
+                  }
                 ></Avatar>
               </div>
               <div className="peoplelist__body">
@@ -142,9 +145,12 @@ function PeopleList({ getAllChatAction }) {
               >
                 <div className="people__avatar">
                   <Avatar
-                    src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
-                      user.profile.filename
-                    }&authToken=${localStorage.getItem("authToken")}`}
+                    src={
+                      user.profile &&
+                      `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                        user.profile.filename
+                      }&authToken=${localStorage.getItem("authToken")}`
+                    }
                   ></Avatar>
                 </div>
                 <div className="peoplelist__body">
