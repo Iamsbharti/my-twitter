@@ -302,6 +302,13 @@ h4 {
   font-size: 20px;
   cursor: pointer;
 }
+button:disabled,
+button[disabled] {
+  border: 1px solid var(--twitter-color) !important;
+  background-color: #f8f4e3 !important;
+  font-weight: 900 !important;
+  color: black !important;
+}
 @media (max-width: 800px) {
   .home {
     display: block;

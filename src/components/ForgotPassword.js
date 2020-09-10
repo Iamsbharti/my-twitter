@@ -95,7 +95,9 @@ function ForgotPassword() {
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
           />
-          <Button onClick={sendRecoveryCode}>Search</Button>
+          <Button onClick={sendRecoveryCode} disabled={loginId ? false : true}>
+            Search
+          </Button>
           <p className="cancel__span" onClick={() => history.goBack()}>
             Cancel
           </p>
@@ -142,7 +144,12 @@ function ForgotPassword() {
           <span style={{ color: doesPwdMatch ? "green" : "red" }}>
             {pwdMatchError}
           </span>
-          <Button onClick={handleResetPassword}>Reset Password</Button>
+          <Button
+            onClick={handleResetPassword}
+            disabled={apiErrorRes ? true : false}
+          >
+            Reset Password
+          </Button>
           <span
             className="span__message"
             style={{ color: apiErrorRes ? "red" : "green", marginTop: "10px" }}
