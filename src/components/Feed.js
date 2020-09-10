@@ -80,7 +80,9 @@ function Feed({
     let newPostresponse = await createPostAction(newTweetInfo);
     /**hide tweetbox after new tweet is posted for mobile device */
     console.log("width after tweet post:", width);
-
+    if (width < 800) {
+      setAddTweetBox(true);
+    }
     /**emit tweets action to the followers */
     let socketInfo = {
       tweetsUserId: userId,
