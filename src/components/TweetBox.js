@@ -31,7 +31,7 @@ function TweetBox({ postTweet, profile }) {
   };
   const deletepostImage = () => {
     setPostImage(undefined);
-    setImageLoad(false);
+    setImageLoad(!isImageLoaded);
   };
   return (
     <div className="tweetbox">
