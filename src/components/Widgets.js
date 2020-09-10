@@ -11,14 +11,14 @@ function Widgets({ user, post, profile }) {
     "1294785948325208064",
     "1304113679521255425",
     "1304061623854755841",
-    "1304055197149229056",
+    "1304087153559965698",
     "1302148980365647872",
     "1303994264574074881",
     "1302789190699155468",
   ];
   const [displayTweets, setDispTweets] = useState([]);
   const [randomSelection, setRandom] = useState(
-    Math.floor(Math.random() * 4) + 1
+    Math.floor(Math.random() * 5) + 1
   );
   useEffect(() => {
     setDispTweets(tweetIds.splice(randomSelection + 1, randomSelection));
