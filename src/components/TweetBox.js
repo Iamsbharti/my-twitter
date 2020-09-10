@@ -19,6 +19,10 @@ function TweetBox({ postTweet, profile }) {
     console.log("handle tweet", text, image, postImage);
     e.preventDefault();
     postTweet(text, image, postImage);
+    if (postImage) {
+      setPostImage(undefined);
+      setImageLoad(!isImageLoaded);
+    }
     /**clear input  */
     setTimeout(() => {
       setText("");
