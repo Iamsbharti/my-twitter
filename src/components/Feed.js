@@ -157,8 +157,8 @@ function Feed({
   const { height, width } = useWindowDimensions();
   useEffect(() => {
     if (width <= 800) {
-      console.log("hiding tweet box");
-      setAddTweetBox(true);
+      //console.log("hiding tweet box");
+      //setAddTweetBox(true);
       setHeader(true);
     }
   }, [height, width]);

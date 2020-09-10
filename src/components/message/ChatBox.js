@@ -23,7 +23,7 @@ function ChatBox({
   updateChatAction,
 }) {
   const [text, setTextMsg] = useState("");
-  const messagesEndRef = React.createRef();
+  const messagesEndRef = React.createRef(undefined);
   /**route back to feed  */
   let history = useHistory();
   const handleBackToFeed = () => {
