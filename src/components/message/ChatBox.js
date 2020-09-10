@@ -146,7 +146,7 @@ function ChatBox({
               </div>
             </div>
           ) : (
-            <div className="user__chats" ref={messagesEndRef}>
+            <div className="user__chats">
               {messageList.map((msg, index) => (
                 <div key={index}>
                   {msg.senderId === currentUserId && (
@@ -174,6 +174,7 @@ function ChatBox({
                   )}
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
           )}
           <div className="send__chat">
