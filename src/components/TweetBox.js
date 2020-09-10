@@ -3,12 +3,17 @@ import "../css/TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
 import GifIcon from "@material-ui/icons/Gif";
 import InsertPhotoIcon from "@material-ui/icons/InsertPhoto";
+import Chip from "@material-ui/core/Chip";
+import CloudDoneIcon from "@material-ui/icons/CloudDone";
 import { connect } from "react-redux";
 import { baseUrl } from "../apis/apiUtils";
+
 function TweetBox({ postTweet, profile }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   const [postImage, setPostImage] = useState(undefined);
+  const [isImageLoaded, setImageLoad] = useState(false);
+
   /**tweet */
   const handleTweet = (e) => {
     console.log("handle tweet", text, image, postImage);
@@ -21,8 +26,12 @@ function TweetBox({ postTweet, profile }) {
     }, 1400);
   };
   const handleFileChange = (event) => {
-    console.log("filecahnge", event.target.files[0]);
     setPostImage(event.target.files[0]);
+    setImageLoad(true);
+  };
+  const deletepostImage = () => {
+    setPostImage(undefined);
+    setImageLoad(false);
   };
   return (
     <div className="tweetbox">
@@ -72,6 +81,18 @@ function TweetBox({ postTweet, profile }) {
             />
           </div>
         </div>
+        {isImageLoaded && (
+          <div className="uploaded__icon">
+            <Chip
+              variant="outlined"
+              size="medium"
+              icon={<CloudDoneIcon />}
+              label="Image Uploaded"
+              onDelete={deletepostImage}
+              color="primary"
+            />
+          </div>
+        )}
         <Button
           className="tweetBox-button"
           type="submit"

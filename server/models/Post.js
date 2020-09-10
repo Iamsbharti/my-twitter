@@ -10,7 +10,6 @@ const postSchema = mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   userAvatar: {
     type: String,
