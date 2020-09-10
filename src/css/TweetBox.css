@@ -28,6 +28,7 @@
   height: 40px !important;
   margin-top: 20px;
   margin-left: auto !important;
+  transition: 0.8 sec !important;
 }
 .tweet--inputImage {
   border: none;
@@ -67,6 +68,13 @@
 }
 input[type="file"] {
   display: none;
+}
+button:disabled,
+button[disabled] {
+  border: 1px solid var(--twitter-color) !important;
+  background-color: #f8f4e3 !important;
+  font-weight: 900 !important;
+  color: black !important;
 }
 @media (max-width: 800px) {
   .tweet--input {

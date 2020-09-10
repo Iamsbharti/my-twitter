@@ -75,7 +75,7 @@ function TweetBox({ postTweet, profile }) {
         <Button
           className="tweetBox-button"
           type="submit"
-          disabled={text ? false : true}
+          disabled={text || image || postImage ? false : true}
         >
           Tweet
         </Button>
