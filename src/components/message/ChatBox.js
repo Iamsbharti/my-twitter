@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Avatar } from "@material-ui/core";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import SendIcon from "@material-ui/icons/Send";
@@ -23,7 +23,7 @@ function ChatBox({
   updateChatAction,
 }) {
   const [text, setTextMsg] = useState("");
-  const messagesEndRef = React.createRef(undefined);
+  const messagesEndRef = useRef(null);
   /**route back to feed  */
   let history = useHistory();
   const handleBackToFeed = () => {
@@ -45,16 +45,24 @@ function ChatBox({
     scrollToBottom();
   };
   const scrollToBottom = () => {
-    console.log(
+    /*console.log(
       "setting scoll position::",
       messagesEndRef.current.scrollIntoView({
         block: "end",
         behavior: "smooth",
       })
-    );
-    messagesEndRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
+    );*/
+    console.log("messages ref:", messagesEndRef);
+    if (messagesEndRef.current !== null) {
+      messagesEndRef.current.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+      });
+    }
   };
-
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageList, messagesEndRef]);
   /**listen to new text events if any */
   useEffect(() => {
     socket.on(currentUserId, (data) => {
