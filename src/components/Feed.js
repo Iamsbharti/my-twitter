@@ -79,7 +79,11 @@ function Feed({
     /**get the new post response and emit the same */
     let newPostresponse = await createPostAction(newTweetInfo);
     /**hide tweetbox after new tweet is posted for mobile device */
-
+    console.log("width after tweet post:", width);
+    if (width < 800) {
+      console.log("hiding tweet box:", width);
+      setAddTweetBox(true);
+    }
     /**emit tweets action to the followers */
     let socketInfo = {
       tweetsUserId: userId,
@@ -157,8 +161,8 @@ function Feed({
   const { height, width } = useWindowDimensions();
   useEffect(() => {
     if (width <= 800) {
-      //console.log("hiding tweet box");
-      //setAddTweetBox(true);
+      console.log("hiding tweet box");
+      setAddTweetBox(true);
       setHeader(true);
     }
   }, [height, width]);

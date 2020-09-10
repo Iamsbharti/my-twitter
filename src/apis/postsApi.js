@@ -32,8 +32,11 @@ export const createPost = async (postInfo) => {
   };
   try {
     let createPostResponse = await axios(createPostConfig);
-    console.log("create post success::");
-    toast.success(createPostResponse.data.data.message);
+    console.log("create post success::", createPostResponse.data.message);
+    if (!createPostResponse.data.error) {
+      toast.success("Tweet Posted");
+    }
+
     return createPostResponse.data.data;
   } catch (error) {
     console.warn("Create POST Error::", error.response.data);
