@@ -1,4 +1,8 @@
-import { LOGIN, SESSION_STATE } from "../actions/actionTypes";
+import {
+  LOGIN,
+  SESSION_STATE,
+  SESSION_ERROR_STATE,
+} from "../actions/actionTypes";
 import { session_state } from "../defaultStore";
 
 export function userReducer(usersession = session_state.session || {}, action) {
@@ -12,6 +16,11 @@ export function userReducer(usersession = session_state.session || {}, action) {
       return {
         ...usersession,
         user: action.userInfo,
+      };
+    case SESSION_ERROR_STATE:
+      return {
+        ...usersession,
+        user: "",
       };
     default:
       return usersession;

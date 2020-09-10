@@ -1,6 +1,7 @@
 import {
   LOGIN,
   SESSION_STATE,
+  SESSION_ERROR_STATE,
   GET_USER_INFO,
   UPDATE_USER_INFO,
   UPDATE_USER_FILE,
@@ -17,6 +18,12 @@ export function setUserState(userId) {
   return async (dispatch) => {
     let userInfo = await userApi.getUserInfo(userId);
     dispatch({ type: SESSION_STATE, userInfo });
+  };
+}
+export function setUserStateOnError() {
+  console.log("error-set session::");
+  return (dispatch) => {
+    dispatch({ type: SESSION_ERROR_STATE });
   };
 }
 export function getUserInfo(userId) {

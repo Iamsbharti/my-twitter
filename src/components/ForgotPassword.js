@@ -146,10 +146,13 @@ function ForgotPassword() {
           </span>
           <Button
             onClick={handleResetPassword}
-            disabled={apiErrorRes ? true : false}
+            disabled={code && doesPwdMatch ? false : true}
           >
             Reset Password
           </Button>
+          <p className="cancel__span" onClick={() => history.goBack()}>
+            Cancel
+          </p>
           <span
             className="span__message"
             style={{ color: apiErrorRes ? "red" : "green", marginTop: "10px" }}

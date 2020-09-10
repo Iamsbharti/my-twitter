@@ -305,7 +305,7 @@ h4 {
 button:disabled,
 button[disabled] {
   border: 1px solid var(--twitter-color) !important;
-  background-color: #f8f4e3 !important;
+  background-color: #507dbc !important;
   font-weight: 900 !important;
   color: black !important;
 }

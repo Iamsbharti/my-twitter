@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import "../css/Home.css";
-import { loginAction } from "../redux/actions/userActions";
+import { loginAction, setUserStateOnError } from "../redux/actions/userActions";
 import { connect } from "react-redux";
 
-function Login({ loginAction, message, error, isAuthenticated }) {
+function Login({
+  loginAction,
+  setUserStateOnError,
+  message,
+  error,
+  isAuthenticated,
+}) {
   let history = useHistory();
   /**define state */
   let [loginId, setLoginId] = useState("");
@@ -49,12 +55,19 @@ function Login({ loginAction, message, error, isAuthenticated }) {
     /**set classname based on error */
     error ? setClassName("signup__error") : setClassName("signup__success");
     if (error) {
-      setTimeout(() => setStatus(""), 1200);
+      setTimeout(() => {
+        setStatus("");
+        setUserStateOnError();
+      }, 3000);
     }
     /**redirect to tweets upon sucess auth */
     if (isAuthenticated) {
       setTimeout(() => history.push("/tweets"), 1200);
     }
+    return () => {
+      //setUserStateOnError();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, message, error, history]);
   const handleLoginByEnter = (event) => {
     if (event.key === "Enter") {
@@ -111,5 +124,5 @@ const mapStateToProps = ({ user }) => {
   };
 };
 
-const mapActionToProps = { loginAction };
+const mapActionToProps = { loginAction, setUserStateOnError };
 export default connect(mapStateToProps, mapActionToProps)(Login);

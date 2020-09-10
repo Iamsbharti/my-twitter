@@ -1,8 +1,14 @@
 export const session_state = {
   session: {
-    user: "",
+    user: {
+      error: "",
+      status: "",
+      message: "",
+      data: "",
+    },
   },
 };
+/**{user:{error:true,status:400,m…word" ']}} */
 export const posts = [
   {
     comments: [],
