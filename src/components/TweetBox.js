@@ -40,8 +40,6 @@ function TweetBox({ postTweet, profile }) {
             placeholder="What's happening?"
             type="text"
             name="text"
-            required
-            autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
