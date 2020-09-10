@@ -21,11 +21,12 @@
 .sideBarOptions--active {
   color: var(--twitter-color);
 }
-.sidebar__tweet {
+.sidebar__logout {
   background-color: var(--twitter-color) !important;
   border: none !important;
   color: white !important;
   font-weight: 900 !important;
+  font-size: 16px !important;
   text-transform: inherit !important;
   border-radius: 30px !important;
   height: 50px !important;
@@ -49,6 +50,12 @@
 }
 .sidebar__responsive_menubar {
   display: none;
+}
+.sidebar__logout_span {
+  margin-top: 10px;
+  font-size: 16px;
+  color: red;
+  font-weight: 800;
 }
 @media (max-width: 800px) {
   .sidebar {
