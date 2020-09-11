@@ -39,21 +39,20 @@ initdb();
 /**add router */
 app.use(process.env.API_VERSION, router);
 //production config
-if (process.env.NODE_ENV === "production") {
+/*if (process.env.NODE_ENV === "production") {
   console.log("prod-env");
   app.use(express.static(path.resolve(__dirname, "client/build")));
   app.get("*", (req, res) => {
     const index = path.join(__dirname, "build", "index.html");
     res.sendFile(index);
   });
-}
-/*
+}*/
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-*/
 
-app.use(notfound);
+//app.use(notfound);
 app.use(handleError);
 
 /**listen to server */
