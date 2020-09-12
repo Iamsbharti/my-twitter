@@ -23,6 +23,7 @@
 - A tweet can be bookmarked
 - User gets real time notification when someone send a direct message.
 - Password can be reset by getting a 6 digit code on the email
+- Can see the hashtags in the Explore section
 
 ### Additional Features
 
