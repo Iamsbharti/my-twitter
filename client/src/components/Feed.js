@@ -14,9 +14,7 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Avatar } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import { baseUrl } from "../apis/apiUtils";
 import socket from "./message/socket";
 import Homeicon from "@material-ui/icons/Home";
 import Searchicon from "@material-ui/icons/Search";
@@ -29,6 +27,7 @@ import MoreHorizicon from "@material-ui/icons/MoreHoriz";
 import SideBarOptions from "./SideBarOptions";
 import CloseIcon from "@material-ui/icons/Close";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import MenuIcon from "@material-ui/icons/Menu";
 function Feed({
   isAuthenticated,
   userId,
@@ -241,17 +240,11 @@ function Feed({
                   <>
                     {displayHeader ? (
                       <>
-                        <Avatar
+                        <MenuIcon
                           className="header__responsive"
                           hidden={toggleAddtweet}
                           onClick={handleDisplaySideBar}
-                          src={
-                            profile &&
-                            `${baseUrl}/api/v1/user/fetchPicture?filename=${
-                              profile.filename
-                            }&authToken=${localStorage.getItem("authToken")}`
-                          }
-                        ></Avatar>
+                        />
                         <h2>Home</h2>
                         <AddCircleOutlineIcon
                           className="header__responsive addTweetIcon"

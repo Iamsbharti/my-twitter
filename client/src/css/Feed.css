@@ -63,6 +63,7 @@
     overflow-y: scroll;
   }
   .header__responsive {
+    color: var(--twitter-color);
     display: inline;
   }
   .header___nonresponsive {
