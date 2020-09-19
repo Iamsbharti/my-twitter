@@ -3,6 +3,7 @@
   border-right: 1px solid var(--twitter-bg);
   min-width: fit-content;
   overflow-y: scroll;
+  overflow-x: hidden;
   border-bottom: 1px solid var(--twitter-color);
 }
 /*Hide scrollbar for chrome,safari*/
