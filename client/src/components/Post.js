@@ -188,7 +188,7 @@ function Post({
                 ))}
               </p>
             </div>
-            {info.image && (
+            {info.image && info.image.includes("http") && (
               <img src={info.image} alt="" className="post__link__img" />
             )}
             {info.postImage && (

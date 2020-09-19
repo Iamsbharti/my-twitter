@@ -83,18 +83,24 @@ function ProfilePresentation({
                   </div>
                   <div className="profile__coverpic">
                     <img
-                      src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
-                        userInfo.coverPicture.filename
-                      }&authToken=${localStorage.getItem("authToken")}`}
+                      src={
+                        userInfo.coverPicture &&
+                        `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                          userInfo.coverPicture.filename
+                        }&authToken=${localStorage.getItem("authToken")}`
+                      }
                       className="coverPic"
                       alt="cover pic"
                     />
 
                     <img
                       className="profile__user__avatar"
-                      src={`${baseUrl}/api/v1/user/fetchPicture?filename=${
-                        userInfo.profile.filename
-                      }&authToken=${localStorage.getItem("authToken")}`}
+                      src={
+                        userInfo.profile &&
+                        `${baseUrl}/api/v1/user/fetchPicture?filename=${
+                          userInfo.profile.filename
+                        }&authToken=${localStorage.getItem("authToken")}`
+                      }
                       alt=""
                     />
 

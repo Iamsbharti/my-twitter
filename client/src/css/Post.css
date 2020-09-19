@@ -52,6 +52,8 @@
   margin-top: 10px;
   font-size: 18px;
   margin-bottom: 10px;
+  width: 500px;
+  overflow-wrap: break-word;
 }
 .post__avatar {
   padding: 15px;
